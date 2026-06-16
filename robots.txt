@@ -1,0 +1,53 @@
+# Robots.txt for partnerhoursguide.com
+# Updated: June 2026
+# Purpose: Block old Starbucks pages, allow Old English content
+
+User-agent: *
+Allow: /
+
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Allow: /wp-admin/admin-ajax.php
+
+# Block all former Starbucks pages
+Disallow: /starbucks-benefits-and-perks/
+Disallow: /starbucks-partner-hours-qr-code-android/
+Disallow: /starbucks-partner-hours-app-installation/
+Disallow: /starbucks-partner-hours-android-installation/
+Disallow: /add-partner-numbers-to-starbucks-app/
+Disallow: /starbucks-my-partner-link/
+Disallow: /starbucks-discount-benefits-new-rules/
+Disallow: /starbucks-retail-portal/
+Disallow: /starbucks-partner-hub-guide/
+Disallow: /starbucks-human-resources-phone-number/
+Disallow: /starbucks-partner-central-guide/
+Disallow: /starbucks-partner-hours-teamworks/
+Disallow: /starbucks-double-star-days/
+Disallow: /starbucks-partner-schedule-app/
+Disallow: /starbucks-partner-hours-app-not-working/
+Disallow: /starbucks-app-ai-scheduling/
+Disallow: /starbucks-information-hub-2026/
+Disallow: /starbucks-benefits-2026/
+Disallow: /starbucks-health-insurance/
+Disallow: /starbucks-401-plan-future/
+Disallow: /starbucks-rewards-program/
+Disallow: /starbucks-partner-hour-login/
+Disallow: /starbucks-partner-hour-login-error/
+Disallow: /how-to-get-w2-from-starbucks/
+Disallow: /tuition-reimbursement-beyond-starbucks-partner-educational-benefits/
+Disallow: /paid-parental-leave/
+Disallow: /back-to-starbucks/
+Disallow: /enrolling-one-intelligent-hub/
+Disallow: /the-starbucks-partner-hours-login-guide/
+Disallow: /the-starbucks-coffeegear-portal/
+Disallow: /jda-delivers-starbucks/
+Disallow: /my-partner-info/
+Disallow: /tarbucks-green-dot-assist/
+Disallow: /partner-hours-dmca/
+Disallow: /affiliation-disclaimer/
+
+# Block off-topic tools
+Disallow: /resume-screening/
+Disallow: /geooptimizer/
+
+Sitemap: https://partnerhoursguide.com/sitemap_index.xml

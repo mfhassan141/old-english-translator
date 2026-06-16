@@ -1,0 +1,22 @@
+{
+  "name": "historical-english-timeline",
+  "version": "1.0.0",
+  "description": "Historical English Evolution & Translation Timeline single-file application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "english",
+    "timeline",
+    "translation",
+    "linguistics",
+    "runes"
+  ],
+  "author": "Antigravity",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^29.1.1"
+  }
+}

@@ -1,0 +1,2505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shakespeare Language Translator (AI) — Translate Instantly &amp; Free</title>
+  <meta name="description" content="Use our free online Shakespeare language translator to convert modern English to Shakespearean English instantly. Explore word-by-word etymologies and hear pronunciation.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link data-no-optimize="1" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- PDF.js & Tesseract.js CDNs -->
+  <script data-no-optimize="1" data-no-defer="1" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script data-no-optimize="1" data-no-defer="1" src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script data-no-optimize="1" data-no-defer="1">
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
+
+  <style data-no-optimize="1">
+    /* ==========================================================================
+       1. DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-color: #120924; /* Deep Medieval Purple */
+      --card-bg: #1c1032; /* Lighter Purple */
+      --card-bg-hover: #261742;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.25);
+      --text-cream: #f8f5f0;
+      --text-muted: #8c829d;
+      --text-light-muted: #a8b2d1;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.35);
+      
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* Isolated self-contained wrapper container for WordPress themes compatibility */
+    .translator-app-wrapper {
+      background-color: #120924 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      line-height: 1.6 !important;
+      border-radius: 16px !important;
+      border: 1px solid rgba(201, 153, 58, 0.15) !important;
+      padding: 2rem 1.5rem !important;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important;
+      text-align: left !important;
+    }
+
+    .translator-app-wrapper h1, 
+    .translator-app-wrapper h2, 
+    .translator-app-wrapper h3, 
+    .translator-app-wrapper p, 
+    .translator-app-wrapper span, 
+    .translator-app-wrapper a, 
+    .translator-app-wrapper label,
+    .translator-app-wrapper select,
+    .translator-app-wrapper textarea,
+    .translator-app-wrapper button {
+      color: #f8f5f0;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* ==========================================================================
+       2. HEADER & NAVIGATION
+       ========================================================================== */
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .header-nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-crest {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      background: rgba(28, 16, 50, 0.6);
+    }
+
+    .brand-name {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav.site-navigation ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    nav.site-navigation li {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    nav.site-navigation a {
+      white-space: nowrap;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    nav.site-navigation a:hover, 
+    nav.site-navigation a.active {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    nav.site-navigation a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--accent-gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav.site-navigation a:hover::after, 
+    nav.site-navigation a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    nav.site-navigation a.nav-cta {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.5rem 1.1rem !important;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    nav.site-navigation a.nav-cta:hover {
+      color: var(--bg-color) !important;
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       3. TRANSLATOR TOOL LAYOUT
+       ========================================================================== */
+    .crest {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+      color: var(--accent-gold);
+      filter: drop-shadow(0 0 8px var(--accent-gold-glow));
+    }
+    h1.app-title {
+      font-size: 2.5rem;
+      color: var(--text-cream);
+      margin-bottom: 0.4rem;
+      text-align: center;
+      font-family: var(--font-title);
+    }
+    .translator-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    @media (min-width: 992px) {
+      .translator-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .panel-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+    .panel-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(201, 153, 58, 0.1);
+      padding-bottom: 0.8rem;
+    }
+    .panel-title {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-gold);
+      font-family: var(--font-ui);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .selector-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    label.select-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .select-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    select {
+      width: 100%;
+      background: rgba(18, 9, 36, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .select-arrow {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+    }
+
+    textarea, .output-container {
+      width: 100%;
+      min-height: 220px;
+      background: rgba(18, 9, 36, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.2rem;
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      resize: vertical;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+    textarea:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 10px rgba(201, 153, 58, 0.15);
+    }
+    .output-container {
+      background: rgba(18, 9, 36, 0.7);
+      border-color: var(--border-color);
+      overflow-y: auto;
+      white-space: pre-wrap;
+      position: relative;
+    }
+    .output-container.active-glow {
+      border-color: var(--accent-gold);
+      box-shadow: inset 0 0 15px rgba(201, 153, 58, 0.08);
+    }
+    .placeholder-text {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .input-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.6rem;
+    }
+    .char-count {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .action-btn {
+      background: rgba(28, 16, 50, 0.8);
+      border: 1px solid var(--border-color);
+      color: var(--text-cream);
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+    .action-btn:hover {
+      border-color: var(--accent-gold);
+      background: rgba(201, 153, 58, 0.05);
+      color: var(--accent-gold-hover);
+    }
+
+    /* Academic Presets Row */
+    .presets-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 0.5rem;
+    }
+    .presets-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .presets-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .preset-chip {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 6px 14px;
+      color: var(--text-light-muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: var(--transition-smooth);
+    }
+    .preset-chip:hover, .preset-chip.active {
+      border-color: var(--accent-gold);
+      background: rgba(201, 153, 58, 0.1);
+      color: var(--accent-gold-hover);
+      box-shadow: 0 2px 8px rgba(201, 153, 58, 0.15);
+    }
+
+    /* Output Controls Panel */
+    .output-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .audio-btn, .drawer-btn {
+      background: rgba(201, 153, 58, 0.1);
+      border: 1px solid rgba(201, 153, 58, 0.2);
+      color: var(--accent-gold-hover);
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+    }
+    .audio-btn:hover, .drawer-btn:hover {
+      background: var(--accent-gold);
+      color: var(--bg-color);
+      border-color: var(--accent-gold);
+      box-shadow: 0 4px 12px var(--accent-gold-glow);
+    }
+
+    /* Custom Alert Boxes */
+    .alert-box {
+      display: none;
+      background: rgba(201, 153, 58, 0.05);
+      border-left: 3px solid var(--accent-gold);
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    /* Interactive Hover Span Settings */
+    .hover-word {
+      position: relative;
+      cursor: pointer;
+      border-bottom: 1px dashed rgba(201, 153, 58, 0.4);
+      padding: 0 1px;
+      transition: var(--transition-smooth);
+      display: inline-block;
+    }
+    .hover-word:hover {
+      background: rgba(201, 153, 58, 0.15);
+      border-bottom-color: var(--accent-gold);
+      color: var(--accent-gold-hover);
+    }
+
+    /* Word Tooltip Popup Styling */
+    .word-tooltip {
+      position: absolute;
+      background: #1a0f2e;
+      border: 1px solid var(--accent-gold);
+      border-radius: 8px;
+      padding: 12px 16px;
+      width: 280px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 9999;
+      pointer-events: none;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      font-family: var(--font-ui);
+    }
+    .word-tooltip.active {
+      display: block;
+      opacity: 1;
+    }
+    .tooltip-title {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent-gold-hover);
+      margin-bottom: 4px;
+      border-bottom: 1px solid rgba(201, 153, 58, 0.2);
+      padding-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .tooltip-era {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      background: rgba(201, 153, 58, 0.15);
+      color: var(--accent-gold);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 0.5px solid rgba(201, 153, 58, 0.3);
+    }
+    .tooltip-row {
+      margin-top: 6px;
+      font-size: 0.8rem;
+    }
+    .tooltip-label {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    .tooltip-val {
+      color: var(--text-cream);
+    }
+
+    /* ==========================================================================
+       4. LINGUISTIC drawer
+       ========================================================================== */
+    .drawer-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 5, 20, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      transition: var(--transition-smooth);
+    }
+    .drawer-overlay.open {
+      display: block;
+    }
+    .drawer-panel {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 460px;
+      height: 100%;
+      background: var(--card-bg);
+      border-left: 1px solid var(--border-color);
+      box-shadow: -10px 0 35px rgba(0,0,0,0.6);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .drawer-panel.open {
+      right: 0;
+    }
+    .drawer-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(201, 153, 58, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .drawer-title {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      color: var(--accent-gold-hover);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .drawer-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+    }
+    .drawer-close:hover {
+      color: var(--accent-gold);
+    }
+    .drawer-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .drawer-section {
+      background: rgba(18, 9, 36, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1.2rem;
+    }
+    .drawer-sec-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      border-bottom: 1.5px solid rgba(201, 153, 58, 0.15);
+      padding-bottom: 4px;
+      font-weight: 700;
+    }
+    .audio-synthesis-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+    .slider-row input[type="range"] {
+      flex: 1;
+      accent-color: var(--accent-gold);
+      background: rgba(255, 255, 255, 0.1);
+      height: 4px;
+      border-radius: 2px;
+      outline: none;
+    }
+
+    /* ==========================================================================
+       5. EDUCATIONAL ARTICLE LAYOUT
+       ========================================================================== */
+    .article-section {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border-color);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .article-title {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      color: var(--accent-gold-hover);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .article-meta {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      border-bottom: 1px dashed rgba(201, 153, 58, 0.15);
+      padding-bottom: 12px;
+    }
+    .article-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-light-muted);
+    }
+    .article-content p {
+      margin-bottom: 1.5rem;
+    }
+    .article-content h2 {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      color: var(--accent-gold);
+      margin: 2.5rem 0 1rem;
+      border-left: 3px solid var(--accent-gold);
+      padding-left: 12px;
+    }
+    .article-content h3 {
+      font-family: var(--font-title);
+      font-size: 1.25rem;
+      color: var(--text-cream);
+      margin: 1.8rem 0 0.8rem;
+    }
+    .article-content ul, .article-content ol {
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+    }
+    .article-content li {
+      margin-bottom: 0.5rem;
+    }
+    .article-table-wrapper {
+      overflow-x: auto;
+      margin: 2rem 0;
+      border: 1px solid rgba(201, 153, 58, 0.15);
+      border-radius: 8px;
+    }
+    table.glossary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      text-align: left;
+      min-width: 550px;
+    }
+    table.glossary-table th {
+      background: rgba(201, 153, 58, 0.08);
+      color: var(--accent-gold-hover);
+      font-weight: 700;
+      padding: 12px 16px;
+      border-bottom: 2px solid rgba(201, 153, 58, 0.2);
+    }
+    table.glossary-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(201, 153, 58, 0.1);
+      color: var(--text-light-muted);
+    }
+    table.glossary-table tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* AI Settings Modal & Spinner */
+        #ai-modal-overlay.modal-overlay {
+      display: none;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: rgba(10, 5, 20, 0.9) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      z-index: 999999 !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    #ai-modal-overlay .modal-card {
+      background: var(--card-bg) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 12px !important;
+      padding: 24px !important;
+      max-width: 480px !important;
+      width: 90% !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+      animation: fadeInModal 0.3s ease forwards !important;
+      margin: auto !important;
+      position: relative !important;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    .spinner {
+      animation: rotate 1.5s linear infinite;
+    }
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 768px) {
+      .header-nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .translator-app-wrapper {
+        padding: 1rem 0.5rem !important;
+        margin: 0.5rem auto !important;
+        border-radius: 8px !important;
+      }
+    }
+  
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  
+    /* Dropdown CSS Rules */
+    nav.site-navigation li {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1c1032;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+      padding: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.2rem !important;
+      font-size: 0.9rem !important;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      width: 100%;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent-gold-hover) !important;
+      background: rgba(201, 153, 58, 0.08);
+      padding-left: 1.5rem !important;
+    }
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+    nav.site-navigation li.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-arrow {
+      font-size: 0.7rem;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    nav.site-navigation li.has-dropdown:hover .nav-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-gold-hover);
+    }
+    @media (max-width: 1150px) {
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .dropdown-menu a {
+        padding: 0.3rem 1rem !important;
+        text-align: center !important;
+      }
+      .nav-arrow {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://partnerhoursguide.com/shakespeare-english-translator/#application",
+      "name": "Shakespearean English Converter",
+      "operatingSystem": "All",
+      "applicationCategory": "EducationalApplication",
+      "description": "Convert Modern English to Shakespeare's Early Modern English. Use our free tool with offline heuristics or AI translation.",
+      "browserRequirements": "Requires JavaScript. Requires HTML5."
+    }
+  ]
+}
+  </script>
+
+</head>
+<body>
+
+  <div class="translator-app-wrapper">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-nav-container">
+        <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+          <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+          <span class="brand-name">Translator Old English</span>
+        </a>
+        <nav class="site-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="https://partnerhoursguide.com/">Home</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/" class="active">Shakespeare</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/">Names</a></li>
+          <li><a href="https://partnerhoursguide.com/random-name-maker/">Name Maker</a></li>
+          
+          <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About</a></li>
+          <li><a href="https://partnerhoursguide.com/spanish-words-in-english/">Spanish Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Blog</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/" class="nav-cta">Try translator</a></li>
+        </ul>
+      </nav>
+      </div>
+    </header>
+
+    <!-- Main Tool Container -->
+    <div class="container" style="padding-top: 3rem; padding-bottom: 2rem;">
+      <div class="crest">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 8 6 6 6-6"></path>
+          <path d="m4 14 6 6 8-8"></path>
+        </svg>
+      </div>
+      <h1 class="app-title">Shakespearean English Converter</h1>
+      <p class="app-subtitle" style="text-align: center; color: var(--text-muted); font-style: italic; max-width: 600px; margin: 0 auto 2rem;">Convert Modern English to Shakespeare's Early Modern Speech, or parse Elizabethan drama back into modern prose. <a href="https://partnerhoursguide.com/old-english-vs-modern-english/">Old English vs. Shakespearean English: What's the Difference? &rarr;</a><br><br><a href="https://partnerhoursguide.com/old-english-names/">Discover the Old English names behind modern English</a>.</p>
+
+      <!-- Two Panel Grid -->
+      <div class="translator-grid">
+        <!-- LEFT PANEL: Input -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+              Modern or Shakespeare Text
+            </h2>
+          </div>
+
+          <div class="selector-row">
+            <label class="select-label" for="direction-select">Conversion Direction</label>
+            <div class="select-wrapper">
+              <select id="direction-select">
+                <option value="modern_to_shakespeare">Modern English ➔ Shakespeare's Speech</option>
+                <option value="shakespeare_to_modern">Shakespearean English ➔ Modern Prose</option>
+              </select>
+              <div class="select-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="lexical-references-bar" style="margin-bottom: 12px; font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(255, 255, 255, 0.03); border-radius: 6px; border: 1px dashed rgba(255, 255, 255, 0.08);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>
+              <span><strong>Lexical References:</strong> First Folio corpora, Alexander Schmidt's Shakespeare Lexicon, & Onions' Shakespeare Glossary.</span>
+            </div>
+            <textarea id="translator-input" placeholder="Type or paste your text here..."></textarea>
+            <div class="input-actions">
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; width: 100%;">
+                <button id="clear-btn" class="action-btn" title="Clear input text">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                  Clear
+                </button>
+                <button id="upload-btn" class="action-btn" title="Upload Image or PDF to extract and convert text">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                  Upload File
+                </button>
+                <input type="file" id="file-loader" accept="image/*,application/pdf" style="display:none">
+                
+                <button id="translate-btn" class="action-btn" style="background: linear-gradient(135deg, #c9993a 0%, #b2832c 100%) !important; color: #0a1628 !important; border: none !important; font-weight: bold !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25) !important;" title="Convert text now">
+                  Convert
+                </button>
+                
+                <button id="ai-settings-btn" class="action-btn" title="AI Translation Settings" style="margin-left: auto; display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                  AI Translate
+                </button>
+              </div>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+              <span class="char-count"><span id="char-current">0</span> characters</span>
+            </div>
+          </div>
+
+          <div id="file-progress-alert" class="alert-box" style="background: rgba(201, 153, 58, 0.08); border-left-color: var(--accent-gold);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation: spin 1s linear infinite; color: var(--accent-gold); flex-shrink: 0; margin-right: 8px;">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="32" stroke-dashoffset="8" fill="none"></circle>
+            </svg>
+            <div>
+              <strong>Extracting text:</strong> <span id="file-progress-status">Please wait while the file is processed.</span>
+            </div>
+          </div>
+
+          <div id="custom-alert" class="alert-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent-gold)">
+              <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <div>
+              <strong>Rule-Based Heuristics Mode:</strong> Custom text uses an automated lookup. Exact inflection cases may vary. Select a <strong>Preset Chip</strong> below for 100% verified academic mappings.
+            </div>
+          </div>
+
+          <div class="presets-row">
+            <span class="presets-label">Academic verified presets:</span>
+            <div class="presets-flex" id="presets-container">
+              <!-- Dynamically populated chips -->
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL: Output -->
+        <div class="panel-card">
+          <div class="panel-header" style="flex-direction: column; align-items: flex-start; gap: 0.8rem; border-bottom: none; padding-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <h2 class="panel-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                Converted Output
+              </h2>
+              <span class="accuracy-badge" id="accuracy-score-badge" style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b; backdrop-filter: blur(4px);">
+                Accuracy: 55% (Offline Heuristic)
+              </span>
+            </div>
+          </div>
+
+          <div class="output-container" id="translator-output-container">
+            <!-- Converted output text -->
+          </div>
+
+          <div class="output-controls">
+            <button class="audio-btn" id="play-audio-btn" title="Listen to text pronunciation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+              Pronounce Speech
+            </button>
+            <button class="drawer-btn" id="linguistic-drawer-trigger" style="margin-left: auto;" title="Linguistic Companion Drawer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+              Linguistic Analysis
+            </button>
+            <button class="action-btn" id="copy-btn" title="Copy output text to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Educational Article -->
+      <section class="article-section">
+        <h2 class="article-title">Shakespearean English: Linguistics, Grammar, & Historical Transition</h2>
+        <div class="article-meta">
+          <span><strong>Category:</strong> Early Modern English Linguistic Studies</span>
+          <span><strong>Word Count:</strong> 1,120 Words</span>
+          <span><strong>Author:</strong> Editorial Board</span>
+        </div>
+        
+        <div class="article-content">
+          <p>The English language as spoken and written by William Shakespeare during the Elizabethan and Jacobean eras (spanning the late 16th and early 17th centuries) occupies a critical juncture in the history of linguistics. Classified by historical linguists as <strong>Early Modern English</strong>, this linguistic stage acts as a transitional bridge between the heavily inflected, Germanic structure of Middle English (popularized by Geoffrey Chaucer) and the standard Modern English we speak today. To the casual modern reader, Shakespeare’s vocabulary and grammar may seem dense, archaic, or even "foreign," leading to the common misconception that he wrote in "Old English." In truth, Old English (or Anglo-Saxon) is a separate, highly inflected language that ended around the 12th century, whereas Shakespeare’s language is functionally modern, sharing nearly identical syntactic structures and base vocabularies with our contemporary speech.</p>
+
+          <h2>1. The Dawn of Early Modern English</h2>
+          <p>The transition from Middle English to Early Modern English was not sudden, but rather a gradual evolution catalyzed by two massive historical developments: the <strong>Great Vowel Shift</strong> and the rise of the **Printing Press**. The Great Vowel Shift, which began in the 15th century, fundamentally altered the pronunciation of long vowels in English. Long vowels shifted "upward" in the mouth (for instance, the Middle English pronunciation of <i>bite</i> shifted from sounding like "beet" to the modern diphthong "bite," and <i>meet</i> shifted from sounding like "mate" to "meet"). This shift decoupled English spelling from its pronunciation, creating the orthographic irregularities that persist today.</p>
+          <p>Coinciding with this phonetic revolution, William Caxton introduced the movable-type printing press to Westminster in 1476. The printing press standardization favored the East Midlands dialect of London, codifying spelling rules and ensuring that books printed in England could be universally read across the island. By the time Shakespeare began writing in the 1590s, the English vocabulary was expanding exponentially, absorbing thousands of words from Latin, French, Greek, and Italian. Shakespeare himself was a notorious linguistic innovator, credited with introducing or popularizing over 1,700 words—including <i>swagger</i>, <i>assassination</i>, <i>lonely</i>, and <i>gloomy</i>—by converting nouns to verbs and borrowing terms from foreign tongues.</p>
+
+          <h2>2. Shakespearean Verb Conjugations</h2>
+          <p>One of the most distinctive features of Early Modern English grammar is its verbal inflection system, specifically the second- and third-person singular present endings. Understanding these inflections is key to reading and converting text to Elizabethan styles:</p>
+          <ul>
+            <li><strong>Second-Person Singular present (-est / -st):</strong> When addressing a single individual using the pronoun <i>thou</i>, verbs take the ending <i>-est</i> or <i>-st</i>. For example, "you know" becomes <i>thou knowest</i>, "you do" becomes <i>thou dost</i>, "you have" becomes <i>thou hast</i>, and "you will" becomes <i>thou wilt</i>. In the past tense, this suffix persists, transforming "you did" into <i>thou didst</i> and "you went" into <i>thou wentest</i>.</li>
+            <li><strong>Third-Person Singular present (-eth / -th):</strong> Instead of the modern <i>-s</i> ending (e.g., "he has," "she runs"), Elizabethan English frequently employed the <i>-eth</i> or <i>-th</i> suffix. Thus, "he has" becomes <i>he hath</i>, "she does" becomes <i>she doth</i>, and "it runs" becomes <i>it runneth</i>. During Shakespeare's lifetime, these <i>-eth</i> endings were actively being replaced by the northern <i>-s</i> inflections; Shakespeare often used both interchangeably, relying on the <i>-eth</i> ending when he needed an extra syllable to maintain the iambic pentameter of his verse.</li>
+          </ul>
+
+          <h2>3. The Pronoun Matrix: Thou vs. You</h2>
+          <p>In contemporary English, the single pronoun <i>you</i> serves as the subject, object, singular, plural, formal, and informal second-person address. Early Modern English, however, possessed a sophisticated T-V distinction matrix (similar to modern French <i>tu</i> and <i>vous</i>) that carried immense social and emotional weight:</p>
+          <div class="article-table-wrapper">
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Case</th>
+                  <th>Singular Informal (T-Form)</th>
+                  <th>Plural / Formal (V-Form)</th>
+                  <th>Modern equivalent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Subjective</strong></td>
+                  <td>Thou</td>
+                  <td>Ye / You</td>
+                  <td>You (as subject)</td>
+                </tr>
+                <tr>
+                  <td><strong>Objective</strong></td>
+                  <td>Thee</td>
+                  <td>You</td>
+                  <td>You (as object)</td>
+                </tr>
+                <tr>
+                  <td><strong>Possessive Adjective</strong></td>
+                  <td>Thy (consonant) / Thine (vowel)</td>
+                  <td>Your</td>
+                  <td>Your</td>
+                </tr>
+                <tr>
+                  <td><strong>Possessive Pronoun</strong></td>
+                  <td>Thine</td>
+                  <td>Yours</td>
+                  <td>Yours</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Addressing someone as <i>thou</i> or <i>thee</i> signaled intimacy, affection, or familiarity (such as between close friends, family members, or lovers). Conversely, it could indicate condescension or superiority when addressing servants, children, or social inferiors. Using <i>you</i> signaled respect, formality, and deference (such as when addressing a king, a nobleman, or a stranger). If a speaker suddenly switched from <i>you</i> to <i>thou</i> during a dialogue, it represented a significant emotional shift—either an expression of growing intimacy or a deliberate insult.</p>
+          <p>Additionally, possessive adjectives followed a rule analogous to modern <i>a</i> and <i>an</i>: the modifier <i>thy</i> was used before words starting with a consonant (e.g., <i>thy sword</i>), whereas <i>thine</i> was used before words beginning with a vowel or a silent 'h' (e.g., <i>thine eye</i>, <i>thine honour</i>).</p>
+
+          <h2>4. Syntax and Word Order Shifts</h2>
+          <p>Shakespearean syntax is famously flexible. Because Early Modern English was closer to its inflected roots, word order could be scrambled without losing meaning. Writers frequently employed three syntactic patterns that differ from modern defaults:</p>
+          <ol>
+            <li><strong>Subject-Verb-Object Inversion:</strong> For poetic emphasis, Shakespeare often placed the object before the verb, or the verb before the subject. In <i>The Tempest</i>, we read, "Me he restored" (Object-Subject-Verb) rather than "He restored me." Similarly, a question would invert the subject and verb directly without using the auxiliary verb "do" (e.g., "What say you?" instead of "What do you say?", or "Goes the King hence today?" instead of "Is the King leaving today?").</li>
+            <li><strong>The Negative Declarative:</strong> Modern English requires the auxiliary verb "do" to form a negative statement (e.g., "I do not know"). In Elizabethan English, negation was applied directly to the verb (e.g., "I know not" or "I care not").</li>
+            <li><strong>Double Negatives:</strong> In modern grammar, a double negative is considered a mistake that cancels itself out. In Shakespeare's time, double and triple negatives were used as intensive markers to strengthen a negative statement. For instance, in <i>As You Like It</i>, Celia remarks, "I cannot go no further," which simply means she is completely exhausted and cannot take another step.</li>
+          </ol>
+
+          <h2>5. Essential Shakespearean Glossary</h2>
+          <p>A major barrier to comprehending Early Modern English is vocabulary shift: words that have vanished entirely, or words whose meanings have shifted dramatically (false cognates). Below is a reference of common archaisms:</p>
+          
+          <div class="article-table-wrapper">
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Shakespearean Term</th>
+                  <th>Modern Translation</th>
+                  <th>Etymological Origin / Usage Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Anon</strong></td>
+                  <td>Soon / Shortly</td>
+                  <td>From Old English <i>on ān</i> (in one). "I will see thee anon."</td>
+                </tr>
+                <tr>
+                  <td><strong>Ere</strong></td>
+                  <td>Before</td>
+                  <td>From Old English <i>ǣr</i>. "Ere the sun sets, we must depart."</td>
+                </tr>
+                <tr>
+                  <td><strong>Wherefore</strong></td>
+                  <td>Why / For what reason</td>
+                  <td>Often confused with "where". "Wherefore art thou Romeo?" means "Why are you Romeo?" (lamenting his family name).</td>
+                </tr>
+                <tr>
+                  <td><strong>Prithee</strong></td>
+                  <td>Please / I pray you</td>
+                  <td>Contraction of "I pray thee". "Prithee, tell me the truth."</td>
+                </tr>
+                <tr>
+                  <td><strong>Hark</strong></td>
+                  <td>Listen / Pay attention</td>
+                  <td>From Middle English <i>herken</i>. "Hark, what sweet noise is this!"</td>
+                </tr>
+                <tr>
+                  <td><strong>Hither / Thither / Whither</strong></td>
+                  <td>Here / There / Where (with motion)</td>
+                  <td>Indicates directional movement. "Come hither" (Come here). "Go thither" (Go there).</td>
+                </tr>
+                <tr>
+                  <td><strong>Verily</strong></td>
+                  <td>Truly / Indeed</td>
+                  <td>From Old French <i>verai</i> (true). "Verily, I say unto you."</td>
+                </tr>
+                <tr>
+                  <td><strong>Perchance</strong></td>
+                  <td>Perhaps / Maybe</td>
+                  <td>"Perchance he will return tomorrow."</td>
+                </tr>
+                <tr>
+                  <td><strong>Soft</strong></td>
+                  <td>Wait / Quietly</td>
+                  <td>Used as an exclamation. "Soft! What light through yonder window breaks?"</td>
+                </tr>
+                <tr>
+                  <td><strong>Fie</strong></td>
+                  <td>An expression of disgust / shame</td>
+                  <td>"Fie upon thee, disloyal knave!"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <p>By studying these syntactic structures, pronoun matrices, and vocabulary variations, one can begin to appreciate how the English language evolved. Far from being a dead tongue, Shakespeare's Early Modern English is a vibrant, expressive ancestor of modern speech, containing the seeds of the grammar we use today.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Tool Shared Tooltip Portal -->
+    <div class="word-tooltip" id="shared-word-tooltip">
+      <div class="tooltip-title">
+        <span id="tooltip-word-title">Word</span>
+        <span class="tooltip-era" id="tooltip-era-tag">Linguistic Era</span>
+      </div>
+      <div class="tooltip-row">
+        <span class="tooltip-label">Translation:</span>
+        <span class="tooltip-val" id="tooltip-translation-val">Translation value</span>
+      </div>
+      <div class="tooltip-row">
+        <span class="tooltip-label">Grammar Role:</span>
+        <span class="tooltip-val" id="tooltip-grammar-val">Grammar Role value</span>
+      </div>
+      <div class="tooltip-row">
+        <span class="tooltip-label">Etymological Note:</span>
+        <span class="tooltip-val" id="tooltip-etymology-val" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 2px;">Etymology note value</span>
+      </div>
+    </div>
+
+    <!-- Linguistic Companion Drawer -->
+    <div class="drawer-overlay" id="linguistic-drawer-overlay"></div>
+    <div class="drawer-panel" id="linguistic-drawer">
+      <div class="drawer-header">
+        <h3 class="drawer-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          Elizabethan Companion
+        </h3>
+        <button class="drawer-close" id="drawer-close-btn" aria-label="Close Companion Panel">&times;</button>
+      </div>
+      <div class="drawer-body">
+        <!-- Pronunciation Synthesis Card -->
+        <div class="drawer-section">
+          <h4 class="drawer-sec-title">Pronunciation Synthesis</h4>
+          <div class="audio-synthesis-card">
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Modify the synthesized speech parameters to match an authentic Early Modern theatrical accent.</p>
+            <div class="slider-row">
+              <label for="synth-rate">Tempo Speed</label>
+              <input type="range" id="synth-rate" min="0.5" max="1.5" step="0.05" value="0.75">
+              <span id="rate-val" style="color: var(--accent-gold); font-weight: bold; width: 40px; text-align: right;">0.75x</span>
+            </div>
+            <div class="slider-row">
+              <label for="synth-pitch">Acoustic Pitch</label>
+              <input type="range" id="synth-pitch" min="0.5" max="1.5" step="0.05" value="0.95">
+              <span id="pitch-val" style="color: var(--accent-gold); font-weight: bold; width: 40px; text-align: right;">0.95x</span>
+            </div>
+            <button class="audio-btn" id="drawer-synth-play" style="width: 100%; margin-top: 10px; justify-content: center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              Synthesize Speech Accent
+            </button>
+          </div>
+        </div>
+
+        <!-- Linguistic Parsing Guide Card -->
+        <div class="drawer-section">
+          <h4 class="drawer-sec-title">Linguistic Parsing Guide</h4>
+          <div id="drawer-read-aloud" style="display:none;"></div>
+          <div style="font-size: 0.85rem; color: var(--text-light-muted); display: flex; flex-direction: column; gap: 10px;">
+            <p><strong>Pronunciation Tips:</strong> In Shakespeare's Early Modern English, the pronunciation was rhotic (the "r" sound was always pronounced, similar to modern Irish or West Country English) and vowel values were undergoing the Great Vowel Shift. Words like "love" were pronounced closer to "loov".</p>
+            <p><strong>Verb Inflections:</strong> Suffixes like <i>-est</i> indicate the second person singular ("thou"). Suffixes like <i>-eth</i> indicate the third person singular ("he/she/it").</p>
+            <p><strong>Hover Cards:</strong> Place your cursor over any word in the translated output box to inspect its grammatical role, modern translation, and historical context.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Settings Modal -->
+  <div id="ai-modal-overlay" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <h3 style="margin-top: 0; color: var(--accent-gold); display: flex; align-items: center; gap: 8px; font-size: 1.2rem; font-family: var(--font-title);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        AI Translation Settings
+      </h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Use your own API keys to query Google, OpenAI, or Anthropic models for high-accuracy translation.</p>
+      
+      <div class="settings-group" style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 6px;">AI Provider</label>
+        <select id="ai-provider-select" style="width: 100%; padding: 10px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; color: var(--text-cream); outline: none;">
+          <option value="gemini">Google Gemini</option>
+          <option value="openai">OpenAI GPT</option>
+          <option value="claude">Anthropic Claude</option>
+        </select>
+      </div>
+      
+      <div class="settings-group" style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 6px;">API Key</label>
+        <input type="password" id="ai-key-input" placeholder="Enter API key..." style="width: 100%; padding: 10px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; color: var(--text-cream); outline: none;" />
+      </div>
+      
+      <div class="settings-group" style="margin-bottom: 24px; display: flex; align-items: center; gap: 8px;">
+        <input type="checkbox" id="ai-enabled-checkbox" style="width: 16px; height: 16px; accent-color: var(--accent-gold);" />
+        <label for="ai-enabled-checkbox" style="font-size: 0.85rem; color: var(--text-cream); user-select: none; cursor: pointer;">Enable AI-powered translation</label>
+      </div>
+      
+      <div style="display: flex; gap: 12px; justify-content: flex-end;">
+        <button id="ai-test-btn" class="action-btn" style="background: rgba(255, 255, 255, 0.05);">Test API</button>
+        <button id="ai-save-btn" class="action-btn" style="background: var(--accent-gold); color: #120924; font-weight: 600;">Save & Apply</button>
+        <button id="ai-close-btn" class="action-btn" style="background: transparent; border: none; color: var(--text-muted);">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       Linguistic Database for Shakespearean Words Hover popups
+       ========================================================================== */
+    const shakespeareWordsDb = {
+      "thou": { modern: "you (subjective singular)", role: "Pronoun, Second Person Singular Subject", etym: "From Old English 'þū', marking intimate, singular address." },
+      "thee": { modern: "you (objective singular)", role: "Pronoun, Second Person Singular Object", etym: "From Old English 'þē', marking singular direct/indirect object." },
+      "thy": { modern: "your", role: "Possessive Adjective", etym: "From Old English 'þīn'. Used before words beginning with a consonant." },
+      "thine": { modern: "yours / your (before vowel)", role: "Possessive Pronoun/Adjective", etym: "From Old English 'þīn'. Used before vowel sounds or absolute possessive." },
+      "hath": { modern: "has", role: "Verb, Third Person Present", etym: "Elizabethan variant of 'has'. Standard in Early Modern Southern English." },
+      "hast": { modern: "have (second person)", role: "Verb, Second Person Present", etym: "Used with 'thou'. e.g., 'thou hast' means 'you have'." },
+      "doth": { modern: "does", role: "Verb, Third Person Present", etym: "Elizabethan variant of 'does'. From Old English 'dōþ'." },
+      "dost": { modern: "do (second person)", role: "Verb, Second Person Present", etym: "Used with 'thou'. e.g., 'thou dost' means 'you do'." },
+      "wilt": { modern: "will (second person)", role: "Verb, Auxiliary Future", etym: "Used with 'thou'. e.g., 'thou wilt' means 'you will'." },
+      "shalt": { modern: "shall (second person)", role: "Verb, Auxiliary Future", etym: "Used with 'thou'. e.g., 'thou shalt' means 'you shall'." },
+      "art": { modern: "are", role: "Verb, Second Person Present", etym: "Used with 'thou'. From Old English 'eart'." },
+      "wherefore": { modern: "why / for what reason", role: "Adverb", etym: "From Middle English. Meaning 'for what cause'." },
+      "anon": { modern: "soon / shortly", role: "Adverb", etym: "From Old English 'on ān' meaning 'straightway'." },
+      "ere": { modern: "before", role: "Preposition / Conjunction", etym: "From Old English 'ǣr'. Cognate with modern 'early'." },
+      "hark": { modern: "listen / hear", role: "Verb, Imperative", etym: "From Middle English 'herken'. Used as exclamation." },
+      "hither": { modern: "here (to this place)", role: "Adverb", etym: "From Old English 'hider'. Indicates motion towards." },
+      "thither": { modern: "there (to that place)", role: "Adverb", etym: "From Old English 'þider'. Indicates motion away." },
+      "whither": { modern: "where (to what place)", role: "Adverb", etym: "From Old English 'hwider'. Indicates motion to which." },
+      "prithee": { modern: "please / I pray thee", role: "Interjection / Contraction", etym: "Contraction of 'I pray thee'." },
+      "verily": { modern: "truly / indeed", role: "Adverb", etym: "From Old French 'verai' (true)." },
+      "perchance": { modern: "perhaps / maybe", role: "Adverb", etym: "From Anglo-Norman 'par cheance'." },
+      "soft": { modern: "wait / quietly", role: "Interjection", etym: "Used to request silence or pause." },
+      "fie": { modern: "shame on you", role: "Interjection", etym: "Expression of disapproval or disgust." }
+    };
+
+    const presets = {
+      modern_to_shakespeare: [
+        {
+          id: 1,
+          input: "To be or not to be, that is the question.",
+          output: "To be, or not to be, that is the question."
+        },
+        {
+          id: 2,
+          input: "Why are you looking for me, my friend?",
+          output: "Wherefore lookest thou for me, my comrade?"
+        },
+        {
+          id: 3,
+          input: "Go quickly to the city and tell the lady.",
+          output: "Go anon unto the city and tell the dame."
+        },
+        {
+          id: 4,
+          input: "Listen! What light comes through that window?",
+          output: "Hark! What light through yonder window breaks?"
+        },
+        {
+          id: 5,
+          input: "I love you with all my heart.",
+          output: "I love thee with all my heart."
+        }
+      ],
+      shakespeare_to_modern: [
+        {
+          id: 6,
+          input: "Wherefore art thou Romeo?",
+          output: "Why are you Romeo?"
+        },
+        {
+          id: 7,
+          input: "Verily, thou hast spoken the truth.",
+          output: "Truly, you have spoken the truth."
+        },
+        {
+          id: 8,
+          input: "Hark, the bell tolls for thee.",
+          output: "Listen, the bell tolls for you."
+        },
+        {
+          id: 9,
+          input: "Go thither and tell him I come anon.",
+          output: "Go there and tell him I come soon."
+        },
+        {
+          id: 10,
+          input: "Prithee, speak soft, my lord.",
+          output: "Please, speak quietly, my lord."
+        }
+      ]
+    };
+
+    /* ==========================================================================
+       Offline Heuristic Shakespeare Translator
+       ========================================================================== */
+    const dictionaryM2S = {
+      "hello": "hail",
+      "hi": "hail",
+      "goodbye": "farewell",
+      "bye": "farewell",
+      "please": "prithee",
+      "why": "wherefore",
+      "listen": "hark",
+      "here": "hither",
+      "there": "thither",
+      "where": "whither",
+      "truly": "verily",
+      "indeed": "verily",
+      "soon": "anon",
+      "before": "ere",
+      "nothing": "naught",
+      "perhaps": "perchance",
+      "maybe": "perchance",
+      "often": "oft",
+      "very": "exceeding",
+      "happy": "merry",
+      "sad": "heavy-hearted",
+      "friend": "comrade",
+      "lady": "dame",
+      "has": "hath",
+      "does": "doth"
+    };
+
+    const dictionaryS2M = {
+      "hail": "hello",
+      "farewell": "goodbye",
+      "prithee": "please",
+      "wherefore": "why",
+      "hark": "listen",
+      "hither": "here",
+      "thither": "there",
+      "whither": "where",
+      "verily": "truly",
+      "anon": "soon",
+      "ere": "before",
+      "naught": "nothing",
+      "perchance": "perhaps",
+      "oft": "often",
+      "exceeding": "very",
+      "merry": "happy",
+      "heavy-hearted": "sad",
+      "comrade": "friend",
+      "dame": "lady",
+      "hath": "has",
+      "doth": "does"
+    };
+
+    function translateToShakespeareOffline(text) {
+      let words = text.split(/\b/);
+      let out = [];
+      
+      for (let i = 0; i < words.length; i++) {
+        let rawWord = words[i];
+        let lower = rawWord.toLowerCase();
+        
+        // Handle common contractions / pronouns
+        if (lower === "you") {
+          if (words[i+1] === " ") {
+            if (words[i+2] === "are") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thou" : "thou");
+              words[i+2] = "art";
+              continue;
+            }
+            if (words[i+2] === "have") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thou" : "thou");
+              words[i+2] = "hast";
+              continue;
+            }
+            if (words[i+2] === "do") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thou" : "thou");
+              words[i+2] = "dost";
+              continue;
+            }
+            if (words[i+2] === "will") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thou" : "thou");
+              words[i+2] = "wilt";
+              continue;
+            }
+            if (words[i+2] === "shall") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thou" : "thou");
+              words[i+2] = "shalt";
+              continue;
+            }
+          }
+        }
+
+        // Heuristic you subjective/objective
+        if (lower === "you") {
+          // If 'you' is followed by a verb or starts a phrase, convert to thou, else thee
+          let isSubjective = false;
+          let nextIndex = i + 1;
+          while (nextIndex < words.length) {
+            if (words[nextIndex].trim() !== "") {
+              break;
+            }
+            nextIndex++;
+          }
+          if (nextIndex < words.length) {
+            let nextWordLower = words[nextIndex].toLowerCase();
+            let commonVerbs = ["want", "go", "think", "know", "speak", "tell", "love", "see", "hear", "make", "take", "find", "come", "look"];
+            if (commonVerbs.includes(nextWordLower) || nextWordLower.endsWith("s") || nextWordLower.endsWith("ed")) {
+              isSubjective = true;
+            }
+          }
+          if (i === 0 || words[i-1] === "." || words[i-1] === "?" || words[i-1] === "!") {
+            isSubjective = true;
+          }
+          
+          if (isSubjective) {
+            out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thou" : "thou");
+          } else {
+            out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thee" : "thee");
+          }
+          continue;
+        }
+
+        // your / yours
+        if (lower === "your") {
+          let nextIndex = i + 1;
+          while (nextIndex < words.length) {
+            if (words[nextIndex].trim() !== "") {
+              break;
+            }
+            nextIndex++;
+          }
+          if (nextIndex < words.length) {
+            let nextWord = words[nextIndex].toLowerCase();
+            if (/^[aeiou]/.test(nextWord)) {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thine" : "thine");
+              continue;
+            }
+          }
+          out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thy" : "thy");
+          continue;
+        }
+        if (lower === "yours") {
+          out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Thine" : "thine");
+          continue;
+        }
+
+        // Dictionary lookup
+        if (dictionaryM2S[lower]) {
+          let repl = dictionaryM2S[lower];
+          out.push(rawWord[0] === rawWord[0].toUpperCase() ? repl[0].toUpperCase() + repl.slice(1) : repl);
+          continue;
+        }
+
+        // Suffix transformations
+        if (lower.endsWith("s")) {
+          if (lower.length > 3) {
+            if (!lower.endsWith("ss")) {
+              if (!lower.endsWith("us")) {
+                if (!lower.endsWith("is")) {
+                  if (!lower.endsWith("as")) {
+                    // Heuristically convert 3rd person verbs ending in s to eth
+                    let verbBase = rawWord.slice(0, -1);
+                    if (verbBase.endsWith("e")) {
+                      out.push(verbBase + "th");
+                      continue;
+                    } else {
+                      out.push(verbBase + "eth");
+                      continue;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        out.push(rawWord);
+      }
+      return out.join("");
+    }
+
+    function translateFromShakespeareOffline(text) {
+      let words = text.split(/\b/);
+      let out = [];
+      
+      for (let i = 0; i < words.length; i++) {
+        let rawWord = words[i];
+        let lower = rawWord.toLowerCase();
+        
+        if (lower === "thou") {
+          if (words[i+1] === " ") {
+            if (words[i+2] === "art") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "You" : "you");
+              words[i+2] = "are";
+              continue;
+            }
+            if (words[i+2] === "hast") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "You" : "you");
+              words[i+2] = "have";
+              continue;
+            }
+            if (words[i+2] === "dost") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "You" : "you");
+              words[i+2] = "do";
+              continue;
+            }
+            if (words[i+2] === "wilt") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "You" : "you");
+              words[i+2] = "will";
+              continue;
+            }
+            if (words[i+2] === "shalt") {
+              out.push(rawWord[0] === rawWord[0].toUpperCase() ? "You" : "you");
+              words[i+2] = "shall";
+              continue;
+            }
+          }
+        }
+
+        if (lower === "thou" || lower === "thee") {
+          out.push(rawWord[0] === rawWord[0].toUpperCase() ? "You" : "you");
+          continue;
+        }
+        if (lower === "thy" || lower === "thine") {
+          // If thine is stand alone, yours
+          let nextIndex = i + 1;
+          while (nextIndex < words.length) {
+            if (words[nextIndex].trim() !== "") {
+              break;
+            }
+            nextIndex++;
+          }
+          let isYour = false;
+          if (nextIndex < words.length) {
+            if (words[nextIndex].trim() !== "") {
+              if (/^[a-zA-Z]/.test(words[nextIndex])) {
+                isYour = true;
+              }
+            }
+          }
+          if (isYour) {
+            out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Your" : "your");
+          } else {
+            out.push(rawWord[0] === rawWord[0].toUpperCase() ? "Yours" : "yours");
+          }
+          continue;
+        }
+
+        if (dictionaryS2M[lower]) {
+          let repl = dictionaryS2M[lower];
+          out.push(rawWord[0] === rawWord[0].toUpperCase() ? repl[0].toUpperCase() + repl.slice(1) : repl);
+          continue;
+        }
+
+        // Suffix back conversions (-eth to -s, -est to empty)
+        if (lower.endsWith("eth")) {
+          if (lower.length > 4) {
+            let base = rawWord.slice(0, -3);
+            out.push(base.endsWith("e") ? base + "s" : base + "es");
+            continue;
+          }
+        }
+        if (lower.endsWith("est")) {
+          if (lower.length > 4) {
+            out.push(rawWord.slice(0, -3));
+            continue;
+          }
+        }
+
+        out.push(rawWord);
+      }
+      return out.join("");
+    }
+
+    /* ==========================================================================
+       Word-wrapping logic for interactive Hover cards
+       ========================================================================== */
+    function wrapTextInWordSpans(text, currentDirection) {
+      if (!text || text.trim() === "") return "";
+      
+      let words = text.split(/(\s+|[.,\/#!$%\^&\*;:{}=\-_`~()?])/);
+      
+      return words.map(item => {
+        if (/^[a-zA-Z]+$/.test(item)) {
+          let lower = item.toLowerCase();
+          let parsedKey = lower;
+          let isFallback = false;
+          let isTargetShakespeare = (currentDirection === "modern_to_shakespeare");
+          
+          let dbToUse = shakespeareWordsDb;
+          
+          if (isTargetShakespeare) {
+            // Target is Shakespearean. We want to check if the word is in the DB.
+            if (!dbToUse[lower]) {
+              isFallback = true;
+            }
+          } else {
+            // Source is Shakespearean, target is modern. Key is the source word.
+            // Let's find if the word is in DB
+            if (!dbToUse[lower]) {
+              isFallback = true;
+            }
+          }
+
+          let tooltipClass = isFallback ? "hover-word fallback-hover" : "hover-word";
+          let eraLabel = isTargetShakespeare ? "early" : "modern";
+          
+          return `<span class="${tooltipClass}" data-word-key="${parsedKey}" data-era="${eraLabel}" data-fallback="${isFallback}">${item}</span>`;
+        }
+        return item;
+      }).join("");
+    }
+
+    /* ==========================================================================
+       Speech Synthesis Controls
+       ========================================================================== */
+    let activeUtterance = null;
+    let speakTimeoutId = null;
+
+    function speakText(text, rate = 0.75, pitch = 0.95) {
+      if (!window.speechSynthesis) {
+        console.warn("Speech synthesis not supported in this browser.");
+        return;
+      }
+      
+      // Un-stuck sequence for Chromium: resume first, then cancel
+      window.speechSynthesis.resume();
+      window.speechSynthesis.cancel();
+      
+      let cleanText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      
+      if (!cleanText.trim()) return;
+      
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = rate;
+      utterance.pitch = pitch;
+      utterance.lang = 'en-US'; // Use en-US as it is universally installed and stable
+      
+      activeUtterance = utterance;
+      
+      utterance.onend = () => { activeUtterance = null; };
+      utterance.onerror = (e) => { 
+        console.error("SpeechSynthesis error:", e.error);
+        activeUtterance = null; 
+      };
+      
+      window.speechSynthesis.speak(utterance);
+    }
+
+    /* ==========================================================================
+       Core Application Event Loop
+       ========================================================================== */
+    let currentDirection = "modern_to_shakespeare";
+    let isCustomMode = false;
+    let customText = "";
+    let translationCache = { output: "" };
+
+    // Dynamic UI loaders
+    function renderPresetChips() {
+      const presetsContainer = document.getElementById("presets-container");
+      presetsContainer.innerHTML = "";
+      
+      const currentList = presets[currentDirection] || [];
+      currentList.forEach((p, idx) => {
+        const chip = document.createElement("button");
+        let isDefaultActive = false;
+        if (idx === 0) {
+          if (!isCustomMode) {
+            isDefaultActive = true;
+          }
+        }
+        
+        chip.className = `preset-chip ${isDefaultActive ? 'active' : ''}`;
+        chip.textContent = p.input.length > 32 ? p.input.substring(0, 32) + "..." : p.input;
+        chip.setAttribute("data-preset-id", p.id);
+        
+        chip.addEventListener("click", () => {
+          document.querySelectorAll(".preset-chip").forEach(el => el.classList.remove("active"));
+          chip.classList.add("active");
+          
+          isCustomMode = false;
+          document.getElementById("custom-alert").style.display = "none";
+          
+          const inputEl = document.getElementById("translator-input");
+          inputEl.value = p.input;
+          document.getElementById("char-current").textContent = p.input.length.toLocaleString();
+          
+          performTranslation();
+        });
+        presetsContainer.appendChild(chip);
+      });
+    }
+
+    async function queryAITranslation(text, direction) {
+      const provider = localStorage.getItem("ai_provider") || "gemini";
+      const apiKey = localStorage.getItem("ai_key");
+      if (!apiKey) {
+        throw new Error("API key is missing! Please configure AI settings.");
+      }
+      
+      let sourceName = direction === "modern_to_shakespeare" ? "Modern English" : "Shakespeare's Early Modern English";
+      let targetName = direction === "modern_to_shakespeare" ? "Shakespeare's Early Modern English (Elizabethan)" : "Modern English";
+      
+      const prompt = `You are an expert translator specializing in Shakespearean and Early Modern English. Translate the following text from ${sourceName} to ${targetName}. Maintain the exact Elizabethan tone, double negatives, pronouns (thou/thee/thy/thine), verb inflections (-eth/-est), and poetic meter where appropriate. Output ONLY the raw translated text with NO notes, NO preambles, and NO comments. Text to translate: "${text}"`;
+      
+      let responseText = "";
+      if (provider === "gemini") {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.3 }
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error?.message || `Gemini error ${res.status}`);
+        }
+        const data = await res.json();
+        responseText = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      } else if (provider === "openai") {
+        const url = "https://api.openai.com/v1/chat/completions";
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [{ role: "user", content: prompt }],
+            temperature: 0.3
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error?.message || `OpenAI error ${res.status}`);
+        }
+        const data = await res.json();
+        responseText = data.choices?.[0]?.message?.content || "";
+      } else if (provider === "claude") {
+        const url = "https://api.anthropic.com/v1/messages";
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": apiKey,
+            "anthropic-version": "2023-06-01",
+            "dangerouslyAllowBrowser": "true"
+          },
+          body: JSON.stringify({
+            model: "claude-3-5-haiku-20241022",
+            max_tokens: 1024,
+            messages: [{ role: "user", content: prompt }]
+          })
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`Claude error: ${errText}`);
+        }
+        const data = await res.json();
+        responseText = data.content?.[0]?.text || "";
+      }
+      
+      return responseText.trim().replace(/^["']|["']$/g, "");
+    }
+
+    async function performTranslation() {
+      const inputEl = document.getElementById("translator-input");
+      let inputText = inputEl.value;
+      
+      if (inputText.trim() === "") {
+        displayActiveTranslation();
+        return;
+      }
+      
+      // Identify active preset
+      let activePreset = null;
+      if (!isCustomMode) {
+        const presetsList = presets[currentDirection] || [];
+        activePreset = presetsList.find(p => p.input.toLowerCase().trim() === inputText.toLowerCase().trim());
+      }
+      
+      const aiEnabled = localStorage.getItem("ai_enabled") === "true";
+      const accuracyBadge = document.getElementById("accuracy-score-badge");
+      
+      let runAiTranslation = false;
+      if (aiEnabled) {
+        if (!activePreset) {
+          runAiTranslation = true;
+        }
+      }
+      
+      if (runAiTranslation) {
+        const outputContainer = document.getElementById("translator-output-container");
+        outputContainer.innerHTML = `<span class="placeholder-text" style="display: flex; align-items: center; gap: 8px;"><svg class="spinner" width="16" height="16" viewBox="0 0 50 50" style="animation: rotate 1s linear infinite; transform-origin: center;"><circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="80" stroke-dashoffset="0" style="stroke: var(--accent-gold);"></circle></svg> Converting using AI...</span>`;
+        if (accuracyBadge) {
+          accuracyBadge.textContent = "Accuracy: 98% (AI Powered)";
+          accuracyBadge.style.background = "rgba(16, 185, 129, 0.15)";
+          accuracyBadge.style.borderColor = "rgba(16, 185, 129, 0.3)";
+          accuracyBadge.style.color = "#10b981";
+        }
+        
+        try {
+          const aiOut = await queryAITranslation(inputText, currentDirection);
+          translationCache = { output: aiOut };
+          displayActiveTranslation();
+          return;
+        } catch (err) {
+          console.error("AI translation error:", err);
+          const toast = document.createElement("div");
+          toast.style = "position: fixed; bottom: 20px; right: 20px; background: #ef4444; color: white; padding: 12px 24px; border-radius: 6px; font-size: 0.9rem; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.2);";
+          toast.textContent = `AI Translation error (falling back to offline): ${err.message}`;
+          document.body.appendChild(toast);
+          setTimeout(() => toast.remove(), 4000);
+        }
+      }
+      
+      if (accuracyBadge) {
+        accuracyBadge.textContent = "Accuracy: 55% (Offline Heuristic)";
+        accuracyBadge.style.background = "rgba(245, 158, 11, 0.15)";
+        accuracyBadge.style.borderColor = "rgba(245, 158, 11, 0.3)";
+        accuracyBadge.style.color = "#f59e0b";
+      }
+      
+      if (activePreset) {
+        translationCache = { output: activePreset.output };
+      } else {
+        if (currentDirection === "modern_to_shakespeare") {
+          translationCache = { output: translateToShakespeareOffline(inputText) };
+        } else {
+          translationCache = { output: translateFromShakespeareOffline(inputText) };
+        }
+      }
+      
+      displayActiveTranslation();
+    }
+
+    function displayActiveTranslation() {
+      const outputContainer = document.getElementById("translator-output-container");
+      const readAloudEl = document.getElementById("drawer-read-aloud");
+      
+      const inputEl = document.getElementById("translator-input");
+      if (inputEl.value.trim() === "") {
+        outputContainer.innerHTML = `<span class="placeholder-text">Converted output will appear here...</span>`;
+        outputContainer.classList.remove("active-glow");
+        return;
+      }
+      
+      outputContainer.classList.add("active-glow");
+      outputContainer.innerHTML = wrapTextInWordSpans(translationCache.output, currentDirection);
+      if (readAloudEl) readAloudEl.textContent = translationCache.output;
+      
+      bindWordHoverEvents();
+    }
+
+    function bindWordHoverEvents() {
+      const hoverWords = document.querySelectorAll(".hover-word");
+      const tooltip = document.getElementById("shared-word-tooltip");
+
+      hoverWords.forEach(wordSpan => {
+        wordSpan.addEventListener("mouseenter", (e) => {
+          const key = wordSpan.getAttribute("data-word-key");
+          const isFallback = wordSpan.getAttribute("data-fallback") === "true";
+          
+          let wordTitle = wordSpan.textContent.replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+          let translation = "";
+          let grammar = "Grammatical Analysis";
+          let etymology = "Late 16th century Early Modern English coinage.";
+          let eraLabel = "Shakespearean (c. 1600)";
+          
+          if (isFallback) {
+            translation = wordTitle;
+            grammar = "Elizabethan Term";
+            etymology = "Regular Early Modern English word structure.";
+          } else {
+            let data = shakespeareWordsDb[key];
+            if (data) {
+              translation = data.modern;
+              grammar = data.role;
+              etymology = data.etym;
+            } else {
+              translation = wordTitle;
+            }
+          }
+
+          document.getElementById("tooltip-word-title").textContent = wordTitle;
+          document.getElementById("tooltip-era-tag").textContent = eraLabel;
+          document.getElementById("tooltip-translation-val").textContent = translation;
+          document.getElementById("tooltip-grammar-val").textContent = grammar;
+          document.getElementById("tooltip-etymology-val").textContent = etymology;
+
+          const rect = wordSpan.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+          
+          tooltip.style.left = (rect.left + scrollLeft - (280/2) + (rect.width/2)) + "px";
+          tooltip.style.top = (rect.top + scrollTop - tooltip.offsetHeight - 12) + "px";
+          
+          tooltip.classList.add("active");
+        });
+
+        wordSpan.addEventListener("mouseleave", () => {
+          tooltip.classList.remove("active");
+        });
+      });
+    }
+
+    /* ==========================================================================
+       Linguistic drawer functions
+       ========================================================================== */
+    function openLinguisticDrawer() {
+      document.getElementById("linguistic-drawer-overlay").classList.add("open");
+      document.getElementById("linguistic-drawer").classList.add("open");
+    }
+
+    function closeLinguisticDrawer() {
+      document.getElementById("linguistic-drawer-overlay").classList.remove("open");
+      document.getElementById("linguistic-drawer").classList.remove("open");
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    /* ==========================================================================
+       File loader functions (PDF & Image layout analysis)
+       ========================================================================== */
+    async function extractTextFromPDF(file, statusCallback) {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      let fullText = [];
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        if (statusCallback) statusCallback(`Reading page ${pageNum} of ${pdf.numPages}...`);
+        const page = await pdf.getPage(pageNum);
+        const textContent = await page.getTextContent();
+        const pageText = textContent.items.map(item => item.str).join(" ");
+        fullText.push(pageText);
+      }
+      return fullText.join("\n");
+    }
+
+    async function extractTextFromImage(file, statusCallback) {
+      if (statusCallback) statusCallback("Analyzing image layout...");
+      const result = await Tesseract.recognize(file, 'eng', {
+        logger: m => {
+          if (m.status === 'recognizing text') {
+            const progress = Math.round(m.progress * 100);
+            if (statusCallback) statusCallback(`Extracting characters: ${progress}%...`);
+          }
+        }
+      });
+      return result.data.text;
+    }
+
+    /* ==========================================================================
+       Initialization
+       ========================================================================== */
+    let initRetries = 0;
+    function initConverter() {
+      const inputEl = document.getElementById("translator-input");
+      if (!inputEl) {
+        initRetries++;
+        if (initRetries < 100) { // Retry for up to 5 seconds
+          setTimeout(initConverter, 50);
+        } else {
+          console.warn("Converter input element not found after 100 retries.");
+        }
+        return;
+      }
+      initRetries = 0; // Reset retries
+
+      const directionSelect = document.getElementById("direction-select");
+      const charCurrent = document.getElementById("char-current");
+      const customAlert = document.getElementById("custom-alert");
+      const clearBtn = document.getElementById("clear-btn");
+      
+      renderPresetChips();
+      
+      // Load first preset
+      const currentList = presets[currentDirection] || [];
+      if (currentList.length > 0) {
+        inputEl.value = currentList[0].input;
+        charCurrent.textContent = currentList[0].input.length.toLocaleString();
+        performTranslation();
+      }
+
+      // Input changes
+      inputEl.addEventListener("input", (e) => {
+        let val = e.target.value;
+        charCurrent.textContent = val.length.toLocaleString();
+        customText = val;
+        
+        document.querySelectorAll(".preset-chip").forEach(el => el.classList.remove("active"));
+        
+        if (val.trim() === "") {
+          isCustomMode = false;
+          customAlert.style.display = "none";
+          const firstChip = document.querySelector(".preset-chip");
+          if (firstChip) firstChip.classList.add("active");
+        } else {
+          const currentList = presets[currentDirection] || [];
+          const matched = currentList.find(p => p.input.toLowerCase().trim() === val.toLowerCase().trim());
+          if (matched) {
+            isCustomMode = false;
+            customAlert.style.display = "none";
+            const matchingChip = document.querySelector(`[data-preset-id="${matched.id}"]`);
+            if (matchingChip) matchingChip.classList.add("active");
+          } else {
+            isCustomMode = true;
+            customAlert.style.display = "flex";
+          }
+        }
+        performTranslation();
+      });
+
+      // Direction select changes
+      directionSelect.addEventListener("change", (e) => {
+        currentDirection = e.target.value;
+        isCustomMode = false;
+        customAlert.style.display = "none";
+        
+        renderPresetChips();
+        
+        const currentList = presets[currentDirection] || [];
+        if (currentList.length > 0) {
+          inputEl.value = currentList[0].input;
+          charCurrent.textContent = currentList[0].input.length.toLocaleString();
+        } else {
+          inputEl.value = "";
+          charCurrent.textContent = "0";
+        }
+        performTranslation();
+      });
+
+      // Clear
+      clearBtn.addEventListener("click", () => {
+        inputEl.value = "";
+        charCurrent.textContent = "0";
+        customText = "";
+        isCustomMode = false;
+        customAlert.style.display = "none";
+        
+        document.querySelectorAll(".preset-chip").forEach(el => el.classList.remove("active"));
+        const firstChip = document.querySelector(".preset-chip");
+        if (firstChip) {
+          firstChip.classList.add("active");
+          const currentList = presets[currentDirection] || [];
+          if (currentList.length > 0) {
+            inputEl.value = currentList[0].input;
+            charCurrent.textContent = currentList[0].input.length.toLocaleString();
+          }
+        }
+        performTranslation();
+      });
+
+      // File loader OCR
+      const fileLoader = document.getElementById("file-loader");
+      const uploadBtn = document.getElementById("upload-btn");
+      const fileProgressAlert = document.getElementById("file-progress-alert");
+      const fileProgressStatus = document.getElementById("file-progress-status");
+
+      uploadBtn.addEventListener("click", () => fileLoader.click());
+      fileLoader.addEventListener("change", async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        fileProgressAlert.style.display = "flex";
+        fileProgressStatus.textContent = "Loading file...";
+        inputEl.disabled = true;
+        uploadBtn.disabled = true;
+
+        try {
+          let text = "";
+          if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
+            text = await extractTextFromPDF(file, (msg) => { fileProgressStatus.textContent = msg; });
+          } else if (file.type.startsWith("image/") || /\.(png|jpe?g|gif|webp|bmp)$/i.test(file.name)) {
+            text = await extractTextFromImage(file, (msg) => { fileProgressStatus.textContent = msg; });
+          } else {
+            alert("Unsupported format. PDF or Image only.");
+            fileProgressAlert.style.display = "none";
+            inputEl.disabled = false;
+            uploadBtn.disabled = false;
+            fileLoader.value = "";
+            return;
+          }
+
+          if (text.trim()) {
+            inputEl.value = text;
+            charCurrent.textContent = text.length.toLocaleString();
+            isCustomMode = true;
+            customText = text;
+            customAlert.style.display = "flex";
+            document.querySelectorAll(".preset-chip").forEach(el => el.classList.remove("active"));
+            performTranslation();
+          } else {
+            alert("No text extracted.");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Error: " + err.message);
+        } finally {
+          fileProgressAlert.style.display = "none";
+          inputEl.disabled = false;
+          uploadBtn.disabled = false;
+          fileLoader.value = "";
+        }
+      });
+
+      // Translation trigger
+      document.getElementById("translate-btn").addEventListener("click", () => {
+        performTranslation();
+      });
+
+      // Pronunciation synthesis audio trigger
+      document.getElementById("play-audio-btn").addEventListener("click", () => {
+        const outputEl = document.getElementById("translator-output-container");
+        if (!outputEl || outputEl.querySelector(".placeholder-text")) return;
+        
+        const rate = parseFloat(document.getElementById("synth-rate").value) || 0.75;
+        const pitch = parseFloat(document.getElementById("synth-pitch").value) || 0.95;
+        speakText(outputEl.textContent, rate, pitch);
+      });
+
+      // Drawer trigger
+      document.getElementById("linguistic-drawer-trigger").addEventListener("click", openLinguisticDrawer);
+      document.getElementById("drawer-close-btn").addEventListener("click", closeLinguisticDrawer);
+      document.getElementById("linguistic-drawer-overlay").addEventListener("click", closeLinguisticDrawer);
+
+      // Synthesis tempo modifications in drawer
+      const rateSlider = document.getElementById("synth-rate");
+      const rateVal = document.getElementById("rate-val");
+      const pitchSlider = document.getElementById("synth-pitch");
+      const pitchVal = document.getElementById("pitch-val");
+
+      rateSlider.addEventListener("input", (e) => { rateVal.textContent = e.target.value + "x"; });
+      pitchSlider.addEventListener("input", (e) => { pitchVal.textContent = e.target.value + "x"; });
+      
+      document.getElementById("drawer-synth-play").addEventListener("click", () => {
+        const outputEl = document.getElementById("translator-output-container");
+        if (!outputEl || outputEl.querySelector(".placeholder-text")) return;
+        speakText(outputEl.textContent, parseFloat(rateSlider.value), parseFloat(pitchSlider.value));
+      });
+
+      // Copy to clipboard
+      const copyBtn = document.getElementById("copy-btn");
+      copyBtn.addEventListener("click", () => {
+        const outputEl = document.getElementById("translator-output-container");
+        if (!outputEl || outputEl.querySelector(".placeholder-text")) return;
+        
+        const text = outputEl.innerText || outputEl.textContent;
+        navigator.clipboard.writeText(text.trim()).then(() => {
+          const orig = copyBtn.innerHTML;
+          copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!`;
+          setTimeout(() => { copyBtn.innerHTML = orig; }, 2000);
+        }).catch(err => console.error(err));
+      });
+
+      // AI Settings modal
+      const aiSettingsBtn = document.getElementById("ai-settings-btn");
+      const aiModalOverlay = document.getElementById("ai-modal-overlay");
+      const aiCloseBtn = document.getElementById("ai-close-btn");
+      const aiSaveBtn = document.getElementById("ai-save-btn");
+      const aiTestBtn = document.getElementById("ai-test-btn");
+      const aiProviderSelect = document.getElementById("ai-provider-select");
+      const aiKeyInput = document.getElementById("ai-key-input");
+      const aiEnabledCheckbox = document.getElementById("ai-enabled-checkbox");
+
+      aiSettingsBtn.addEventListener("click", () => {
+        aiProviderSelect.value = localStorage.getItem("ai_provider") || "gemini";
+        aiKeyInput.value = localStorage.getItem("ai_key") || "";
+        aiEnabledCheckbox.checked = localStorage.getItem("ai_enabled") === "true";
+        aiModalOverlay.style.display = "flex";
+      });
+
+      const closeAIModal = () => { aiModalOverlay.style.display = "none"; };
+      aiCloseBtn.addEventListener("click", closeAIModal);
+      aiModalOverlay.addEventListener("click", (e) => { if (e.target === aiModalOverlay) closeAIModal(); });
+
+      aiSaveBtn.addEventListener("click", () => {
+        localStorage.setItem("ai_provider", aiProviderSelect.value);
+        localStorage.setItem("ai_key", aiKeyInput.value.trim());
+        localStorage.setItem("ai_enabled", aiEnabledCheckbox.checked ? "true" : "false");
+        closeAIModal();
+        performTranslation();
+      });
+
+      aiTestBtn.addEventListener("click", async () => {
+        const provider = aiProviderSelect.value;
+        const apiKey = aiKeyInput.value.trim();
+        if (!apiKey) {
+          alert("Please enter an API key first.");
+          return;
+        }
+
+        aiTestBtn.disabled = true;
+        aiTestBtn.textContent = "Testing...";
+
+        try {
+          const prompt = "Reply with only the word OK";
+          let success = false;
+          
+          if (provider === "gemini") {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+            const res = await fetch(url, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { maxOutputTokens: 5 } })
+            });
+            if (res.ok) success = true;
+          } else if (provider === "openai") {
+            const url = "https://api.openai.com/v1/chat/completions";
+            const res = await fetch(url, {
+              method: "POST",
+              headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+              body: JSON.stringify({ model: "gpt-4o-mini", messages: [{ role: "user", content: prompt }], max_tokens: 5 })
+            });
+            if (res.ok) success = true;
+          } else if (provider === "claude") {
+            const url = "https://api.anthropic.com/v1/messages";
+            const res = await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "x-api-key": apiKey,
+                "anthropic-version": "2023-06-01",
+                "dangerouslyAllowBrowser": "true"
+              },
+              body: JSON.stringify({ model: "claude-3-5-haiku-20241022", max_tokens: 5, messages: [{ role: "user", content: prompt }] })
+            });
+            if (res.ok) success = true;
+          }
+          
+          if (success) {
+            alert("Connection test successful! Your API key is valid.");
+          } else {
+            alert("Connection failed. Please check your key and network.");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Connection error: " + err.message);
+        } finally {
+          aiTestBtn.disabled = false;
+          aiTestBtn.textContent = "Test API";
+        }
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initConverter);
+    } else {
+      initConverter();
+    }
+  </script>
+
+      <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

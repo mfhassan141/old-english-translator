@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is French the Mother Language of English? (The Surprising Truth)</title>
+  <meta name="description" content="Is French the mother language of English? Discover the historical truth about where the English language and people really came from, from Anglo-Saxons to Normans.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link data-no-optimize="1" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style data-no-optimize="1">
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-color: #120924; /* Deep Medieval Purple */
+      --card-bg: #1c1032; /* Slightly Lighter Purple */
+      --card-bg-hover: #261742;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.25);
+      --text-cream: #f8f5f0;
+      --text-muted: #8c829d;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.35);
+      
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* Isolated Wrapper to Prevent WordPress Theme Style Leaking */
+    .translator-app-wrapper {
+      background-color: #120924 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      line-height: 1.6 !important;
+      text-align: left !important;
+    }
+
+    .translator-app-wrapper h1, 
+    .translator-app-wrapper h2, 
+    .translator-app-wrapper h3, 
+    .translator-app-wrapper p, 
+    .translator-app-wrapper span, 
+    .translator-app-wrapper a, 
+    .translator-app-wrapper label {
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .header-nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-crest {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      background: rgba(28, 16, 50, 0.6);
+    }
+
+    .brand-name {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav.site-navigation ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav.site-navigation a {
+      white-space: nowrap;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    nav.site-navigation a:hover, 
+    nav.site-navigation a.active {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    nav.site-navigation a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--accent-gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav.site-navigation a:hover::after, 
+    nav.site-navigation a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    nav.site-navigation a.nav-cta {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.5rem 1.1rem !important;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    nav.site-navigation a.nav-cta:hover {
+      color: var(--bg-color) !important;
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       BLOG LAYOUT
+       ========================================================================== */
+    .blog-header-section {
+      padding: 5rem 0 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(28, 16, 50, 0.15);
+    }
+
+    .blog-category {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      background: rgba(201, 153, 58, 0.1);
+      border: 1.5px solid var(--accent-gold);
+      color: var(--accent-gold) !important;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .blog-main-title {
+      font-family: var(--font-title) !important;
+      font-size: 2.5rem;
+      line-height: 1.35;
+      color: var(--text-cream) !important;
+      max-width: 950px;
+      margin: 0 auto 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .blog-main-title {
+        font-size: 3rem;
+      }
+    }
+
+    .blog-meta-info {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .blog-meta-info span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .blog-content-wrapper {
+      padding: 4rem 0;
+    }
+
+    .blog-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    @media (min-width: 992px) {
+      .blog-grid-layout {
+        grid-template-columns: 8fr 4fr;
+      }
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    /* ARTICLE STYLES */
+    article.blog-article {
+      background: rgba(28, 16, 50, 0.15);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (min-width: 768px) {
+      article.blog-article {
+        padding: 2.5rem;
+      }
+    }
+
+    .article-body {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    .article-body p {
+      margin-bottom: 1.8rem;
+    }
+
+    .article-body p strong {
+      color: var(--text-cream);
+    }
+
+    .article-body h2 {
+      font-family: var(--font-title) !important;
+      font-size: 2.0rem;
+      color: var(--accent-gold) !important;
+      margin: 2.5rem 0 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.4rem;
+      color: var(--text-cream) !important;
+      margin: 1.8rem 0 1rem;
+    }
+
+    .article-body ul, .article-body ol {
+      margin: 0 0 1.8rem 1.5rem;
+    }
+
+    .article-body li {
+      margin-bottom: 0.6rem;
+    }
+
+    .article-body blockquote {
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201, 153, 58, 0.05);
+      border-left: 4px solid var(--accent-gold);
+      font-style: italic;
+      color: var(--text-cream);
+      border-radius: 4px;
+    }
+
+    /* Comparison Table Styling */
+    .comparison-table-wrapper {
+      overflow-x: auto;
+      margin: 2rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    table.comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+      background: rgba(18, 9, 36, 0.4);
+      min-width: 500px;
+    }
+
+    table.comparison-table th {
+      background: rgba(201, 153, 58, 0.15);
+      color: var(--accent-gold);
+      padding: 1rem;
+      font-weight: 600;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    table.comparison-table td {
+      padding: 1.2rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+      color: var(--text-muted);
+    }
+
+    table.comparison-table tr:hover {
+      background: rgba(201, 153, 58, 0.02);
+    }
+
+    table.comparison-table td strong {
+      color: var(--text-cream);
+    }
+
+    /* Image Styling */
+    .blog-image-box {
+      margin: 2.2rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(18, 9, 36, 0.3);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .blog-image-box img {
+      width: 100%;
+      height: auto;
+      max-height: 450px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .blog-image-caption {
+      padding: 0.8rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* AUTHOR CARD */
+    .author-card {
+      margin-top: 4rem;
+      padding: 2rem;
+      background: rgba(28, 16, 50, 0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    @media (min-width: 576px) {
+      .author-card {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    .author-avatar {
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--accent-gold);
+      border-radius: 50%;
+      background: var(--card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      flex-shrink: 0;
+    }
+
+    .author-details h4 {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 0.5rem;
+    }
+
+    .author-details p {
+      font-size: 0.95rem;
+      color: var(--text-muted) !important;
+      margin: 0;
+    }
+
+    /* SIDEBAR STYLES */
+    aside.blog-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-widget {
+      background: rgba(28, 16, 50, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+    }
+
+    .sidebar-widget h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.3rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.4rem;
+    }
+
+    .cta-widget {
+      background: linear-gradient(145deg, rgba(28, 16, 50, 0.8) 0%, rgba(18, 9, 36, 0.9) 100%);
+      border: 1px solid var(--accent-gold);
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .cta-widget p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-btn:hover {
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    .recent-posts-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .recent-posts-list li a {
+      color: var(--text-cream) !important;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+      display: block;
+    }
+
+    .recent-posts-list li a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    .recent-posts-list li span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.9);
+      padding: 4rem 0 2rem;
+      margin-top: 5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 320px;
+    }
+
+    .footer-links h4 {
+      font-family: var(--font-title) !important;
+      font-size: 1.1rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted) !important;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold-hover) !important;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(201, 153, 58, 0.08);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+      }
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal-links a {
+      color: var(--text-muted) !important;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-legal-links a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 768px) {
+      .header-nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      /* Adjust blog layout paddings for maximum reading space on small screens */
+      article.blog-article {
+        padding: 1.2rem !important;
+      }
+      .blog-header-section {
+        padding: 3rem 0 2rem;
+      }
+      .blog-main-title {
+        font-size: 2rem !important;
+      }
+    }
+  
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  
+    /* Dropdown CSS Rules */
+    nav.site-navigation li {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1c1032;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+      padding: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.2rem !important;
+      font-size: 0.9rem !important;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      width: 100%;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent-gold-hover) !important;
+      background: rgba(201, 153, 58, 0.08);
+      padding-left: 1.5rem !important;
+    }
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+    nav.site-navigation li.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-arrow {
+      font-size: 0.7rem;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    nav.site-navigation li.has-dropdown:hover .nav-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-gold-hover);
+    }
+    @media (max-width: 1150px) {
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .dropdown-menu a {
+        padding: 0.3rem 1rem !important;
+        text-align: center !important;
+      }
+      .nav-arrow {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://partnerhoursguide.com/is-french-mother-language-of-english/#post",
+      "headline": "Is French the Mother Language of English? The Surprising Truth",
+      "description": "Is French the mother language of English? Discover the historical truth about where the English language and people really came from, from Anglo-Saxons to Normans.",
+      "author": {
+        "@type": "Person",
+        "name": "Furqan",
+        "jobTitle": "Senior Career Advisor",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Sir Syed University of Engineering and Technology"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "PartnerHoursGuide",
+        "url": "https://partnerhoursguide.com"
+      },
+      "datePublished": "2026-05-30",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://partnerhoursguide.com/is-french-mother-language-of-english/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://partnerhoursguide.com/is-french-mother-language-of-english/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is French the mother language of English?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. English is a Germanic language descended from the speech of Anglo-Saxon migrants. French deeply influenced English vocabulary, particularly after 1066, but French did not give birth to English."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the English descended from French people?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mostly no. The Norman French who conquered England in 1066 were a small ruling class who had enormous cultural impact but contributed relatively little to the genetic makeup of the modern English population."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
+</head>
+<body>
+  <div class="translator-app-wrapper">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-nav-container">
+      <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+        <div class="brand-crest">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m5 8 6 6 6-6"></path>
+            <path d="m4 14 6 6 8-8"></path>
+          </svg>
+        </div>
+        <span class="brand-name">Translator Old English</span>
+      </a>
+      <nav class="site-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="https://partnerhoursguide.com/">Home</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/">Names</a></li>
+          <li><a href="https://partnerhoursguide.com/random-name-maker/">Name Maker</a></li>
+          
+          <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/" class="active">Blog</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/" class="nav-cta">Try translator</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Blog Header -->
+  <section class="blog-header-section">
+    <div class="container">
+      <span class="blog-category">History</span>
+      <h1 class="blog-main-title">Is French the Mother Language of English? The Surprising Truth About Where English (and the English) Really Came From</h1>
+      <div class="blog-meta-info">
+        <span>ðŸ•’ 8 min read</span>
+        <span>•</span>
+        <span>✍️ Editorial Team</span>
+        <span>•</span>
+        <span>ðŸ“… May 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Content -->
+  <div class="blog-content-wrapper">
+    <div class="container blog-grid-layout">
+      
+      <!-- Main Article -->
+      <main>
+        <article class="blog-article">
+          <div class="article-body">
+            
+            <p><strong>The short answer: No — French is not the mother language of English. But French shaped English so profoundly that millions of people who use an old English translator every day are staring at the evidence without realizing it. Here's the full story — and it's stranger, bloodier, and more beautiful than the textbooks let on.</strong></p>
+
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+            <h2>What You Need to Know First (Bottom Line Up Front)</h2>
+            
+            <p>If you've ever typed a phrase into an English translator and noticed how many English words sound oddly French — <em>justice</em>, <em>liberty</em>, <em>language</em>, <em>translation</em> — you've already felt the fingerprints of history on your keyboard.</p>
+
+            <p>English is not a daughter of French. But English spent centuries in the same house as French, eating at the same table, sleeping in the same bed, and borrowing French clothes it never returned.</p>
+
+            <p>The English language is, at its bones, a <strong>Germanic language</strong> — the same family as German, Dutch, and Old Norse. But its wardrobe is largely French, and its address book is stuffed with Latin. Understanding this distinction changes everything about how you see the language you speak, translate, and read every single day.</p>
+
+            <h2>The Story Begins Long Before Any English Translator Existed</h2>
+            
+            <p>Picture Britain around 450 AD. The Roman legions have pulled out. The island is cold, wet, and fragmented. Into this vacuum sail the <strong>Anglo-Saxons</strong> — Germanic tribes from what is now northern Germany and Denmark: the Angles, the Saxons, the Jutes.</p>
+
+            <p>They spoke what we now call <strong>Old English</strong> — a language that sounds almost nothing like modern English. If you fed Old English into a translator today, German speakers would recognize chunks of it before English speakers would.</p>
+
+            <p>This is where English comes from. Not from France. Not from Latin. From Germanic farmers, warriors, and fishermen who crossed the North Sea and carved out a new home.</p>
+
+            <div class="blog-image-box">
+              <img src="https://partnerhoursguide.com/wp-content/uploads/2026/05/Ancient-parchment-of-Beowulf.webp" alt="Is French the Mother Language of English">
+              <div class="blog-image-caption">The famous opening of Beowulf, written in the insular script of Old English. It predates the introduction of French vocabulary by several centuries.</div>
+            </div>
+
+            <p>The word <em>English</em> itself comes from "Angles." <em>Englaland</em> — land of the Angles — became England. The language of the Angles became <em>Englisc</em>, then English.</p>
+
+            <p>For about six centuries, Old English evolved largely on its own. It absorbed some Latin from Christian missionaries (words like <em>church</em> and <em>bishop</em>). It absorbed Old Norse from the Vikings who raided, settled, and eventually merged with the population (words like <em>sky</em>, <em>egg</em>, <em>knife</em>, <em>they</em>). But it remained fundamentally Germanic in structure — its grammar, its core vocabulary, its rhythm.</p>
+
+            <p>Then came 1066. And everything changed.</p>
+
+            <h2>The Year That Put French Words in Your English Translator</h2>
+            
+            <p>On October 14, 1066, William the Conqueror — Duke of Normandy, a region of France — defeated King Harold at the Battle of Hastings and became King of England.</p>
+
+            <p>This was not just a change of government. It was a language earthquake.</p>
+
+            <div class="blog-image-box">
+              <img src="https://partnerhoursguide.com/wp-content/uploads/2026/05/Medieval-battle-scene.webp" alt="Is French the Mother Language of English">
+              <div class="blog-image-caption">The Norman Conquest in 1066 overthrew the Anglo-Saxon elite, installing an Old French-speaking aristocracy and triggering a massive linguistic restructuring.</div>
+            </div>
+
+            <p>The Norman ruling class spoke <strong>Old French</strong> (specifically the Norman dialect). Suddenly, French became the language of the court, the law, the church, the military, the aristocracy. English — spoken by the common people — was pushed down the social ladder. If you want to translate <a href="https://partnerhoursguide.com/translate-english-to-english/">english to anglo-saxon</a> to see how the language looked before this massive French integration, you can strip away these foreign layers using our guides. Indeed, attempting to convert your daily english to anglo saxon vocabulary will reveal just how much of our basic speech remains purely Germanic despite the French invasion.</p>
+
+            <p>For roughly <strong>300 years</strong>, England was effectively bilingual. French sat at the top. English survived at the bottom.</p>
+
+            <p>Here's what that centuries-long linguistic layering produced — a pattern you'll notice if you compare Old English words to their French-influenced replacements:</p>
+
+            <div class="comparison-table-wrapper">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Germanic (Old English)</th>
+                    <th>French-influenced English</th>
+                    <th>What it reveals</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>kingly</strong></td>
+                    <td>royal</td>
+                    <td>French ruled the court</td>
+                  </tr>
+                  <tr>
+                    <td><strong>holy</strong></td>
+                    <td>sacred</td>
+                    <td>French influenced the church</td>
+                  </tr>
+                  <tr>
+                    <td><strong>help</strong></td>
+                    <td>aid</td>
+                    <td>Both survive today with different social weights</td>
+                  </tr>
+                  <tr>
+                    <td><strong>cow, sheep, pig</strong> (animals)</td>
+                    <td>beef, mutton, pork (the meat)</td>
+                    <td>Anglo-Saxons raised the animals; Normans ate the meat</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>That last example tells the whole class story in a single dinner plate. The English peasant tended the <em>cow</em>. The French-speaking Norman lord ate the <em>beef</em>. Both words survived, carrying the memory of a divided society in their very syllables.</p>
+
+            <p>By the time French and English finally merged into Middle English — the language of Chaucer, spoken around 1300–1500 — English had absorbed roughly <strong>10,000 French words</strong>. Modern English vocabulary is estimated to be <strong>28–29% French</strong> in origin.</p>
+
+            <p>So no, French did not <em>birth</em> English. But French rewired its vocabulary in a transformation that no English translator can fully reverse.</p>
+
+            <h2>Are the English Descended from French People?</h2>
+            
+            <p>This is the question that sounds like a simple yes/no but actually demands a story.</p>
+
+            <p>The straightforward answer: <strong>Most English people are not primarily descended from French people.</strong> The Normans who invaded in 1066 were a relatively small ruling class — historians estimate somewhere between 8,000 and 15,000 warriors and settlers. England's population at the time was somewhere around 1.5 to 2 million.</p>
+
+            <p>The Norman elite had enormous cultural and linguistic impact. They had almost no genetic impact by comparison.</p>
+
+            <p>Large-scale genetic studies of the British population — including the landmark 2015 Oxford study — found that the largest ancestral contributions to modern English DNA come from the <strong>Anglo-Saxons</strong> themselves, with a significant layer of older <strong>Celtic British</strong> ancestry (the people who were already in Britain before the Anglo-Saxons arrived), and smaller contributions from <strong>Scandinavians</strong> (the Vikings).</p>
+
+            <p>The Norman French left almost no detectable genetic signature in the modern English population. They arrived, ruled, intermarried with the existing elite, and within a few generations had been absorbed — culturally, linguistically, and genetically — into the English people they had conquered.</p>
+
+            <p>What they left behind was not DNA. It was vocabulary. Institutions. The legal system. Architecture. And thousands of words that now flow through English so naturally that most English speakers never recognize them as imports.</p>
+
+            <h2>Where Did the English Really Come From? A Longer View</h2>
+            
+            <p>If you zoom out further, the ancestry of the English people becomes a layered story that stretches back millennia:</p>
+
+            <p><strong>Layer 1: Ancient Hunter-Gatherers</strong><br>
+            The deepest roots of British ancestry trace to Mesolithic hunter-gatherers who arrived after the last Ice Age, around 10,000–12,000 years ago. These were people physically similar to modern Europeans, leaving traces in the DNA of people across Britain today.</p>
+
+            <p><strong>Layer 2: The First Farmers</strong><br>
+            Around 4000 BC, farmers from Anatolia (modern Turkey) migrated into Britain, bringing agriculture, stone monuments, and new genetic lines. These are the people who built monuments like Stonehenge.</p>
+
+            <p><strong>Layer 3: The Bronze Age Steppe People</strong><br>
+            Around 2500–2000 BC, herders from the Eurasian steppe — genetically related to groups from what is now Ukraine and Russia — swept into Britain and made such a dramatic genetic impact that they replaced much of the earlier farming population.</p>
+
+            <p><strong>Layer 4: The Iron Age Celts</strong><br>
+            Celtic culture and language spread across Britain in the Iron Age. The pre-Roman Britons spoke Celtic languages related to modern Welsh, Cornish, and Gaelic. Their genetic legacy persists most strongly in Wales, Scotland, and Ireland.</p>
+
+            <p><strong>Layer 5: The Romans</strong><br>
+            Rome occupied Britain from 43 AD to around 410 AD. Roman soldiers came from across the empire — Mediterranean, North Africa, the Middle East — but left a limited genetic trace. Their lasting impact was on roads, cities, Latin vocabulary, and Christianity.</p>
+
+            <p><strong>Layer 6: The Anglo-Saxons</strong><br>
+            The groups who matter most for the <em>English</em> people as a distinct identity. Their migration, from about 400–600 AD, brought the Germanic language that became Old English, and their DNA became a major component of the modern English genetic profile.</p>
+
+            <p><strong>Layer 7: The Vikings</strong><br>
+            Scandinavian settlers, especially in northern and eastern England (the Danelaw), added Norse genes and Norse words. Words like <em>window</em> (from Old Norse <em>vindauga</em>, "wind eye") are their linguistic gifts to every English translator alive today.</p>
+
+            <p><strong>Layer 8: The Normans</strong><br>
+            Cultural and linguistic transformation. Minimal genetic addition.</p>
+
+            <p>The English, in short, are a beautifully complicated people — Western European at the base, Germanic in language and core identity, touched by Scandinavia, skimmed by Normandy, and carrying 10,000 years of accumulated human migration in their blood and their words.</p>
+
+            <h2>Why This Matters for the Language You Translate Every Day</h2>
+            
+            <p>Understanding the origins of English explains something that confuses everyone who works with translation:</p>
+
+            <p><strong>Why does English have so many synonyms?</strong></p>
+
+            <p>English has <em>begin</em>, <em>start</em>, and <em>commence</em>. The first is Old English. The second is Old Norse. The third is French. All three mean approximately the same thing, but they carry different registers — different social weights left over from the classes of people who originally used them.</p>
+
+            <p>If you're using an old English translator to work with medieval texts, you're navigating this layered history in real time. Old English texts — like <em>Beowulf</em>, written around 700–1000 AD — read almost like a foreign language to modern eyes. That's because they predate the French flood. Middle English texts — like Chaucer's <em>Canterbury Tales</em>, written around 1390 — sit at the fascinating point where Old English grammar and French vocabulary are still negotiating with each other.</p>
+
+            <p>Modern English is what emerged from that negotiation: a hybrid language with a Germanic skeleton and a largely French-and-Latin wardrobe, using a writing system inherited from Rome, with grammar simplified by centuries of people speaking multiple languages across a shared island.</p>
+
+            <p>It is, by any measure, one of the most remarkable linguistic hybrids in human history.</p>
+
+            <h2>The Three Questions, Answered Clearly</h2>
+            
+            <p><strong>Is French the mother language of English?</strong><br>
+            No. English is a Germanic language descended from the speech of Anglo-Saxon migrants. French deeply influenced English vocabulary — particularly after 1066 — but French did not give birth to English. A language can shape a child without being its parent.</p>
+
+            <p><strong>Are the English descended from French people?</strong><br>
+            Mostly no. The Norman French who conquered England in 1066 were a small ruling class who had enormous cultural impact but contributed relatively little to the genetic makeup of the modern English population. The English are descended primarily from a layered sequence of migrations — ancient hunter-gatherers, Bronze Age steppe people, Celts, and most significantly for English identity, the Anglo-Saxons.</p>
+
+            <p><strong>Where did the English come from?</strong><br>
+            Ultimately, from everywhere — like most peoples. But the English as a culturally distinct group emerged from the Anglo-Saxon settlement of Britain between the 5th and 7th centuries AD, shaped by subsequent waves of Viking influence and Norman French cultural transformation, all layered on top of thousands of years of prior human habitation.</p>
+
+            <h2>A Closing Thought</h2>
+            
+            <p>Every language is a history of contact — of peoples meeting, clashing, trading, marrying, conquering, and being conquered. English is an extreme example: few languages have absorbed so many outside influences while remaining so distinctly itself.</p>
+
+            <p>The next time you open an English translator or reach for the right word in English, you're touching that history. The Germanic bones. The French muscle. The Latin sinew. The Norse idiom hiding inside a phrase you've used a thousand times without knowing it.</p>
+
+            <p>English isn't the daughter of French. It's something stranger and more interesting: a language that was built by many peoples, shaped by conquest, and carried forward by ordinary people who kept speaking even when the rulers spoke a different tongue.</p>
+
+            <p>That resilience — the stubbornness of common speech — is written into every word.</p>
+
+          
+            <div class="academic-references" style="margin-top: 3rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; text-align: left;">
+              <h3 style="font-family: var(--font-title), serif; font-size: 1.25rem; color: var(--accent-gold); margin-bottom: 0.8rem; margin-top: 0;">Academic References &amp; Further Reading</h3>
+              <ul style="font-size: 0.95rem; color: var(--text-muted); list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>📖</span>
+                  <span>Explore historical Anglo-Saxon vocabulary in the <a href="https://bosworthtoller.com/" target="_blank" rel="noopener noreferrer">Bosworth-Toller Old English Dictionary</a>.</span>
+                </li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>🎓</span>
+                  <span>Review linguistic research and texts at the <a href="https://www.doe.utoronto.ca/" target="_blank" rel="noopener noreferrer">Dictionary of Old English (DOE) Project at the University of Toronto</a>.</span>
+                </li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>🏛️</span>
+                  <span>Verify historical medieval names and etymologies using the <a href="https://www.pase.ac.uk/" target="_blank" rel="noopener noreferrer">Prosopography of Anglo-Saxon England (PASE)</a>.</span>
+                </li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>🎭</span>
+                  <span>For Shakespearean and Elizabethan studies, consult resources at the <a href="https://www.folger.edu/" target="_blank" rel="noopener noreferrer">Folger Shakespeare Library</a> and <a href="https://www.shakespeareswords.com/" target="_blank" rel="noopener noreferrer">Shakespeare's Words dictionary</a>.</span>
+                </li>
+              </ul>
+            </div>
+
+        </div>
+        </article>
+
+        <!-- Author Bio Card -->
+        
+        
+        
+        <div class="author-card">
+          <div class="author-avatar">👨‍🏫</div>
+          <div class="author-details">
+            <h4>Written by Furqan &amp; the Editorial Team</h4>
+            <p>Researched and overseen by Furqan, a veteran student career advisor with 19 years of dedicated service in the education sector of Pakistan, including career guidance roles at Sir Syed University of Engineering and Technology (SSUET), and founder of the <a href="https://www.facebook.com/profile.php?id=100069961940632" target="_blank" rel="noopener noreferrer">Youth Development Society</a>. Under his direction, this platform provides a suite of tools built to motivate and guide the youth in utilizing AI to uplift their earning potential and build successful careers.</p>
+          </div>
+        </div>
+
+
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="blog-sidebar">
+        
+        <!-- CTA Widget -->
+        <div class="sidebar-widget cta-widget">
+          <h3>Try the Translator</h3>
+          <p>Experience the true sound of Anglo-Saxon. Translate modern phrases into Old English instantly.</p>
+          <a href="https://partnerhoursguide.com/translator-old-english-tool/" class="cta-btn">Start Translating</a>
+        </div>
+
+        <!-- Recent Posts Widget -->
+        <div class="sidebar-widget">
+          <h3>Recent Articles</h3>
+          <ul class="recent-posts-list">
+            <li>
+              <a href="english-to-old-norse.html">English to Old Norse: Complete Viking Guide</a>
+              <span>Translator • 18 min read</span>
+            </li>
+            <li>
+              <a href="spanish-words-in-english.html">Spanish Words in English: Translator &amp; Guide</a>
+              <span>Translator • 15 min read</span>
+            </li>
+            <li>
+              <a href="blog-25-words.html">25 Old English Words We Still Use Today</a>
+              <span>History • 6 min read</span>
+            </li>
+            <li>
+              <a href="why-shakespeare-is-not-old-english.html">Is Shakespeare Old English?</a>
+              <span>Language Guide • 10 min read</span>
+            </li>
+            <li>
+              <a href="old-english-insults-slang-phrases.html">Old English Insults, Slang, &amp; Phrases</a>
+              <span>Language Guide • 8 min read</span>
+            </li>
+            <li>
+              <a href="is-french-mother-language-of-english.html">Is French the Mother Language of English?</a>
+              <span>History • 8 min read</span>
+            </li>
+            <li>
+              <a href="how-tolkien-used-old-english-rohirric.html">How Tolkien Used Old English in Rohirric</a>
+              <span>Tolkien Studies • 8 min read</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+          <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+          <span class="brand-name">Translator Old English</span>
+        </a>
+        <p>Bringing ancient history to life with instant, historically-grounded translations into the language of the Anglo-Saxons.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+            <li><a href="https://partnerhoursguide.com/">Home</a></li>
+            <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator Tool</a></li>
+            <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About Page</a></li>
+          </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Insights & Legal</h4>
+        <ul>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Articles & Blogs</a></li>
+          <li><a href="https://partnerhoursguide.com/contact-us/">Contact Us</a></li>
+          <li><a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Translator Old English. All rights reserved.</p>
+      <div class="footer-legal-links">
+        <a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a>
+        <a href="https://partnerhoursguide.com/contact-us/">Contact Support</a>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+      <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

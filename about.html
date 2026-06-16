@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About &mdash; Translator Old English | Our Mission &amp; Editorial Process</title>
+  <meta name="description" content="Learn about TranslatorOldEnglish.com — a free online tool to translate English to Old English. Discover our mission to make Anglo-Saxon language history accessible.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link data-no-optimize="1" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style data-no-optimize="1">
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-color: #120924; /* Deep Medieval Purple */
+      --card-bg: #1c1032; /* Slightly Lighter Purple */
+      --card-bg-hover: #261742;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.25);
+      --text-cream: #f8f5f0;
+      --text-muted: #8c829d;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.35);
+      
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* Isolated Wrapper to Prevent WordPress Theme Style Leaking */
+    .translator-app-wrapper {
+      background-color: #120924 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      line-height: 1.6 !important;
+      text-align: left !important;
+    }
+
+    .translator-app-wrapper h1, 
+    .translator-app-wrapper h2, 
+    .translator-app-wrapper h3, 
+    .translator-app-wrapper p, 
+    .translator-app-wrapper span, 
+    .translator-app-wrapper a, 
+    .translator-app-wrapper label {
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .header-nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-crest {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      background: rgba(28, 16, 50, 0.6);
+    }
+
+    .brand-name {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav.site-navigation ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav.site-navigation a {
+      white-space: nowrap;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    nav.site-navigation a:hover, 
+    nav.site-navigation a.active {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    nav.site-navigation a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--accent-gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav.site-navigation a:hover::after, 
+    nav.site-navigation a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    nav.site-navigation a.nav-cta {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.5rem 1.1rem !important;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    nav.site-navigation a.nav-cta:hover {
+      color: var(--bg-color) !important;
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       HERO AREA (PAGE TITLE)
+       ========================================================================== */
+    section.page-hero {
+      padding: 5rem 0 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(28, 16, 50, 0.2);
+    }
+
+    h1.page-title {
+      font-family: var(--font-title) !important;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      margin-bottom: 1rem;
+    }
+
+    p.page-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted) !important;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       CONTENT LAYOUT
+       ========================================================================== */
+    section.about-content {
+      padding: 5rem 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+    }
+
+    @media (min-width: 992px) {
+      .about-grid {
+        grid-template-columns: 3.5fr 2.5fr;
+      }
+    }
+
+    .main-editorial {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .editorial-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .editorial-block h2 {
+      font-family: var(--font-title) !important;
+      font-size: 1.8rem;
+      color: var(--accent-gold) !important;
+      border-left: 3px solid var(--accent-gold);
+      padding-left: 12px;
+      margin-bottom: 0.5rem;
+    }
+
+    .editorial-block p {
+      font-size: 1.05rem;
+      color: var(--text-cream) !important;
+      line-height: 1.7;
+    }
+
+    .editorial-block p strong {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    .sidebar-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    }
+
+    .info-card h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.4rem;
+      color: var(--accent-gold-hover) !important;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted) !important;
+      line-height: 1.6;
+    }
+
+    .info-card p strong {
+      color: var(--text-cream) !important;
+    }
+
+    /* EEAT Gallery Styles */
+    .eeat-section {
+      margin-top: 3rem;
+    }
+    .eeat-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .gallery-item {
+      background: rgba(28, 16, 50, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+    .gallery-item:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid rgba(201, 153, 58, 0.1);
+    }
+    .gallery-item .caption {
+      margin-top: 0.6rem !important;
+      font-size: 0.85rem !important;
+      color: var(--text-muted) !important;
+      text-align: center !important;
+      line-height: 1.4 !important;
+    }
+    @media (max-width: 600px) {
+      .eeat-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* CTA Section inside content */
+    .cta-banner {
+      background: radial-gradient(circle at center, #1c1032 0%, #120924 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 4rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-banner h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.8rem;
+      color: var(--text-cream) !important;
+    }
+
+    .cta-banner p {
+      color: var(--text-muted) !important;
+      max-width: 500px;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.8rem 2rem !important;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    .cta-btn:hover {
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      background: #0d061c;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .footer-brand-info p {
+      font-size: 0.95rem;
+      color: var(--text-muted) !important;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-nav-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .footer-nav-col h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      color: var(--accent-gold) !important;
+      font-weight: 700;
+    }
+
+    .footer-nav-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      list-style: none;
+    }
+
+    .footer-nav-col a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-nav-col a:hover {
+      color: var(--accent-gold-hover) !important;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+      }
+    }
+
+    .footer-bottom p {
+      font-size: 0.85rem;
+      color: var(--text-muted) !important;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVENESS & UTILITIES
+       ========================================================================== */
+    @media (max-width: 768px) {
+      section.page-hero {
+        padding: 3rem 0 2rem;
+      }
+      h1.page-title {
+        font-size: 2.2rem !important;
+      }
+      p.page-subtitle {
+        font-size: 1rem !important;
+      }
+      .header-nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+    }
+  
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  
+    /* Dropdown CSS Rules */
+    nav.site-navigation li {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1c1032;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+      padding: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.2rem !important;
+      font-size: 0.9rem !important;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      width: 100%;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent-gold-hover) !important;
+      background: rgba(201, 153, 58, 0.08);
+      padding-left: 1.5rem !important;
+    }
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+    nav.site-navigation li.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-arrow {
+      font-size: 0.7rem;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    nav.site-navigation li.has-dropdown:hover .nav-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-gold-hover);
+    }
+    @media (max-width: 1150px) {
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .dropdown-menu a {
+        padding: 0.3rem 1rem !important;
+        text-align: center !important;
+      }
+      .nav-arrow {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": "https://partnerhoursguide.com/about-our-research-editorial-process/#webpage",
+  "url": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+  "name": "About Us — Translator Old English",
+  "description": "Learn about the mission, brand story, and editorial team behind Translator Old English.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "PartnerHoursGuide",
+    "url": "https://partnerhoursguide.com"
+  }
+}
+  </script>
+
+</head>
+<body>
+
+  <div class="translator-app-wrapper">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-nav-container">
+        <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+          <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+          <span class="brand-name">Translator Old English</span>
+        </a>
+        <nav class="site-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="https://partnerhoursguide.com/">Home</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/">Names</a></li>
+          <li><a href="https://partnerhoursguide.com/random-name-maker/">Name Maker</a></li>
+          
+          <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/" class="active">About</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Blog</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/" class="nav-cta">Try translator</a></li>
+        </ul>
+      </nav>
+      </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <h1 class="page-title">About Translator Old English</h1>
+        <p class="page-subtitle">Bridging the gap between modern technology and the ancient beginnings of the English tongue.</p>
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="about-content">
+      <div class="container about-grid">
+        
+        <!-- Main editorial (Origin story & educational description) -->
+        <div class="main-editorial">
+
+          <div class="aeo-quick-answer">
+            <h3><span>⚡</span> Quick Answer</h3>
+            <p>This Old English translator is powered by Claude AI (Anthropic), trained across a broad corpus of scholarly linguistic sources including the Bosworth-Toller Anglo-Saxon Dictionary and surviving Old English manuscripts. It translates phrases and sentences — not just isolated words — and applies contextual understanding rather than simple word-for-word lookup. Like all AI translation tools, it is best suited for creative writing, learning, and everyday use, and should be cross-referenced with scholarly sources for academic work.</p>
+          </div>
+
+          
+          <!-- Origin Story -->
+          <div class="editorial-block">
+            <h2>The Story Behind the Project</h2>
+            <p>Our journey began with a simple but profound observation: the language spoken by modern millions has a beautiful, rich ancestral voice that is almost entirely forgotten. While millions read Shakespeare or even Middle English works like Chaucer's Canterbury Tales, the language of the legendary Anglo-Saxon era—<strong>Old English</strong>—has been relegated to dusty academic libraries and specialist research centers.</p>
+            <p>We created <strong>TranslatorOldEnglish.com</strong> because we believe that linguistic history shouldn't be locked behind university paywalls or complex academic textbooks. As language lovers and history enthusiasts, we wanted to build a bridge. We wanted to design a digital portal where anyone—whether a fantasy novelist seeking atmospheric character names, a history student preparing for exams, or a curious explorer—could type modern phrases and immediately hear the guttural, poetic rhythms of our linguistic ancestors.</p>
+            <p>What started as a hobby project mapping vocabulary has grown into a robust, rule-based historical translator, built with academic care and styled with a deep love for the medieval heritage it represents. By bringing early medieval text into the digital age, we hope to ignite a passion for historical philology and keep the memory of Anglo-Saxon prose alive.</p>
+          </div>
+
+          <!-- Educational Explanation (min 200 words) -->
+          <div class="editorial-block">
+            <h2>What Is Old English?</h2>
+            <p>Old English, historically known as Englisc, was the earliest form of the English language spoken and written in England and southern Scotland from the mid-5th century until the Norman Conquest of 1066. Developed from the North Sea Germanic dialects brought by the invading Angles, Saxons, and Jutes, it was a highly inflected language, meaning its grammar was governed by complex system of noun declensions, grammatical genders, case markings (nominative, accusative, genitive, dative, and instrumental), and strong and weak verb conjugations.</p>
+            <p>Over its six-century history, Old English was shaped by two major cultural waves: the introduction of Christianity, which brought Latin terminology and literacy, and the Viking invasions, which integrated Old Norse elements into the northern dialects. It was the language of epic poetry, such as the heroic verses of Beowulf, and the monumental historical record of the Anglo-Saxon Chronicle.</p>
+            <p>Unlike modern English, which relies heavily on word order and auxiliary verbs, Old English relied on grammatical endings to determine meaning, making it look and sound more like modern German or Icelandic than today's English. Studying this linguistic ancestor offers a fascinating window into the worldview, cultural values, and everyday lives of the early medieval people.</p>
+          </div>
+
+          <!-- E-E-A-T Authority & Leadership Block -->
+          <div class="editorial-block eeat-section">
+            <h2>Academic Leadership &amp; Real-world Impact</h2>
+            <p>Our project is overseen and directed by <strong>Furqan</strong>, a veteran career advisor with 19 years of dedicated service in Pakistan's education sector, including advisory roles at <strong>Sir Syed University of Engineering and Technology (SSUET)</strong>. As the founder of the <strong>Youth Development Society</strong>, his mission is to empower the youth to bridge the gap between historic academic studies and high-tech digital opportunities.</p>
+            
+            <div class="eeat-gallery">
+              <div class="gallery-item">
+                <img src="https://partnerhoursguide.com/wp-content/uploads/2026/06/Student-Counseling-Session-at-SSUET-by-Youth-Development-Society.webp" alt="Student Counseling Session at SSUET" loading="lazy" />
+                <p class="caption">Student Counseling Session at SSUET conducted by Youth Development Society</p>
+              </div>
+              <div class="gallery-item">
+                <img src="https://partnerhoursguide.com/wp-content/uploads/2026/06/Stretigic-Execution-Certification-at-SSUET.webp" alt="Strategic Execution Certification at SSUET" loading="lazy" />
+                <p class="caption">Strategic Execution Certification at SSUET</p>
+              </div>
+              <div class="gallery-item">
+                <img src="https://partnerhoursguide.com/wp-content/uploads/2026/06/With-Career-Counsellors-of-different-Universities-of-Karachi.webp" alt="Career Counsellors meeting in Karachi" loading="lazy" />
+                <p class="caption">Collaborative meet with Career Counsellors from different Universities of Karachi</p>
+              </div>
+              <div class="gallery-item">
+                <img src="https://partnerhoursguide.com/wp-content/uploads/2026/06/Youth-Development-Society.webp" alt="Youth Development Society event" loading="lazy" />
+                <p class="caption">Youth Development Society community leadership seminar</p>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Why We Published This Page -->
+          <div class="editorial-block">
+            <h2>Why We Published This Page</h2>
+            <p>Trust matters — especially when you are working with a language as complex and historically significant as Old English. Several other Old English tools on the web operate as black boxes: you put text in, something comes out, and there is no explanation of how or why. We think that is a problem. If you are a student, researcher, fantasy author, or language enthusiast relying on a translation tool, you deserve to know exactly what is powering it, what its limitations are, and where its data comes from. This page gives you the full picture.</p>
+          </div>
+
+          <!-- What Kind of Translator Is This? -->
+          <div class="editorial-block">
+            <h2>What Kind of Translator Is This?</h2>
+            <p>There are two main types of Old English translation tools in use today:</p>
+            
+            <h3>1. Database / Lexicon Translators</h3>
+            <p>These tools work by looking up words in a pre-built database derived from Old English dictionaries. You enter a word, the software finds the closest match in the lexicon, and returns a result. The best-known example is oldenglishtranslator.co.uk, which uses a custom-built database with inflected word forms derived from multiple Old English dictionaries. They offer high fidelity for individual words that exist in the dictionary, but they cannot handle modern concepts with no Old English equivalent and struggle with full-sentence context.</p>
+            
+            <h3>2. AI Language Model Translators</h3>
+            <p>This is what powers our tool. Rather than looking words up in a fixed database, a large language model (LLM) has been trained on a vast corpus of text — including Old English manuscripts, dictionaries, and scholarly commentary — and develops an internal representation of how Old English grammar, vocabulary, and sentence structure work. They can translate full sentences with contextual awareness and handle modern words with no Old English equivalent by generating plausible reconstructions based on linguistic patterns.</p>
+            
+            <p>Our tool is the second type — <strong>AI-powered, context-aware, full-sentence translation</strong>.</p>
+          </div>
+
+          <!-- The AI Model: Claude by Anthropic -->
+          <div class="editorial-block">
+            <h2>The AI Model: Claude by Anthropic</h2>
+            <p>The translation engine on this site is powered by <strong>Claude</strong>, a large language model developed by <strong>Anthropic</strong>. Claude is trained on a broad and carefully curated corpus that spans multiple languages, historical text traditions, and academic sources.</p>
+            <p>For Old English translation specifically, Claude's training includes:</p>
+            <ul>
+              <li>Surviving Anglo-Saxon manuscripts and their modern scholarly editions</li>
+              <li>The Bosworth-Toller Anglo-Saxon Dictionary (the primary scholarly Old English lexicon, originally published 1882–1898 and still the gold standard)</li>
+              <li>The Dictionary of Old English compiled by the University of Toronto (covering texts from 600–1150 AD)</li>
+              <li>Academic commentary, grammar guides, and linguistic analyses of Old English morphology</li>
+              <li>Modern scholarly translations of key texts (Beowulf, the Anglo-Saxon Chronicle, the Exeter Book, the Vercelli Book)</li>
+            </ul>
+            <p>Claude does not simply look up a word and return a database result. It applies an understanding of Old English grammar rules, including the four-case declension system, noun gender, verb conjugation patterns, and compound word construction (a defining feature of Old English vocabulary).</p>
+          </div>
+
+          <!-- How a Translation Actually Happens -->
+          <div class="editorial-block">
+            <h2>How a Translation Actually Happens</h2>
+            <p>When you type a phrase into our translator and press Translate, here is what happens step by step:</p>
+            
+            <h3>Step 1 — Input Processing</h3>
+            <p>Your text is sent securely to the Claude AI via Anthropic's API. No text is stored on our servers. Each translation is processed independently.</p>
+            
+            <h3>Step 2 — Contextual Analysis</h3>
+            <p>Claude analyses the grammatical structure of your input: identifying nouns, verbs, adjectives, prepositions, and their relationships to each other. This is important because the correct Old English word form depends on its grammatical function — the word for "king" changes depending on whether it is the subject, object, or possessor in the sentence.</p>
+            
+            <h3>Step 3 — Lexical Mapping</h3>
+            <p>Claude maps each element to its Old English equivalent, drawing on its training data. For words with well-documented Old English equivalents, this is a high-confidence lookup. For modern concepts (technology, internet, professional titles), Claude generates a linguistically plausible Old English equivalent based on how Anglo-Saxon compounds were constructed.</p>
+            
+            <h3>Step 4 — Grammar Application</h3>
+            <p>Claude applies Old English grammar rules — case endings, verb conjugation, word order — to produce a grammatically structured output rather than a word-for-word substitution.</p>
+            
+            <h3>Step 5 — Output Delivery</h3>
+            <p>The translated text is returned to your browser, displayed alongside (where applicable) runic script output and pronunciation audio via our text-to-speech feature.</p>
+          </div>
+
+          <!-- Our Source Material and Data Lineage -->
+          <div class="editorial-block">
+            <h2>Our Source Material and Data Lineage</h2>
+            <p>All of these sources are part of the broader scholarly corpus on which Claude AI has been trained. We do not maintain a proprietary database of our own — instead we leverage an AI that has internalized these sources as part of its training.</p>
+            
+            <div class="comparison-table-wrapper">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Source</th>
+                    <th>Type</th>
+                    <th>Period Covered</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Bosworth-Toller Anglo-Saxon Dictionary</strong></td>
+                    <td>Scholarly lexicon</td>
+                    <td>450–1100 AD</td>
+                    <td>Primary Old English dictionary; 35,000+ entries</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Dictionary of Old English (U of Toronto)</strong></td>
+                    <td>Digital corpus</td>
+                    <td>600–1150 AD</td>
+                    <td>Based on all surviving Old English texts</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Beowulf (Nowell Codex)</strong></td>
+                    <td>Primary manuscript</td>
+                    <td>c. 700–1000 AD</td>
+                    <td>Most studied Old English text</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Anglo-Saxon Chronicle (Parker MS)</strong></td>
+                    <td>Primary manuscript</td>
+                    <td>890–1154 AD</td>
+                    <td>First English-language history</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Exeter Book</strong></td>
+                    <td>Primary manuscript</td>
+                    <td>c. 970 AD</td>
+                    <td>Largest surviving collection of OE poetry</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Vercelli Book</strong></td>
+                    <td>Primary manuscript</td>
+                    <td>c. 970 AD</td>
+                    <td>Contains The Dream of the Rood</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ælfric's Catholic Homilies</strong></td>
+                    <td>Primary text</td>
+                    <td>c. 990–995 AD</td>
+                    <td>Major prose source for West Saxon OE</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- What the Tool Does Well -->
+          <div class="editorial-block">
+            <h2>What the Tool Does Well</h2>
+            <ul>
+              <li><strong>Full-sentence and phrase translation:</strong> Rather than returning one word at a time, the tool handles complete phrases with grammatical coherence.</li>
+              <li><strong>Modern concepts without direct Old English equivalents:</strong> If you type "send me an email," the tool will produce an Old English-style rendering using period-appropriate vocabulary and construction — something a database tool cannot do at all.</li>
+              <li><strong>Creative and literary output:</strong> For fantasy authors, game designers, tattoo copy, wedding vows, and any creative use, the tool produces evocative, historically-grounded Old English that reads authentically.</li>
+              <li><strong>Name generation:</strong> Our Old English Name Generator uses the same AI foundation to produce authentic Anglo-Saxon names with etymological grounding, across multiple cultural traditions.</li>
+              <li><strong>Runic script output:</strong> The tool can render output in the Elder Futhark and Younger Futhark runic alphabets — a feature that database-only tools do not offer.</li>
+              <li><strong>Text-to-speech pronunciation:</strong> Synthesised audio pronunciation helps learners hear how Old English actually sounded, based on academic phonological reconstruction.</li>
+            </ul>
+          </div>
+
+          <!-- Known Limitations -->
+          <div class="editorial-block">
+            <h2>Known Limitations — We Will Be Honest</h2>
+            <p>No Old English translation tool — AI or database — is perfect. These are the limitations you should know about:</p>
+            <ul>
+              <li><strong>Old English is heavily inflected — context changes word forms:</strong> The same root word appears in up to eight different forms depending on case, number, and gender. Our AI handles this well for straightforward sentences but may produce simplified forms for complex grammatical constructions.</li>
+              <li><strong>Dialect variation is not always handled:</strong> Old English had four main dialects: West Saxon, Mercian, Northumbrian, and Kentish. Our tool defaults to West Saxon forms.</li>
+              <li><strong>Translation is never fully deterministic:</strong> Two scholars translating the same Old English passage often produce quite different Modern English versions — and vice versa. Our AI produces one well-grounded interpretation, not the only possible one.</li>
+              <li><strong>AI does not replace scholarly expertise:</strong> For academic papers, published works, historical research, or formal linguistic study, our tool should be used as a starting point and cross-referenced with the Bosworth-Toller Dictionary and peer-reviewed scholarship.</li>
+            </ul>
+          </div>
+
+          <!-- How We Compare to the Competitor -->
+          <div class="editorial-block">
+            <h2>How We Compare to the Competitor</h2>
+            <p>We believe in honest comparison. Here is how our AI approach differs from the longest-running alternative, oldenglishtranslator.co.uk:</p>
+            
+            <div class="comparison-table-wrapper">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Capability</th>
+                    <th>partnerhoursguide.com (AI)</th>
+                    <th>oldenglishtranslator.co.uk (Database)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Full-sentence translation</strong></td>
+                    <td>✓ Yes</td>
+                    <td>Limited</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Individual word lookup</strong></td>
+                    <td>✓ Yes</td>
+                    <td>✓ Yes (stronger for rare OE words)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Inflection / fuzzy matching</strong></td>
+                    <td>✓ Handled contextually</td>
+                    <td>Manual :ia/:ca flag required</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Modern concepts with no OE equivalent</strong></td>
+                    <td>✓ Generates plausible forms</td>
+                    <td>✗ Returns no result</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Runic script output</strong></td>
+                    <td>✓ Yes</td>
+                    <td>✗ No</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Text-to-speech pronunciation</strong></td>
+                    <td>✓ Yes</td>
+                    <td>✗ No</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Old English → Modern English</strong></td>
+                    <td>Coming soon</td>
+                    <td>✓ Core feature</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Name generator</strong></td>
+                    <td>✓ 100+ names, 10 languages</td>
+                    <td>✗ No</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Shakespeare translator</strong></td>
+                    <td>✓ Yes</td>
+                    <td>✗ No</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Blog / learning content</strong></td>
+                    <td>✓ 7+ articles</td>
+                    <td>✗ None</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Version transparency</strong></td>
+                    <td>AI model (Claude, Anthropic)</td>
+                    <td>SW 3.3.3, DB 20240723</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Academic Institutions and Researcher Use -->
+          <div class="editorial-block">
+            <h2>Academic Institutions and Researcher Use</h2>
+            <p>We have seen use of this tool from students, teachers, researchers, and enthusiasts in the UK, USA, Australia, and across Europe. If you are using this tool for:</p>
+            <ul>
+              <li><strong>University coursework:</strong> Use as a reference and cross-check with Bosworth-Toller</li>
+              <li><strong>Creative writing / worldbuilding:</strong> The tool is well-suited for this use case</li>
+              <li><strong>Tattoo or artistic copy:</strong> Review output carefully, particularly for proper nouns and names</li>
+              <li><strong>Linguistic research:</strong> Treat output as a hypothesis to verify, not a final answer</li>
+            </ul>
+            <p>We welcome feedback from academics and advanced learners. If you spot a translation that appears incorrect, please use our Contact page to let us know — with the source phrase, our output, and what you believe the correct form to be.</p>
+          </div>
+
+          <!-- Our Commitment to Accuracy and Improvement -->
+          <div class="editorial-block">
+            <h2>Our Commitment to Accuracy and Improvement</h2>
+            <p>This tool is actively maintained and improved. Planned upgrades include:</p>
+            <ul>
+              <li>Old English → Modern English reverse translation (in development)</li>
+              <li>Dialect selector (West Saxon / Mercian / Northumbrian output options)</li>
+              <li>Grammar annotation — showing which case and inflection form was applied and why</li>
+              <li>Confidence scoring — indicating how well-attested a translation is in primary sources</li>
+            </ul>
+          </div>
+
+          <!-- Frequently Asked Questions -->
+          <div class="editorial-block">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+              <div class="faq-item">
+                <div class="faq-question">What AI model powers the Old English translator?</div>
+                <div class="faq-answer">The translator is powered by Claude, Anthropic's large language model, trained on a broad corpus that includes academic Old English texts, the Bosworth-Toller Anglo-Saxon Dictionary, and scholarly linguistic sources.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">Is AI Old English translation accurate?</div>
+                <div class="faq-answer">AI translation is highly useful for phrases, creative writing, names, and learning — but is not a substitute for human scholarly translation of complex Old English texts. Context, inflection, and dialect variation all affect accuracy, and we recommend cross-referencing with Bosworth-Toller for any formal use.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">What sources does the translator use?</div>
+                <div class="faq-answer">The tool draws on AI trained across multiple scholarly sources including the Bosworth-Toller Anglo-Saxon Dictionary, the Dictionary of Old English (University of Toronto), and a broad corpus of surviving Old English manuscripts from the 5th to 12th centuries.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">How is this different from a database translator?</div>
+                <div class="faq-answer">Database translators look up individual words in a fixed lexicon. Our AI-powered approach understands sentence structure, context, and can generate plausible Old English equivalents for modern concepts that have no direct dictionary entry — producing natural-sounding, grammatically grounded output.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">Is my text stored or logged?</div>
+                <div class="faq-answer">No. Text entered into the translator is sent to the Anthropic API for processing and is not stored on our servers. We do not log individual translations.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">Can I use this for a tattoo?</div>
+                <div class="faq-answer">Yes, but please review the output carefully. For tattoos, names, or anything permanent, we recommend double-checking key words against the Bosworth-Toller Dictionary online and — where possible — consulting a specialist.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sidebar / Supplemental Info (Mission, Why it matters today) -->
+        <div class="sidebar-cards">
+          
+          <!-- Our Mission -->
+          <div class="info-card">
+            <h3><span>📜</span> Our Mission</h3>
+            <p>To demystify historical languages and make the deep heritage of the English language accessible to everyone through intuitive digital interfaces, rule-based accuracy, and comprehensive educational resources.</p>
+          </div>
+
+          <!-- Relevance Today (min 150 words) -->
+          <div class="info-card">
+            <h3><span>ðŸ“œ</span> Relevance Today</h3>
+            <p>In our modern, high-tech world, Old English continues to hold profound relevance across multiple creative and academic disciplines. For writers and fantasy authors, it serves as a treasure trove of atmospheric depth, providing archaic roots and compounding structures like kennings (e.g., <strong>'bānhūs'</strong> or bone-house for body) that lend a primeval flavor to worldbuilding.</p>
+            <p>Legendary philologist <strong>J.R.R. Tolkien</strong> famously drew upon Old English to construct the language, lore, and names of the Rohirrim in <em>The Lord of the Rings</em>. In the gaming industry, developers utilize Anglo-Saxon terminology and runes to create authentic medieval environments and lore.</p>
+            <p>Beyond creative pursuits, studying Old English preserves our shared cultural heritage, allowing us to read the oldest monuments of English literature in their original, raw form. It bridges the millennium-long gap between our modern expressions and the guttural, poetic tongue of our ancestors, reminding us that English is an evolving, living tapestry.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CTA Banner -->
+      <div class="container">
+        <div class="cta-banner">
+          <h3>Uncover the Language of Beowulf</h3>
+          <p>Translate modern sentences, explore phonetic pronunciations, and transcribe names directly into authentic Anglo-Saxon runes.</p>
+          <a href="https://partnerhoursguide.com/translator-old-english-tool/" class="cta-btn">Try the Translator Tool</a>
+        </div>
+      </div>
+
+    </section>
+
+    
+            <div class="educational-disclaimer">
+              <strong>Educational Disclaimer &amp; Mission:</strong> While we strive for accuracy in all translation and language tools, these are designed for educational exploration and creative use. For formal academic work, we recommend cross-referencing with established sources such as the <a href="https://www.doe.utoronto.ca/" target="_blank" rel="noopener noreferrer">Dictionary of Old English at the University of Toronto</a>.
+            </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand-info">
+          <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+            <div class="brand-crest">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 8 6 6 6-6"></path>
+                <path d="m4 14 6 6 8-8"></path>
+              </svg>
+            </div>
+            <span class="brand-name">Translator Old English</span>
+          </a>
+          <p>Uncovering the ancestral roots and sounds of the English language through technology. Built with academic detail, cross-referenced with tools like the <a href="https://www.doe.utoronto.ca/" target="_blank" rel="noopener noreferrer">Dictionary of Old English (DOE) Project at the University of Toronto</a>.</p>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="https://partnerhoursguide.com/">Home</a></li>
+            <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator Tool</a></li>
+            <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About Page</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Articles & Blogs</a></li>
+            <li><a href="https://partnerhoursguide.com/contact-us/">Contact Us</a></li>
+            <li><a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; 2026 Translator Old English. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a>
+          <a href="https://partnerhoursguide.com/contact-us/">Contact Support</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+
+  
+
+  
+
+      <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

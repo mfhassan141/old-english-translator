@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Old English Translator (AI-Powered) — Free &amp; Instant Translation</title>
+  <meta name="description" content="Translate modern English to Old English instantly with our free AI-powered tool. Explore Anglo-Saxon language, history, and ancient word origins.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link data-no-optimize="1" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style data-no-optimize="1">
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-color: #120924; /* Deep Medieval Purple */
+      --card-bg: #1c1032; /* Slightly Lighter Purple */
+      --card-bg-hover: #261742;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.25);
+      --text-cream: #f8f5f0;
+      --text-muted: #8c829d;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.35);
+      
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* Isolated Wrapper to Prevent WordPress Theme Style Leaking */
+    .translator-app-wrapper {
+      background-color: #120924 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      line-height: 1.6 !important;
+      text-align: left !important;
+    }
+
+    .translator-app-wrapper h1, 
+    .translator-app-wrapper h2, 
+    .translator-app-wrapper h3, 
+    .translator-app-wrapper p, 
+    .translator-app-wrapper span, 
+    .translator-app-wrapper a, 
+    .translator-app-wrapper label {
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .header-nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-crest {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      background: rgba(28, 16, 50, 0.6);
+    }
+
+    .brand-name {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav.site-navigation ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    nav.site-navigation li {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    nav.site-navigation a {
+      white-space: nowrap;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    nav.site-navigation a:hover, 
+    nav.site-navigation a.active {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    nav.site-navigation a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--accent-gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav.site-navigation a:hover::after, 
+    nav.site-navigation a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    nav.site-navigation a.nav-cta {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.5rem 1.1rem !important;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    nav.site-navigation a.nav-cta:hover {
+      color: var(--bg-color) !important;
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    section.hero-banner {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-container {
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    h1.hero-title {
+      font-family: var(--font-title) !important;
+      font-size: 3rem;
+      line-height: 1.25;
+      font-weight: 700;
+      color: var(--text-cream) !important;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    p.hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted) !important;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero-cta-btn {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.9rem 2.2rem !important;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .hero-cta-btn:hover {
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       INTRODUCTION SECTION
+       ========================================================================== */
+    section.intro-heritage {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(28, 16, 50, 0.2);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .intro-grid {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    .intro-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .intro-text-block h2 {
+      font-family: var(--font-title) !important;
+      font-size: 2.2rem;
+      color: var(--accent-gold) !important;
+      line-height: 1.3;
+    }
+
+    .intro-text-block p {
+      font-size: 1.05rem;
+      color: var(--text-muted) !important;
+      line-height: 1.7;
+    }
+
+    .intro-text-block strong {
+      color: var(--text-cream) !important;
+    }
+
+    .intro-visual-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-visual-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    }
+
+    .rune-backdrop-text {
+      font-family: 'Segoe UI Historic', 'Segoe UI Symbol', 'Noto Sans Runic', sans-serif;
+      font-size: 4rem;
+      color: rgba(201, 153, 58, 0.08);
+      text-align: center;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5rem;
+    }
+
+    .quote-block {
+      font-family: var(--font-title) !important;
+      font-size: 1.35rem;
+      line-height: 1.5;
+      font-style: italic;
+      color: var(--text-cream) !important;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .quote-author {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      color: var(--accent-gold) !important;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       FEATURES HIGHLIGHTS GRID
+       ========================================================================== */
+    section.features-section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-title) !important;
+      font-size: 2.2rem;
+      color: var(--text-cream) !important;
+    }
+
+    .section-header p {
+      font-size: 1rem;
+      color: var(--text-muted) !important;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.2rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-color-hover);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+    }
+
+    .feature-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: rgba(201, 153, 58, 0.1);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      font-size: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent-gold-hover) !important;
+      font-family: var(--font-ui) !important;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted) !important;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       BLOG PREVIEWS SECTION
+       ========================================================================== */
+    section.blog-preview-section {
+      padding: 5rem 0;
+      background: rgba(28, 16, 50, 0.15);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .blog-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .blog-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-color-hover);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .blog-card-image-placeholder {
+      height: 180px;
+      background: linear-gradient(135deg, #1c1032 0%, #2b1c4a 100%);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .blog-card-image-placeholder::after {
+      content: 'ᚻᚹᚪᛏ';
+      font-family: 'Segoe UI Historic', 'Segoe UI Symbol', 'Noto Sans Runic', sans-serif;
+      font-size: 3.5rem;
+      color: rgba(201, 153, 58, 0.05);
+      letter-spacing: 0.2rem;
+    }
+
+    .blog-card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      flex-grow: 1;
+    }
+
+    .blog-card-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 0.75rem;
+      color: var(--text-muted) !important;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+    }
+
+    .blog-card-title {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      color: var(--text-cream) !important;
+      line-height: 1.35;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+
+    .blog-card:hover .blog-card-title {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    .blog-card-excerpt {
+      font-size: 0.9rem;
+      color: var(--text-muted) !important;
+      line-height: 1.5;
+    }
+
+    .blog-card-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-gold) !important;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 1rem;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      background: #0d061c;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .footer-brand-info p {
+      font-size: 0.95rem;
+      color: var(--text-muted) !important;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-nav-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .footer-nav-col h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      color: var(--accent-gold) !important;
+      font-weight: 700;
+    }
+
+    .footer-nav-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      list-style: none;
+    }
+
+    .footer-nav-col a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-nav-col a:hover {
+      color: var(--accent-gold-hover) !important;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+      }
+    }
+
+    .footer-bottom p {
+      font-size: 0.85rem;
+      color: var(--text-muted) !important;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVENESS & UTILITIES
+       ========================================================================== */
+    @media (max-width: 768px) {
+      section.hero-banner {
+        padding: 4rem 0 3rem;
+      }
+      h1.hero-title {
+        font-size: 2.2rem !important;
+      }
+      p.hero-subtitle {
+        font-size: 1rem !important;
+      }
+      .header-nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+    }
+  
+    /* Historical Translators Cards Styles */
+    .tools-section {
+      padding: 5rem 0;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .tools-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .tools-grid-single {
+      display: flex;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tools-grid-single .tool-card {
+      max-width: 380px;
+      width: 100%;
+    }
+    
+    .tools-grid-double {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    @media (min-width: 768px) {
+      .tools-grid-double {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .tools-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .tool-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
+    .tool-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-color-hover);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+      background: var(--card-bg-hover);
+    }
+    .tool-card:hover::before {
+      opacity: 1;
+    }
+    .tool-icon-box {
+      font-size: 2.5rem;
+      background: rgba(201, 153, 58, 0.1);
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 153, 58, 0.2);
+      color: var(--accent-gold);
+      margin-bottom: 0.5rem;
+      transition: var(--transition-smooth);
+    }
+    .tool-card:hover .tool-icon-box {
+      background: rgba(201, 153, 58, 0.2);
+      border-color: var(--accent-gold);
+      transform: scale(1.05);
+    }
+    .tool-card h3 {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      color: var(--text-cream);
+      margin: 0;
+    }
+    .tool-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+      flex-grow: 1;
+    }
+    .tool-card-btn {
+      display: inline-block;
+      padding: 0.8rem 1.6rem;
+      background: transparent;
+      color: var(--accent-gold);
+      border: 1px solid var(--accent-gold);
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      margin-top: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .tool-card-btn:hover {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: #0a1628;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(201, 153, 58, 0.2);
+    }
+
+
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  
+    /* Dropdown CSS Rules */
+    nav.site-navigation li {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1c1032;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+      padding: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.2rem !important;
+      font-size: 0.9rem !important;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      width: 100%;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent-gold-hover) !important;
+      background: rgba(201, 153, 58, 0.08);
+      padding-left: 1.5rem !important;
+    }
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+    nav.site-navigation li.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-arrow {
+      font-size: 0.7rem;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    nav.site-navigation li.has-dropdown:hover .nav-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-gold-hover);
+    }
+    @media (max-width: 1150px) {
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .dropdown-menu a {
+        padding: 0.3rem 1rem !important;
+        text-align: center !important;
+      }
+      .nav-arrow {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://partnerhoursguide.com/#website",
+      "url": "https://partnerhoursguide.com/",
+      "name": "Translator Old English",
+      "description": "Translate English to Old English instantly. Explore Anglo-Saxon language, runes, history, and naming etymologies.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "PartnerHoursGuide",
+        "url": "https://partnerhoursguide.com"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://partnerhoursguide.com/#application",
+      "name": "Linguistic Historical English Translation Engine",
+      "operatingSystem": "All",
+      "applicationCategory": "EducationalApplication",
+      "description": "AI-powered linguistic translation engine designed to translate modern English to Old English and Shakespearean English.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}
+  </script>
+
+</head>
+<body>
+
+  <div class="translator-app-wrapper">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-nav-container">
+        <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+          <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+          <span class="brand-name">Translator Old English</span>
+        </a>
+        <nav class="site-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="https://partnerhoursguide.com/" class="active">Home</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/">Names</a></li>
+          <li><a href="https://partnerhoursguide.com/random-name-maker/">Name Maker</a></li>
+          
+          <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About</a></li>
+          <li><a href="https://partnerhoursguide.com/spanish-words-in-english/">Spanish Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Blog</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/" class="nav-cta">Try translator</a></li>
+        </ul>
+      </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-banner">
+      <div class="container hero-container">
+        <h1 class="hero-title">Translate English to Old English Instantly</h1>
+        <p class="hero-subtitle">Discover the ancient Anglo-Saxon roots of the English language. Free online Old English translator.</p>
+        <a href="https://partnerhoursguide.com/translator-old-english-tool/" class="hero-cta-btn">Try the Translator</a>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-heritage">
+      <div class="container intro-grid">
+        <div class="intro-text-block">
+          <h2>The Voice of the Anglo-Saxons</h2>
+          <p>Old English, or <strong>Englisc</strong>, was the language spoken in England by the Germanic tribes (Angles, Saxons, and Jutes) from the mid-5th century until the Norman Conquest of 1066. It is the language of legendary epics like <em>Beowulf</em> and the historical annals of the <em>Anglo-Saxon Chronicle</em>.</p>
+          <p>Though it may look and sound entirely foreign at first, Old English is the direct parent of modern English. In fact, many of the most common words we use every single day—words like <em>friend</em>, <em>house</em>, <em>water</em>, and <em>father</em>—descend directly from Old English.</p>
+          <p>Our translator uses rule-based mappings and academic presets to help you <a href="https://partnerhoursguide.com/translate-english-to-english/">translate english to english</a> and uncover the archaic sounds, spelling, and meanings behind today's vocabulary. You can also generate historic names using our <a href="https://partnerhoursguide.com/random-name-maker/">Name Maker</a>.</p>
+        </div>
+        <div class="intro-visual-card">
+          <div class="rune-backdrop-text">ᚻᚹᚪᛏ ᛗᛁᚾ ᚠᚱᛡᚾᛞ</div>
+          <p class="quote-block">"Hwæt, mīn frēond, hwider gæst þū?"</p>
+          <p class="quote-author">"Listen, my friend, whither goest thou?"</p>
+        </div>
+        </div>
+    </section>
+
+    
+    <!-- Historical Translators Section -->
+    <section class="tools-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Historical English Tools &amp; Translators</h2>
+          <p>Explore and translate modern text into historical English periods with our interactive tools.</p>
+        </div>
+        <div class="tools-grid">
+          <!-- Card 1: Old English Translator -->
+          <div class="tool-card">
+            <div class="tool-icon-box">🛡️ </div>
+            <h3>Old English Translator</h3>
+            <p>Convert modern English into the Anglo-Saxon tongue of Beowulf, including runic translations and academic presets.</p>
+            <a href="https://partnerhoursguide.com/translator-old-english-tool/" class="tool-card-btn">Use Old English Translator</a>
+          </div>
+          <!-- Card 2: Shakespearean English Translator -->
+          <div class="tool-card">
+            <div class="tool-icon-box">✍ ️ </div>
+            <h3>Shakespearean English Translator</h3>
+            <p>Translate modern text into the eloquent early modern English of William Shakespeare's plays and sonnets.</p>
+            <a href="https://partnerhoursguide.com/shakespeare-english-translator/" class="tool-card-btn">Use Shakespeare Translator</a>
+          </div>
+          <!-- Card 3: Old English Name Finder -->
+          <div class="tool-card">
+            <div class="tool-icon-box">📜</div>
+            <h3>Old English Name Finder</h3>
+            <p>Explore authentic Anglo-Saxon names with full etymological details, gender filters, and text-to-speech pronunciation.</p>
+            <a href="https://partnerhoursguide.com/old-english-names/" class="tool-card-btn">Use Name Finder</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+<!-- Features Section -->
+    <section class="features-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Engineered for Language Enthusiasts</h2>
+          <p>Explore the timeline of the English language with modern tools built for historical accuracy.</p>
+        </div>
+        <div class="features-grid">
+          <!-- Card 1 -->
+          <div class="feature-card">
+            <div class="feature-icon-box">📜</div>
+            <h3>AI-Powered Translation</h3>
+            <p>Our rule-based engine translates text instantly across four distinct historical eras, including Old English (c. 1000) and Middle English (c. 1200).</p>
+          </div>
+          <!-- Card 2 -->
+          <div class="feature-card">
+            <div class="feature-icon-box">📊</div>
+            <h3>Instant Results</h3>
+            <p>Compare eras side-by-side. Watch how words evolve, vowels shift, and grammar adapts through our tabbed layout interface.</p>
+          </div>
+          <!-- Card 3 -->
+          <div class="feature-card">
+            <div class="feature-icon-box">📜</div>
+            <h3>Learn the History</h3>
+            <p>Hover over words to read etymology sheets, phonetic approximations, grammatical details, and view direct Runic translations.</p>
+          </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-preview-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Latest Insights from the Editorial Team</h2>
+          <p>Read historical trivia, tutorials, and deep-dives into the Anglo-Saxon heritage.</p>
+        </div>
+        <div class="blog-grid">
+          <!-- Article 1 -->
+          <a href="https://partnerhoursguide.com/translate-english-to-english/" class="blog-card">
+            <div class="blog-card-image-placeholder" style="background-image: url('https://partnerhoursguide.com/wp-content/uploads/2026/05/Gemini_Generated_Image_63mtun63mtun63mt-scaled.webp'); background-size: cover; background-position: center;"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span>Language &amp; History</span>
+                <span>•</span>
+                <span>10 min read</span>
+              </div>
+              <h3 class="blog-card-title">Translate English to English: The Complete Guide</h3>
+              <p class="blog-card-excerpt">Trace the evolution of modern English across 1,500 years. Compare Old English, Middle English, and Shakespearean speech...</p>
+              <span class="blog-card-link">Read Article &rarr;</span>
+            </div>
+          </a>
+          <!-- Article 2 -->
+          <a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/" class="blog-card">
+            <div class="blog-card-image-placeholder"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span>History</span>
+                <span>•</span>
+                <span>6 min read</span>
+              </div>
+              <h3 class="blog-card-title">25 Old English Words We Still Use Today</h3>
+              <p class="blog-card-excerpt">Discover 25 surprising Old English words still used in modern English. Learn the Anglo-Saxon roots of everyday words...</p>
+              <span class="blog-card-link">Read Article &rarr;</span>
+            </div>
+          </a>
+          <!-- Article 3 -->
+          <a href="https://partnerhoursguide.com/why-shakespeare-is-not-old-english/" class="blog-card">
+            <div class="blog-card-image-placeholder"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span>Language Guide</span>
+                <span>•</span>
+                <span>5 min read</span>
+              </div>
+              <h3 class="blog-card-title">Why Shakespeare is NOT Old English</h3>
+              <p class="blog-card-excerpt">Many people confuse Early Modern English with the language of Beowulf. Let's break down the centuries-long differences...</p>
+              <span class="blog-card-link">Read Article &rarr;</span>
+            </div>
+          </a>
+          <!-- Article 4 -->
+          <a href="https://partnerhoursguide.com/is-french-the-mother-language-of-english/" class="blog-card">
+            <div class="blog-card-image-placeholder" style="background-image: url('https://partnerhoursguide.com/wp-content/uploads/2026/05/Medieval-battle-scene.webp'); background-size: cover; background-position: center;"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span>History</span>
+                <span>•</span>
+                <span>8 min read</span>
+              </div>
+              <h3 class="blog-card-title">Is French the Mother Language of English?</h3>
+              <p class="blog-card-excerpt">Is French the mother language of English? Explore the truth behind 1066 and why English remains Germanic.</p>
+              <span class="blog-card-link">Read Article &rarr;</span>
+            </div>
+          </a>
+          <!-- Article 5 -->
+          <a href="https://partnerhoursguide.com/how-tolkien-used-old-english/" class="blog-card">
+            <div class="blog-card-image-placeholder"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span>Tolkien Studies</span>
+                <span>•</span>
+                <span>8 min read</span>
+              </div>
+              <h3 class="blog-card-title">How Tolkien Used Old English in Rohirric</h3>
+              <p class="blog-card-excerpt">J.R.R. Tolkien was a philologist who loved Anglo-Saxon. Explore how he mapped Rohirric names and runes in Lord of the Rings...</p>
+              <span class="blog-card-link">Read Article &rarr;</span>
+            </div>
+          </a>
+          <!-- Article 6 -->
+          <a href="https://partnerhoursguide.com/old-english-vs-modern-english/" class="blog-card">
+            <div class="blog-card-image-placeholder" style="background-image: url('https://partnerhoursguide.com/wp-content/uploads/2026/05/Copilot_20260530_195327.webp'); background-size: cover; background-position: center;"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span>Language &amp; History</span>
+                <span>•</span>
+                <span>12 min read</span>
+              </div>
+              <h3 class="blog-card-title">Old English vs. Modern English: How Much Has the Language Changed?</h3>
+              <p class="blog-card-excerpt">Discover how Old English vs. Modern English compares across grammar, vocabulary, pronunciation, and writing...</p>
+              <span class="blog-card-link">Read Article &rarr;</span>
+            </div>
+          </a>
+                  <!-- Article 7 -->
+          <a href="https://partnerhoursguide.com/random-name-maker/" class="blog-card">
+            <div class="blog-card-image-placeholder"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span>Language Guide</span>
+                <span>•</span>
+                <span>8 min read</span>
+              </div>
+              <h3 class="blog-card-title">Name Finder — Ancient Anglo-Saxon Names, Meanings & Free Tool</h3>
+              <p class="blog-card-excerpt">Use our free name finder to explore Anglo-Saxon name meanings, male and female names, and ancient English name history...</p>
+              <span class="blog-card-link">Read Article &rarr;</span>
+            </div>
+          </a>
+          <!-- Article 8 -->
+          <a href="https://partnerhoursguide.com/famous-old-english-text-translations/" class="blog-card">
+            <div class="blog-card-image-placeholder" style="background-image: url('https://partnerhoursguide.com/wp-content/uploads/2026/06/Copilot_20260616_043449.webp'); background-size: cover; background-position: center;"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span>Manuscripts &amp; Translations</span>
+                <span>•</span>
+                <span>10 min read</span>
+              </div>
+              <h3 class="blog-card-title">Famous Old English Text Translations: Beowulf, Prayers &amp; Manuscripts Decoded</h3>
+              <p class="blog-card-excerpt">Explore the most famous Old English text translations in history — from Beowulf to the Lord's Prayer and Anglo-Saxon Chronicle...</p>
+              <span class="blog-card-link">Read Article &rarr;</span>
+            </div>
+          </a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand-info">
+          <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+            <div class="brand-crest">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 8 6 6 6-6"></path>
+                <path d="m4 14 6 6 8-8"></path>
+              </svg>
+            </div>
+            <span class="brand-name">Translator Old English</span>
+          </a>
+          <p>Uncovering the ancestral roots and sounds of the English language through technology. Built with academic detail.</p>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="https://partnerhoursguide.com/">Home</a></li>
+            <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator Tool</a></li>
+            <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About Page</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Articles & Blogs</a></li>
+            <li><a href="https://partnerhoursguide.com/contact-us/">Contact Us</a></li>
+            <li><a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; 2026 Translator Old English. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a>
+          <a href="https://partnerhoursguide.com/contact-us/">Contact Support</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+
+  
+
+  
+
+      <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/",
+          "famous-old-english-text-translations.html": "https://partnerhoursguide.com/famous-old-english-text-translations/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

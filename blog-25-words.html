@@ -1,0 +1,1433 @@
+<?php
+/**
+ * Stop RankMath from generating duplicate meta titles, descriptions, and schemas on this page.
+ */
+if (function_exists('add_filter')) {
+  add_filter( 'rank_math/frontend/title', '__return_false' );
+  add_filter( 'rank_math/frontend/description', '__return_false' );
+  add_filter( 'rank_math/json_ld', '__return_empty_array', 99 );
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>25 Old English Words We Still Use Today | Old English Word Origins</title>
+  <meta name="description" content="Discover 25 surprising Old English words still used in modern English. Learn the Anglo-Saxon roots of everyday words with our free Old English translator.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link data-no-optimize="1" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style data-no-optimize="1">
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-color: #120924; /* Deep Medieval Purple */
+      --card-bg: #1c1032; /* Slightly Lighter Purple */
+      --card-bg-hover: #261742;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.25);
+      --text-cream: #f8f5f0;
+      --text-muted: #8c829d;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.35);
+      
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* Isolated Wrapper to Prevent WordPress Theme Style Leaking */
+    .translator-app-wrapper {
+      background-color: #120924 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      line-height: 1.6 !important;
+      text-align: left !important;
+    }
+
+    .translator-app-wrapper h1, 
+    .translator-app-wrapper h2, 
+    .translator-app-wrapper h3, 
+    .translator-app-wrapper p, 
+    .translator-app-wrapper span, 
+    .translator-app-wrapper a, 
+    .translator-app-wrapper label {
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    /* Hide default WordPress / Kadence page titles to avoid duplicates and white background leaks */
+    .entry-hero, .entry-header, .page-title-wrap {
+      display: none !important;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .header-nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-crest {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      background: rgba(28, 16, 50, 0.6);
+    }
+
+    .brand-name {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav.site-navigation ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav.site-navigation a {
+      white-space: nowrap;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    nav.site-navigation a:hover, 
+    nav.site-navigation a.active {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    nav.site-navigation a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--accent-gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav.site-navigation a:hover::after, 
+    nav.site-navigation a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    nav.site-navigation a.nav-cta {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.5rem 1.1rem !important;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    nav.site-navigation a.nav-cta:hover {
+      color: var(--bg-color) !important;
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       BLOG LAYOUT & ARTICLES
+       ========================================================================== */
+    section.blog-post-section {
+      padding: 4rem 0 6rem;
+    }
+
+    .blog-post-header {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .blog-meta-info {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase;
+      letter-spacing: 0.08rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h1.post-title {
+      font-family: var(--font-title) !important;
+      font-size: 3rem;
+      line-height: 1.2;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .post-excerpt-intro {
+      font-size: 1.2rem;
+      color: var(--text-muted) !important;
+      line-height: 1.6;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .blog-post-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .article-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--font-title) !important;
+      font-size: 2rem;
+      color: var(--accent-gold) !important;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+      margin-top: 1.5rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.4rem;
+      color: var(--accent-gold-hover) !important;
+      margin-top: 1rem;
+    }
+
+    .article-body p {
+      font-size: 1.05rem;
+      color: var(--text-cream) !important;
+      line-height: 1.75;
+    }
+
+    .article-body p strong {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    .article-body blockquote {
+      border-left: 4px solid var(--accent-gold);
+      padding: 1rem 1.5rem;
+      background: rgba(28, 16, 50, 0.4);
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+
+    .article-body blockquote p {
+      font-style: italic;
+      color: var(--text-cream) !important;
+    }
+
+    /* Word Origins Table Styling */
+    .table-container {
+      overflow-x: auto;
+      margin: 2.5rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      width: 100%;
+    }
+
+    table.origins-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+      background: var(--card-bg);
+      min-width: 900px;
+      table-layout: fixed;
+    }
+
+    table.origins-table th:nth-child(1),
+    table.origins-table td:nth-child(1) {
+      width: 50px;
+    }
+    table.origins-table th:nth-child(2),
+    table.origins-table td:nth-child(2) {
+      width: 150px;
+    }
+    table.origins-table th:nth-child(3),
+    table.origins-table td:nth-child(3) {
+      width: 130px;
+    }
+    table.origins-table th:nth-child(4),
+    table.origins-table td:nth-child(4) {
+      width: 320px;
+      word-wrap: break-word;
+      white-space: normal;
+    }
+    table.origins-table th:nth-child(5),
+    table.origins-table td:nth-child(5) {
+      width: 250px;
+      word-wrap: break-word;
+      white-space: normal;
+    }
+
+    table.origins-table th {
+      background: #0d061c;
+      color: var(--accent-gold) !important;
+      font-weight: 600;
+      padding: 1rem;
+      border-bottom: 2px solid var(--border-color);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.05rem;
+    }
+
+    table.origins-table td {
+      padding: 1.1rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-cream) !important;
+      line-height: 1.5;
+    }
+
+    table.origins-table tr:hover {
+      background: var(--card-bg-hover);
+    }
+
+    table.origins-table td strong {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    .example-sentence-block {
+      font-style: italic;
+      color: var(--text-muted) !important;
+      font-size: 0.88rem;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Author Bio card */
+    .author-bio-card {
+      background: rgba(28, 16, 50, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-top: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .author-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-gold);
+      background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg-hover) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+    }
+
+    .author-info h4 {
+      font-family: var(--font-title) !important;
+      font-size: 1.15rem;
+      color: var(--accent-gold-hover) !important;
+      margin-bottom: 0.3rem;
+    }
+
+    .author-info p {
+      font-size: 0.92rem;
+      color: var(--text-muted) !important;
+      line-height: 1.5;
+    }
+
+    /* CTA Panel */
+    .post-cta-panel {
+      background: radial-gradient(circle at center, #1c1032 0%, #120924 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 4rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .post-cta-panel h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.8rem;
+      color: var(--text-cream) !important;
+    }
+
+    .post-cta-panel p {
+      color: var(--text-muted) !important;
+      max-width: 550px;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.8rem 2rem !important;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    .cta-btn:hover {
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      background: #0d061c;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .footer-brand-info p {
+      font-size: 0.95rem;
+      color: var(--text-muted) !important;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-nav-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .footer-nav-col h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      color: var(--accent-gold) !important;
+      font-weight: 700;
+    }
+
+    .footer-nav-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      list-style: none;
+    }
+
+    .footer-nav-col a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-nav-col a:hover {
+      color: var(--accent-gold-hover) !important;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+      }
+    }
+
+    .footer-bottom p {
+      font-size: 0.85rem;
+      color: var(--text-muted) !important;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    .blog-content-wrapper {
+      padding: 4rem 0;
+    }
+
+    .blog-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    @media (min-width: 992px) {
+      .blog-grid-layout {
+        grid-template-columns: 8fr 4fr;
+      }
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    article.blog-article {
+      background: rgba(28, 16, 50, 0.15);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* SIDEBAR STYLES */
+    aside.blog-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-widget {
+      background: rgba(28, 16, 50, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+    }
+
+    .sidebar-widget h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.3rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.4rem;
+    }
+
+    .cta-widget {
+      background: linear-gradient(145deg, rgba(28, 16, 50, 0.8) 0%, rgba(18, 9, 36, 0.9) 100%);
+      border: 1px solid var(--accent-gold);
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .cta-widget p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .recent-posts-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .recent-posts-list li a {
+      color: var(--text-cream) !important;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+      display: block;
+    }
+
+    .recent-posts-list li a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    .recent-posts-list li span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVENESS & UTILITIES
+       ========================================================================== */
+    @media (max-width: 768px) {
+      h1.post-title {
+        font-size: 2.2rem !important;
+      }
+      .post-excerpt-intro {
+        font-size: 1rem !important;
+      }
+      .header-nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+    }
+  
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  
+    /* Dropdown CSS Rules */
+    nav.site-navigation li {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1c1032;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+      padding: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.2rem !important;
+      font-size: 0.9rem !important;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      width: 100%;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent-gold-hover) !important;
+      background: rgba(201, 153, 58, 0.08);
+      padding-left: 1.5rem !important;
+    }
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+    nav.site-navigation li.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-arrow {
+      font-size: 0.7rem;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    nav.site-navigation li.has-dropdown:hover .nav-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-gold-hover);
+    }
+    @media (max-width: 1150px) {
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .dropdown-menu a {
+        padding: 0.3rem 1rem !important;
+        text-align: center !important;
+      }
+      .nav-arrow {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://partnerhoursguide.com/blog-25-words/#post",
+      "headline": "25 Old English Words We Still Use Today | Old English Word Origins",
+      "description": "Discover 25 surprising Old English words still used in modern English. Learn the Anglo-Saxon roots of everyday words with our free Old English translator.",
+      "author": {
+        "@type": "Person",
+        "name": "Furqan",
+        "jobTitle": "Senior Career Advisor",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Sir Syed University of Engineering and Technology"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "PartnerHoursGuide",
+        "url": "https://partnerhoursguide.com"
+      },
+      "datePublished": "2026-05-30",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://partnerhoursguide.com/blog-25-words/"
+      }
+    }
+  ]
+}
+  </script>
+
+</head>
+<body>
+
+  <div class="translator-app-wrapper">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-nav-container">
+        <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+          <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+          <span class="brand-name">Translator Old English</span>
+        </a>
+        <nav class="site-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="https://partnerhoursguide.com/">Home</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/">Names</a></li>
+          <li><a href="https://partnerhoursguide.com/random-name-maker/">Name Maker</a></li>
+          
+          <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/" class="active">Blog</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/" class="nav-cta">Try translator</a></li>
+        </ul>
+      </nav>
+      </div>
+    </header>
+
+    <!-- Blog Header Section -->
+    <section class="blog-post-section">
+      <div class="container blog-post-header">
+        <div class="blog-meta-info">
+          <span>Language & Origins</span>
+          <span>•</span>
+          <span>May 24, 2026</span>
+          <span>•</span>
+          <span>10 min read</span>
+        </div>
+        <h1 class="post-title">25 Old English Words We Still Use Today</h1>
+        <p class="post-excerpt-intro">We speak the language of early medieval warriors every day without realizing it. Discover the ancient Anglo-Saxon roots of 25 common modern English words.</p>
+      </div>
+
+      <!-- Main Blog Content -->
+      <div class="blog-content-wrapper">
+        <div class="container blog-grid-layout">
+          
+          <!-- Main Article -->
+          <main>
+            <article class="blog-article">
+              <div class="article-body">
+                
+                <p>Language is a living chronicle of human history. When we speak modern English today, we are not just exchanging information; we are breathing life into sounds and structures that were shaped in the mead-halls and muddy fields of early medieval Britain. The historical language of this era is known as <strong>Old English</strong> (or Anglo-Saxon), spoken from roughly the mid-5th century until the Norman Conquest of 1066. While the vocabulary of modern English has since been heavily saturated with French, Latin, and Greek terms, the grammatical skeleton and the most basic, visceral words we use daily belong to the Germanic tongue of the Anglo-Saxons.</p>
+          
+          <p>It is easy to assume that Old English is a completely foreign language—especially when viewing the runes or reading the original text of the epic poem <em>Beowulf</em>. However, a closer inspection reveals that the vocabulary of family, survival, nature, and the human body has remained remarkably stable. If you want to translate english to old english to see these changes in action, you can use our dynamic tool to compare the two eras. Tracing these words from old english to modern English reveals just how much has survived. For instance, how would you write this in old english? Below, we explore 25 essential **old english words** that have survived the trials of over a thousand years, tracing their original meanings, phonetic evolutions, and historical contexts. To trace this evolution step by step, including how to <a href="https://partnerhoursguide.com/translate-english-to-english/">translate English to English</a> across 1,500 years of linguistic history, check our timeline transition guide. Alternatively, you can <a href="https://partnerhoursguide.com/old-english-vs-modern-english/">Compare Old English and Modern English side-by-side &rarr;</a>.</p>
+
+          <h2>The Ancestral Vocabulary: 25 Survivors</h2>
+          <p>To understand how modern English relates to its historical parent, we have compiled a detailed table of 25 terms. Each entry contains the original spelling, the modern counterpart, the etymological meaning, and a reconstructed example sentence in Old English to show how the word functioned in context.</p>
+
+          <div class="table-container">
+            <table class="origins-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Old English (Englisc)</th>
+                  <th>Modern English</th>
+                  <th>Original Meaning & Etymological Notes</th>
+                  <th>Reconstructed Anglo-Saxon Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><strong>Fæder</strong></td>
+                  <td>Father</td>
+                  <td>Originally designated the male parent or household protector. Derived from Proto-Indo-European *pəter.</td>
+                  <td>"Se fæder lufode his sunu mid eallum his heortan."
+                    <span class="example-sentence-block">Translation: The father loved his son with all his heart.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><strong>Mōdor</strong></td>
+                  <td>Mother</td>
+                  <td>The female parent, originating from Proto-Germanic *mōdēr. In Anglo-Saxon society, mothers held crucial domestic and societal roles.</td>
+                  <td>"His mōdor sang swēte lēoð tō slǣpenne þæt child."
+                    <span class="example-sentence-block">Translation: His mother sang a sweet song to sleep the child.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><strong>Hūs</strong></td>
+                  <td>House</td>
+                  <td>A dwelling, building, or shelter. Houses in Anglo-Saxon England were typically timber-framed structures.</td>
+                  <td>"Ãžæt timber-hūs stōd fæste wið þone micclan storm."
+                    <span class="example-sentence-block">Translation: The timber house stood firm against the great storm.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><strong>Eorðe</strong></td>
+                  <td>Earth</td>
+                  <td>Soil, ground, dry land, or the physical world. Connected to the early medieval agricultural lifestyle.</td>
+                  <td>"Sēo eorðe is gearu tō sēowenne mid hwǣte."
+                    <span class="example-sentence-block">Translation: The earth is ready to be sown with wheat.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><strong>Wæter</strong></td>
+                  <td>Water</td>
+                  <td>Clear liquid essential for life, descending from Proto-Germanic *watar. Waterways were vital for commerce.</td>
+                  <td>"We druncon ceald wæter of þǣm clǣran brōce."
+                    <span class="example-sentence-block">Translation: We drank cold water from the clear brook.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><strong>Fȳr</strong></td>
+                  <td>Fire</td>
+                  <td>Flame or hearth-fire. Fire was the center of warmth, safety, and cooking in the communal mead hall.</td>
+                  <td>"Ãžæt fȳr on þǣm heorde brann beorhte ealle þā niht."
+                    <span class="example-sentence-block">Translation: The fire on the hearth burned brightly all night.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><strong>Sǣ</strong></td>
+                  <td>Sea</td>
+                  <td>Large body of salt water. The Anglo-Saxons were seafaring warriors and traders who feared and respected the ocean.</td>
+                  <td>"Ãžā scipu fōron ofer þā deopan sǣ tō nīwum landum."
+                    <span class="example-sentence-block">Translation: The ships sailed over the deep sea to new lands.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><strong>Wind</strong></td>
+                  <td>Wind</td>
+                  <td>Moving air currents. Vital for sailing ships but also feared during northern winter storms.</td>
+                  <td>"Strong wind blēow of norðe and bræc þā trēowu."
+                    <span class="example-sentence-block">Translation: A strong wind blew from the north and broke the trees.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td><strong>Frēond</strong></td>
+                  <td>Friend</td>
+                  <td>One joined in mutual affection. Originally a present participle of *frēogan* (to love, honor).</td>
+                  <td>"He is mīn getrēowa frēond on eallum nearonessum."
+                    <span class="example-sentence-block">Translation: He is my true friend in all times of distress.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td><strong>Cū</strong></td>
+                  <td>Cow</td>
+                  <td>Female bovine. Livestock was the primary measure of wealth and survival in early England.</td>
+                  <td>"Sēo cū geaf fersce meolc eallum þǣm hīrede dæghwāmlīce."
+                    <span class="example-sentence-block">Translation: The cow gave fresh milk to the entire household daily.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td><strong>Gōd</strong></td>
+                  <td>Good</td>
+                  <td>Having desirable qualities, beneficial, or morally sound. Relates to honor and virtue in warrior codes.</td>
+                  <td>"Ãžes is swipe gōd wītelic cyning."
+                    <span class="example-sentence-block">Translation: This is a very good and wise king.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td><strong>Dæg</strong></td>
+                  <td>Day</td>
+                  <td>Time of light between sunrise and sunset. Plural form *dagas* evolved into modern "days".</td>
+                  <td>"Se dæg wæs lēoht and wearm ofer þæt feldland."
+                    <span class="example-sentence-block">Translation: The day was bright and warm over the fields.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td><strong>Niht</strong></td>
+                  <td>Night</td>
+                  <td>Period of darkness. The Anglo-Saxons historically reckoned time in "winters" and "nights" rather than years and days.</td>
+                  <td>"Sēo deope niht brōhte cealdne mist ofer þā mōras."
+                    <span class="example-sentence-block">Translation: The deep night brought cold mist over the moors.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td><strong>Cyning</strong></td>
+                  <td>King</td>
+                  <td>Monarch or ruler. Etymologically means "scion of a noble kin" (from *cyn* + *-ing*).</td>
+                  <td>"Sē cyning weold þǣm rīce mid rihtwīsnesse."
+                    <span class="example-sentence-block">Translation: The king ruled the realm with justice.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>15</td>
+                  <td><strong>Hand</strong></td>
+                  <td>Hand</td>
+                  <td>The terminal part of the arm. Used extensively in poetic metaphors for strength, pledge, and combat.</td>
+                  <td>"He heold his sweord mid strangan hande on beadwe."
+                    <span class="example-sentence-block">Translation: He held his sword with a strong hand in battle.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>16</td>
+                  <td><strong>Fōt</strong></td>
+                  <td>Foot</td>
+                  <td>Terminal part of the leg. Plural form *fēt* shows mutated vowel sound that led to modern "feet".</td>
+                  <td>"He stōp his fōt on þæt grēne gærs eadmlīce."
+                    <span class="example-sentence-block">Translation: He stepped his foot on the green grass humbly.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td><strong>Gærs</strong></td>
+                  <td>Grass</td>
+                  <td>Green herbage for grazing. Suffered a metathesis of the 'r' sound (from *græs* to *gærs*).</td>
+                  <td>"Ãžæt wearme gærs wēox swīðe æfter þǣm lēohtan rīne."
+                    <span class="example-sentence-block">Translation: The warm grass grew rapidly after the gentle rain.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td><strong>Heorte</strong></td>
+                  <td>Heart</td>
+                  <td>The organ of blood circulation, historically viewed as the seat of courage, emotion, and intellect.</td>
+                  <td>"Mīn heorte is blīðe for þīnum gōdan wordum."
+                    <span class="example-sentence-block">Translation: My heart is glad because of your kind words.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td><strong>Gēar</strong></td>
+                  <td>Year</td>
+                  <td>Twelve-month period. Spelled with a palatal 'g' that sounded like 'y', giving us the modern pronunciation.</td>
+                  <td>"Ãžæt nīwe gēar brōhte gōde wæstmas and sibbe."
+                    <span class="example-sentence-block">Translation: The new year brought abundant crops and peace.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td><strong>Slǣpan</strong></td>
+                  <td>Sleep</td>
+                  <td>Verb meaning to rest in sleep. Connected to physical recovery and peace of mind in early literature.</td>
+                  <td>"We woldon slǣpan under þǣm scade þæs ealdan trēowes."
+                    <span class="example-sentence-block">Translation: We wanted to sleep under the shade of the old tree.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td><strong>Drincan</strong></td>
+                  <td>Drink</td>
+                  <td>To swallow liquid. Mead-drinking rituals in the hall (*medu-heall*) were central to social bonding.</td>
+                  <td>"Ãžā þegnas druncon wīn of gyldenum hornum."
+                    <span class="example-sentence-block">Translation: The thanes drank wine from golden horns.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td><strong>Etan</strong></td>
+                  <td>Eat</td>
+                  <td>To consume food. Relates directly to survival and hospitality rites in medieval halls.</td>
+                  <td>"Hīe ēton gōdne hlaf and gebrǣded flǣsc."
+                    <span class="example-sentence-block">Translation: They ate good bread and roasted meat.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td><strong>Hēafod</strong></td>
+                  <td>Head</td>
+                  <td>Anatomical head or leader. The spelling shows standard diphthong 'ēa' which simplified over time.</td>
+                  <td>"He bær self þæt hēafod þæs dracan tō þǣm healle."
+                    <span class="example-sentence-block">Translation: He himself carried the dragon's head to the hall.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td><strong>Bēor</strong></td>
+                  <td>Beer</td>
+                  <td>Fermented barley drink. An essential staple drink due to water purity concerns and celebratory value.</td>
+                  <td>"Ãžæt bēor wæs swēte and strang on þǣre mētinge."
+                    <span class="example-sentence-block">Translation: The beer was sweet and strong at the gathering.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td><strong>Lēof</strong></td>
+                  <td>Love / Dear</td>
+                  <td>Dear, beloved, or valued. Evolved into modern "lief" (as in "I'd as lief") and is the root of the noun "love".</td>
+                  <td>"Ãžū eart mīn lēofa sunu, on þǣm ic gelīcode."
+                    <span class="example-sentence-block">Translation: You are my beloved son, in whom I am well pleased.</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Educational Explanation (min 300 words) -->
+          <h2>What Is Old English?</h2>
+          <p>To fully appreciate these word origins, we must examine what Old English actually was. Known historically as <strong>Englisc</strong>, it was the linguistic foundation of Anglo-Saxon society. It was spoken and written in England and parts of southern Scotland between the mid-5th century and the late 11th century. This Germanic tongue was carried across the North Sea by various tribes—specifically the Angles, Saxons, and Jutes—who settled in Roman-abandoned Britain. Over six centuries, it split into four distinct dialects: Northumbrian, Mercian, Kentish, and West Saxon. West Saxon eventually achieved prominence as the literary standard under the unification reforms of King Alfred the Great in the late 9th century.</p>
+          
+          <p>Grammatically, Old English is characterized by its high inflection. Unlike modern English, which depends on helper verbs and strict word order to convey grammatical relationships, Old English had a highly complex system. Nouns, adjectives, and pronouns were fully declined across four major cases (nominative, accusative, genitive, and dative), three grammatical genders (masculine, feminine, and neuter), and dual number categories for pronouns. Verbs were classified into weak and strong groups, undergoing major vowel mutations (known as *ablaut*) to indicate tense.</p>
+          
+          <p>Its vocabulary was heavily Germanic, relying on compounding to create new concepts. This technique, called a <strong>kenning</strong>, combined existing words to form poetic metaphors: for instance, the sea was called *seġl-rād* (sail-road) or *hron-rād* (whale-road), and the body was referred to as *bānhūs* (bone-house). The phonological system was marked by guttural consonants and long vowels that sounded closer to modern German or Icelandic than to the modern English spoken in London or New York today.</p>
+
+          <h2>How Old English Transformed into Modern English</h2>
+          <p>How did this heavily inflected, guttural Germanic tongue transform into the global language we speak today? The shift was not a gradual, peaceful development, but the result of massive historical upheavals. The first major catalyst was the Viking invasions starting in the late 8th century. Old Norse speakers settled in northern and eastern England, under the region known as the Danelaw. Because Old Norse and Old English shared Germanic origins but had different grammatical endings, the settlers simplified their grammar to understand each other. This contact led to the shedding of complex noun declensions and the adoption of basic pronoun vocabulary, such as *they*, *them*, and *their*.</p>
+          
+          <p>The turning point, however, occurred in 1066 with the Norman Conquest. William the Conqueror introduced Norman French as the language of the crown, government, and nobility, while Latin remained the language of the church and scholarship. For nearly three centuries, English was spoken almost exclusively by the common people, causing it to lose its standard written form and fragment into regional dialects. During this period of isolation, the grammatical system simplified rapidly. When English finally re-emerged as the official national language in the 14th century (in the form of Middle English), it had absorbed thousands of French and Latin terms. Later, the **Great Vowel Shift** (c. 1400–1700) dramatically altered the pronunciation of long vowels, solidifying the phonetic divide between our medieval past and modern pronunciation.</p>
+
+          <h2>Conclusion</h2>
+          <p>When you speak of the *wind* howling at *night*, or share a cup of *water* or *beer* in your *house* with a *friend*, you are participating in a linguistic tradition that stretches back over fifteen hundred years. The durability of these basic vocabulary items proves that although empires fall and cultures merge, the core words of human connection, nature, and survival remain deeply anchored. Understanding the etymology of these words gives us a profound appreciation for the resilience of our language.</p>
+          
+          <p>If you want to explore this linguistic connection further, you can use our interactive translation engine. Simply type any modern sentence to see how it would have looked in the era of Alfred the Great, Beowulf, or Geoffrey Chaucer.</p>
+
+          <!-- CTA Panel -->
+          <div class="post-cta-panel">
+            <h3>Try the Old English Translator</h3>
+            <p>Connect with the language of your ancestors. Use our tool to translate, compare eras, and see runic transcriptions instantly.</p>
+            <a href="https://partnerhoursguide.com/translator-old-english-tool/" class="cta-btn">Start Translating Now</a>
+          </div>
+
+          <!-- Author Bio -->
+          <div class="author-bio-card">
+            <div class="author-avatar">📜</div>
+            <div class="author-info">
+              <h4>Written by the Translator Old English editorial team</h4>
+              <p>We are a dedicated group of historical linguists, programmers, and medieval enthusiasts passionate about making the etymology and history of the Anglo-Saxon language accessible to the digital world.</p>
+            
+            <div style="margin: 2.5rem 0; padding: 1.5rem; background: rgba(201, 153, 58, 0.05); border-left: 4px solid var(--accent-gold); border-radius: 4px;">
+              <h4 style="font-family: var(--font-title); color: var(--accent-gold); margin-bottom: 0.5rem; font-size: 1.15rem;">Related Guide:</h4>
+              <p style="margin: 0; font-size: 1.05rem;"><a href="https://partnerhoursguide.com/history-of-languages/" style="color: var(--text-cream); text-decoration: none; font-weight: 500;">History of Languages: Origins, Families, Death, and the Future of Human Speech</a></p>
+            </div>
+            </div>
+          </div>
+
+              </div>
+            
+        
+        
+        
+            <div class="academic-references" style="margin-top: 3rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; text-align: left;">
+              <h3 style="font-family: var(--font-title), serif; font-size: 1.25rem; color: var(--accent-gold); margin-bottom: 0.8rem; margin-top: 0;">Academic References &amp; Further Reading</h3>
+              <ul style="font-size: 0.95rem; color: var(--text-muted); list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>📖</span>
+                  <span>Explore historical Anglo-Saxon vocabulary in the <a href="https://bosworthtoller.com/" target="_blank" rel="noopener noreferrer">Bosworth-Toller Old English Dictionary</a>.</span>
+                </li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>🎓</span>
+                  <span>Review linguistic research and texts at the <a href="https://www.doe.utoronto.ca/" target="_blank" rel="noopener noreferrer">Dictionary of Old English (DOE) Project at the University of Toronto</a>.</span>
+                </li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>🏛️</span>
+                  <span>Verify historical medieval names and etymologies using the <a href="https://www.pase.ac.uk/" target="_blank" rel="noopener noreferrer">Prosopography of Anglo-Saxon England (PASE)</a>.</span>
+                </li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>🎭</span>
+                  <span>For Shakespearean and Elizabethan studies, consult resources at the <a href="https://www.folger.edu/" target="_blank" rel="noopener noreferrer">Folger Shakespeare Library</a> and <a href="https://www.shakespeareswords.com/" target="_blank" rel="noopener noreferrer">Shakespeare's Words dictionary</a>.</span>
+                </li>
+              </ul>
+            </div>
+
+        <div class="author-card">
+          <div class="author-avatar">👨‍🏫</div>
+          <div class="author-details">
+            <h4>Written by Furqan &amp; the Editorial Team</h4>
+            <p>Researched and overseen by Furqan, a veteran student career advisor with 19 years of dedicated service in the education sector of Pakistan, including career guidance roles at Sir Syed University of Engineering and Technology (SSUET), and founder of the <a href="https://www.facebook.com/profile.php?id=100069961940632" target="_blank" rel="noopener noreferrer">Youth Development Society</a>. Under his direction, this platform provides a suite of tools built to motivate and guide the youth in utilizing AI to uplift their earning potential and build successful careers.</p>
+          </div>
+        </div>
+
+
+
+      </article>
+          </main>
+
+          <!-- Sidebar -->
+          <aside class="blog-sidebar">
+            
+            <!-- CTA Widget -->
+            <div class="sidebar-widget cta-widget">
+              <h3>Try the Translator</h3>
+              <p>Experience the true sound of Anglo-Saxon. Translate modern phrases into Old English instantly.</p>
+              <a href="https://partnerhoursguide.com/translator-old-english-tool/" class="cta-btn">Start Translating</a>
+            </div>
+
+            <!-- Recent Posts Widget -->
+            <div class="sidebar-widget">
+              <h3>Recent Articles</h3>
+              <ul class="recent-posts-list">
+            <li>
+              <a href="english-to-old-norse.html">English to Old Norse: Complete Viking Guide</a>
+              <span>Translator • 18 min read</span>
+            </li>
+            <li>
+              <a href="spanish-words-in-english.html">Spanish Words in English: Translator &amp; Guide</a>
+              <span>Translator • 15 min read</span>
+            </li>
+            <li>
+              <a href="blog-25-words.html">25 Old English Words We Still Use Today</a>
+              <span>History • 6 min read</span>
+            </li>
+            <li>
+              <a href="why-shakespeare-is-not-old-english.html">Is Shakespeare Old English?</a>
+              <span>Language Guide • 10 min read</span>
+            </li>
+            <li>
+              <a href="old-english-insults-slang-phrases.html">Old English Insults, Slang, &amp; Phrases</a>
+              <span>Language Guide • 8 min read</span>
+            </li>
+            <li>
+              <a href="is-french-mother-language-of-english.html">Is French the Mother Language of English?</a>
+              <span>History • 8 min read</span>
+            </li>
+            <li>
+              <a href="how-tolkien-used-old-english-rohirric.html">How Tolkien Used Old English in Rohirric</a>
+              <span>Tolkien Studies • 8 min read</span>
+            </li>
+          </ul>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand-info">
+          <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+            <div class="brand-crest">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 8 6 6 6-6"></path>
+                <path d="m4 14 6 6 8-8"></path>
+              </svg>
+            </div>
+            <span class="brand-name">Translator Old English</span>
+          </a>
+          <p>Uncovering the ancestral roots and sounds of the English language through technology. Built with academic detail.</p>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="https://partnerhoursguide.com/">Home</a></li>
+            <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator Tool</a></li>
+            <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About Page</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Articles & Blogs</a></li>
+            <li><a href="https://partnerhoursguide.com/contact-us/">Contact Us</a></li>
+            <li><a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; 2026 Translator Old English. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a>
+          <a href="https://partnerhoursguide.com/contact-us/">Contact Support</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+
+  
+
+  
+
+      <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

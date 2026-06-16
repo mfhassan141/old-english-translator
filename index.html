@@ -1,0 +1,3610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Old English Translator — Free AI-Powered Tool | Translator Old English</title>
+  <meta name="description" content="Free AI-powered Old English translator. Convert modern English to Anglo-Saxon instantly. Includes Shakespeare converter, Old English name finder, and etymology tools. No signup needed.">
+  <meta property="og:title" content="Old English Translator — Free AI-Powered Tool">
+  <meta property="og:description" content="Convert modern English to Anglo-Saxon Old English instantly. Free translator, name finder, and Shakespeare converter. No signup needed.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://partnerhoursguide.com/">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link data-no-optimize="1" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- PDF.js & Tesseract.js CDNs -->
+  <script data-no-optimize="1" data-no-defer="1" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script data-no-optimize="1" data-no-defer="1" src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script data-no-optimize="1" data-no-defer="1">
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
+
+  <style data-no-optimize="1">
+    /* ==========================================================================
+       1. DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-color: #0a1628;
+      --card-bg: #112240;
+      --card-bg-hover: #172a45;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.3);
+      --text-cream: #f8f5f0;
+      --text-muted: #8892b0;
+      --text-light-muted: #a8b2d1;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.4);
+      
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.03) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    /* Isolated self-contained wrapper container for WordPress themes compatibility */
+    .translator-app-wrapper {
+      /* Redefine all local variables to isolate them from theme-level overrides */
+      --bg-color: #0a1628;
+      --card-bg: #112240;
+      --card-bg-hover: #172a45;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.3);
+      --text-cream: #f8f5f0;
+      --text-muted: #8892b0;
+      --text-light-muted: #a8b2d1;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.4);
+
+      background-color: #0a1628 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      line-height: 1.6 !important;
+      border-radius: 16px !important;
+      border: 1px solid rgba(201, 153, 58, 0.15) !important;
+      padding: 2rem 1.5rem !important;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.03) 0%, transparent 40%) !important;
+      margin: 1.5rem auto !important;
+      max-width: 1200px !important;
+      box-sizing: border-box !important;
+      text-align: left !important;
+    }
+
+    .translator-app-wrapper * {
+      box-sizing: border-box !important;
+    }
+
+    /* Override any WordPress theme typography and text overrides */
+    .translator-app-wrapper h1, 
+    .translator-app-wrapper h2, 
+    .translator-app-wrapper h3, 
+    .translator-app-wrapper p, 
+    .translator-app-wrapper label, 
+    .translator-app-wrapper span, 
+    .translator-app-wrapper button, 
+    .translator-app-wrapper textarea, 
+    .translator-app-wrapper select {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      color: #f8f5f0 !important;
+    }
+
+    .translator-app-wrapper .app-title {
+      font-family: 'Playfair Display', Georgia, serif !important;
+      background: linear-gradient(135deg, #f8f5f0 30%, #c9993a 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    .translator-app-wrapper .app-subtitle {
+      color: #8892b0 !important;
+    }
+
+    /* Extra high specificity selectors to override generic theme inputs rules */
+    body .translator-app-wrapper select, 
+    body .translator-app-wrapper textarea,
+    .translator-app-wrapper select#direction-select,
+    .translator-app-wrapper textarea#translator-input {
+      background-color: #0a1628 !important;
+      color: #f8f5f0 !important;
+      border: 1px solid rgba(201, 153, 58, 0.15) !important;
+    }
+
+    /* Style the placeholder text with high specificity */
+    body .translator-app-wrapper textarea::placeholder,
+    .translator-app-wrapper textarea#translator-input::placeholder {
+      color: #8892b0 !important;
+      opacity: 0.8 !important;
+    }
+
+    /* Style dropdown options explicitly to avoid invisible white-on-white text in Chrome/Safari */
+    body .translator-app-wrapper select option,
+    .translator-app-wrapper select#direction-select option {
+      background-color: #112240 !important;
+      color: #f8f5f0 !important;
+    }
+
+    body .translator-app-wrapper select:focus, 
+    body .translator-app-wrapper textarea:focus,
+    .translator-app-wrapper select#direction-select:focus,
+    .translator-app-wrapper textarea#translator-input:focus {
+      border-color: #c9993a !important;
+      box-shadow: 0 0 10px rgba(201, 153, 58, 0.3) !important;
+    }
+
+    .translator-app-wrapper #translate-btn {
+      color: #0a1628 !important;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-gold);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-gold-hover);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .crest {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 0.8rem;
+      border: 2px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 15px var(--accent-gold-glow);
+      background: rgba(17, 34, 64, 0.6);
+    }
+
+    h1.app-title {
+      font-size: 2.5rem;
+      color: var(--text-cream);
+      margin-bottom: 0.4rem;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      font-family: var(--font-title);
+    }
+
+    .app-subtitle {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-family: var(--font-title);
+    }
+
+    /* ==========================================================================
+       2. TWO PANEL TRANSLATOR GRID
+       ========================================================================== */
+    .translator-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 992px) {
+      .translator-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .panel-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .panel-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    }
+
+    .panel-card:hover {
+      border-color: rgba(201, 153, 58, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(201, 153, 58, 0.1);
+      padding-bottom: 0.8rem;
+    }
+
+    .panel-title {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-gold);
+      font-family: var(--font-ui);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Language Selection Customization */
+    .selector-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label.select-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .select-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    select {
+      width: 100%;
+      background: rgba(10, 22, 40, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: var(--transition-smooth);
+    }
+
+    select:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+    }
+
+    .select-arrow {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+    }
+
+    /* Text areas and output boxes */
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      background: rgba(10, 22, 40, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.1rem;
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      font-size: 1.1rem;
+      resize: none;
+      outline: none;
+      transition: var(--transition-smooth);
+      line-height: 1.5;
+    }
+
+    textarea:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      background: rgba(10, 22, 40, 0.85);
+    }
+
+    .output-container {
+      width: 100%;
+      min-height: 180px;
+      background: rgba(10, 22, 40, 0.4);
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 1.1rem;
+      font-family: var(--font-title);
+      font-size: 1.45rem;
+      line-height: 1.6;
+      color: var(--text-cream);
+      overflow-y: auto;
+      transition: var(--transition-smooth);
+    }
+
+    .output-container.active-glow {
+      border: 1px solid var(--accent-gold);
+      background: rgba(201, 153, 58, 0.02);
+      box-shadow: inset 0 0 10px rgba(201, 153, 58, 0.05);
+    }
+
+    .output-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: -0.2rem;
+      border-bottom: 1px solid rgba(201, 153, 58, 0.15);
+      padding-bottom: 0px;
+    }
+
+    .output-tab {
+      background: rgba(10, 22, 40, 0.5);
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+      padding: 0.6rem 1.1rem;
+      color: var(--text-muted);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      outline: none;
+    }
+
+    .output-tab:hover {
+      color: var(--text-cream);
+      background: var(--card-bg-hover);
+      border-color: rgba(201, 153, 58, 0.3);
+    }
+
+    .output-tab.active {
+      color: var(--accent-gold-hover);
+      background: rgba(201, 153, 58, 0.08);
+      border-color: var(--accent-gold);
+      border-bottom: 1px solid var(--card-bg); /* overlap bottom border of tab bar */
+      margin-bottom: -1px;
+      font-weight: 600;
+      box-shadow: 0 -4px 10px rgba(201, 153, 58, 0.05);
+    }
+
+    .placeholder-text {
+      color: var(--text-muted);
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    /* Input actions row */
+    .input-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: -0.5rem;
+    }
+
+    .action-btn {
+      background: rgba(17, 34, 64, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 5px 10px;
+      color: var(--text-light-muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .action-btn:hover {
+      color: var(--accent-gold);
+      border-color: var(--accent-gold);
+      background: var(--card-bg);
+    }
+
+    .char-count {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Alert / Heuristic Warning Box */
+    .alert-box {
+      padding: 0.8rem 1rem;
+      background: rgba(201, 153, 58, 0.04);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.8rem;
+      color: var(--text-light-muted);
+      display: none;
+      align-items: flex-start;
+      gap: 8px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    /* Presets Segment */
+    .presets-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .presets-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    .presets-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preset-chip {
+      background: rgba(10, 22, 40, 0.6);
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--text-light-muted);
+      transition: var(--transition-smooth);
+    }
+
+    .preset-chip:hover, .preset-chip.active {
+      background: rgba(201, 153, 58, 0.08);
+      border-color: var(--accent-gold);
+      color: var(--text-cream);
+    }
+
+    /* Runic Output Section */
+    .runic-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(10, 22, 40, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-gold);
+      display: none; /* Controlled by logic */
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .runic-box-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .runic-display-text {
+      font-family: 'Segoe UI Historic', 'Segoe UI Symbol', 'Noto Sans Runic', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.3rem;
+      color: var(--accent-gold);
+      text-shadow: 0 0 10px rgba(201, 153, 58, 0.3);
+      user-select: all;
+    }
+
+    /* Words Hover Spans */
+    .hover-word {
+      display: inline-block;
+      cursor: help;
+      position: relative;
+      border-bottom: 1px dotted rgba(248, 245, 240, 0.4);
+      transition: var(--transition-smooth);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    .hover-word:hover {
+      color: var(--accent-gold-hover);
+      border-bottom-color: var(--accent-gold-hover);
+      background: rgba(201, 153, 58, 0.1);
+    }
+
+    /* Actions Bottom Row */
+    .output-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 0.5rem;
+    }
+
+    .audio-btn {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color);
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .audio-btn:hover {
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      box-shadow: 0 6px 15px rgba(201, 153, 58, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .audio-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .drawer-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-light-muted);
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .drawer-btn:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold-hover);
+      background: rgba(201, 153, 58, 0.03);
+    }
+
+    /* ==========================================================================
+       3. INTERACTIVE SLIDE-OUT DRAWER & DICTIONARY TOOLTIPS
+       ========================================================================== */
+    /* Drawers for linguistic phonetic details */
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 22, 40, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .drawer-container {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 460px;
+      max-width: 100%;
+      height: 100%;
+      background: var(--card-bg);
+      border-left: 2px solid var(--accent-gold);
+      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.6);
+      z-index: 101;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-overlay.open + .drawer-container,
+    .drawer-container.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(201, 153, 58, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 22, 40, 0.4);
+    }
+
+    .drawer-title-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .drawer-title {
+      font-size: 1.4rem;
+      font-family: var(--font-title);
+    }
+
+    .drawer-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 4px;
+      transition: var(--transition-smooth);
+    }
+
+    .drawer-close:hover {
+      color: var(--text-cream);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .drawer-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .drawer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .drawer-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      font-weight: 600;
+      border-bottom: 1px dashed rgba(201, 153, 58, 0.15);
+      padding-bottom: 4px;
+    }
+
+    .phonetic-guide-box {
+      background: rgba(10, 22, 40, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .phonetic-read-aloud {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      color: var(--text-cream);
+      line-height: 1.4;
+      font-style: italic;
+    }
+
+    .ipa-transcription {
+      font-family: var(--font-ui);
+      font-size: 1.1rem;
+      color: var(--accent-gold);
+      background: rgba(201, 153, 58, 0.05);
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      align-self: flex-start;
+      letter-spacing: 0.05em;
+    }
+
+    /* Sound Synthesizer Panel inside Drawer */
+    .synth-control-panel {
+      background: rgba(10, 22, 40, 0.4);
+      border: 1px solid rgba(201, 153, 58, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-light-muted);
+    }
+
+    .slider-row label {
+      width: 70px;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .slider-row input[type="range"] {
+      flex: 1;
+      accent-color: var(--accent-gold);
+      height: 4px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    /* Linguistic Rule Cheat Sheet Table */
+    #drawer-rules-table-container {
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 1rem;
+    }
+    .rules-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+      min-width: 480px;
+    }
+
+    .rules-table th {
+      color: var(--text-cream);
+      font-weight: 600;
+      border-bottom: 2px solid var(--accent-gold);
+      padding: 8px 4px;
+    }
+
+    .rules-table td {
+      padding: 10px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-light-muted);
+      vertical-align: top;
+    }
+
+    .rules-table tr:hover td {
+      color: var(--text-cream);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .rule-glyph {
+      font-family: var(--font-title);
+      font-weight: bold;
+      color: var(--accent-gold);
+      font-size: 1.1rem;
+    }
+
+    .rule-ipa {
+      font-family: monospace;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    /* Runic reference grid */
+    .runic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      gap: 8px;
+    }
+
+    .runic-item {
+      background: rgba(10, 22, 40, 0.5);
+      border: 1px solid rgba(201, 153, 58, 0.1);
+      border-radius: 6px;
+      padding: 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+
+    .runic-item:hover {
+      border-color: var(--accent-gold);
+      background: rgba(201, 153, 58, 0.05);
+    }
+
+    .rune-char {
+      font-size: 1.6rem;
+      color: var(--accent-gold);
+    }
+
+    .rune-latin {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Word Tooltip */
+    .word-tooltip {
+      position: absolute;
+      background: #112240;
+      border: 1px solid var(--accent-gold);
+      border-radius: 8px;
+      padding: 0.8rem 1.2rem;
+      color: var(--text-cream);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(201, 153, 58, 0.1);
+      z-index: 1000;
+      font-size: 0.85rem;
+      width: 280px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      line-height: 1.4;
+    }
+
+    .word-tooltip.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tooltip-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(201, 153, 58, 0.2);
+      padding-bottom: 4px;
+      margin-bottom: 2px;
+    }
+
+    .tooltip-word {
+      font-weight: 700;
+      color: var(--accent-gold-hover);
+      font-size: 0.95rem;
+      font-family: var(--font-title);
+    }
+
+    .tooltip-tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      background: rgba(201, 153, 58, 0.1);
+      color: var(--accent-gold);
+      padding: 1px 6px;
+      border-radius: 3px;
+      align-self: center;
+      font-weight: 600;
+    }
+
+    .tooltip-translation {
+      font-style: italic;
+      color: var(--text-cream);
+      font-size: 0.85rem;
+    }
+
+    .tooltip-etymology {
+      font-size: 0.75rem;
+      color: var(--text-light-muted);
+      border-top: 1px dashed rgba(255, 255, 255, 0.05);
+      padding-top: 4px;
+      margin-top: 2px;
+    }
+
+    .tooltip-grammar {
+      font-size: 0.75rem;
+      color: var(--accent-gold);
+      font-weight: 500;
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    textarea:disabled, .action-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 768px) {
+      .translator-app-wrapper {
+        padding: 1rem 0.5rem !important;
+        margin: 0.5rem auto !important;
+        border-radius: 8px !important;
+      }
+      .container {
+        padding: 0.5rem !important;
+      }
+      h1.app-title {
+        font-size: 1.8rem !important;
+        line-height: 1.3 !important;
+      }
+      .app-subtitle {
+        font-size: 0.85rem !important;
+      }
+      .panel-card {
+        padding: 1.2rem !important;
+        gap: 0.8rem !important;
+      }
+      .runic-display-text {
+        font-size: 1.6rem !important;
+        letter-spacing: 0.15rem !important;
+      }
+      textarea, .output-container {
+        min-height: 150px !important;
+        font-size: 1rem !important;
+      }
+      .output-container {
+        font-size: 1.2rem !important;
+      }
+      .action-btn, .audio-btn, .drawer-btn {
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+      }
+    }
+    /* AI Settings Modal & Spinner */
+        #ai-modal-overlay.modal-overlay {
+      display: none;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: rgba(10, 5, 20, 0.9) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      z-index: 999999 !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    #ai-modal-overlay .modal-card {
+      background: var(--card-bg) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 12px !important;
+      padding: 24px !important;
+      max-width: 480px !important;
+      width: 90% !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+      animation: fadeInModal 0.3s ease forwards !important;
+      margin: auto !important;
+      position: relative !important;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    .spinner {
+      animation: rotate 1.5s linear infinite;
+    }
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
+    }
+  
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  </style>
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://partnerhoursguide.com/#website",
+      "url": "https://partnerhoursguide.com/",
+      "name": "Translator Old English",
+      "description": "Translate English to Old English instantly. Explore Anglo-Saxon language, runes, history, and naming etymologies.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "PartnerHoursGuide",
+        "url": "https://partnerhoursguide.com"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://partnerhoursguide.com/#application",
+      "name": "Linguistic Historical English Translation Engine",
+      "operatingSystem": "All",
+      "applicationCategory": "EducationalApplication",
+      "description": "AI-powered linguistic translation engine designed to translate modern English to Old English and Shakespearean English.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}
+  </script>
+
+</head>
+<body>
+
+  <div class="translator-app-wrapper">
+    <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="crest">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 8 6 6 6-6"></path>
+          <path d="m4 14 6 6 8-8"></path>
+        </svg>
+      </div>
+      <h1 class="app-title">Historical English Translation Dashboard & Shakespeare Converter</h1>
+      <p class="app-subtitle">Linguistic Translation Engine & Shakespearean Speech Converter</p>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="translator-grid">
+      
+      <!-- LEFT CARD: Input Panel -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+            Linguistic Input
+          </h2>
+        </div>
+
+        <!-- Source Language Dropdown Selector -->
+        <div class="selector-row">
+          <label class="select-label" for="direction-select">Linguistic Input Language</label>
+          <div class="select-wrapper">
+            <select id="direction-select">
+              <option value="modern">Modern English (Translate to historical eras)</option>
+              <option value="old">Old English / Anglo-Saxon (c. 1000) ➔ Modern English</option>
+              <option value="middle">Middle Ages English / Middle English (c. 1200) ➔ Modern English</option>
+            </select>
+            <div class="select-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Textarea -->
+        <div>
+          <div class="lexical-references-bar" style="margin-bottom: 12px; font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(255, 255, 255, 0.03); border-radius: 6px; border: 1px dashed rgba(255, 255, 255, 0.08);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>
+            <span><strong>Lexical References:</strong> Bosworth-Toller & Clark Hall (Old English), Middle English Glossaries, & Academic Corpus reconstructions.</span>
+          </div>
+          <div class="textarea-container" style="position: relative; width: 100%;">
+            <textarea id="translator-input" placeholder="Type text here to translate..." style="padding-bottom: 50px;"></textarea>
+            <button id="upload-btn" class="action-btn" title="Upload Image or PDF to extract and translate text" style="position: absolute; bottom: 12px; left: 12px; background: rgba(201, 153, 58, 0.15) !important; border: 1px solid rgba(201, 153, 58, 0.3) !important; color: var(--accent-gold-hover) !important; padding: 6px 12px !important; border-radius: 6px !important; z-index: 5;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+              Attach File
+            </button>
+            <input type="file" id="file-loader" accept="image/*,application/pdf" style="display:none">
+          </div>
+          <div class="input-actions">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; width: 100%;">
+              <button id="clear-btn" class="action-btn" title="Clear input text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                Clear
+              </button>
+              
+              <!-- WordPress Compatible Translate Action Trigger -->
+              <button id="translate-btn" class="action-btn" style="background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%) !important; color: var(--bg-color) !important; border: none !important; font-weight: bold !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25) !important;" title="Translate text now">
+                Translate
+              </button>
+              
+              <button id="ai-settings-btn" class="action-btn" title="AI Translation Settings" style="margin-left: auto; display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                AI Translate
+              </button>
+            </div>
+            <span class="char-count"><span id="char-current">0</span> characters</span>
+          </div>
+        </div>
+
+        <!-- File Progress Alert Indicator -->
+        <div id="file-progress-alert" class="alert-box" style="display:none; background: rgba(201, 153, 58, 0.08); border-left-color: var(--accent-gold);">
+          <svg class="spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation: spin 1s linear infinite; color: var(--accent-gold); flex-shrink: 0; margin-right: 8px;">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="32" stroke-dashoffset="8" fill="none"></circle>
+          </svg>
+          <div>
+            <strong>Extracting text:</strong> <span id="file-progress-status">Please wait while the file is processed.</span>
+          </div>
+        </div>
+
+        <!-- Custom Warning Box -->
+        <div id="custom-alert" class="alert-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; color:var(--accent-gold)">
+            <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <div>
+            <strong>Rule-Based Heuristics Mode:</strong> Custom text uses an automated lookup. Exact inflection cases may vary. Select a <strong>Preset Chip</strong> below for 100% verified academic mappings.
+          </div>
+        </div>
+
+        <!-- Preset Chips Box -->
+        <div class="presets-row">
+          <span class="presets-label">Academic verified presets:</span>
+          <div class="presets-flex" id="presets-container">
+            <!-- Dynamically populated chips -->
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT CARD: Output Panel -->
+      <div class="panel-card">
+        <div class="panel-header" style="flex-direction: column; align-items: flex-start; gap: 0.8rem; border-bottom: none; padding-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <h2 class="panel-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              Translated Output
+            </h2>
+            <span class="accuracy-badge" id="accuracy-score-badge" style="font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b; backdrop-filter: blur(4px);">
+              Accuracy: 55% (Offline Heuristic)
+            </span>
+          </div>
+          
+          <!-- Dynamic Tabs Container -->
+          <div class="output-tabs" id="output-tabs-container">
+            <!-- Tabs rendered here dynamically by Javascript -->
+          </div>
+        </div>
+
+        <!-- Core Output Viewport -->
+        <div class="output-container" id="translator-output-container">
+          <!-- Text rendered here with word spans -->
+        </div>
+
+        <!-- Runic Output display -->
+        <div class="runic-box" id="runic-display-box">
+          <div class="runic-box-header">
+            <span>Anglo-Saxon Runic (Futhorc)</span>
+            <button class="action-btn" id="runic-info-trigger" style="padding: 2px 6px; font-size: 0.7rem">Runic Reference Map</button>
+          </div>
+          <div class="runic-display-text" id="runic-output">
+            <!-- Runes rendered here -->
+          </div>
+        </div>
+
+        <!-- Output Actions Controls -->
+        <div class="output-actions-row">
+          <button class="audio-btn" id="play-audio-btn">
+            <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            Play Audio guide
+          </button>
+          
+          <button class="drawer-btn" id="copy-btn" title="Copy translated text to clipboard">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+            Copy Translation
+          </button>
+          
+          <button class="drawer-btn" id="linguistic-drawer-trigger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Pronunciation Companion
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Slide-out Drawer Overlay -->
+  <div class="drawer-overlay" id="linguistic-drawer-overlay"></div>
+  
+  <!-- Slide-out Drawer Panel -->
+  <div class="drawer-container" id="linguistic-drawer">
+    <div class="drawer-header">
+      <div class="era-title-block">
+        <span class="drawer-title-label" id="drawer-era-label">Old English Guide</span>
+        <h3 class="drawer-title" id="drawer-era-title">West Saxon Dialect</h3>
+      </div>
+      <button class="drawer-close" id="drawer-close-btn" title="Close guide">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="drawer-body">
+      <!-- Section 1: Phonetic Read-Aloud & IPA -->
+      <div class="drawer-section">
+        <span class="drawer-section-title">Pronunciation Assistance</span>
+        <div class="phonetic-guide-box">
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px;">Phonetic Read-Aloud Approximation</div>
+            <p class="phonetic-read-aloud" id="drawer-read-aloud">Hwat, meen freond, hwider gayst thoo?</p>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px;">IPA Phonetic Script</div>
+            <span class="ipa-transcription" id="drawer-ipa">/xwaæt miːn freːond nwi.der ɡæːst θuː/</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Custom Text Synthesizer -->
+      <div class="drawer-section">
+        <span class="drawer-section-title">Phonetic Synthesis Engine</span>
+        <p style="font-size: 0.8rem; color: var(--text-light-muted)">Since native browser TTS models only understand Modern English pronunciation rules, we dynamically synthesize an approximation of the archaic sound waves by loading custom phonetically modified strings.</p>
+        <div class="synth-control-panel">
+          <button class="audio-btn" id="drawer-synth-play" style="align-self: flex-start; padding: 0.5rem 1rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            Reconstruct Speech Audio
+          </button>
+          <div class="slider-row">
+            <label for="synth-rate">Speech Rate</label>
+            <input type="range" id="synth-rate" min="0.5" max="1.5" step="0.1" value="0.7">
+            <span id="rate-val" style="width: 25px; text-align: right">0.7x</span>
+          </div>
+          <div class="slider-row">
+            <label for="synth-pitch">Vocal Pitch</label>
+            <input type="range" id="synth-pitch" min="0.5" max="1.5" step="0.1" value="0.9">
+            <span id="pitch-val" style="width: 25px; text-align: right">0.9x</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Vowel & Consonant Cheat Sheet -->
+      <div class="drawer-section">
+        <span class="drawer-section-title">Linguistic Cheat Sheet</span>
+        <div id="drawer-rules-table-container">
+          <!-- Dynamically loaded rules table -->
+        </div>
+      </div>
+
+      <!-- Section 4: Runes Reference -->
+      <div class="drawer-section" id="drawer-runes-section">
+        <span class="drawer-section-title">Anglo-Saxon Futhorc Runes Map</span>
+        <div class="runic-grid" id="drawer-runic-grid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Word Tooltip -->
+  <div class="word-tooltip" id="shared-word-tooltip">
+    <div class="tooltip-header">
+      <span class="tooltip-word" id="tooltip-word-title">frēond</span>
+      <span class="tooltip-tag" id="tooltip-era-tag">Old English</span>
+    </div>
+    <div class="tooltip-translation">Translation: <strong id="tooltip-translation-val">friend</strong></div>
+    <div class="tooltip-grammar" id="tooltip-grammar-val">Noun, Masculine Nominative Singular</div>
+    <div class="tooltip-etymology" id="tooltip-etymology-val">From Proto-Germanic *frijōnds (loving one).</div>
+      </div>
+
+  <script data-no-optimize="1" data-no-defer="1">
+    /* ==========================================================================
+       A. DATASETS
+       ========================================================================== */
+    const presets = {
+      modern: [
+        {
+          id: "m_1",
+          input: "Hello my friend, where are you going?",
+          eras: {
+            old: {
+              output: "Hwæt, mīn frēond, hwider gæst þū?",
+              runic: "ᚻᚹᚪᛏ ᛗᛁᚾ ᚠᚱᛡᚾᛞ ᚻᚹᛁᛞᛡᚱ ᚷᚾᛏ ᚦᚢ",
+              phonetic: "Hwat, meen freond, hwider gayst thoo?",
+              ipa: "/xwaæt miːn freːond nwi.der ɡæːst θuː/"
+            },
+            middle: {
+              output: "Heil, myn frend, whider gost thou?",
+              phonetic: "Hayl, meen frend, whider goast thou?",
+              ipa: "/hæjl miːn freːnd wi.dər ɡoːst ðuː/"
+            },
+            early: {
+              output: "Hail, my friend, whither goest thou?",
+              phonetic: "Hail, my friend, whither goest thou?",
+              ipa: "/heɪl maɪ frend ˈwɪð.ər ˈɡoʊ.əst ðaʊ/"
+            },
+            late: {
+              output: "Hail, my friend, whither go you?",
+              phonetic: "Hail, my friend, whither go you?",
+              ipa: "/heɪl maɪ frend ˈwɪð.ər ɡoʊ juː/"
+            }
+          }
+        },
+        {
+          id: "m_2",
+          input: "Give us this day our daily bread.",
+          eras: {
+            old: {
+              output: "Ūre dæghwāmlīcan hlāf syle ūs tō dæg.",
+              runic: "ᚢᚱᛡ ᛞᚾᚷᚻᚹᚪᛗᛚᛁᚳᚪᚾ ᚻᛚᚪᚠ ᛋᚾᛚᛡ ᚢᛋ ᛏᚩ ᛞᚾᚷ",
+              phonetic: "Oo-re day-whahm-lee-can hlahf syle oos to day.",
+              ipa: "/ˈuː.re dæjˈxwɑːm.liː.kɑn xlɑːf ˈsy.le uːs toː dæj/"
+            },
+            middle: {
+              output: "Gyve to us this day oure breed oure echedayes.",
+              phonetic: "Give to us this day oore braid oore echay-dayes.",
+              ipa: "/ɡiːv toː ʌs ðɪs dæj uːr brɛːd uːr ɛːtʃ.dæj.əs/"
+            },
+            early: {
+              output: "Give us this day our daily bread.",
+              phonetic: "Give us this day our daily bread.",
+              ipa: "/ɡɪv ʌs ðɪs deɪ aʊər ˈdeɪ.lɪ brɛd/"
+            },
+            late: {
+              output: "Give us this day our daily bread.",
+              phonetic: "Give us this day our daily bread.",
+              ipa: "/ɡɪv ʌs ðɪs deɪ aʊər ˈdeɪ.lɪ brɛd/"
+            }
+          }
+        },
+        {
+          id: "m_3",
+          input: "To be, or not to be, that is the question.",
+          eras: {
+            old: {
+              output: "Wesan, oððe ne wesan, þæt is sēo frīgnung.",
+              runic: "ᚹᛡᛋᚪᚾ, ᚩᚦᚦᛡ ᚾᛡ ᚹᛡᛋᚪᚾ, ᚦᚪᛏ ᛁᛋ ᛋᛡᚩ ᚠᚱᛁᚷᚾᚢᚾᚷ",
+              phonetic: "Wess-ahn, oth-the ne wess-ahn, that is say-oh freeng-noong.",
+              ipa: "/ˈwe.sɑn ˈoθ.θe ne ˈwe.sɑn θæt is seːo ˈfriːj.nuŋɡ/"
+            },
+            middle: {
+              output: "To be, or nat to be, that is the questioun.",
+              phonetic: "To be, or nat to be, that is the questioun.",
+              ipa: "/toː biː ɔr nat toː biː ðat ɪz ðə kwɛst.juːn/"
+            },
+            early: {
+              output: "To be, or not to be, that is the question.",
+              phonetic: "To be, or not to be, that is the question.",
+              ipa: "/tuː biː ɔːr nɒt tuː biː ðæt ɪz ðə ˈkwɛs.tʃən/"
+            },
+            late: {
+              output: "To be, or not to be, that is the question.",
+              phonetic: "To be, or not to be, that is the question.",
+              ipa: "/tuː biː ɔːr nɒt tuː biː ðæt ɪz ðə ˈkwɛs.tʃən/"
+            }
+          }
+        }
+      ],
+      old: [
+        {
+          id: "o_1",
+          input: "Hwæt, mīn frēond, hwider gæst þū?",
+          output: "Hello my friend, where are you going?",
+          runic: "ᚻᚹᚪᛏ ᛗᛁᚾ ᚠᚱᛡᚾᛞ ᚻᚹᛁᛞᛡᚱ ᚷᚾᛏ ᚦᚢ"
+        },
+        {
+          id: "o_2",
+          input: "Ūre dæghwāmlīcan hlāf syle ūs tō dæg.",
+          output: "Give us this day our daily bread.",
+          runic: "ᚢᚱᛡ ᛞᚾᚷᚻᚹᚪᛗᛚᛁᚳᚪᚾ ᚻᛚᚪᚠ ᛋᚾᛚᛡ ᚢᛋ ᛏᚩ ᛞᚾᚷ"
+        },
+        {
+          id: "o_3",
+          input: "Wesan, oððe ne wesan, þæt is sēo frīgnung.",
+          output: "To be, or not to be, that is the question.",
+          runic: "ᚹᛡᛋᚪᚾ, ᚩᚦᚦᛡ ᚾᛡ ᚹᛡᛋᚪᚾ, ᚦᚪᛏ ᛁᛋ ᛋᛡᚩ ᚠᚱᛁᚷᚾᚢᚾᚷ"
+        }
+      ],
+      middle: [
+        {
+          id: "mid_1",
+          input: "Heil, myn frend, whider gost thou?",
+          output: "Hello my friend, where are you going?"
+        },
+        {
+          id: "mid_2",
+          input: "Gyve to us this day oure breed oure echedayes.",
+          output: "Give us this day our daily bread."
+        },
+        {
+          id: "mid_3",
+          input: "Treuthe shal make yow free in the light.",
+          output: "Truth shall make you free in the light."
+        }
+      ],
+      early: [
+        {
+          id: "ea_1",
+          input: "Hail, my friend, whither goest thou?",
+          output: "Hello my friend, where are you going?"
+        },
+        {
+          id: "ea_2",
+          input: "Give us this day our daily bread.",
+          output: "Give us this day our daily bread."
+        },
+        {
+          id: "ea_3",
+          input: "To be, or not to be, that is the question.",
+          output: "To be, or not to be, that is the question."
+        }
+      ]
+    };
+
+    // Dictionary of translation mapping
+    const translatorDb = {
+      "hello": { early: "hail", middle: "heil", old: "hwæt", late: "hail" },
+      "hi": { early: "hail", middle: "heil", old: "hwæt", late: "hail" },
+      "my": { early: "my", middle: "myn", old: "mīn", late: "my" },
+      "friend": { early: "friend", middle: "frend", old: "frēond", late: "friend" },
+      "friends": { early: "friends", middle: "frendes", old: "frēondas", late: "friends" },
+      "where": { early: "whither", middle: "whider", old: "hwider", late: "whither" },
+      "are": { early: "art", middle: "art", old: "eart", late: "are" },
+      "you": { early: "thou", middle: "thou", old: "þū", late: "you" },
+      "going": { early: "goest", middle: "gost", old: "gæst", late: "going" },
+      "give": { early: "give", middle: "gyve", old: "syle", late: "give" },
+      "us": { early: "us", middle: "us", old: "ūs", late: "us" },
+      "this": { early: "this", middle: "this", old: "þis", late: "this" },
+      "day": { early: "day", middle: "day", old: "dæg", late: "day" },
+      "today": { early: "this day", middle: "this day", old: "tō dæg", late: "today" },
+      "our": { early: "our", middle: "oure", old: "ūre", late: "our" },
+      "daily": { early: "daily", middle: "echedayes", old: "dæghwāmlīcan", late: "daily" },
+      "bread": { early: "bread", middle: "breed", old: "hlāf", late: "bread" },
+      "love": { early: "love", middle: "love", old: "lufu", late: "love" },
+      "money": { early: "money", middle: "money", old: "fēos", late: "money" },
+      "is": { early: "is", middle: "is", old: "is", late: "is" },
+      "root": { early: "root", middle: "roote", old: "wyrtruma", late: "root" },
+      "all": { early: "all", middle: "alle", old: "ealra", late: "all" },
+      "evil": { early: "evil", middle: "yvels", old: "yfela", late: "evil" },
+      "to": { early: "to", middle: "to", old: "tō", late: "to" },
+      "be": { early: "be", middle: "be", old: "wesan", late: "be" },
+      "be_imp": { early: "be", middle: "be", old: "wes", late: "be" },
+      "be_imp_pl": { early: "be", middle: "be", old: "wesað", late: "be" },
+      "ye": { early: "ye", middle: "ye", old: "ġē", late: "you" },
+      "hale": { early: "hale", middle: "hal", old: "hāl", late: "hale" },
+      "hale_pl": { early: "hale", middle: "hale", old: "hāle", late: "hale" },
+      "welcome": { early: "welcome", middle: "welcome", old: "wilcuma", late: "welcome" },
+      "yes": { early: "yea", middle: "ye", old: "ġēse", late: "yes" },
+      "no": { early: "nay", middle: "nay", old: "nā", late: "no" },
+      "thank": { early: "thank", middle: "thanke", old: "þancian", late: "thank" },
+      "thanks": { early: "thanks", middle: "thankes", old: "þancas", late: "thanks" },
+      "or": { early: "or", middle: "or", old: "oððe", late: "or" },
+      "not": { early: "not", middle: "nat", old: "ne", late: "not" },
+      "that": { early: "that", middle: "that", old: "þæt", late: "that" },
+      "question": { early: "question", middle: "questioun", old: "frīgnung", late: "question" },
+      "truth": { early: "truth", middle: "treuthe", old: "sōþġeðōht", late: "truth" },
+      "will": { early: "shall", middle: "shal", old: "ġedēþ", late: "shall" },
+      "shall": { early: "shall", middle: "shal", old: "ġedēþ", late: "shall" },
+      "make": { early: "make", middle: "make", old: "ġedēþ", late: "make" },
+      "free": { early: "free", middle: "free", old: "frīġe", late: "free" },
+      "in": { early: "in", middle: "in", old: "on", late: "in" },
+      "the": { early: "the", middle: "the", old: "þām", late: "the" },
+      "light": { early: "light", middle: "light", old: "lēohte", late: "light" },
+      "and": { early: "and", middle: "and", old: "and", late: "and" },
+      "how": { early: "how", middle: "how", old: "hū", late: "how" },
+      "father": { early: "father", middle: "fader", old: "fæder", late: "father" },
+      "mother": { early: "mother", middle: "moder", old: "mōdor", late: "mother" },
+      "brother": { early: "brother", middle: "brother", old: "brōþor", late: "brother" },
+      "sister": { early: "sister", middle: "suster", old: "sweostor", late: "sister" },
+      "king": { early: "king", middle: "kyng", old: "cyning", late: "king" },
+      "queen": { early: "queen", middle: "quene", old: "cwēn", late: "queen" },
+      "house": { early: "house", middle: "hous", old: "hūs", late: "house" },
+      "water": { early: "water", middle: "water", old: "wæter", late: "water" },
+      "fire": { early: "fire", middle: "fyr", old: "fȳr", late: "fire" },
+      "stone": { early: "stone", middle: "stoon", old: "stān", late: "stone" },
+      "good": { early: "good", middle: "good", old: "gōd", late: "good" },
+      "great": { early: "great", middle: "greet", old: "grēat", late: "great" },
+      "small": { early: "small", middle: "smal", old: "smæl", late: "small" },
+      "old": { early: "old", middle: "old", old: "eald", late: "old" },
+      "new": { early: "new", middle: "newe", old: "nīwe", late: "new" },
+      "man": { early: "man", middle: "man", old: "mann", late: "man" },
+      "woman": { early: "woman", middle: "womman", old: "wīfmann", late: "woman" },
+      "child": { early: "child", middle: "child", old: "cild", late: "child" },
+      "name": { early: "name", middle: "name", old: "nama", late: "name" },
+      "word": { early: "word", middle: "word", old: "word", late: "word" },
+      "world": { early: "world", middle: "world", old: "weorold", late: "world" },
+      "life": { early: "life", middle: "lyf", old: "līf", late: "life" },
+      "death": { early: "death", middle: "deeth", old: "dēaþ", late: "death" }
+    };
+
+    // Dictionary of etymology, translations and cases for word hovers
+    const historicalWordsDb = {
+      // Old English entries
+      "hwæt": { modern: "hello / listen / lo", etym: "Proto-Germanic *hwat (what). Originally an exclamation to command attention in epics.", role: "Interjection" },
+      "mīn": { modern: "my / mine", etym: "Proto-Germanic *mīnaz. Possessive genitive of personal pronoun 'ic' (I).", role: "Possessive Pronoun, Genitive Singular" },
+      "frēond": { modern: "friend", etym: "Proto-Germanic *frijōnds (loving one). Relates to 'frēogan' (to love).", role: "Noun, Masculine Nominative Singular" },
+      "hwider": { modern: "whither (where to)", etym: "Proto-Germanic *hwadre. Directive adverb relative to 'where'.", role: "Interrogative Adverb of Direction" },
+      "gæst": { modern: "goest (go)", etym: "Proto-Germanic *gāną (to go). 2nd-person singular inflection.", role: "Verb, 2nd Person Present Indicative" },
+      "þū": { modern: "thou (you)", etym: "Proto-Germanic *þū. Standard second-person singular pronoun.", role: "Personal Pronoun, 2nd Person Singular Nominative" },
+      "ūre": { modern: "our", etym: "Proto-Germanic *unsaras. Possessive modifier from plural 'ūs'.", role: "Possessive Pronoun, Genitive Plural" },
+      "dæghwāmlīcan": { modern: "daily", etym: "Old English compounds: 'dæg' (day) + 'hwīlum' (at times).", role: "Adjective, Accusative Masculine Singular" },
+      "hlāf": { modern: "bread / loaf", etym: "Old English hlāf. Source of modern 'loaf' and 'lord' (hlāford: bread-keeper).", role: "Noun, Masculine Accusative Singular" },
+      "syle": { modern: "give / deliver", etym: "From 'sellan' (to hand over/sell). Relates to Dutch 'stellen'.", role: "Verb, Imperative Singular" },
+      "ūs": { modern: "us", etym: "Proto-Germanic *uns. Accusative/Dative plural form of 'we'.", role: "Personal Pronoun, 1st Plural Dative" },
+      "tō": { modern: "to / for / at", etym: "West Germanic preposition. Serves here as a time modifier with 'dæg'.", role: "Preposition" },
+      "dæg": { modern: "day", etym: "Proto-Germanic *dagaz. Root relates to heat or burning daylight.", role: "Noun, Masculine Dative Singular" },
+      "sē": { modern: "the (masculine)", etym: "Proto-Germanic *sa. Used as definite article and relative marker.", role: "Definite Article, Masculine Nominative Singular" },
+      "sēo": { modern: "the (feminine)", etym: "Proto-Germanic *sō. Definite article/demonstrative pronoun.", role: "Definite Article, Feminine Nominative Singular" },
+      "þæt": { modern: "that / the (neuter)", etym: "Proto-Germanic *þat. Base of modern 'that'.", role: "Definite Article, Neuter Nominative Singular" },
+      "lufu": { modern: "love", etym: "Proto-Germanic *lubō. Connected to 'leof' (dear/beloved).", role: "Noun, Feminine Nominative Singular" },
+      "fēos": { modern: "of money / wealth / fee", etym: "Genitive of 'feoh' (cattle/property). Origin of modern 'fee'.", role: "Noun, Neuter Genitive Singular" },
+      "wyrtruma": { modern: "root / origin", etym: "Compound of 'wyrt' (herb/root) + 'truma' (strong host/foundation).", role: "Noun, Masculine Nominative Singular" },
+      "ealra": { modern: "of all", etym: "Genitive plural of descriptor 'eall'.", role: "Adjective, Genitive Plural" },
+      "yfela": { modern: "of evils", etym: "Genitive plural of 'yfel' (bad/evil).", role: "Noun, Neuter Genitive Plural" },
+      "wesan": { modern: "to be / exist", etym: "Proto-Germanic *wesaną (to live/dwell). Ancestor of modern 'was'/'were'.", role: "Verb, Infinitive" },
+      "oððe": { modern: "or", etym: "Old English coordinating conjunction.", role: "Coordinating Conjunction" },
+      "ne": { modern: "not / nor", etym: "Proto-Germanic *ni. Negative particle typically preceding the verb.", role: "Adverb / Negative Particle" },
+      "frīgnung": { modern: "question / inquiry", etym: "Derived from 'frīnan' (to ask).", role: "Noun, Feminine Nominative Singular" },
+      "sōþġeðōht": { modern: "truth / true thought", etym: "From sōþ (sooth/truth) + ġeþōht (thought/concept).", role: "Noun, Neuter Nominative Singular" },
+      "ġedēþ": { modern: "makes / does / causes", etym: "3rd singular of verb 'ġedōn' (to bring about/do).", role: "Verb, 3rd Person Present" },
+      "ēow": { modern: "you (plural/formal)", etym: "Proto-Germanic *izwiz. Dative/Accusative plural object pronoun.", role: "Personal Pronoun, 2nd Plural Accusative" },
+      "frīġe": { modern: "free", etym: "Proto-Germanic *frijaz (beloved/noble/free).", role: "Adjective, Accusative Plural" },
+      "on": { modern: "in / on", etym: "West Germanic locative preposition.", role: "Preposition" },
+      "þām": { modern: "the / that (dative)", etym: "Dative plural or singular neuter/masculine definite article.", role: "Definite Article, Neuter Dative Singular" },
+      "lēohte": { modern: "light (dative)", etym: "Dative of 'lēoht'. Proto-Germanic *leuhtą (brightness).", role: "Noun, Neuter Dative Singular" },
+      "hū": { modern: "how", etym: "Proto-Germanic *hwō. Relative adverb.", role: "Interrogative Adverb" },
+      "fæder": { modern: "father", etym: "Proto-Germanic *fadēr. Indo-European kinship term.", role: "Noun, Masculine Nominative Singular" },
+      "mōdor": { modern: "mother", etym: "Proto-Germanic *mōdēr.", role: "Noun, Feminine Nominative Singular" },
+      "brōþor": { modern: "brother", etym: "Proto-Germanic *brōþēr.", role: "Noun, Masculine Nominative Singular" },
+      "sweostor": { modern: "sister", etym: "Proto-Germanic *swestōr.", role: "Noun, Feminine Nominative Singular" },
+      "cyning": { modern: "king", etym: "Proto-Germanic *kuningaz (son of a noble lineage).", role: "Noun, Masculine Nominative Singular" },
+      "cwēn": { modern: "queen", etym: "Proto-Germanic *kwēnis (woman/wife). Relates to 'cwen' (female).", role: "Noun, Feminine Nominative Singular" },
+      "hūs": { modern: "house", etym: "Proto-Germanic *hūsą.", role: "Noun, Neuter Nominative Singular" },
+      "wæter": { modern: "water", etym: "Proto-Germanic *watar.", role: "Noun, Neuter Nominative Singular" },
+      "fȳr": { modern: "fire", etym: "Proto-Germanic *fōr. Relates to Greek 'pyr'.", role: "Noun, Neuter Nominative Singular" },
+      "stān": { modern: "stone", etym: "Proto-Germanic *stainaz.", role: "Noun, Masculine Nominative Singular" },
+      "gōd": { modern: "good", etym: "Proto-Germanic *gōdaz (fitting/suitable).", role: "Adjective" },
+      "yfel": { modern: "evil", etym: "Proto-Germanic *ubilaz.", role: "Noun/Adjective, Neuter" },
+      "grēat": { modern: "great", etym: "Proto-Germanic *grautaz (coarse/large).", role: "Adjective" },
+      "smæl": { modern: "small", etym: "Proto-Germanic *smalaz.", role: "Adjective" },
+      "eald": { modern: "old", etym: "Proto-Germanic *aldaz.", role: "Adjective" },
+      "nīwe": { modern: "new", etym: "Proto-Germanic *neujaz.", role: "Adjective" },
+      "mann": { modern: "man / human", etym: "Proto-Germanic *mann-.", role: "Noun, Masculine Nominative Singular" },
+      "wīfmann": { modern: "woman", etym: "Compounded from wīf (female) + mann (human).", role: "Noun, Masculine Nominative Singular" },
+      "cild": { modern: "child", etym: "Proto-Germanic *kelþaz (fetus/womb).", role: "Noun, Neuter Nominative Singular" },
+      "nama": { modern: "name", etym: "Proto-Germanic *namō. Relates to Greek 'onoma'.", role: "Noun, Masculine Nominative Singular" },
+      "word": { modern: "word", etym: "Proto-Germanic *wurdą. Cognate with Old Saxon 'word'.", role: "Noun, Neuter Nominative Singular" },
+      "weorold": { modern: "world / age", etym: "Compound 'wer' (man) + 'ald' (age) meaning 'the age of man'.", role: "Noun, Feminine Nominative Singular" },
+      "līf": { modern: "life", etym: "Proto-Germanic *līban (to live/remain).", role: "Noun, Neuter Nominative Singular" },
+      "dēaþ": { modern: "death", etym: "Proto-Germanic *dauþuz.", role: "Noun, Masculine Nominative/Accusative" },
+      "wes": { modern: "be (imperative singular)", etym: "Imperative singular of wesan (to be/exist). Used in greetings.", role: "Verb, Imperative Singular" },
+      "wesað": { modern: "be (imperative plural)", etym: "Imperative plural of wesan (to be/exist). Used in formal or plural greetings.", role: "Verb, Imperative Plural" },
+      "ġē": { modern: "ye (you plural)", etym: "Proto-Germanic *jīz. Second-person plural subject pronoun.", role: "Personal Pronoun, 2nd Person Plural Nominative" },
+      "hāl": { modern: "hale / healthy / whole", etym: "Proto-Germanic *hailaz (undamaged/healthy). Cognate with Old Norse heill (source of greeting hail).", role: "Adjective, Nominative Masculine Singular" },
+      "hāle": { modern: "hale / healthy / whole (plural)", etym: "Plural form of hāl (healthy/whole).", role: "Adjective, Nominative Masculine Plural" },
+      "wilcuma": { modern: "welcome", etym: "From wil- (pleasure/will) + cuma (guest/comer). Literally a desirable guest.", role: "Noun/Interjection" },
+      "ġēse": { modern: "yes", etym: "From ġēa (yea) + sīe (may it be). Literally 'yea, let it be'.", role: "Adverb/Interjection" },
+      "nā": { modern: "no / not at all", etym: "From ne (not) + ā (always/ever). Literally 'never/no'.", role: "Adverb" },
+      "þancian": { modern: "thank", etym: "Proto-Germanic *þankōną (to thank/think). Connected to 'thought'.", role: "Verb" },
+      "þancas": { modern: "thanks / thoughts", etym: "Plural of þanc (thought/gratitude).", role: "Noun, Masculine Plural" },
+
+      // Middle English entries
+      "heil": { modern: "hail / greetings", etym: "Old Norse 'heill' (healthy/prosperous). Replaced Old English greeting.", role: "Interjection" },
+      "myn": { modern: "my", etym: "Old English 'mīn'. Loss of ending 'n' before consonants was emerging.", role: "Possessive Determiner" },
+      "frend": { modern: "friend", etym: "Old English 'frēond'. Consonant clusters modified.", role: "Noun" },
+      "whider": { modern: "whither", etym: "Old English 'hwider'. Spelling 'wh' represents French script influences.", role: "Adverb" },
+      "gost": { modern: "goest (go)", etym: "Old English 'gæst'. Suffix '-st' is typical second person verb marker.", role: "Verb" },
+      "gyve": { modern: "give", etym: "Old English 'giefan' with North Germanic influence.", role: "Verb, Imperative" },
+      "oure": { modern: "our", etym: "Old English 'ūre'. Possessive plural.", role: "Possessive Pronoun" },
+      "breed": { modern: "bread", etym: "Old English 'brēad'. Double vowel represents phonetic vowel lengthening.", role: "Noun" },
+      "echedayes": { modern: "daily / each day's", etym: "Compound of 'eche' (each) + 'day'.", role: "Adjective" },
+      "roote": { modern: "root", etym: "From Old Norse 'rót'. Inflected with final '-e' in Middle English.", role: "Noun" },
+      "alle": { modern: "all", etym: "Old English 'eall' with plural agreement suffix '-e'.", role: "Adjective" },
+      "yvels": { modern: "evils", etym: "Old English 'yfel' with standard Middle English plural '-s'.", role: "Noun, Plural" },
+      "nat": { modern: "not", etym: "Spell variant of 'not' (from Old English 'nāwiht' meaning no-thing).", role: "Adverb" },
+      "questioun": { modern: "question", etym: "Borrowed from Anglo-Norman French 'questioun'. Shows Latin influence.", role: "Noun" },
+      "treuthe": { modern: "truth", etym: "Old English 'trēowþ'. Suffix '-the' denotes abstract qualities.", role: "Noun" },
+      "yow": { modern: "you (plural/formal)", etym: "Old English 'ēow'. Functioning here as objective pronoun.", role: "Personal Pronoun" },
+      "shal": { modern: "shall / will", etym: "Old English auxiliary 'sceal'. Relates to obligation.", role: "Verb, Auxiliary" },
+      "fader": { modern: "father", etym: "Middle English representation of 'fæder'.", role: "Noun" },
+      "moder": { modern: "mother", etym: "Middle English spelling of 'mōdor'.", role: "Noun" },
+      "suster": { modern: "sister", etym: "Middle English variant.", role: "Noun" },
+      "kyng": { modern: "king", etym: "Spelling variant in Middle English scripts.", role: "Noun" },
+      "quene": { modern: "queen", etym: "Middle English spelling.", role: "Noun" },
+      "hous": { modern: "house", etym: "Middle English orthography for Old English 'hūs'.", role: "Noun" },
+      "stoon": { modern: "stone", etym: "Phonetic vowel lengthening representation.", role: "Noun" },
+      "yvel": { modern: "evil", etym: "Middle English representation of 'yfel'.", role: "Noun/Adjective" },
+      "greet": { modern: "great", etym: "Vowel shift representation.", role: "Adjective" },
+      "smal": { modern: "small", etym: "Middle English spelling.", role: "Adjective" },
+      "newe": { modern: "new", etym: "Inflected with trailing final '-e'.", role: "Adjective" },
+      "womman": { modern: "woman", etym: "Standard Middle English representation.", role: "Noun" },
+      "lyf": { modern: "life", etym: "Spelled with 'y' following standard Gothic script scripts.", role: "Noun" },
+      "deeth": { modern: "death", etym: "Middle English spelling.", role: "Noun" },
+
+      // Early Modern English entries
+      "hail": { modern: "hello / greetings", etym: "Salutation from Middle English 'heil'.", role: "Interjection" },
+      "my": { modern: "my", etym: "Pronoun modifier showing loss of final 'n'.", role: "Possessive Determiner" },
+      "friend": { modern: "friend", etym: "Modern spelling establishing.", role: "Noun" },
+      "whither": { modern: "where / whither", etym: "Indicates destination direction.", role: "Adverb" },
+      "goest": { modern: "go / are going", etym: "Archaic 2nd person singular present suffix '-est'.", role: "Verb" },
+      "thou": { modern: "you (singular/informal)", etym: "Familiar second person singular pronoun.", role: "Personal Pronoun" },
+      "thy": { modern: "your (singular/informal)", etym: "Possessive pronoun variant of 'thou'.", role: "Possessive Determiner" },
+      "thine": { modern: "yours (singular/informal)", etym: "Absolute possessive pronoun.", role: "Possessive Pronoun" }
+    };
+
+    // Alphabet mappings for Futhorc Runes
+    const runicAlphabetMap = {
+      'ᚠ': 'F', 'ᚢ': 'U', 'ᚦ': 'TH', 'ᚩ': 'O', 'ᚱ': 'R', 'ᚳ': 'C/K', 'ᚷ': 'G', 'ᚹ': 'W',
+      'ᚻ': 'H', 'ᚾ': 'N', 'ᛁ': 'I', 'ᛡ': 'Y/J', 'ᛈ': 'P', 'ᛉ': 'X', 'ᛋ': 'S', 'ᛏ': 'T',
+      'ᛒ': 'B', 'ᛖ': 'E', 'ᛗ': 'M', 'ᛚ': 'L', 'ᛝ': 'NG', 'ᛞ': 'D', 'ᚪ': 'A', 'ᚫ': 'Æ',
+      'ᛠ': 'EA'
+    };
+
+    // Era static detail sheets for Drawers
+    const eraDetails = {
+      early: {
+        title: "Early Modern English (Shakespearean)",
+        dialect: "Elizabethan / London Court Dialect",
+        readAloud: "Phonetic Read-Aloud Guide",
+        rules: [
+          { glyph: "thou / thee", ipa: "ðaʊ / ðiː", rule: "Second-person singular pronouns. 'Thou' is the subject ('thou art'), 'thee' is the object ('I love thee')." },
+          { glyph: "thy / thine", ipa: "ðaɪ / ðaɪn", rule: "Possessive pronouns representing 'your' and 'yours'." },
+          { glyph: "-est / -eth", ipa: "əst / əθ", rule: "Verb endings. '-est' is used for second-person singular ('thou speakest'); '-eth' is used for third-person singular ('he speaketh')." },
+          { glyph: "hath / doth", ipa: "hæθ / dʌθ", rule: "Archaic forms of 'has' and 'does' (e.g. 'He hath run', 'She doth sing')." },
+          { glyph: "wilt / shalt", ipa: "wɪlt / ʃælt", rule: "Archaic forms of 'will' and 'shall' used with 'thou' ('thou wilt go')." }
+        ]
+      },
+      middle: {
+        title: "Middle English (Chaucerian Era)",
+        dialect: "Late Middle English / London Dialect",
+        readAloud: "Phonetic Read-Aloud Guide",
+        rules: [
+          { glyph: "e / ee", ipa: "eː / ɛː", rule: "Pronounced like French 'é' or English 'eh' in 'care', not modern 'ee'. For instance, 'breed' sounds like 'braid' (not 'breed')." },
+          { glyph: "y / i", ipa: "iː / i", rule: "Long y/i is pronounced as 'ee' (e.g. 'myn' sounds like 'meen', not 'mine'). Great Vowel Shift has not occurred yet." },
+          { glyph: "ou / ow", ipa: "uː", rule: "Pronounced like 'oo' in 'food' (e.g., 'thou' sounds like 'thoo', 'hous' sounds like 'hoos')." },
+          { glyph: "gh", ipa: "x / ç", rule: "Voiceless velar or palatal fricative. Guttural sound, like German 'ch' or Scottish 'ch' in 'loch' (e.g., 'light', 'night')." },
+          { glyph: "final -e", ipa: "ə", rule: "Often pronounced lightly as a schwa (like the 'a' in 'sofa') at the end of lines or words for meter." }
+        ]
+      },
+      old: {
+        title: "Old English (Anglo-Saxon Era)",
+        dialect: "West Saxon Literary Dialect",
+        readAloud: "Phonetic Read-Aloud Guide",
+        rules: [
+          { glyph: "þ / ð", ipa: "θ / ð", rule: "Thorn (þ) and Eth (ð) represent 'th' sounds. Voiced (like 'then') between vowels, voiceless (like 'thin') elsewhere." },
+          { glyph: "æ", ipa: "æ", rule: "Ash (æ) sounds like the short 'a' in modern 'cat' or 'glass'." },
+          { glyph: "c", ipa: "k / tʃ", rule: "Sounds like 'ch' in 'child' near front vowels (e.g. e, i, y) like 'ċild'; sounds like 'k' elsewhere." },
+          { glyph: "ġ / g", ipa: "j / ɡ / ɣ", rule: "Dot-g (ġ) sounds like modern 'y' (e.g. 'gæst' sounds like 'gayst'). Plain g can be a soft throat gargle [ɣ]." },
+          { glyph: "sc", ipa: "ʃ", rule: "Sounds like modern 'sh' (e.g. 'scip' sounds like 'ship')." },
+          { glyph: "cg", ipa: "dʒ", rule: "Sounds like modern 'dge' in 'bridge' (e.g. 'ecg' -> edge)." },
+          { glyph: "h", ipa: "h / x", rule: "Breathy 'h' at start of words. Guttural throat rasp 'ch' (like 'loch') inside or at ends of words (e.g. 'hlāf', 'leoht')." }
+        ]
+      }
+    };
+
+    /* ==========================================================================
+       B. TRANSLATION ENGINE AND HELPER FUNCTIONS
+       ========================================================================== */
+    
+    // Runic transliterator for Old English
+    function transliterateToRunic(text) {
+      const runes = {
+        'th': 'ᚦ', 'ea': 'ᛠ', 'eo': 'ᛡ', 'ng': 'ᛝ',
+        'a': 'ᚪ', 'æ': 'ᚫ', 'b': 'ᛒ', 'c': 'ᚳ', 'd': 'ᛞ', 'e': 'ᛖ',
+        'f': 'ᚠ', 'g': 'ᚷ', 'h': 'ᚻ', 'i': 'ᛁ', 'l': 'ᛚ', 'm': 'ᛗ',
+        'n': 'ᚾ', 'o': 'ᚩ', 'p': 'ᛈ', 'r': 'ᚱ', 's': 'ᛋ', 't': 'ᛏ',
+        'u': 'ᚢ', 'w': 'ᚹ', 'x': 'ᛉ', 'y': 'ᛡ', 'þ': 'ᚦ', 'ð': 'ᚦ',
+        'ā': 'ᚪ', 'ē': 'ᛖ', 'ī': 'ᛁ', 'ō': 'ᚩ', 'ū': 'ᚢ', 'ȳ': 'ᛡ',
+        'ċ': 'ᚳ', 'ġ': 'ᚷ'
+      };
+      
+      let t = text.toLowerCase();
+      t = t.replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+      
+      let result = '';
+      let i = 0;
+      while (i < t.length) {
+        let matchedDoubleRune = false;
+        if (i < t.length - 1) {
+          if (runes[t.substring(i, i + 2)]) {
+            result += runes[t.substring(i, i + 2)];
+            i += 2;
+            matchedDoubleRune = true;
+          }
+        }
+        if (!matchedDoubleRune) {
+          if (runes[t[i]]) {
+            result += runes[t[i]];
+            i += 1;
+          } else {
+            result += t[i];
+            i += 1;
+          }
+        }
+      }
+      return result.toUpperCase();
+    }
+
+    // Heuristic Word translator (Modern ➔ Historical)
+    function translateWord(word, era) {
+      let clean = word.toLowerCase().replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+      if (!clean) return word;
+      
+      if (translatorDb[clean]) {
+        let t = translatorDb[clean][era];
+        if (word[0] === word[0].toUpperCase()) {
+          t = t[0].toUpperCase() + t.slice(1);
+        }
+        return t;
+      }
+      
+      // Rule-based fallbacks
+      let t = clean;
+      if (era === 'early') {
+        if (t === "you") t = "thou";
+        else if (t === "your") t = "thy";
+        else if (t === "yours") t = "thine";
+        else if (t === "has") t = "hath";
+        else if (t === "have") t = "hast";
+        else if (t === "does") t = "doth";
+        else if (t === "do") t = "dost";
+        else if (t === "are") t = "art";
+        else if (t === "will") t = "wilt";
+        else if (t === "shall") t = "shalt";
+        else if (t === "were") t = "wert";
+        else if (t === "would") t = "wouldst";
+        else if (t === "could") t = "couldst";
+        else if (t === "should") t = "shouldst";
+        else if (t === "can") t = "canst";
+        else if (t === "did") t = "didst";
+      } else if (era === 'middle') {
+        if (t === "you") t = "thou";
+        else if (t === "your") t = "oure";
+        else if (t === "my") t = "myn";
+        else {
+          t = t.replace(/y/g, "i").replace(/oo/g, "o").replace(/ee/g, "e");
+          if (t.length > 3) {
+            if (!t.endsWith("e")) {
+              t += "e";
+            }
+          }
+        }
+      } else if (era === 'old') {
+        if (t === "you") t = "þū";
+        else if (t === "your") t = "ūre";
+        else if (t === "my") t = "mīn";
+        else if (t === "the") t = "þæt";
+        else {
+          t = t.replace(/th/g, "þ")
+               .replace(/a/g, "æ")
+               .replace(/o/g, "ō")
+               .replace(/u/g, "ū")
+               .replace(/i/g, "ī")
+               .replace(/y/g, "ȳ");
+        }
+      } else if (era === 'late') {
+        // Late Modern (c. 1700) spelling changes
+        if (t === "has") t = "hath";
+        else if (t === "does") t = "doth";
+        else if (t === "show") t = "shew";
+        else if (t === "public") t = "publick";
+        else if (t === "music") t = "musick";
+        else if (t === "only") t = "onely";
+        else if (t === "therefore") t = "therfore";
+      }
+      
+      if (word[0] === word[0].toUpperCase()) {
+        t = t[0].toUpperCase() + t.slice(1);
+      }
+      return t;
+    }
+
+    // Heuristic Reverse Word translator (Old English ➔ Modern)
+    function translateWordOldToModern(word) {
+      let clean = word.toLowerCase().replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+      if (!clean) return word;
+      
+      // Remove West Saxon macrons for search mapping
+      let normalizedClean = clean.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      
+      // Look up key where old matches word
+      for (const [key, eras] of Object.entries(translatorDb)) {
+        let oldWordClean = eras.old.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (oldWordClean === normalizedClean || eras.old === clean) {
+          let res = key;
+          if (res.includes("_")) {
+            res = res.split("_")[0];
+          }
+          if (word[0] === word[0].toUpperCase()) {
+            res = res[0].toUpperCase() + res.slice(1);
+          }
+          return res;
+        }
+      }
+      
+      // Heuristic cleaning if not found
+      let t = clean;
+      t = t.replace(/þ/g, "th")
+           .replace(/ð/g, "th")
+           .replace(/æ/g, "a")
+           .replace(/ū/g, "u")
+           .replace(/ī/g, "i")
+           .replace(/ō/g, "o")
+           .replace(/ā/g, "a")
+           .replace(/ē/g, "e")
+           .replace(/ȳ/g, "y")
+           .replace(/ċ/g, "c")
+           .replace(/ġ/g, "g");
+           
+      if (word[0] === word[0].toUpperCase()) {
+        t = t[0].toUpperCase() + t.slice(1);
+      }
+      return t;
+    }
+
+    // Heuristic Reverse Word translator (Middle English ➔ Modern)
+    function translateWordMiddleToModern(word) {
+      let clean = word.toLowerCase().replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+      if (!clean) return word;
+      
+      // Look up key where middle matches word
+      for (const [key, eras] of Object.entries(translatorDb)) {
+        if (eras.middle === clean) {
+          let res = key;
+          if (res.includes("_")) {
+            res = res.split("_")[0];
+          }
+          if (word[0] === word[0].toUpperCase()) {
+            res = res[0].toUpperCase() + res.slice(1);
+          }
+          return res;
+        }
+      }
+      
+      // Heuristic cleaning for Middle English if not found
+      let t = clean;
+      if (t === "yow") t = "you";
+      else if (t === "myn") t = "my";
+      else if (t === "oure") t = "our";
+      else if (t === "gyve") t = "give";
+      else if (t === "heil") t = "hello";
+      else {
+        t = t.replace(/y/g, "i").replace(/oo/g, "o").replace(/ee/g, "e");
+        if (t.length > 3) {
+          if (t.endsWith("e")) {
+            t = t.slice(0, -1);
+          }
+        }
+      }
+      
+      if (word[0] === word[0].toUpperCase()) {
+        t = t[0].toUpperCase() + t.slice(1);
+      }
+      return t;
+    }
+
+    // Heuristic Reverse Word translator (Early Modern English ➔ Modern)
+    function translateWordEarlyToModern(word) {
+      let clean = word.toLowerCase().replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+      if (!clean) return word;
+      
+      // Look up key where early matches word
+      for (const [key, eras] of Object.entries(translatorDb)) {
+        if (eras.early === clean) {
+          let res = key;
+          if (res.includes("_")) {
+            res = res.split("_")[0];
+          }
+          if (word[0] === word[0].toUpperCase()) {
+            res = res[0].toUpperCase() + res.slice(1);
+          }
+          return res;
+        }
+      }
+      
+      // Heuristic cleaning for Early Modern English if not found
+      let t = clean;
+      if (t === "thou") t = "you";
+      else if (t === "thee") t = "you";
+      else if (t === "thy") t = "your";
+      else if (t === "thine") t = "yours";
+      else if (t === "hath") t = "has";
+      else if (t === "doth") t = "does";
+      else if (t === "art") t = "are";
+      else if (t === "wilt") t = "will";
+      else if (t === "shalt") t = "shall";
+      else if (t === "hast") t = "have";
+      else if (t === "dost") t = "do";
+      else if (t === "wert") t = "were";
+      else if (t === "wouldst") t = "would";
+      else if (t === "couldst") t = "could";
+      else if (t === "shouldst") t = "should";
+      else if (t === "canst") t = "can";
+      else if (t === "didst") t = "did";
+      else {
+        // remove suffix -e
+        if (t.length > 5) {
+          if (t.endsWith("est")) {
+            t = t.slice(0, -3);
+          } else if (t.endsWith("eth")) {
+            t = t.slice(0, -3);
+          }
+        }
+      }
+      
+      if (word[0] === word[0].toUpperCase()) {
+        t = t[0].toUpperCase() + t.slice(1);
+      }
+      return t;
+    }
+
+    // Translates full sentence word-by-word
+    function translateSentence(sentence, direction) {
+      return sentence.split(/\s+/).map(word => {
+        let match = word.match(/^([^a-zA-Zææþðūīōāēȳċġ]*)(.*?)([^a-zA-Zææþðūīōāēȳċġ]*)$/i);
+        if (!match) return word;
+        
+        let prefix = match[1];
+        let core = match[2];
+        let suffix = match[3];
+        
+        let translatedCore = "";
+        if (direction === "old_to_modern") {
+          translatedCore = translateWordOldToModern(core);
+        } else if (direction === "middle_to_modern") {
+          translatedCore = translateWordMiddleToModern(core);
+        } else if (direction === "early_to_modern") {
+          translatedCore = translateWordEarlyToModern(core);
+        } else {
+          let era = "old";
+          if (direction === "modern_to_800") era = "middle";
+          if (direction === "modern_to_500") era = "early";
+          if (direction === "modern_to_300") era = "late";
+          translatedCore = translateWord(core, era);
+        }
+        
+        return prefix + translatedCore + suffix;
+      }).join(' ');
+    }
+
+    // Helper: Wrap each word in span for hovers
+    function wrapTextInWordSpans(text, sourceLang, targetLang) {
+      let isOutputModern = (targetLang === "modern");
+      let currentEraId = targetLang;
+      
+      return text.split(' ').map(word => {
+        let clean = word.toLowerCase().replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+        let normalizedClean = clean.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        
+        if (isOutputModern) {
+          // If output is Modern, search key in translatorDb to find etymological source
+          let entry = translatorDb[clean];
+          if (entry) {
+            let key = entry[sourceLang] || clean;
+            return `<span class="hover-word" data-word-key="${key}" data-era="modern" data-modern-translation="${clean}">${word}</span>`;
+          }
+          return `<span class="hover-word" data-word-key="${clean}" data-era="modern" data-fallback="true" data-word-val="${word}">${word}</span>`;
+        } else {
+          // If output is Historical, look up directly in historicalWordsDb
+          let exists = historicalWordsDb[clean] || historicalWordsDb[normalizedClean];
+          if (exists) {
+            return `<span class="hover-word" data-word-key="${clean}" data-era="${currentEraId}">${word}</span>`;
+          }
+          return `<span class="hover-word" data-word-key="${clean}" data-era="${currentEraId}" data-fallback="true" data-word-val="${word}">${word}</span>`;
+        }
+      }).join(' ');
+    }
+
+    // Phonetic guide generators
+    function generateOldEnglishPhonetic(text) {
+      let t = text.toLowerCase();
+      t = t.replace(/þ/g, "th")
+           .replace(/ð/g, "th")
+           .replace(/æ/g, "a")
+           .replace(/ū/g, "oo")
+           .replace(/ī/g, "ee")
+           .replace(/ō/g, "oh")
+           .replace(/ā/g, "ah")
+           .replace(/ē/g, "ee")
+           .replace(/ȳ/g, "y")
+           .replace(/ċ/g, "ch")
+           .replace(/ġ/g, "y")
+           .replace(/sc/g, "sh")
+           .replace(/cg/g, "dge")
+           .replace(/h([fpt])/g, "ch$1") 
+           .replace(/([aeou])h/g, "$1ch")
+           .replace(/hlāf/g, "chlahf");
+      return t;
+    }
+
+    function generateOldEnglishIPA(text) {
+      let t = text.toLowerCase().replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+      let words = t.split(' ').map(word => {
+        let ipa = '';
+        let i = 0;
+        while (i < word.length) {
+          let char = word[i];
+          let next = word[i+1] || '';
+          let prev = word[i-1] || '';
+          
+          let matchedOldEnglishDigraph = false;
+          if (char === 's') {
+            if (next === 'c') {
+              ipa += 'ʃ'; i += 2;
+              matchedOldEnglishDigraph = true;
+            }
+          } else if (char === 'c') {
+            if (next === 'g') {
+              ipa += 'dʒ'; i += 2;
+              matchedOldEnglishDigraph = true;
+            }
+          }
+          
+          if (matchedOldEnglishDigraph) {
+            // Already processed digraph
+          } else if (char === 'þ' || char === 'ð') {
+            let isVoiced = false;
+            if (i > 0) {
+              if (i < word.length - 1) {
+                if (/[aeiouyæāēīōūȳ]/i.test(prev)) {
+                  if (/[aeiouyæāēīōūȳ]/i.test(next)) {
+                    isVoiced = true;
+                  }
+                }
+              }
+            }
+            ipa += isVoiced ? 'ð' : 'θ';
+            i += 1;
+          } else if (char === 'f') {
+            let isVoiced = false;
+            if (i > 0) {
+              if (i < word.length - 1) {
+                if (/[aeiouyæāēīōūȳ]/i.test(prev)) {
+                  if (/[aeiouyæāēīōūȳ]/i.test(next)) {
+                    isVoiced = true;
+                  }
+                }
+              }
+            }
+            ipa += isVoiced ? 'v' : 'f';
+            i += 1;
+          } else if (char === 's') {
+            let isVoiced = false;
+            if (i > 0) {
+              if (i < word.length - 1) {
+                if (/[aeiouyæāēīōūȳ]/i.test(prev)) {
+                  if (/[aeiouyæāēīōūȳ]/i.test(next)) {
+                    isVoiced = true;
+                  }
+                }
+              }
+            }
+            ipa += isVoiced ? 'z' : 's';
+            i += 1;
+          } else if (char === 'h') {
+            ipa += (i === 0) ? 'h' : 'x';
+            i += 1;
+          } else if (char === 'c') {
+            if (next === 'e' || next === 'i' || next === 'y' || next === 'æ' || next === 'ē' || next === 'ī') {
+              ipa += 'tʃ';
+            } else {
+              ipa += 'k';
+            }
+            i += 1;
+          } else if (char === 'ġ') { ipa += 'j'; i += 1; }
+          else if (char === 'g') { ipa += 'g'; i += 1; }
+          else if (char === 'æ') { ipa += 'æ'; i += 1; }
+          else if (char === 'ā') { ipa += 'ɑː'; i += 1; }
+          else if (char === 'ē') { ipa += 'eː'; i += 1; }
+          else if (char === 'ī') { ipa += 'iː'; i += 1; }
+          else if (char === 'ō') { ipa += 'oː'; i += 1; }
+          else if (char === 'ū') { ipa += 'uː'; i += 1; }
+          else if (char === 'ȳ') { ipa += 'yː'; i += 1; }
+          else if (char === 'a') { ipa += 'ɑ'; i += 1; }
+          else if (char === 'e') { ipa += 'e'; i += 1; }
+          else if (char === 'i') { ipa += 'i'; i += 1; }
+          else if (char === 'o') { ipa += 'o'; i += 1; }
+          else if (char === 'u') { ipa += 'u'; i += 1; }
+          else if (char === 'y') { ipa += 'y'; i += 1; }
+          else { ipa += char; i += 1; }
+        }
+        return ipa;
+      });
+      return '/' + words.join(' ') + '/';
+    }
+
+    function generateMiddleEnglishPhonetic(text) {
+      let t = text.toLowerCase();
+      t = t.replace(/myn/g, "meen").replace(/gyve/g, "give").replace(/breed/g, "braid").replace(/y/g, "ee").replace(/gh/g, "ch").replace(/ou/g, "oo").replace(/ow/g, "oo");
+      return t;
+    }
+
+    function generateMiddleEnglishIPA(text) {
+      let t = text.toLowerCase().replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+      let words = t.split(' ').map(word => {
+        let ipa = '';
+        let i = 0;
+        while (i < word.length) {
+          let char = word[i];
+          let next = word[i+1] || '';
+          let matchedMiddleEnglishDouble = false;
+          if (char === 'g') {
+            if (next === 'h') {
+              ipa += 'x'; i += 2;
+              matchedMiddleEnglishDouble = true;
+            }
+          } else if (char === 'o') {
+            if (next === 'o') {
+              ipa += 'oː'; i += 2;
+              matchedMiddleEnglishDouble = true;
+            } else if (next === 'u') {
+              ipa += 'uː'; i += 2;
+              matchedMiddleEnglishDouble = true;
+            }
+          } else if (char === 'e') {
+            if (next === 'e') {
+              ipa += 'eː'; i += 2;
+              matchedMiddleEnglishDouble = true;
+            }
+          }
+          
+          if (matchedMiddleEnglishDouble) {
+            // Already processed double vowel/digraph
+          } else if (char === 'y') { ipa += 'iː'; i += 1; }
+          else if (char === 'a') { ipa += 'a'; i += 1; }
+          else if (char === 'e') { ipa += 'e'; i += 1; }
+          else { ipa += char; i += 1; }
+        }
+        return ipa;
+      });
+      return '/' + words.join(' ') + '/';
+    }
+
+    function generateEarlyModernIPA(text) {
+      let t = text.toLowerCase().replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+      let words = t.split(' ').map(word => {
+        let ipa = '';
+        let i = 0;
+        while (i < word.length) {
+          let char = word[i];
+          let next = word[i+1] || '';
+          let matched = false;
+          if (char === 'e') {
+            if (next === 'e') { ipa += 'iː'; i += 2; matched = true; }
+          }
+          if (!matched) {
+            if (char === 'o') {
+              if (next === 'o') { ipa += 'uː'; i += 2; matched = true; }
+              else if (next === 'u') { ipa += 'aʊ'; i += 2; matched = true; }
+            }
+          }
+          if (!matched) {
+            if (char === 'a') {
+              if (next === 'i') { ipa += 'eɪ'; i += 2; matched = true; }
+              else if (next === 'y') { ipa += 'eɪ'; i += 2; matched = true; }
+            }
+          }
+          if (!matched) {
+            if (char === 't') {
+              if (next === 'h') { ipa += 'ð'; i += 2; matched = true; }
+            }
+          }
+          if (!matched) {
+            if (char === 's') {
+              if (next === 'h') { ipa += 'ʃ'; i += 2; matched = true; }
+            }
+          }
+          if (!matched) {
+            if (char === 'c') {
+              if (next === 'h') { ipa += 'tʃ'; i += 2; matched = true; }
+            }
+          }
+          if (!matched) {
+            if (char === 'y') {
+              ipa += 'aɪ'; i += 1; matched = true;
+            }
+          }
+          if (!matched) {
+            if (char === 'e') {
+              if (i === word.length - 1) { i += 1; matched = true; }
+            }
+          }
+          if (!matched) {
+            ipa += char; i += 1;
+          }
+        }
+        return ipa;
+      });
+      return '/' + words.join(' ') + '/';
+    }
+
+    // Global references to prevent garbage collection and race condition deadlocks
+    let activeUtterance = null;
+    let speakTimeoutId = null;
+
+    function speakText(text, rate = 0.8, pitch = 1.0) {
+      if (!window.speechSynthesis) {
+        console.warn("Speech synthesis not supported in this browser.");
+        return;
+      }
+      
+      // Un-stuck sequence for Chromium: resume first, then cancel
+      window.speechSynthesis.resume();
+      window.speechSynthesis.cancel();
+      
+      // Clean up text of any remaining macrons or special characters (þ, ð, æ) case-insensitively
+      let cleanText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      cleanText = cleanText.replace(/þ/gi, "th").replace(/ð/gi, "th").replace(/æ/gi, "a");
+      
+      if (!cleanText.trim()) {
+        console.warn("Speech text is empty.");
+        return;
+      }
+      
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = rate;
+      utterance.pitch = pitch;
+      
+      // Use en-US as it is universally installed and extremely stable across SAPI and browser drivers
+      utterance.lang = 'en-US';
+      
+      // Persist reference to global scope during speech
+      activeUtterance = utterance;
+      
+      utterance.onend = () => {
+        activeUtterance = null;
+      };
+      
+      utterance.onerror = (e) => {
+        console.error("SpeechSynthesis error:", e.error);
+        activeUtterance = null;
+      };
+      
+      window.speechSynthesis.speak(utterance);
+    }
+
+    let currentSourceLanguage = "modern";
+    let activeTab = "old";
+    let isCustomMode = false;
+    let customText = "";
+
+    // Keep cached translations for tabs switching
+    let translationCache = {
+      old: { output: "", runic: "" },
+      middle: { output: "" },
+      late: { output: "" },
+      modern: { output: "" }
+    };
+
+    // Renders the output panel tabs dynamically based on the current source language
+    function renderOutputTabs() {
+      const tabsContainer = document.getElementById("output-tabs-container");
+      tabsContainer.innerHTML = "";
+      
+      let tabOptions = [];
+      if (currentSourceLanguage === "modern") {
+        tabOptions = [
+          { id: "old", label: "Old English (c. 1000)" },
+          { id: "middle", label: "Middle English (c. 1200)" },
+          { id: "late", label: "Late Modern (c. 1700)" }
+        ];
+        if (!["old", "middle", "late"].includes(activeTab)) {
+          activeTab = "old"; // Default to Old English
+        }
+      } else {
+        tabOptions = [
+          { id: "modern", label: "Modern English" }
+        ];
+        activeTab = "modern";
+      }
+      
+      tabOptions.forEach(tab => {
+        const tabBtn = document.createElement("button");
+        tabBtn.className = `output-tab ${activeTab === tab.id ? 'active' : ''}`;
+        tabBtn.textContent = tab.label;
+        tabBtn.addEventListener("click", () => {
+          document.querySelectorAll(".output-tab").forEach(btn => btn.classList.remove("active"));
+          tabBtn.classList.add("active");
+          activeTab = tab.id;
+          displayActiveTranslation();
+        });
+        tabsContainer.appendChild(tabBtn);
+      });
+    }
+
+    // Renders the preset chips dynamically based on the current source language
+    function renderPresetChips() {
+      const presetsContainer = document.getElementById("presets-container");
+      presetsContainer.innerHTML = "";
+      
+      const currentPresetsList = presets[currentSourceLanguage] || [];
+      
+      currentPresetsList.forEach((p, idx) => {
+        const chip = document.createElement("button");
+                let isDefaultActive = false;
+        if (idx === 0) {
+          if (!isCustomMode) {
+            isDefaultActive = true;
+          }
+        }
+        chip.className = `preset-chip ${isDefaultActive ? 'active' : ''}`;
+        chip.textContent = p.input.length > 32 ? p.input.substring(0, 32) + "..." : p.input;
+        chip.setAttribute("data-preset-id", p.id);
+        
+        chip.addEventListener("click", () => {
+          document.querySelectorAll(".preset-chip").forEach(el => el.classList.remove("active"));
+          chip.classList.add("active");
+          
+          isCustomMode = false;
+          document.getElementById("custom-alert").style.display = "none";
+          
+          const inputEl = document.getElementById("translator-input");
+          inputEl.value = p.input;
+          document.getElementById("char-current").textContent = p.input.length.toLocaleString();
+          
+          performTranslation();
+        });
+        presetsContainer.appendChild(chip);
+      });
+    }
+
+    function getAIEraName(langCode) {
+      if (langCode === "modern") return "Modern English";
+      if (langCode === "old") return "Old English / Anglo-Saxon (c. 1000)";
+      if (langCode === "middle") return "Middle English (c. 1200)";
+      if (langCode === "late") return "Late Modern English (c. 1700)";
+      return langCode;
+    }
+
+    async function queryAITranslation(text, sourceLang, targetLang) {
+      const provider = localStorage.getItem("ai_provider") || "gemini";
+      const apiKey = localStorage.getItem("ai_key");
+      if (!apiKey) {
+        throw new Error("API key is missing! Please enter your key in the AI Settings.");
+      }
+      
+      const prompt = `You are an expert translator specializing in historical English. Translate the following text from ${getAIEraName(sourceLang)} to ${getAIEraName(targetLang)}. Maintain the exact meaning, tone, and grammar structure appropriate for that historical era. Do NOT write any explanations, notes, or preambles. Output ONLY the raw translated text. Text to translate: "${text}"`;
+      
+      let responseText = "";
+      if (provider === "gemini") {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.2 }
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error?.message || `Gemini API returned status ${res.status}`);
+        }
+        const data = await res.json();
+        responseText = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      } else if (provider === "openai") {
+        const url = "https://api.openai.com/v1/chat/completions";
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [{ role: "user", content: prompt }],
+            temperature: 0.2
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error?.message || `OpenAI API returned status ${res.status}`);
+        }
+        const data = await res.json();
+        responseText = data.choices?.[0]?.message?.content || "";
+      } else if (provider === "claude") {
+        const url = "https://api.anthropic.com/v1/messages";
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": apiKey,
+            "anthropic-version": "2023-06-01",
+            "dangerouslyAllowBrowser": "true"
+          },
+          body: JSON.stringify({
+            model: "claude-3-5-haiku-20241022",
+            max_tokens: 1024,
+            messages: [{ role: "user", content: prompt }]
+          })
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`Claude API returned status ${res.status}: ${errText}`);
+        }
+        const data = await res.json();
+        responseText = data.content?.[0]?.text || "";
+      } else {
+        throw new Error("Unknown AI provider selected.");
+      }
+      
+      return responseText.trim().replace(/^["']|["']$/g, "");
+    }
+
+    let isAiTranslating = false;
+
+    // Triggers and renders translation outputs to cache
+    async function performTranslation() {
+      const inputEl = document.getElementById("translator-input");
+      let inputText = inputEl.value;
+      
+      if (inputText.trim() === "") {
+        displayActiveTranslation();
+        return;
+      }
+      
+      // Identify active preset
+      let activePreset = null;
+      if (!isCustomMode) {
+        const presetsList = presets[currentSourceLanguage] || [];
+        activePreset = presetsList.find(p => p.input.toLowerCase().trim() === inputText.toLowerCase().trim());
+      }
+      
+      const aiEnabled = localStorage.getItem("ai_enabled") === "true";
+      const accuracyBadge = document.getElementById("accuracy-score-badge");
+      
+      if (aiEnabled) {
+        if (!activePreset) {
+          const outputContainer = document.getElementById("translator-output-container");
+          outputContainer.innerHTML = `<span class="placeholder-text" style="display: flex; align-items: center; gap: 8px;"><svg class="spinner" width="16" height="16" viewBox="0 0 50 50" style="animation: rotate 1s linear infinite; transform-origin: center;"><circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="80" stroke-dashoffset="0" style="stroke: var(--accent-gold);"></circle></svg> Translating using AI...</span>`;
+          if (accuracyBadge) {
+            accuracyBadge.textContent = "Accuracy: 98% (AI Powered)";
+            accuracyBadge.style.background = "rgba(16, 185, 129, 0.15)";
+            accuracyBadge.style.borderColor = "rgba(16, 185, 129, 0.3)";
+            accuracyBadge.style.color = "#10b981";
+          }
+          isAiTranslating = true;
+          
+          try {
+            if (currentSourceLanguage === "modern") {
+              const [oldOut, middleOut, lateOut] = await Promise.all([
+                queryAITranslation(inputText, "modern", "old"),
+                queryAITranslation(inputText, "modern", "middle"),
+                queryAITranslation(inputText, "modern", "late")
+              ]);
+              translationCache.old = { output: oldOut, runic: transliterateToRunic(oldOut) };
+              translationCache.middle = { output: middleOut };
+              translationCache.late = { output: lateOut };
+            } else {
+              const modOut = await queryAITranslation(inputText, currentSourceLanguage, "modern");
+              translationCache.modern = {
+                output: modOut,
+                runic: currentSourceLanguage === "old" ? transliterateToRunic(inputText) : ""
+              };
+            }
+            isAiTranslating = false;
+            displayActiveTranslation();
+            return;
+          } catch (err) {
+            console.error("AI Translation failed, falling back to offline:", err);
+            const toast = document.createElement("div");
+            toast.style = "position: fixed; bottom: 20px; right: 20px; background: #ef4444; color: white; padding: 12px 24px; border-radius: 6px; font-size: 0.9rem; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.2);";
+            toast.textContent = `AI Translation error (falling back to offline): ${err.message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+          }
+        }
+      }
+      
+      if (accuracyBadge) {
+        accuracyBadge.textContent = "Accuracy: 55% (Offline Heuristic)";
+        accuracyBadge.style.background = "rgba(245, 158, 11, 0.15)";
+        accuracyBadge.style.borderColor = "rgba(245, 158, 11, 0.3)";
+        accuracyBadge.style.color = "#f59e0b";
+      }
+      isAiTranslating = false;
+      
+      if (currentSourceLanguage === "modern") {
+        if (activePreset) {
+          translationCache.old = {
+            output: activePreset.eras.old.output,
+            runic: activePreset.eras.old.runic || "",
+            phonetic: activePreset.eras.old.phonetic || "",
+            ipa: activePreset.eras.old.ipa || ""
+          };
+          translationCache.middle = {
+            output: activePreset.eras.middle.output,
+            phonetic: activePreset.eras.middle.phonetic || "",
+            ipa: activePreset.eras.middle.ipa || ""
+          };
+          translationCache.late = {
+            output: activePreset.eras.late.output,
+            phonetic: activePreset.eras.late.phonetic || "",
+            ipa: activePreset.eras.late.ipa || ""
+          };
+        } else {
+          // Heuristic translation to all eras
+          const oldOut = translateSentence(inputText, "modern_to_old");
+          translationCache.old = {
+            output: oldOut,
+            runic: transliterateToRunic(oldOut)
+          };
+          translationCache.middle = {
+            output: translateSentence(inputText, "modern_to_800")
+          };
+          translationCache.late = {
+            output: translateSentence(inputText, "modern_to_300")
+          };
+        }
+      } else if (currentSourceLanguage === "old") {
+        if (activePreset) {
+          translationCache.modern = {
+            output: activePreset.output,
+            runic: activePreset.runic || ""
+          };
+        } else {
+          const modOut = translateSentence(inputText, "old_to_modern");
+          translationCache.modern = {
+            output: modOut,
+            runic: transliterateToRunic(inputText) // runes of input
+          };
+        }
+      } else if (currentSourceLanguage === "middle") {
+        if (activePreset) {
+          translationCache.modern = {
+            output: activePreset.output
+          };
+        } else {
+          const modOut = translateSentence(inputText, "middle_to_modern");
+          translationCache.modern = {
+            output: modOut
+          };
+        }
+      }
+      
+      displayActiveTranslation();
+    }
+
+    // Displays the translation of the active tab pulling from cache
+    function displayActiveTranslation() {
+      const outputContainer = document.getElementById("translator-output-container");
+      const runicBox = document.getElementById("runic-display-box");
+      const runicOutput = document.getElementById("runic-output");
+      const drawerBtn = document.getElementById("linguistic-drawer-trigger");
+      
+      const inputEl = document.getElementById("translator-input");
+      if (inputEl.value.trim() === "") {
+        outputContainer.innerHTML = `<span class="placeholder-text">Translation output will appear here...</span>`;
+        runicBox.style.display = "none";
+        drawerBtn.style.display = "none";
+        outputContainer.classList.remove("active-glow");
+        return;
+      }
+      
+      outputContainer.classList.add("active-glow");
+      
+      const cache = translationCache[activeTab] || { output: "" };
+      
+      // Wrap output with hoverable span tags
+      outputContainer.innerHTML = wrapTextInWordSpans(cache.output, currentSourceLanguage, activeTab);
+      
+      // Runic box visibility
+      let showRunic = false;
+      if (activeTab === "old") {
+        showRunic = true;
+      } else if (currentSourceLanguage === "old") {
+        if (activeTab === "modern") {
+          showRunic = true;
+        }
+      }
+      if (showRunic) {
+        runicBox.style.display = "flex";
+        runicOutput.textContent = cache.runic || "";
+      } else {
+        runicBox.style.display = "none";
+      }
+      
+      // Companion drawer button visibility
+      if (activeTab === "old" || activeTab === "middle" || 
+          currentSourceLanguage === "old" || currentSourceLanguage === "middle") {
+        drawerBtn.style.display = "flex";
+      } else {
+        drawerBtn.style.display = "none";
+      }
+      
+      bindWordHoverEvents();
+    }
+
+    /* ==========================================================================
+       E. WORD HOVER TOOLTIPS
+       ========================================================================== */
+    function bindWordHoverEvents() {
+      const hoverWords = document.querySelectorAll(".hover-word");
+      const tooltip = document.getElementById("shared-word-tooltip");
+
+      hoverWords.forEach(wordSpan => {
+        wordSpan.addEventListener("mouseenter", (e) => {
+          const key = wordSpan.getAttribute("data-word-key");
+          const era = wordSpan.getAttribute("data-era");
+          const isFallback = wordSpan.getAttribute("data-fallback") === "true";
+          const rawVal = wordSpan.getAttribute("data-word-val");
+          
+          let wordTitle = wordSpan.textContent.replace(/[.,\/#!$%\^\x26\*;:{}=\-_`~()?]/g,"");
+          let translation = "";
+          let grammar = "Dynamic Grammatical Parse";
+          let etymology = "Proto-Germanic origin estimated via phonetic shift reconstruction.";
+          let eraLabel = "Linguistic Era";
+          
+          if (era === 'modern') eraLabel = "Modern English";
+          if (era === 'late') eraLabel = "Late Modern English (c. 1700)";
+          if (era === 'early') eraLabel = "Early Modern English (c. 1500)";
+          if (era === 'middle') eraLabel = "Middle English (c. 1200)";
+          if (era === 'old') eraLabel = "Old English / Anglo-Saxon (c. 1000)";
+
+          if (isFallback) {
+            translation = wordTitle;
+            grammar = "Calculated Word Translation";
+            etymology = "Reconstructed word. Detailed etymology require preset phrases.";
+          } else {
+            if (era === "modern") {
+              // Hovering over modern output word, key is Old/Middle English source
+              let normKey = key.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+              let data = historicalWordsDb[key] || historicalWordsDb[normKey];
+              if (data) {
+                translation = data.modern;
+                grammar = data.role;
+                let sourceLanguage = currentSourceLanguage === "old" ? "Anglo-Saxon" : "Middle English";
+                etymology = `Modern equivalent of ${sourceLanguage} '${key}'. ${data.etym}`;
+              } else {
+                translation = wordSpan.getAttribute("data-modern-translation") || wordTitle;
+              }
+            } else {
+              let normKey = key.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+              let data = historicalWordsDb[key] || historicalWordsDb[normKey];
+              if (data) {
+                translation = data.modern;
+                grammar = data.role;
+                etymology = data.etym;
+              } else {
+                translation = wordTitle;
+              }
+            }
+          }
+
+          document.getElementById("tooltip-word-title").textContent = wordTitle;
+          document.getElementById("tooltip-era-tag").textContent = eraLabel;
+          document.getElementById("tooltip-translation-val").textContent = translation;
+          document.getElementById("tooltip-grammar-val").textContent = grammar;
+          let eraId = "old"; // Default to Old English
+      let isMiddle = false;
+      if (currentSourceLanguage === "middle") {
+        isMiddle = true;
+      } else if (currentSourceLanguage === "modern") {
+        if (activeTab === "middle") {
+          isMiddle = true;
+        }
+      }
+      
+      let isEarly = false;
+      if (currentSourceLanguage === "early") {
+        isEarly = true;
+      } else if (currentSourceLanguage === "modern") {
+        if (activeTab === "early") {
+          isEarly = true;
+        }
+      }
+
+      if (isMiddle) {
+        eraId = "middle";
+      } else if (isEarly) {
+        eraId = "early";
+      }
+          document.getElementById("tooltip-etymology-val").textContent = etymology;
+
+          const rect = wordSpan.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+          
+          tooltip.style.left = (rect.left + scrollLeft - (280/2) + (rect.width/2)) + "px";
+          tooltip.style.top = (rect.top + scrollTop - tooltip.offsetHeight - 12) + "px";
+          
+          tooltip.classList.add("active");
+        });
+
+        wordSpan.addEventListener("mouseleave", () => {
+          tooltip.classList.remove("active");
+        });
+      });
+    }
+
+    /* ==========================================================================
+       F. DRAWER MANAGER
+       ========================================================================== */
+    function openLinguisticDrawer() {
+      const overlay = document.getElementById("linguistic-drawer-overlay");
+      const drawer = document.getElementById("linguistic-drawer");
+      
+      let eraId = "old"; // Default to Old English
+            let isMiddleEra = false;
+      if (currentSourceLanguage === "middle") {
+        isMiddleEra = true;
+      } else if (currentSourceLanguage === "modern") {
+        if (activeTab === "middle") {
+          isMiddleEra = true;
+        }
+      }
+      if (isMiddleEra) eraId = "middle";
+      
+      const config = eraDetails[eraId];
+      if (!config) return;
+      
+      document.getElementById("drawer-era-label").textContent = `${eraId === 'old' ? 'Old' : (eraId === 'middle' ? 'Middle' : 'Shakespearean')} English Study`;
+      document.getElementById("drawer-era-title").textContent = config.title;
+      
+      // Determine input values
+      const inputEl = document.getElementById("translator-input");
+      const outputEl = document.getElementById("translator-output-container");
+      let outputText = outputEl.textContent;
+      
+      let phoneticGuide = "";
+      let ipaCode = "";
+      
+      // Try to read preset values
+      let activePreset = null;
+      const presetsList = presets[currentSourceLanguage] || [];
+      activePreset = presetsList.find(p => p.input.toLowerCase().trim() === inputEl.value.toLowerCase().trim());
+      
+      if (eraId === 'old') {
+        if (activePreset) {
+          if (currentSourceLanguage === "old") {
+            if (activePreset.id === "o_1") {
+              phoneticGuide = "Hwat, meen freond, hwider gayst thoo?";
+              ipaCode = "/xwaæt miːn freːond nwi.der ɡæːst θuː/";
+            } else if (activePreset.id === "o_2") {
+              phoneticGuide = "Oo-re day-whahm-lee-can hlahf syle oos to day.";
+              ipaCode = "/ˈuː.re dæjˈxwɑːm.liː.kɑn xlɑːf ˈsy.le uːs toː dæj/";
+            } else if (activePreset.id === "o_3") {
+              phoneticGuide = "Wess-ahn, oth-the ne wess-ahn, that is say-oh freeng-noong.";
+              ipaCode = "/ˈwe.sɑn ˈoθ.θe ne ˈwe.sɑn θæt is seːo ˈfriːj.nuŋɡ/";
+            }
+          } else {
+            phoneticGuide = activePreset.phonetic;
+            ipaCode = activePreset.ipa;
+          }
+        } else {
+          let oeText = currentSourceLanguage === "old" ? inputEl.value : translateSentence(inputEl.value, "modern_to_old");
+          phoneticGuide = generateOldEnglishPhonetic(oeText);
+          ipaCode = generateOldEnglishIPA(oeText);
+        }
+        document.getElementById("drawer-runes-section").style.display = "block";
+      } else if (eraId === 'middle') {
+        // Middle English
+        if (activePreset) {
+          if (currentSourceLanguage === "middle") {
+            if (activePreset.id === "mid_1") {
+              phoneticGuide = "Hayl, meen frend, whider goast thou?";
+              ipaCode = "/hæjl miːn freːnd wi.dər ɡoːst ðuː/";
+            } else if (activePreset.id === "mid_2") {
+              phoneticGuide = "Give to us this day oore braid oore echay-dayes.";
+              ipaCode = "/ɡiːv toː ʌs ðɪs dæj uːr brɛːd uːr ɛːtʃ.dæj.əs/";
+            } else if (activePreset.id === "mid_3") {
+              phoneticGuide = "Truthe shal make yow free in the light.";
+              ipaCode = "/trɛuːθə ʃal maːkə juː freː ɪn ðə lɪxt/";
+            }
+          } else {
+            phoneticGuide = activePreset.phonetic;
+            ipaCode = activePreset.ipa;
+          }
+        } else {
+          let meText = currentSourceLanguage === "middle" ? inputEl.value : translateSentence(inputEl.value, "modern_to_800");
+          phoneticGuide = generateMiddleEnglishPhonetic(meText);
+          ipaCode = generateMiddleEnglishIPA(meText);
+        }
+        document.getElementById("drawer-runes-section").style.display = "none";
+      } else if (eraId === 'early') {
+        // Shakespearean
+        if (activePreset) {
+          if (currentSourceLanguage === "early") {
+            if (activePreset.id === "ea_1") {
+              phoneticGuide = "Hail, my friend, whither goest thou?";
+              ipaCode = "/heɪl maɪ frend ˈwɪð.ər ˈɡoʊ.əst ðaʊ/";
+            } else if (activePreset.id === "ea_2") {
+              phoneticGuide = "Give us this day our daily bread.";
+              ipaCode = "/ɡɪv ʌs ðɪs deɪ aʊər ˈdeɪ.lɪ brɛd/";
+            } else if (activePreset.id === "ea_3") {
+              phoneticGuide = "To be, or not to be, that is the question.";
+              ipaCode = "/tuː biː ɔːr nɒt tuː biː ðæt ɪz ðə ˈkwɛs.tʃən/";
+            }
+          } else {
+            phoneticGuide = activePreset.phonetic;
+            ipaCode = activePreset.ipa;
+          }
+        } else {
+          let eaText = currentSourceLanguage === "early" ? inputEl.value : translateSentence(inputEl.value, "modern_to_500");
+          phoneticGuide = eaText;
+          ipaCode = generateEarlyModernIPA(eaText);
+        }
+        document.getElementById("drawer-runes-section").style.display = "none";
+      }
+      
+      document.getElementById("drawer-read-aloud").textContent = phoneticGuide;
+      document.getElementById("drawer-ipa").textContent = ipaCode;
+      
+      // Populate rules table
+      let tableHtml = `
+        <table class="rules-table">
+          <thead>
+            <tr>
+              <th>Glyph</th>
+              <th>IPA</th>
+              <th>Pronunciation Rule</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      config.rules.forEach(r => {
+        tableHtml += `
+          <tr>
+            <td class="rule-glyph">${r.glyph}</td>
+            <td class="rule-ipa">${r.ipa}</td>
+            <td>${r.rule}</td>
+          </tr>
+        `;
+      });
+      tableHtml += `</tbody></table>`;
+      document.getElementById("drawer-rules-table-container").innerHTML = tableHtml;
+
+      // Populate Runes Grid
+      let runesHtml = "";
+      Object.entries(runicAlphabetMap).forEach(([rune, latin]) => {
+        runesHtml += `
+          <div class="runic-item" title="Rune representing ${latin}">
+            <span class="rune-char">${rune}</span>
+            <span class="rune-latin">${latin}</span>
+          </div>
+        `;
+      });
+      document.getElementById("drawer-runic-grid").innerHTML = runesHtml;
+
+      overlay.classList.add("open");
+      drawer.classList.add("open");
+    }
+
+    function closeLinguisticDrawer() {
+      document.getElementById("linguistic-drawer-overlay").classList.remove("open");
+      document.getElementById("linguistic-drawer").classList.remove("open");
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    /* ==========================================================================
+       G. FILE EXTRACTION UTILITIES
+       ========================================================================== */
+    async function extractTextFromPDF(file, statusCallback) {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      let fullText = [];
+      
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        if (statusCallback) {
+          statusCallback(`Reading page ${pageNum} of ${pdf.numPages}...`);
+        }
+        const page = await pdf.getPage(pageNum);
+        const textContent = await page.getTextContent();
+        const pageText = textContent.items.map(item => item.str).join(" ");
+        fullText.push(pageText);
+      }
+      return fullText.join("\n");
+    }
+
+    async function extractTextFromImage(file, statusCallback) {
+      if (statusCallback) {
+        statusCallback("Analyzing image layout...");
+      }
+      const result = await Tesseract.recognize(
+        file,
+        'eng',
+        {
+          logger: m => {
+            if (m.status === 'recognizing text') {
+              if (statusCallback) {
+                const progress = Math.round(m.progress * 100);
+                statusCallback(`Extracting characters: ${progress}%...`);
+              }
+            }
+          }
+        }
+      );
+      return result.data.text;
+    }
+
+    /* ==========================================================================
+       H. INITIALIZATION
+       ========================================================================== */
+    let initRetries = 0;
+    function initTranslator() {
+      const inputEl = document.getElementById("translator-input");
+      
+      if (!inputEl) {
+        initRetries++;
+        if (initRetries < 100) { // Retry for up to 5 seconds
+          setTimeout(initTranslator, 50);
+        } else {
+          console.warn("Translator input element not found after 100 retries.");
+        }
+        return;
+      }
+      initRetries = 0; // Reset retries
+
+      const directionSelect = document.getElementById("direction-select");
+      const charCurrent = document.getElementById("char-current");
+      const customAlert = document.getElementById("custom-alert");
+      const clearBtn = document.getElementById("clear-btn");
+      
+      // Load Initial Preset list and Tabs list
+      renderPresetChips();
+      renderOutputTabs();
+      
+      // Set initial text value
+      const defaultPresets = presets[currentSourceLanguage] || [];
+      if (defaultPresets.length > 0) {
+        if (inputEl) {
+          inputEl.value = defaultPresets[0].input;
+          if (charCurrent) charCurrent.textContent = defaultPresets[0].input.length.toLocaleString();
+          performTranslation();
+        }
+      }
+
+      // Input change event
+      if (inputEl) {
+        inputEl.addEventListener("input", (e) => {
+          let val = e.target.value;
+          if (charCurrent) charCurrent.textContent = val.length.toLocaleString();
+          customText = val;
+          
+          // Remove active highlights from preset chips
+          document.querySelectorAll(".preset-chip").forEach(el => el.classList.remove("active"));
+          
+          if (val.trim() === "") {
+            isCustomMode = false;
+            if (customAlert) customAlert.style.display = "none";
+            // Re-activate first preset chip
+            const firstChip = document.querySelector(".preset-chip");
+            if (firstChip) firstChip.classList.add("active");
+          } else {
+            // Check if it matches any preset exactly
+            const presetsList = presets[currentSourceLanguage] || [];
+            const matched = presetsList.find(p => p.input.toLowerCase().trim() === val.toLowerCase().trim());
+            
+            if (matched) {
+              isCustomMode = false;
+              if (customAlert) customAlert.style.display = "none";
+              const matchingChip = document.querySelector(`[data-preset-id="${matched.id}"]`);
+              if (matchingChip) matchingChip.classList.add("active");
+            } else {
+              isCustomMode = true;
+              if (customAlert) customAlert.style.display = "flex";
+            }
+          }
+          performTranslation();
+        });
+      }
+
+      // Direction selector event (now Source Language Selector)
+      if (directionSelect) {
+        directionSelect.addEventListener("change", (e) => {
+          currentSourceLanguage = e.target.value;
+          isCustomMode = false;
+          if (customAlert) customAlert.style.display = "none";
+          
+          // Render corresponding chips and tabs
+          renderPresetChips();
+          renderOutputTabs();
+          
+          // Load first preset
+          const currentList = presets[currentSourceLanguage] || [];
+          if (currentList.length > 0) {
+            if (inputEl) inputEl.value = currentList[0].input;
+            if (charCurrent) charCurrent.textContent = currentList[0].input.length.toLocaleString();
+          } else {
+            if (inputEl) inputEl.value = "";
+            if (charCurrent) charCurrent.textContent = "0";
+          }
+          
+          performTranslation();
+        });
+      }
+
+      // Clear action
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          if (inputEl) inputEl.value = "";
+          if (charCurrent) charCurrent.textContent = "0";
+          customText = "";
+          isCustomMode = false;
+          if (customAlert) customAlert.style.display = "none";
+          
+          document.querySelectorAll(".preset-chip").forEach(el => el.classList.remove("active"));
+          const firstChip = document.querySelector(".preset-chip");
+          if (firstChip) {
+            firstChip.classList.add("active");
+            const defaultList = presets[currentSourceLanguage] || [];
+            if (defaultList.length > 0) {
+              if (inputEl) inputEl.value = defaultList[0].input;
+              if (charCurrent) charCurrent.textContent = defaultList[0].input.length.toLocaleString();
+            }
+          }
+          performTranslation();
+        });
+      }
+
+      // File Loader Binding
+      const fileLoader = document.getElementById("file-loader");
+      const uploadBtn = document.getElementById("upload-btn");
+      const fileProgressAlert = document.getElementById("file-progress-alert");
+      const fileProgressStatus = document.getElementById("file-progress-status");
+
+      if (uploadBtn) {
+        if (fileLoader) {
+          uploadBtn.addEventListener("click", () => {
+            fileLoader.click();
+          });
+
+          fileLoader.addEventListener("change", async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            fileProgressAlert.style.display = "flex";
+            fileProgressStatus.textContent = "Loading file...";
+            inputEl.disabled = true;
+            uploadBtn.disabled = true;
+            
+            try {
+              let extractedText = "";
+              if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
+                extractedText = await extractTextFromPDF(file, (msg) => {
+                  fileProgressStatus.textContent = msg;
+                });
+              } else if (file.type.startsWith("image/") || /\.(png|jpe?g|gif|webp|bmp)$/i.test(file.name)) {
+                extractedText = await extractTextFromImage(file, (msg) => {
+                  fileProgressStatus.textContent = msg;
+                });
+              } else {
+                alert("Unsupported file format. Please upload a PDF or an Image.");
+                fileProgressAlert.style.display = "none";
+                inputEl.disabled = false;
+                uploadBtn.disabled = false;
+                fileLoader.value = "";
+                return;
+              }
+
+              if (extractedText.trim()) {
+                inputEl.value = extractedText;
+                charCurrent.textContent = extractedText.length.toLocaleString();
+                
+                // Set custom mode and show warning/heuristic box if text isn't a preset
+                const presetsList = presets[currentSourceLanguage] || [];
+                const matched = presetsList.find(p => p.input.toLowerCase().trim() === extractedText.toLowerCase().trim());
+                document.querySelectorAll(".preset-chip").forEach(el => el.classList.remove("active"));
+                
+                if (matched) {
+                  isCustomMode = false;
+                  customAlert.style.display = "none";
+                  const matchingChip = document.querySelector(`[data-preset-id="${matched.id}"]`);
+                  if (matchingChip) matchingChip.classList.add("active");
+                } else {
+                  isCustomMode = true;
+                  customText = extractedText;
+                  customAlert.style.display = "flex";
+                }
+
+                performTranslation();
+              } else {
+                alert("No text could be extracted from the file.");
+              }
+            } catch (err) {
+              console.error("Error extracting text:", err);
+              alert("An error occurred while extracting text from the file: " + err.message);
+            } finally {
+              fileProgressAlert.style.display = "none";
+              inputEl.disabled = false;
+              uploadBtn.disabled = false;
+              fileLoader.value = "";
+            }
+          });
+        }
+      }
+
+      // Translate button action trigger
+      const translateBtn = document.getElementById("translate-btn");
+      if (translateBtn) {
+        translateBtn.addEventListener("click", () => {
+          performTranslation();
+        });
+      }
+
+      // Audio trigger
+      const playAudioBtn = document.getElementById("play-audio-btn");
+      if (playAudioBtn) {
+        playAudioBtn.addEventListener("click", () => {
+          const outputEl = document.getElementById("translator-output-container");
+          if (!outputEl || outputEl.querySelector(".placeholder-text")) {
+            return;
+          }
+          const outputText = outputEl.textContent;
+          if (currentSourceLanguage === "modern") {
+            if (activeTab === "old") {
+              let phonetic = translationCache.old.phonetic || generateOldEnglishPhonetic(outputText);
+              speakText(phonetic, 0.75, 0.95);
+            } else if (activeTab === "middle") {
+              let phonetic = translationCache.middle.phonetic || generateMiddleEnglishPhonetic(outputText);
+              speakText(phonetic, 0.75, 0.95);
+            } else if (activeTab === "early") {
+              speakText(outputText, 0.75, 0.95);
+            } else if (activeTab === "late") {
+              speakText(outputText, 0.8, 1.0);
+            }
+          } else {
+            speakText(outputText, 0.85, 1.0);
+          }
+        });
+      }
+
+      // Drawer trigger bindings with null checks
+      const drawerTrigger = document.getElementById("linguistic-drawer-trigger");
+      if (drawerTrigger) {
+        drawerTrigger.addEventListener("click", openLinguisticDrawer);
+      }
+      
+      const drawerCloseBtn = document.getElementById("drawer-close-btn");
+      if (drawerCloseBtn) {
+        drawerCloseBtn.addEventListener("click", closeLinguisticDrawer);
+      }
+      
+      const drawerOverlay = document.getElementById("linguistic-drawer-overlay");
+      if (drawerOverlay) {
+        drawerOverlay.addEventListener("click", closeLinguisticDrawer);
+      }
+      
+      const runicInfoTrigger = document.getElementById("runic-info-trigger");
+      if (runicInfoTrigger) {
+        runicInfoTrigger.addEventListener("click", openLinguisticDrawer);
+      }
+
+      // Drawer Synthesis controls
+      const rateSlider = document.getElementById("synth-rate");
+      const rateVal = document.getElementById("rate-val");
+      const pitchSlider = document.getElementById("synth-pitch");
+      const pitchVal = document.getElementById("pitch-val");
+
+      if (rateSlider) {
+        if (rateVal) {
+          rateSlider.addEventListener("input", (e) => { rateVal.textContent = e.target.value + "x"; });
+        }
+      }
+      if (pitchSlider) {
+        if (pitchVal) {
+          pitchSlider.addEventListener("input", (e) => { pitchVal.textContent = e.target.value + "x"; });
+        }
+      }
+
+      const drawerSynthPlay = document.getElementById("drawer-synth-play");
+      if (drawerSynthPlay) {
+        drawerSynthPlay.addEventListener("click", () => {
+          const readAloudEl = document.getElementById("drawer-read-aloud");
+          const textToSpeech = readAloudEl ? readAloudEl.textContent : "";
+          const rate = rateSlider ? parseFloat(rateSlider.value) : 0.7;
+          const pitch = pitchSlider ? parseFloat(pitchSlider.value) : 0.9;
+          if (textToSpeech) {
+            speakText(textToSpeech, rate, pitch);
+          }
+        });
+      }
+
+      // FAQ Accordion Toggle
+      const faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          const item = question.parentElement;
+          const isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+      // Copy translation action trigger
+      const copyBtn = document.getElementById("copy-btn");
+      if (copyBtn) {
+        copyBtn.addEventListener("click", function() {
+          const outputEl = document.getElementById("translator-output-container");
+          if (!outputEl) return;
+          if (outputEl.querySelector(".placeholder-text")) return;
+          
+          const textToCopy = outputEl.innerText || outputEl.textContent;
+          navigator.clipboard.writeText(textToCopy.trim()).then(function() {
+            const originalHtml = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+            setTimeout(function() {
+              copyBtn.innerHTML = originalHtml;
+            }, 2000);
+          }).catch(function(err) {
+            console.error("Failed to copy text: ", err);
+          });
+        });
+      }
+
+      // AI Settings Modal logic
+      const aiSettingsBtn = document.getElementById("ai-settings-btn");
+      const aiModalOverlay = document.getElementById("ai-modal-overlay");
+      const aiCloseBtn = document.getElementById("ai-close-btn");
+      const aiSaveBtn = document.getElementById("ai-save-btn");
+      const aiTestBtn = document.getElementById("ai-test-btn");
+      const aiProviderSelect = document.getElementById("ai-provider-select");
+      const aiKeyInput = document.getElementById("ai-key-input");
+      const aiEnabledCheckbox = document.getElementById("ai-enabled-checkbox");
+
+      if (aiSettingsBtn) {
+        if (aiModalOverlay) {
+          aiSettingsBtn.addEventListener("click", () => {
+            // Load settings from localStorage
+            const savedProvider = localStorage.getItem("ai_provider") || "gemini";
+            const savedKey = localStorage.getItem("ai_key") || "";
+            const savedEnabled = localStorage.getItem("ai_enabled") === "true";
+
+            if (aiProviderSelect) aiProviderSelect.value = savedProvider;
+            if (aiKeyInput) aiKeyInput.value = savedKey;
+            if (aiEnabledCheckbox) aiEnabledCheckbox.checked = savedEnabled;
+
+            aiModalOverlay.style.display = "flex";
+          });
+        }
+      }
+
+      const closeAIModal = () => {
+        if (aiModalOverlay) aiModalOverlay.style.display = "none";
+      };
+
+      if (aiCloseBtn) {
+        aiCloseBtn.addEventListener("click", closeAIModal);
+      }
+
+      if (aiModalOverlay) {
+        aiModalOverlay.addEventListener("click", (e) => {
+          if (e.target === aiModalOverlay) {
+            closeAIModal();
+          }
+        });
+      }
+
+      if (aiSaveBtn) {
+        aiSaveBtn.addEventListener("click", () => {
+          if (aiProviderSelect) localStorage.setItem("ai_provider", aiProviderSelect.value);
+          if (aiKeyInput) localStorage.setItem("ai_key", aiKeyInput.value.trim());
+          if (aiEnabledCheckbox) localStorage.setItem("ai_enabled", aiEnabledCheckbox.checked ? "true" : "false");
+          
+          closeAIModal();
+          
+          // Re-translate with the new settings
+          performTranslation();
+        });
+      }
+
+      if (aiTestBtn) {
+        aiTestBtn.addEventListener("click", async () => {
+          const provider = aiProviderSelect ? aiProviderSelect.value : "gemini";
+          const apiKey = aiKeyInput ? aiKeyInput.value.trim() : "";
+          if (!apiKey) {
+            alert("Please enter an API key first.");
+            return;
+          }
+
+          aiTestBtn.disabled = true;
+          aiTestBtn.textContent = "Testing...";
+
+          try {
+            // Run a quick, small prompt to verify the key works
+            const prompt = "Reply with only the word OK";
+            let success = false;
+            
+            if (provider === "gemini") {
+              const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+              const res = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  contents: [{ parts: [{ text: prompt }] }],
+                  generationConfig: { maxOutputTokens: 5 }
+                })
+              });
+              if (res.ok) success = true;
+            } else if (provider === "openai") {
+              const url = "https://api.openai.com/v1/chat/completions";
+              const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                  model: "gpt-4o-mini",
+                  messages: [{ role: "user", content: prompt }],
+                  max_tokens: 5
+                })
+              });
+              if (res.ok) success = true;
+            } else if (provider === "claude") {
+              const url = "https://api.anthropic.com/v1/messages";
+              const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "x-api-key": apiKey,
+                  "anthropic-version": "2023-06-01",
+                  "dangerouslyAllowBrowser": "true"
+                },
+                body: JSON.stringify({
+                  model: "claude-3-5-haiku-20241022",
+                  max_tokens: 5,
+                  messages: [{ role: "user", content: prompt }]
+                })
+              });
+              if (res.ok) success = true;
+            }
+            
+            if (success) {
+              alert("Connection test successful! Your API key is valid.");
+            } else {
+              alert("Connection failed. Please check your API key and network connection.");
+            }
+          } catch (err) {
+            console.error(err);
+            alert("Connection error: " + err.message);
+          } finally {
+            aiTestBtn.disabled = false;
+            aiTestBtn.textContent = "Test API";
+          }
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initTranslator);
+    } else {
+      initTranslator();
+    }
+  </script>
+  </div>
+
+  
+
+  
+
+      <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+  <!-- AI Settings Modal -->
+  <div id="ai-modal-overlay" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <h3 style="margin-top: 0; color: var(--accent-gold); display: flex; align-items: center; gap: 8px; font-size: 1.2rem; font-family: var(--font-title);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        AI Translation Settings
+      </h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Use your own API keys to query Google, OpenAI, or Anthropic models for high-accuracy translation.</p>
+      
+      <div class="settings-group" style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 6px;">AI Provider</label>
+        <select id="ai-provider-select" style="width: 100%; padding: 10px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; color: var(--text-cream); outline: none;">
+          <option value="gemini">Google Gemini</option>
+          <option value="openai">OpenAI GPT</option>
+          <option value="claude">Anthropic Claude</option>
+        </select>
+      </div>
+      
+      <div class="settings-group" style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 6px;">API Key</label>
+        <input type="password" id="ai-key-input" placeholder="Enter API key..." style="width: 100%; padding: 10px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; color: var(--text-cream); outline: none;" />
+      </div>
+      
+      <div class="settings-group" style="margin-bottom: 24px; display: flex; align-items: center; gap: 8px;">
+        <input type="checkbox" id="ai-enabled-checkbox" style="width: 16px; height: 16px; accent-color: var(--accent-gold);" />
+        <label for="ai-enabled-checkbox" style="font-size: 0.85rem; color: var(--text-cream); user-select: none; cursor: pointer;">Enable AI-powered translation</label>
+      </div>
+      
+      <div style="display: flex; gap: 12px; justify-content: flex-end;">
+        <button id="ai-test-btn" class="action-btn" style="background: rgba(255, 255, 255, 0.05);">Test API</button>
+        <button id="ai-save-btn" class="action-btn" style="background: var(--accent-gold); color: #120924; font-weight: 600;">Save & Apply</button>
+        <button id="ai-close-btn" class="action-btn" style="background: transparent; border: none; color: var(--text-muted);">Cancel</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

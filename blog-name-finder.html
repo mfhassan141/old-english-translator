@@ -1,0 +1,6663 @@
+<?php
+/**
+ * Stop RankMath from generating duplicate meta titles, descriptions, and schemas on this page.
+ */
+if (function_exists('add_filter')) {
+  add_filter( 'rank_math/frontend/title', '__return_false' );
+  add_filter( 'rank_math/frontend/description', '__return_false' );
+  add_filter( 'rank_math/json_ld', '__return_empty_array', 99 );
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Name Maker — Free Anglo-Saxon Name Generator &amp; Finder</title>
+  <meta name="description" content="Use our free Name Maker to generate authentic Anglo-Saxon names, explore historical meanings, and discover ancient English naming traditions.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link data-no-optimize="1" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Canonical Link -->
+  <link rel="canonical" href="https://partnerhoursguide.com/random-name-maker/" />
+
+  
+
+  
+
+  
+
+  <style data-no-optimize="1">
+    :root {
+      --bg-color: #120924; /* Deep Medieval Purple */
+      --card-bg: #1c1032; /* Lighter Purple */
+      --card-bg-hover: #261742;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.25);
+      --text-cream: #f8f5f0;
+      --text-muted: #8c829d;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.35);
+      
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .translator-app-wrapper {
+      background-color: #120924 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    /* Hide default WordPress / Kadence page titles to avoid duplicates and white background leaks */
+    .entry-hero, .entry-header, .page-title-wrap {
+      display: none !important;
+    }
+
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .header-nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-crest {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      background: rgba(28, 16, 50, 0.6);
+    }
+
+    .brand-name {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav.site-navigation ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav.site-navigation a {
+      white-space: nowrap;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    nav.site-navigation a:hover, 
+    nav.site-navigation a.active {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    nav.site-navigation a.nav-cta {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.5rem 1.1rem !important;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    nav.site-navigation a.nav-cta:hover {
+      color: var(--bg-color) !important;
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    .blog-header-section {
+      padding: 5rem 0 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(28, 16, 50, 0.15);
+    }
+
+    .blog-category {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      background: rgba(201, 153, 58, 0.1);
+      border: 1.5px solid var(--accent-gold);
+      color: var(--accent-gold) !important;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .blog-main-title {
+      font-family: var(--font-title) !important;
+      font-size: 3rem;
+      line-height: 1.2;
+      color: var(--text-cream) !important;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .blog-meta-info {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .blog-content-wrapper {
+      padding: 4rem 0;
+    }
+
+    .blog-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    @media (min-width: 992px) {
+      .blog-grid-layout {
+        grid-template-columns: 8fr 4fr;
+      }
+    }
+
+    article.blog-article {
+      background: rgba(28, 16, 50, 0.15);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .article-body {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    .article-body p {
+      margin-bottom: 1.8rem;
+    }
+
+    .article-body a {
+      color: var(--accent-gold);
+      text-decoration: underline;
+      transition: var(--transition-smooth);
+    }
+
+    .article-body a:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    .article-body h2 {
+      font-family: var(--font-title) !important;
+      font-size: 2rem;
+      color: var(--accent-gold) !important;
+      margin: 2.5rem 0 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.4rem;
+      color: var(--text-cream) !important;
+      margin: 1.8rem 0 1rem;
+    }
+
+    .article-body blockquote {
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201, 153, 58, 0.05);
+      border-left: 4px solid var(--accent-gold);
+      font-style: italic;
+      color: var(--text-cream);
+      border-radius: 4px;
+    }
+
+    .bluf-box {
+      background: rgba(201, 153, 58, 0.08);
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .bluf-box h3 {
+      color: var(--accent-gold) !important;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .bluf-box p {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--text-cream) !important;
+    }
+
+    .blog-image-box {
+      margin: 2.5rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(18, 9, 36, 0.3);
+    }
+
+    .blog-image-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 480px;
+      object-fit: cover;
+    }
+
+    .blog-image-caption {
+      padding: 0.8rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* FAQ Section Styles */
+    .faq-section {
+      margin-top: 4rem;
+    }
+
+    .faq-item {
+      background: rgba(28, 16, 50, 0.3);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      padding: 1.5rem;
+    }
+
+    .faq-question {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      color: var(--text-cream);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .faq-answer {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .author-card {
+      margin-top: 4rem;
+      padding: 2rem;
+      background: rgba(28, 16, 50, 0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .author-avatar {
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--accent-gold);
+      border-radius: 50%;
+      background: var(--card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      flex-shrink: 0;
+    }
+
+    .author-details h4 {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 0.5rem;
+    }
+
+    .author-details p {
+      font-size: 0.95rem;
+      color: var(--text-muted) !important;
+      margin: 0;
+    }
+
+    aside.blog-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-widget {
+      background: rgba(28, 16, 50, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+    }
+
+    .sidebar-widget h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.3rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.4rem;
+    }
+
+    .cta-widget {
+      background: linear-gradient(145deg, rgba(28, 16, 50, 0.8) 0%, rgba(18, 9, 36, 0.9) 100%);
+      border: 1px solid var(--accent-gold);
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .cta-widget p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-btn:hover {
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    .recent-posts-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .recent-posts-list li a {
+      color: var(--text-cream) !important;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+      display: block;
+    }
+
+    .recent-posts-list li a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    .recent-posts-list li span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.9);
+      padding: 4rem 0 2rem;
+      margin-top: 5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 320px;
+    }
+
+    .footer-links h4 {
+      font-family: var(--font-title) !important;
+      font-size: 1.1rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted) !important;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold-hover) !important;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(201, 153, 58, 0.08);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+      }
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal-links a {
+      color: var(--text-muted) !important;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-legal-links a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    /* Comparison Table Styling */
+    .comparison-table-wrapper {
+      overflow-x: auto;
+      margin: 2rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+    table.comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+      background: rgba(18, 9, 36, 0.4);
+      min-width: 600px;
+    }
+    table.comparison-table th {
+      background: rgba(201, 153, 58, 0.15);
+      color: var(--accent-gold);
+      padding: 1rem;
+      font-weight: 600;
+      border-bottom: 2px solid var(--border-color);
+    }
+    table.comparison-table td {
+      padding: 1.2rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+      color: var(--text-muted);
+    }
+    table.comparison-table tr:hover {
+      background: rgba(201, 153, 58, 0.02);
+    }
+    table.comparison-table td strong {
+      color: var(--text-cream);
+    }
+
+    
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 768px) {
+      .header-nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      /* Adjust blog layout paddings for maximum reading space on small screens */
+      article.blog-article {
+        padding: 1.2rem !important;
+      }
+      .blog-header-section {
+        padding: 3rem 0 2rem;
+      }
+      .blog-main-title {
+        font-size: 2rem !important;
+      }
+    }
+  
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  
+    /* Dropdown CSS Rules */
+    nav.site-navigation li {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1c1032;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+      padding: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.2rem !important;
+      font-size: 0.9rem !important;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      width: 100%;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent-gold-hover) !important;
+      background: rgba(201, 153, 58, 0.08);
+      padding-left: 1.5rem !important;
+    }
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+    nav.site-navigation li.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-arrow {
+      font-size: 0.7rem;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    nav.site-navigation li.has-dropdown:hover .nav-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-gold-hover);
+    }
+    @media (max-width: 1150px) {
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .dropdown-menu a {
+        padding: 0.3rem 1rem !important;
+        text-align: center !important;
+      }
+      .nav-arrow {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": "https://partnerhoursguide.com/random-name-maker/#post",
+        "headline": "Name Maker — Free Anglo-Saxon Name Generator &amp; Finder",
+        "description": "Use our free Name Maker to generate authentic Anglo-Saxon names, explore historical meanings, and discover ancient English naming traditions.",
+        "author": {
+          "@type": "Person",
+          "name": "Furqan",
+          "jobTitle": "Senior Career Advisor",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Sir Syed University of Engineering and Technology"
+          }
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "PartnerHoursGuide",
+          "url": "https://partnerhoursguide.com"
+        },
+        "datePublished": "2026-05-30",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://partnerhoursguide.com/random-name-maker/"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://partnerhoursguide.com/random-name-maker/#app",
+        "name": "Name Maker",
+        "operatingSystem": "All",
+        "applicationCategory": "EducationalApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://partnerhoursguide.com/random-name-maker/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does the old english e represent in early naming conventions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The old english e was a fundamental vowel sound in Anglo-Saxon orthography. It commonly appeared in diphthongs like ea (meaning river or wealth) and eo (meaning yew or horse), which were central elements combined by the Name Maker tool to construct historically accurate names like Eadwine and Leofric."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How was the old english g pronounced in historical records?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pronunciation of the old english g (represented by the yogh character in Middle English transition) varied based on surrounding letters. Before front vowels like e or i, it sounded like the modern y (e.g., giefu is pronounced yief-oo). In other contexts, it was a hard g or a voiced velar fricative sound."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the old english a function in compound names?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The short old english a was distinct from the digraph æ (ash). In compounding, elements starting with old english a like ald (old) or æsc (ash tree) were fused with second elements to form names symbolizing wisdom or natural strength."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What runic symbol represents the old english t in Futhorc?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The old english t corresponds to the Tyr rune (ᛏ) in the Anglo-Saxon runic alphabet. It symbolized the god Tiw and victory. In names, this consonant began powerful martial elements like torht (bright or glorious)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What protective qualities did the old english b carry in names?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The old english b is found in name prefixes like beald (bold) and beorn (warrior/nobleman). These elements were selected to invoke bravery, protection, and leadership qualities in the children who bore them."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How was the old english l used in compound naming poetry?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The old english l often served as the link consonant for elements like leof (beloved, dear). Combining old english l elements allowed families to construct beautiful alliterative names that signaled family alignment and affection."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How did the old english d interact with the letter eth (ð) in manuscripts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In medieval manuscripts, the standard old english d was phonetically distinct from eth (ð) and thorn (þ), which represented th sounds. Names like Cuthbert or Æthelred use these unique dental sounds alongside standard dental old english d elements."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+<body>
+  <div class="translator-app-wrapper">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-nav-container">
+      <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+        <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+        <span class="brand-name">Translator Old English</span>
+      </a>
+      <nav class="site-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="https://partnerhoursguide.com/">Home</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/">Names</a></li>
+          <li><a href="https://partnerhoursguide.com/random-name-maker/" class="active">Name Maker</a></li>
+          
+          <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Blog</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/" class="nav-cta">Try translator</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Blog Header -->
+  <section class="blog-header-section">
+    <div class="container">
+      <span class="blog-category">Language &amp; Linguistics</span>
+      <h1 class="blog-main-title">Name Maker — Ancient Anglo-Saxon Names, Meanings &amp; Free Tool</h1>
+      <div class="blog-meta-info"><span>By Editorial Team</span><span>•</span><span>June 1, 2026</span><span>•</span><span>8 min read</span></div>
+    </div>
+  </section>
+
+  <!-- Blog Content -->
+  <div class="blog-content-wrapper">
+    <div class="container blog-grid-layout">
+      
+      <!-- Main Article -->
+      <main>
+        <article class="blog-article">
+          <div class="article-body">
+<!-- 
+===========================================
+  NAME GENERATOR WIDGET — partnerhoursguide.com
+  Paste inside a WordPress "Custom HTML" block
+  or add via a plugin like "Insert Headers and Footers"
+===========================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+<style>
+/* ── Scoped to .phg-ng-container to avoid conflicts with WP theme ── */
+.phg-ng-container {
+  --bg-color: #120924;
+  --card-bg: #1c1032;
+  --accent-gold: #c9993a;
+  --accent-gold-hover: #dfb45b;
+  --text-cream: #f8f5f0;
+  --text-muted: #8c829d;
+  --border-color: rgba(201, 153, 58, 0.15);
+  --border-color-hover: rgba(201, 153, 58, 0.35);
+
+  font-family: 'Crimson Pro', Georgia, serif !important;
+  max-width: 580px;
+  margin: 2rem auto;
+  padding: 2.2rem 1.5rem 2.8rem;
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+  color: var(--text-cream) !important;
+}
+
+.phg-ng-container * { box-sizing: border-box; }
+
+.phg-ng-container .phg-title {
+  font-family: 'Cinzel', serif !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  letter-spacing: .06em !important;
+  color: var(--accent-gold) !important;
+  text-align: center !important;
+  margin: 0 0 .3rem !important;
+}
+
+.phg-ng-container .phg-sub {
+  font-size: 15px !important;
+  color: var(--text-muted) !important;
+  text-align: center !important;
+  font-style: italic !important;
+  margin: 0 0 1.8rem !important;
+}
+
+.phg-ng-container .phg-row {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 12px !important;
+  margin-bottom: 12px !important;
+}
+
+.phg-ng-container select {
+  width: 100% !important;
+  padding: 11px 14px !important;
+  font-family: 'Crimson Pro', Georgia, serif !important;
+  font-size: 16px !important;
+  color: var(--text-cream) !important;
+  background: var(--bg-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9993a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  padding-right: 36px !important;
+  cursor: pointer !important;
+  transition: all .2s ease !important;
+}
+
+.phg-ng-container select:hover,
+.phg-ng-container select:focus {
+  border-color: var(--accent-gold) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(201, 153, 58, 0.15) !important;
+}
+
+.phg-ng-container .phg-generate-btn {
+  width: 100% !important;
+  padding: 13px !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: var(--bg-color) !important;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all .2s ease !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.phg-ng-container .phg-generate-btn:hover { background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%) !important; }
+.phg-ng-container .phg-generate-btn:active { transform: scale(.98) !important; }
+
+/* Result box */
+.phg-ng-container .phg-result {
+  background: rgba(18, 9, 36, 0.5) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 1.4rem 1.5rem 1.2rem !important;
+  min-height: 100px !important;
+  text-align: center !important;
+  margin-bottom: 12px !important;
+  position: relative !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.phg-ng-container .phg-result.updated {
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.phg-ng-container .phg-name {
+  font-family: 'Cinzel', serif !important;
+  font-size: 2.2rem !important;
+  font-weight: 600 !important;
+  color: var(--accent-gold) !important;
+  margin: 0 0 6px !important;
+  letter-spacing: .03em !important;
+  line-height: 1.2 !important;
+}
+
+.phg-ng-container .phg-name:empty {
+  display: none !important;
+}
+
+.phg-ng-container .phg-meta {
+  font-size: 16px !important;
+  color: var(--text-muted) !important;
+  font-style: italic !important;
+  margin: 0 !important;
+}
+
+.phg-ng-container .phg-meta:empty {
+  display: none !important;
+}
+
+.phg-ng-container .phg-placeholder {
+  font-size: 15px !important;
+  color: var(--text-muted) !important;
+  font-style: italic !important;
+  padding: 1rem 0 !important;
+}
+
+/* TTS buttons */
+.phg-ng-container .tts-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.phg-ng-container .tts-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-family: 'Crimson Pro', serif;
+  font-size: 14px;
+  color: var(--accent-gold);
+  background: rgba(28, 16, 50, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .2s ease;
+  line-height: 1;
+}
+
+.phg-ng-container .tts-btn:hover {
+  background: rgba(201, 153, 58, 0.1);
+  border-color: var(--accent-gold-hover);
+  color: var(--accent-gold-hover);
+  transform: translateY(-1px);
+}
+
+.phg-ng-container .tts-btn:active {
+  transform: translateY(0);
+}
+
+.phg-ng-container .tts-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Active speaking button state */
+.phg-ng-container .tts-btn.speaking,
+.phg-ng-container .history-pill.speaking {
+  animation: speak-pulse 1.2s infinite ease-in-out;
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  background: rgba(201, 153, 58, 0.15);
+}
+
+.phg-ng-container .tts-btn.copied {
+  border-color: #7b9e73;
+  color: #a3cf99;
+  background: rgba(123, 158, 115, 0.15);
+}
+
+@keyframes speak-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); box-shadow: 0 0 10px rgba(201, 153, 58, 0.15); }
+  100% { transform: scale(1); }
+}
+
+/* Old English block */
+.phg-ng-container .oe-block {
+  background: rgba(18, 9, 36, 0.3);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 12px;
+  display: none;
+  animation: fadeIn .3s ease;
+}
+
+.phg-ng-container .oe-block.visible { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+.phg-ng-container .oe-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin: 0 0 8px;
+}
+
+.phg-ng-container .oe-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-cream);
+  margin: 0 0 5px;
+}
+
+.phg-ng-container .oe-meaning {
+  font-size: 15px;
+  color: var(--text-cream);
+  font-style: italic;
+  margin: 0 0 4px;
+}
+
+.phg-ng-container .oe-modern {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+/* History */
+.phg-ng-container .history-wrap { margin-top: 1.2rem; }
+
+.phg-ng-container .history-label {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin: 0 0 8px;
+}
+
+.phg-ng-container .history-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.phg-ng-container .history-pill {
+  font-size: 14px;
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  padding: 4px 14px;
+  background: rgba(18, 9, 36, 0.4);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  color: var(--text-cream);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.phg-ng-container .history-pill:hover {
+  background: rgba(201, 153, 58, 0.1);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .phg-ng-container .phg-row { grid-template-columns: 1fr; }
+  .phg-ng-container .phg-name { font-size: 1.7rem; }
+  .phg-ng-container { padding: 1.6rem 1rem 2rem; }
+}
+
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+</style>
+
+<div class="phg-ng-container" role="region" aria-label="Name Generator">
+
+  <h3 class="phg-title">Name Generator</h3>
+  <p class="phg-sub">Ancient &amp; modern names across 9 languages</p>
+
+  <div class="phg-row">
+    <select class="phg-lang-select" aria-label="Language">
+      <option value="english">English</option>
+      <option value="oldenglish">Old English</option>
+      <option value="norse">Old Norse</option>
+      <option value="latin">Latin</option>
+      <option value="celtic">Celtic / Gaelic</option>
+      <option value="french">French</option>
+      <option value="german">German</option>
+      <option value="japanese">Japanese</option>
+      <option value="spanish">Spanish</option>
+    </select>
+    <select class="phg-gender-select" aria-label="Gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="neutral">Neutral</option>
+    </select>
+  </div>
+
+  <button class="phg-generate-btn">&#9670; Generate Name</button>
+
+  <div class="phg-result">
+    <p class="phg-placeholder">Choose a language &amp; gender, then generate</p>
+    <p class="phg-name"></p>
+    <p class="phg-meta"></p>
+  </div>
+
+  <div class="tts-row phg-tts-row" style="display:none">
+    <button class="tts-btn phg-speak-btn" aria-label="Hear the name">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+      Hear name
+    </button>
+    <button class="tts-btn phg-copy-btn" aria-label="Copy name">
+      <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <rect x="9" y="9" width="13" height="13" rx="2"/>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+      <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display: none;">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      <span class="phg-copy-text">Copy</span>
+    </button>
+  </div>
+
+  <div class="oe-block phg-oe-block">
+    <p class="oe-label">&#9670; Old English Form</p>
+    <p class="oe-name phg-oe-name"></p>
+    <p class="oe-meaning phg-oe-meaning"></p>
+    <p class="oe-modern phg-oe-modern"></p>
+    <div class="tts-row">
+      <button class="tts-btn phg-speak-oe-btn" aria-label="Hear Old English pronunciation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+        Hear Old English
+      </button>
+    </div>
+  </div>
+
+  <div class="history-wrap phg-history-wrap" style="display:none">
+    <p class="history-label">Recent names</p>
+    <div class="history-pills phg-history-pills"></div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var NAMES = {
+  "english": {
+    "male": [
+      {
+        "n": "Edmund",
+        "m": "Prosperity protector",
+        "oe": {
+          "name": "Eadmund",
+          "meaning": "Wealth (ead) + Protection (mund)",
+          "modern": "Edmund — used since Anglo-Saxon times"
+        }
+      },
+      {
+        "n": "Alfred",
+        "m": "Wise counsellor",
+        "oe": {
+          "name": "Ælfrēd",
+          "meaning": "Elf (ælf) + Counsel (rǣd)",
+          "modern": "Alfred — name of the Great King"
+        }
+      },
+      {
+        "n": "Harold",
+        "m": "Army ruler",
+        "oe": {
+          "name": "Hereweald",
+          "meaning": "Army (here) + Power (weald)",
+          "modern": "Harold — last Anglo-Saxon king"
+        }
+      },
+      {
+        "n": "Richard",
+        "m": "Powerful ruler",
+        "oe": {
+          "name": "Rīcweard",
+          "meaning": "Ruler (rīc) + Guardian (weard)",
+          "modern": "Richard"
+        }
+      },
+      {
+        "n": "Arthur",
+        "m": "Bear king",
+        "oe": {
+          "name": "Artúr",
+          "meaning": "Bear (arth) + King",
+          "modern": "Arthur — legendary British king"
+        }
+      },
+      {
+        "n": "Edgar",
+        "m": "Wealthy spear",
+        "oe": {
+          "name": "Ēadgār",
+          "meaning": "Wealth (ēad) + Spear (gār)",
+          "modern": "Edgar"
+        }
+      },
+      {
+        "n": "Oswald",
+        "m": "Divine power",
+        "oe": {
+          "name": "Ōsweald",
+          "meaning": "Divine (ōs) + Power (weald)",
+          "modern": "Oswald"
+        }
+      },
+      {
+        "n": "William",
+        "m": "Will helmet",
+        "oe": {
+          "name": "Willelm",
+          "meaning": "Will (wil) + Helmet (helm)",
+          "modern": "William — brought by the Normans"
+        }
+      },
+      {
+        "n": "Edward",
+        "m": "Wealthy guardian",
+        "oe": {
+          "name": "Ēadweard",
+          "meaning": "Wealth (ēad) + Guard (weard)",
+          "modern": "Edward — still in use today"
+        }
+      },
+      {
+        "n": "Walter",
+        "m": "Commander of the army"
+      },
+      {
+        "n": "Reginald",
+        "m": "Wise ruler"
+      },
+      {
+        "n": "Leonard",
+        "m": "Brave lion"
+      },
+      {
+        "n": "Bernard",
+        "m": "Strong as a bear"
+      },
+      {
+        "n": "Geoffrey",
+        "m": "Pledge of peace"
+      },
+      {
+        "n": "Malcolm",
+        "m": "Devotee of Saint Columba"
+      },
+      {
+        "n": "Roland",
+        "m": "Famous land"
+      },
+      {
+        "n": "Henry",
+        "m": "Home ruler",
+        "oe": {
+          "name": "Heanrīc",
+          "meaning": "High (hean) + Power (rīc)",
+          "modern": "Henry"
+        }
+      },
+      {
+        "n": "Thomas",
+        "m": "Twin"
+      },
+      {
+        "n": "John",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Charles",
+        "m": "Free man"
+      },
+      {
+        "n": "George",
+        "m": "Earth worker / farmer"
+      },
+      {
+        "n": "James",
+        "m": "Supplanter"
+      },
+      {
+        "n": "Robert",
+        "m": "Bright fame"
+      },
+      {
+        "n": "David",
+        "m": "Beloved"
+      },
+      {
+        "n": "Joseph",
+        "m": "He will add"
+      },
+      {
+        "n": "Samuel",
+        "m": "God has heard"
+      },
+      {
+        "n": "Daniel",
+        "m": "God is my judge"
+      },
+      {
+        "n": "Matthew",
+        "m": "Gift of God"
+      },
+      {
+        "n": "Andrew",
+        "m": "Manly / brave"
+      },
+      {
+        "n": "Benjamin",
+        "m": "Son of the right hand"
+      },
+      {
+        "n": "Philip",
+        "m": "Lover of horses"
+      },
+      {
+        "n": "Stephen",
+        "m": "Crown / garland"
+      },
+      {
+        "n": "Gregory",
+        "m": "Watchful / alert"
+      },
+      {
+        "n": "Nicholas",
+        "m": "Victory of the people"
+      },
+      {
+        "n": "Alexander",
+        "m": "Defender of men"
+      },
+      {
+        "n": "Christopher",
+        "m": "Christ-bearer"
+      },
+      {
+        "n": "Vincent",
+        "m": "Conquering"
+      },
+      {
+        "n": "Laurence",
+        "m": "From Laurentum / laurel"
+      },
+      {
+        "n": "Roger",
+        "m": "Famous spear"
+      },
+      {
+        "n": "Ralph",
+        "m": "Wolf counsel"
+      },
+      {
+        "n": "Hugh",
+        "m": "Heart / mind / spirit"
+      },
+      {
+        "n": "Peter",
+        "m": "Stone / rock"
+      },
+      {
+        "n": "Simon",
+        "m": "He has heard"
+      },
+      {
+        "n": "Timothy",
+        "m": "Honouring God"
+      },
+      {
+        "n": "Paul",
+        "m": "Small / humble"
+      }
+    ],
+    "female": [
+      {
+        "n": "Edith",
+        "m": "Prosperous in war",
+        "oe": {
+          "name": "Ēadgȳð",
+          "meaning": "Wealth (ēad) + Battle (gūð)",
+          "modern": "Edith"
+        }
+      },
+      {
+        "n": "Mildred",
+        "m": "Gentle strength",
+        "oe": {
+          "name": "Mildþrȳð",
+          "meaning": "Gentle (mild) + Strength (þrȳð)",
+          "modern": "Mildred"
+        }
+      },
+      {
+        "n": "Ethel",
+        "m": "Noble",
+        "oe": {
+          "name": "Æþel",
+          "meaning": "Noble — a common name element",
+          "modern": "Ethel / Adele"
+        }
+      },
+      {
+        "n": "Winifred",
+        "m": "Blessed peacemaking",
+        "oe": {
+          "name": "Gwenfrewi",
+          "meaning": "Holy (gwen) + Reconciliation",
+          "modern": "Winifred"
+        }
+      },
+      {
+        "n": "Alice",
+        "m": "Noble kind"
+      },
+      {
+        "n": "Beatrice",
+        "m": "She who brings happiness"
+      },
+      {
+        "n": "Constance",
+        "m": "Constant and steadfast"
+      },
+      {
+        "n": "Dorothy",
+        "m": "Gift of God"
+      },
+      {
+        "n": "Eleanor",
+        "m": "Bright, shining one"
+      },
+      {
+        "n": "Florence",
+        "m": "Flourishing, prosperous"
+      },
+      {
+        "n": "Gertrude",
+        "m": "Spear of strength"
+      },
+      {
+        "n": "Matilda",
+        "m": "Battle mighty"
+      },
+      {
+        "n": "Rosalind",
+        "m": "Pretty rose"
+      },
+      {
+        "n": "Margaret",
+        "m": "Pearl"
+      },
+      {
+        "n": "Katherine",
+        "m": "Pure"
+      },
+      {
+        "n": "Elizabeth",
+        "m": "My God is an oath"
+      },
+      {
+        "n": "Mary",
+        "m": "Beloved or bitter"
+      },
+      {
+        "n": "Jane",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Anne",
+        "m": "Favour / grace"
+      },
+      {
+        "n": "Catherine",
+        "m": "Pure"
+      },
+      {
+        "n": "Sarah",
+        "m": "Princess"
+      },
+      {
+        "n": "Emily",
+        "m": "Rival / industrious"
+      },
+      {
+        "n": "Victoria",
+        "m": "Victory"
+      },
+      {
+        "n": "Charlotte",
+        "m": "Free woman / petite"
+      },
+      {
+        "n": "Evelyn",
+        "m": "Desired / water"
+      },
+      {
+        "n": "Helen",
+        "m": "Shining light"
+      },
+      {
+        "n": "Grace",
+        "m": "Favour / grace"
+      },
+      {
+        "n": "Audrey",
+        "m": "Noble strength",
+        "oe": {
+          "name": "Æðelþryð",
+          "meaning": "Noble (æðel) + Strength (þryð)",
+          "modern": "Audrey — Saint Audrey of Ely"
+        }
+      },
+      {
+        "n": "Cecilia",
+        "m": "Blind"
+      },
+      {
+        "n": "Clara",
+        "m": "Bright / clear"
+      },
+      {
+        "n": "Diana",
+        "m": "Divine / heavenly"
+      },
+      {
+        "n": "Frances",
+        "m": "Free / French"
+      },
+      {
+        "n": "Harriet",
+        "m": "Home ruler"
+      },
+      {
+        "n": "Irene",
+        "m": "Peace"
+      },
+      {
+        "n": "Julia",
+        "m": "Youthful / downy-bearded"
+      },
+      {
+        "n": "Lucy",
+        "m": "Light"
+      },
+      {
+        "n": "Marian",
+        "m": "Beloved star of the sea"
+      },
+      {
+        "n": "Philippa",
+        "m": "Lover of horses"
+      },
+      {
+        "n": "Rose",
+        "m": "Rose flower"
+      },
+      {
+        "n": "Sybil",
+        "m": "Prophetess"
+      },
+      {
+        "n": "Theresa",
+        "m": "Harvester"
+      },
+      {
+        "n": "Ursula",
+        "m": "Little bear"
+      },
+      {
+        "n": "Valerie",
+        "m": "Strong / healthy"
+      },
+      {
+        "n": "Agnes",
+        "m": "Pure / chaste"
+      },
+      {
+        "n": "Martha",
+        "m": "Lady / mistress"
+      }
+    ],
+    "neutral": [
+      {
+        "n": "Robin",
+        "m": "Bright fame"
+      },
+      {
+        "n": "Morgan",
+        "m": "Sea circle"
+      },
+      {
+        "n": "Sidney",
+        "m": "Wide island"
+      },
+      {
+        "n": "Leslie",
+        "m": "Garden of holly"
+      },
+      {
+        "n": "Blair",
+        "m": "Field or plain"
+      },
+      {
+        "n": "Finley",
+        "m": "Fair warrior"
+      },
+      {
+        "n": "Rowan",
+        "m": "Little red one"
+      },
+      {
+        "n": "Sage",
+        "m": "Wise one"
+      },
+      {
+        "n": "Kelly",
+        "m": "Warrior / church"
+      },
+      {
+        "n": "Taylor",
+        "m": "Cutter of cloth"
+      },
+      {
+        "n": "Jordan",
+        "m": "Flowing down"
+      },
+      {
+        "n": "Jamie",
+        "m": "Supplanter"
+      },
+      {
+        "n": "Alex",
+        "m": "Defender of men"
+      },
+      {
+        "n": "Casey",
+        "m": "Vigilant in war"
+      },
+      {
+        "n": "Pat",
+        "m": "Noble"
+      },
+      {
+        "n": "Chris",
+        "m": "Christ-bearer"
+      },
+      {
+        "n": "Terry",
+        "m": "Power of the tribe"
+      },
+      {
+        "n": "Shannon",
+        "m": "Wise river"
+      }
+    ]
+  },
+  "oldenglish": {
+    "male": [
+      {
+        "n": "Æthelred",
+        "m": "Noble counsel — a name borne by many Anglo-Saxon kings",
+        "oe": {
+          "name": "Æthelred",
+          "meaning": "æðele (noble) + rǣd (counsel)",
+          "modern": "Æthelred"
+        }
+      },
+      {
+        "n": "Eadwine",
+        "m": "Prosperous friend; a name of good fortune and fellowship",
+        "oe": {
+          "name": "Eadwine",
+          "meaning": "ēad (prosperity) + wine (friend)",
+          "modern": "Eadwine"
+        }
+      },
+      {
+        "n": "Wulfric",
+        "m": "Wolf power — evoking the fearsome strength of the wolf",
+        "oe": {
+          "name": "Wulfric",
+          "meaning": "wulf (wolf) + rīc (power)",
+          "modern": "Wulfric"
+        }
+      },
+      {
+        "n": "Beorhtric",
+        "m": "Bright power — radiant rulership",
+        "oe": {
+          "name": "Beorhtric",
+          "meaning": "beorht (bright) + rīc (power)",
+          "modern": "Beorhtric"
+        }
+      },
+      {
+        "n": "Godwine",
+        "m": "God's friend; blessed companion",
+        "oe": {
+          "name": "Godwine",
+          "meaning": "god (God/good) + wine (friend)",
+          "modern": "Godwine"
+        }
+      },
+      {
+        "n": "Cynewulf",
+        "m": "Royal wolf — the wolf of the king's house",
+        "oe": {
+          "name": "Cynewulf",
+          "meaning": "cyne (royal) + wulf (wolf)",
+          "modern": "Cynewulf"
+        }
+      },
+      {
+        "n": "Ælfric",
+        "m": "Elf ruler — one with the power of the elves",
+        "oe": {
+          "name": "Ælfric",
+          "meaning": "ælf (elf) + rīc (power)",
+          "modern": "Ælfric"
+        }
+      },
+      {
+        "n": "Leofwine",
+        "m": "Dear friend; beloved companion",
+        "oe": {
+          "name": "Leofwine",
+          "meaning": "lēof (dear) + wine (friend)",
+          "modern": "Leofwine"
+        }
+      },
+      {
+        "n": "Oswald",
+        "m": "God's power — divine rule",
+        "oe": {
+          "name": "Oswald",
+          "meaning": "os (god/divine) + weald (power)",
+          "modern": "Oswald"
+        }
+      },
+      {
+        "n": "Dunstan",
+        "m": "Dark stone; stone of the hill",
+        "oe": {
+          "name": "Dunstan",
+          "meaning": "dunn (dark/dun) + stān (stone)",
+          "modern": "Dunstan"
+        }
+      },
+      {
+        "n": "Eadric",
+        "m": "Prosperous ruler; wealthy in power",
+        "oe": {
+          "name": "Eadric",
+          "meaning": "ēad (prosperity) + rīc (power)",
+          "modern": "Eadric"
+        }
+      },
+      {
+        "n": "Sigeberht",
+        "m": "Victory bright — radiant in conquest",
+        "oe": {
+          "name": "Sigeberht",
+          "meaning": "sige (victory) + beorht (bright)",
+          "modern": "Sigeberht"
+        }
+      },
+      {
+        "n": "Thurston",
+        "m": "Thor's stone — under the protection of the thunder-god",
+        "oe": {
+          "name": "Thurston",
+          "meaning": "þor (Thor) + stān (stone)",
+          "modern": "Thurston"
+        }
+      },
+      {
+        "n": "Hereward",
+        "m": "Army guard; protector of the host",
+        "oe": {
+          "name": "Hereward",
+          "meaning": "here (army) + weard (guard)",
+          "modern": "Hereward"
+        }
+      },
+      {
+        "n": "Æthelwulf",
+        "m": "Noble wolf — the aristocratic wolf",
+        "oe": {
+          "name": "Æthelwulf",
+          "meaning": "æðele (noble) + wulf (wolf)",
+          "modern": "Æthelwulf"
+        }
+      },
+      {
+        "n": "Aldhelm",
+        "m": "Old helmet — the ancient protector",
+        "oe": {
+          "name": "Aldhelm",
+          "meaning": "eald (old) + helm (helmet/protector)",
+          "modern": "Aldhelm"
+        }
+      },
+      {
+        "n": "Cuthbert",
+        "m": "Famous bright; known for brilliance",
+        "oe": {
+          "name": "Cuthbert",
+          "meaning": "cūð (known/famous) + beorht (bright)",
+          "modern": "Cuthbert"
+        }
+      },
+      {
+        "n": "Sweyn",
+        "m": "Young man; boy-warrior (Old Norse)",
+        "oe": {
+          "name": "Sweyn",
+          "meaning": "sweyn (young man)",
+          "modern": "Sweyn"
+        }
+      },
+      {
+        "n": "Ulfberht",
+        "m": "Wolf bright — the gleaming wolf",
+        "oe": {
+          "name": "Ulfberht",
+          "meaning": "wulf (wolf) + beorht (bright)",
+          "modern": "Ulfberht"
+        }
+      },
+      {
+        "n": "Wiglaf",
+        "m": "Battle survivor; war remnant",
+        "oe": {
+          "name": "Wiglaf",
+          "meaning": "wig (battle) + lāf (survivor/remnant)",
+          "modern": "Wiglaf"
+        }
+      },
+      {
+        "n": "Byrhthelm",
+        "m": "Bright helmet; shining protector",
+        "oe": {
+          "name": "Byrhthelm",
+          "meaning": "beorht (bright) + helm (helmet/protector)",
+          "modern": "Byrhthelm"
+        }
+      },
+      {
+        "n": "Leofstan",
+        "m": "Dear stone; beloved and firm",
+        "oe": {
+          "name": "Leofstan",
+          "meaning": "lēof (dear) + stān (stone)",
+          "modern": "Leofstan"
+        }
+      },
+      {
+        "n": "Æthelheard",
+        "m": "Noble hard; noble and resolute",
+        "oe": {
+          "name": "Æthelheard",
+          "meaning": "æðele (noble) + heard (hard/brave)",
+          "modern": "Æthelheard"
+        }
+      },
+      {
+        "n": "Sigemund",
+        "m": "Victory protection; guarded by triumph",
+        "oe": {
+          "name": "Sigemund",
+          "meaning": "sige (victory) + mund (hand/protection)",
+          "modern": "Sigemund"
+        }
+      },
+      {
+        "n": "Ealdwulf",
+        "m": "Ancient wolf; the elder wolf",
+        "oe": {
+          "name": "Ealdwulf",
+          "meaning": "eald (old) + wulf (wolf)",
+          "modern": "Ealdwulf"
+        }
+      },
+      {
+        "n": "Forthred",
+        "m": "Forth counsel; advancing wisdom",
+        "oe": {
+          "name": "Forthred",
+          "meaning": "forþ (forth/forward) + rǣd (counsel)",
+          "modern": "Forthred"
+        }
+      },
+      {
+        "n": "Beornwulf",
+        "m": "Warrior wolf; the wolf-warrior",
+        "oe": {
+          "name": "Beornwulf",
+          "meaning": "beorn (warrior/bear) + wulf (wolf)",
+          "modern": "Beornwulf"
+        }
+      },
+      {
+        "n": "Abba",
+        "m": "Father — a title of religious authority",
+        "oe": {
+          "name": "Abba",
+          "meaning": "abba (father)",
+          "modern": "Abba"
+        }
+      },
+      {
+        "n": "Abbo",
+        "m": "Noble and bright — radiant nobility",
+        "oe": {
+          "name": "Abbo",
+          "meaning": "adal (noble) + beorht (bright)",
+          "modern": "Abbo"
+        }
+      },
+      {
+        "n": "Abbud",
+        "m": "Abbot, father — head of a monastery",
+        "oe": {
+          "name": "Abbud",
+          "meaning": "abbud (abbot/father)",
+          "modern": "Abbud"
+        }
+      },
+      {
+        "n": "Abel",
+        "m": "Breath, vapor — fleeting life",
+        "oe": {
+          "name": "Abel",
+          "meaning": "hebel (breath/vapor)",
+          "modern": "Abel"
+        }
+      },
+      {
+        "n": "Abenel",
+        "m": "Son of strength — powerful lineage",
+        "oe": {
+          "name": "Abenel",
+          "meaning": "ab (father/strength) + el (God)",
+          "modern": "Abenel"
+        }
+      },
+      {
+        "n": "Abonis",
+        "m": "Of uncertain origin, possibly from Latin",
+        "oe": {
+          "name": "Abonis",
+          "meaning": "abonis (uncertain)",
+          "modern": "Abonis"
+        }
+      },
+      {
+        "n": "Abunel",
+        "m": "Variant of Abenel — son of strength",
+        "oe": {
+          "name": "Abunel",
+          "meaning": "ab (father/strength) + el (God)",
+          "modern": "Abunel"
+        }
+      },
+      {
+        "n": "Acca",
+        "m": "Oak — strength and endurance of the oak tree",
+        "oe": {
+          "name": "Acca",
+          "meaning": "æc (oak)",
+          "modern": "Acca"
+        }
+      },
+      {
+        "n": "Acchiersum",
+        "m": "Unclear — possibly derived from a place name",
+        "oe": {
+          "name": "Acchiersum",
+          "meaning": "acchiersum (unclear)",
+          "modern": "Acchiersum"
+        }
+      },
+      {
+        "n": "Aculf",
+        "m": "Oak wolf — fierce as a wolf, enduring as an oak",
+        "oe": {
+          "name": "Aculf",
+          "meaning": "æc (oak) + wulf (wolf)",
+          "modern": "Aculf"
+        }
+      },
+      {
+        "n": "Acwulf",
+        "m": "Oak wolf — variant spelling of Aculf",
+        "oe": {
+          "name": "Acwulf",
+          "meaning": "æc (oak) + wulf (wolf)",
+          "modern": "Acwulf"
+        }
+      },
+      {
+        "n": "Adalbert",
+        "m": "Noble and bright — shining in nobility",
+        "oe": {
+          "name": "Adalbert",
+          "meaning": "adal (noble) + beorht (bright)",
+          "modern": "Adalbert"
+        }
+      },
+      {
+        "n": "Adalger",
+        "m": "Noble spear — armed with nobility",
+        "oe": {
+          "name": "Adalger",
+          "meaning": "adal (noble) + gar (spear)",
+          "modern": "Adalger"
+        }
+      },
+      {
+        "n": "Adalhard",
+        "m": "Noble and hardy — brave in nobility",
+        "oe": {
+          "name": "Adalhard",
+          "meaning": "adal (noble) + heard (hardy/brave)",
+          "modern": "Adalhard"
+        }
+      },
+      {
+        "n": "Adalhelmus",
+        "m": "Noble helmet — noble protector",
+        "oe": {
+          "name": "Adalhelmus",
+          "meaning": "adal (noble) + helm (helmet/protector)",
+          "modern": "Adalhelmus"
+        }
+      },
+      {
+        "n": "Adam",
+        "m": "Earth, red earth — made from the dust of the ground",
+        "oe": {
+          "name": "Adam",
+          "meaning": "adam (earth/ground)",
+          "modern": "Adam"
+        }
+      },
+      {
+        "n": "Adda",
+        "m": "Noble gift, or short form of Æthelred",
+        "oe": {
+          "name": "Adda",
+          "meaning": "adal (noble) + giefu (gift)",
+          "modern": "Adda"
+        }
+      },
+      {
+        "n": "Addan",
+        "m": "Noble one — the noble man",
+        "oe": {
+          "name": "Addan",
+          "meaning": "adal (noble)",
+          "modern": "Addan"
+        }
+      },
+      {
+        "n": "Addi",
+        "m": "Noble ornament — beautifully noble",
+        "oe": {
+          "name": "Addi",
+          "meaning": "adal (noble) + odi (ornament)",
+          "modern": "Addi"
+        }
+      },
+      {
+        "n": "Adelaver",
+        "m": "Noble army — of the army of the noble",
+        "oe": {
+          "name": "Adelaver",
+          "meaning": "adal (noble) + hari (army)",
+          "modern": "Adelaver"
+        }
+      },
+      {
+        "n": "Adelelm",
+        "m": "Noble helmet — noble protector",
+        "oe": {
+          "name": "Adelelm",
+          "meaning": "adal (noble) + helm (helmet/protector)",
+          "modern": "Adelelm"
+        }
+      },
+      {
+        "n": "Adelo",
+        "m": "Noble — a compact form of adal names",
+        "oe": {
+          "name": "Adelo",
+          "meaning": "adal (noble)",
+          "modern": "Adelo"
+        }
+      },
+      {
+        "n": "Adelolf",
+        "m": "Noble wolf — aristocratic and fierce",
+        "oe": {
+          "name": "Adelolf",
+          "meaning": "adal (noble) + wulf (wolf)",
+          "modern": "Adelolf"
+        }
+      },
+      {
+        "n": "Aden",
+        "m": "Possibly 'fire' or place-derived",
+        "oe": {
+          "name": "Aden",
+          "meaning": "aden (uncertain)",
+          "modern": "Aden"
+        }
+      },
+      {
+        "n": "Adestan",
+        "m": "Noble stone — steadfast nobility",
+        "oe": {
+          "name": "Adestan",
+          "meaning": "adal (noble) + stān (stone)",
+          "modern": "Adestan"
+        }
+      },
+      {
+        "n": "Adomnán",
+        "m": "Little lord, little monk — a humble title of devotion",
+        "oe": {
+          "name": "Adomnán",
+          "meaning": "adom (lord) + -nán (diminutive)",
+          "modern": "Adomnán"
+        }
+      },
+      {
+        "n": "Adrad",
+        "m": "Noble counsel — wise and noble advice",
+        "oe": {
+          "name": "Adrad",
+          "meaning": "æðel (noble) + rǣd (counsel)",
+          "modern": "Adrad"
+        }
+      },
+      {
+        "n": "Adriod",
+        "m": "Possibly swift rider — a Celtic-derived name",
+        "oe": {
+          "name": "Adriod",
+          "meaning": "adriod (uncertain)",
+          "modern": "Adriod"
+        }
+      },
+      {
+        "n": "Æadan",
+        "m": "Little fire — born of fire and passion",
+        "oe": {
+          "name": "Æadan",
+          "meaning": "áed (fire) + -án (diminutive)",
+          "modern": "Æadan"
+        }
+      },
+      {
+        "n": "Æbane",
+        "m": "Possibly river dweller — one who lives by the water",
+        "oe": {
+          "name": "Æbane",
+          "meaning": "ēa (river) + bana (dweller)",
+          "modern": "Æbane"
+        }
+      },
+      {
+        "n": "Aedán",
+        "m": "Little fire, born of fire — fiery spirit",
+        "oe": {
+          "name": "Aedán",
+          "meaning": "áed (fire) + -án (diminutive)",
+          "modern": "Aedán"
+        }
+      },
+      {
+        "n": "Ædda",
+        "m": "Rich gift — a gift of prosperity",
+        "oe": {
+          "name": "Ædda",
+          "meaning": "ēad (wealth) + giefu (gift)",
+          "modern": "Ædda"
+        }
+      },
+      {
+        "n": "Ædde",
+        "m": "Rich, blessed — wealthy and fortunate",
+        "oe": {
+          "name": "Ædde",
+          "meaning": "ēad (wealth/blessed)",
+          "modern": "Ædde"
+        }
+      },
+      {
+        "n": "Eadbald",
+        "m": "Prosperous bold",
+        "oe": {
+          "name": "Ēadbald",
+          "meaning": "Wealth (ēad) + Bold (bald)",
+          "modern": "Eadbald — early King of Kent"
+        }
+      },
+      {
+        "n": "Cenred",
+        "m": "Bold counsel",
+        "oe": {
+          "name": "Cenrēd",
+          "meaning": "Bold (cēne) + Counsel (rǣd)",
+          "modern": "Conrad"
+        }
+      },
+      {
+        "n": "Sigehere",
+        "m": "Victorious army",
+        "oe": {
+          "name": "Sigehere",
+          "meaning": "Victory (sige) + Army (here)",
+          "modern": "Sigehere — King of the East Saxons"
+        }
+      },
+      {
+        "n": "Wulfhere",
+        "m": "Wolf army",
+        "oe": {
+          "name": "Wulfhere",
+          "meaning": "Wolf (wulf) + Army (here)",
+          "modern": "Wulfhere — King of Mercia"
+        }
+      },
+      {
+        "n": "Ceolwulf",
+        "m": "Ship wolf",
+        "oe": {
+          "name": "Ceolwulf",
+          "meaning": "Ship (cēol) + Wolf (wulf)",
+          "modern": "Ceolwulf"
+        }
+      }
+    ],
+    "female": [
+      {
+        "n": "Æthelflæd",
+        "m": "Noble beauty; aristocratic and fair",
+        "oe": {
+          "name": "Æthelflæd",
+          "meaning": "æðele (noble) + flǣd (beauty)",
+          "modern": "Æthelflæd"
+        }
+      },
+      {
+        "n": "Ælswith",
+        "m": "Elf strength — powered by elfin grace",
+        "oe": {
+          "name": "Ælswith",
+          "meaning": "ælf (elf) + swiþ (strong)",
+          "modern": "Ælswith"
+        }
+      },
+      {
+        "n": "Cynethryth",
+        "m": "Royal strength; queenly might",
+        "oe": {
+          "name": "Cynethryth",
+          "meaning": "cyne (royal) + þryð (strength)",
+          "modern": "Cynethryth"
+        }
+      },
+      {
+        "n": "Eadgyth",
+        "m": "Prosperous war; blessed battle",
+        "oe": {
+          "name": "Eadgyth",
+          "meaning": "ēad (prosperity) + gyð (battle)",
+          "modern": "Eadgyth"
+        }
+      },
+      {
+        "n": "Mildreth",
+        "m": "Gentle strength; mild power",
+        "oe": {
+          "name": "Mildreth",
+          "meaning": "mild (gentle) + þryð (strength)",
+          "modern": "Mildreth"
+        }
+      },
+      {
+        "n": "Æthelburh",
+        "m": "Noble fortress; aristocratic stronghold",
+        "oe": {
+          "name": "Æthelburh",
+          "meaning": "æðele (noble) + burh (fortress)",
+          "modern": "Æthelburh"
+        }
+      },
+      {
+        "n": "Sexburh",
+        "m": "Victory fortress; triumphant stronghold",
+        "oe": {
+          "name": "Sexburh",
+          "meaning": "seax (knife/Saxon) + burh (fortress)",
+          "modern": "Sexburh"
+        }
+      },
+      {
+        "n": "Cwenburh",
+        "m": "Queen's fortress; women's stronghold",
+        "oe": {
+          "name": "Cwenburh",
+          "meaning": "cwen (queen) + burh (fortress)",
+          "modern": "Cwenburh"
+        }
+      },
+      {
+        "n": "Leofgyth",
+        "m": "Dear war; beloved in battle",
+        "oe": {
+          "name": "Leofgyth",
+          "meaning": "lēof (dear) + gyð (battle)",
+          "modern": "Leofgyth"
+        }
+      },
+      {
+        "n": "Ælfflaed",
+        "m": "Elf beauty; elfin comeliness",
+        "oe": {
+          "name": "Ælfflaed",
+          "meaning": "ælf (elf) + flǣd (beauty)",
+          "modern": "Ælfflaed"
+        }
+      },
+      {
+        "n": "Wulfrun",
+        "m": "Wolf secret; wolf mystery",
+        "oe": {
+          "name": "Wulfrun",
+          "meaning": "wulf (wolf) + rūn (secret/rune)",
+          "modern": "Wulfrun"
+        }
+      },
+      {
+        "n": "Ealdgyth",
+        "m": "Old war; the ancient battle",
+        "oe": {
+          "name": "Ealdgyth",
+          "meaning": "eald (old) + gyð (battle)",
+          "modern": "Ealdgyth"
+        }
+      },
+      {
+        "n": "Eanswith",
+        "m": "Grace strength; gracious power",
+        "oe": {
+          "name": "Eanswith",
+          "meaning": "ean (grace) + swiþ (strong)",
+          "modern": "Eanswith"
+        }
+      },
+      {
+        "n": "Sigeflæd",
+        "m": "Victory beauty; triumphantly fair",
+        "oe": {
+          "name": "Sigeflæd",
+          "meaning": "sige (victory) + flǣd (beauty)",
+          "modern": "Sigeflæd"
+        }
+      },
+      {
+        "n": "Æthelswith",
+        "m": "Noble strong; powerful in nobility",
+        "oe": {
+          "name": "Æthelswith",
+          "meaning": "æðele (noble) + swiþ (strong)",
+          "modern": "Æthelswith"
+        }
+      },
+      {
+        "n": "Godgifu",
+        "m": "God's gift; divine gift",
+        "oe": {
+          "name": "Godgifu",
+          "meaning": "god (God) + gifu (gift)",
+          "modern": "Godgifu"
+        }
+      },
+      {
+        "n": "Ēadhild",
+        "m": "Prosperous battle-woman; blessed warrior",
+        "oe": {
+          "name": "Ēadhild",
+          "meaning": "ēad (prosperity) + hild (battle)",
+          "modern": "Ēadhild"
+        }
+      },
+      {
+        "n": "Friðuswið",
+        "m": "Peace strong; strong in peace",
+        "oe": {
+          "name": "Friðuswið",
+          "meaning": "friþ (peace) + swiþ (strong)",
+          "modern": "Friðuswið"
+        }
+      },
+      {
+        "n": "Hereswith",
+        "m": "Army strong; strong as a host",
+        "oe": {
+          "name": "Hereswith",
+          "meaning": "here (army) + swiþ (strong)",
+          "modern": "Hereswith"
+        }
+      },
+      {
+        "n": "Abarhilda",
+        "m": "Struggle and battle-maid — a warrior woman",
+        "oe": {
+          "name": "Abarhilda",
+          "meaning": "abar (struggle) + hild (battle)",
+          "modern": "Abarhilda"
+        }
+      },
+      {
+        "n": "Abbe",
+        "m": "Strength of a boar — fierce and powerful",
+        "oe": {
+          "name": "Abbe",
+          "meaning": "eofor (boar) + beorn (warrior)",
+          "modern": "Abbe"
+        }
+      },
+      {
+        "n": "Acha",
+        "m": "Oak, or edge of a sword — strength or sharpness",
+        "oe": {
+          "name": "Acha",
+          "meaning": "æc (oak) + ecg (edge/blade)",
+          "modern": "Acha"
+        }
+      },
+      {
+        "n": "Ada",
+        "m": "Noble, nobility — of aristocratic character",
+        "oe": {
+          "name": "Ada",
+          "meaning": "adal (noble)",
+          "modern": "Ada"
+        }
+      },
+      {
+        "n": "Adela",
+        "m": "Noble — of high and noble birth",
+        "oe": {
+          "name": "Adela",
+          "meaning": "adal (noble)",
+          "modern": "Adela"
+        }
+      },
+      {
+        "n": "Adelida",
+        "m": "Noble kind — of noble sort or lineage",
+        "oe": {
+          "name": "Adelida",
+          "meaning": "adal (noble) + id (kind/type)",
+          "modern": "Adelida"
+        }
+      },
+      {
+        "n": "Adola",
+        "m": "Noble — feminine form of the adal root",
+        "oe": {
+          "name": "Adola",
+          "meaning": "adal (noble)",
+          "modern": "Adola"
+        }
+      },
+      {
+        "n": "Æalde",
+        "m": "Old, ancient — venerable and of long lineage",
+        "oe": {
+          "name": "Æalde",
+          "meaning": "eald (old/ancient)",
+          "modern": "Æalde"
+        }
+      },
+      {
+        "n": "Æbbe",
+        "m": "Strength of a boar — fierce and indomitable",
+        "oe": {
+          "name": "Æbbe",
+          "meaning": "eofor (boar) + beorn (warrior)",
+          "modern": "Æbbe"
+        }
+      },
+      {
+        "n": "Cenwynn",
+        "m": "Bold joy",
+        "oe": {
+          "name": "Cēnwynn",
+          "meaning": "Bold (cēne) + Joy (wynn)",
+          "modern": "Kenwyn"
+        }
+      },
+      {
+        "n": "Eadwynn",
+        "m": "Prosperous joy",
+        "oe": {
+          "name": "Ēadwynn",
+          "meaning": "Wealth (ēad) + Joy (wynn)",
+          "modern": "Edwin / Edwina family"
+        }
+      },
+      {
+        "n": "Gildas",
+        "m": "Servant of God",
+        "oe": {
+          "name": "Gildas",
+          "meaning": "Celtic origin, Christian monk",
+          "modern": "Gildas — historian"
+        }
+      },
+      {
+        "n": "Wulfflæd",
+        "m": "Wolf beauty",
+        "oe": {
+          "name": "Wulfflǣd",
+          "meaning": "Wolf (wulf) + Beauty (flǣd)",
+          "modern": "Wulffled"
+        }
+      },
+      {
+        "n": "Sigehild",
+        "m": "Victory battle",
+        "oe": {
+          "name": "Sigehild",
+          "meaning": "Victory (sige) + Battle (hild)",
+          "modern": "Sighild"
+        }
+      }
+    ],
+    "neutral": [
+      {
+        "n": "Freawine",
+        "m": "Lord's friend; friend of the master",
+        "oe": {
+          "name": "Freawine",
+          "meaning": "frēa (lord) + wine (friend)",
+          "modern": "Freawine"
+        }
+      },
+      {
+        "n": "Goldwine",
+        "m": "Golden friend; friend of gold",
+        "oe": {
+          "name": "Goldwine",
+          "meaning": "gold (gold) + wine (friend)",
+          "modern": "Goldwine"
+        }
+      },
+      {
+        "n": "Deorwine",
+        "m": "Beloved friend; dear and friendly",
+        "oe": {
+          "name": "Deorwine",
+          "meaning": "dēor (dear/beloved) + wine (friend)",
+          "modern": "Deorwine"
+        }
+      },
+      {
+        "n": "Winefrith",
+        "m": "Friend of peace; peaceful companion",
+        "oe": {
+          "name": "Winefrith",
+          "meaning": "wine (friend) + friþ (peace)",
+          "modern": "Winefrith"
+        }
+      },
+      {
+        "n": "Ædi",
+        "m": "Rich, blessed — short form expressing prosperity",
+        "oe": {
+          "name": "Ædi",
+          "meaning": "ēad (wealth/blessed)",
+          "modern": "Ædi"
+        }
+      },
+      {
+        "n": "Friðu",
+        "m": "Peace",
+        "oe": {
+          "name": "Friðu",
+          "meaning": "Peace or safety",
+          "modern": "Frith"
+        }
+      },
+      {
+        "n": "Gēat",
+        "m": "Geatish person",
+        "oe": {
+          "name": "Gēat",
+          "meaning": "Of the Geatish tribe",
+          "modern": "Geat"
+        }
+      }
+    ]
+  },
+  "norse": {
+    "male": [
+      {
+        "n": "Bjorn",
+        "m": "Bear"
+      },
+      {
+        "n": "Sigurd",
+        "m": "Victory guardian"
+      },
+      {
+        "n": "Leif",
+        "m": "Heir, descendant"
+      },
+      {
+        "n": "Ragnar",
+        "m": "Warrior of decision"
+      },
+      {
+        "n": "Gunnar",
+        "m": "Bold warrior"
+      },
+      {
+        "n": "Thorvald",
+        "m": "Thor's ruler"
+      },
+      {
+        "n": "Ivar",
+        "m": "Bow warrior"
+      },
+      {
+        "n": "Ulfr",
+        "m": "Wolf"
+      },
+      {
+        "n": "Halfdan",
+        "m": "Half Dane"
+      },
+      {
+        "n": "Sven",
+        "m": "Young man"
+      },
+      {
+        "n": "Erik",
+        "m": "Eternal ruler"
+      },
+      {
+        "n": "Hakon",
+        "m": "High son"
+      },
+      {
+        "n": "Olaf",
+        "m": "Ancestor's relic"
+      },
+      {
+        "n": "Knut",
+        "m": "Knot"
+      },
+      {
+        "n": "Magnús",
+        "m": "Great"
+      },
+      {
+        "n": "Ragnvald",
+        "m": "Ruler's power"
+      },
+      {
+        "n": "Agnar",
+        "m": "Warrior with a sharp sword"
+      },
+      {
+        "n": "Aksel",
+        "m": "Father of peace"
+      },
+      {
+        "n": "Arne",
+        "m": "Eagle"
+      },
+      {
+        "n": "Asbjørn",
+        "m": "God's bear"
+      },
+      {
+        "n": "Baldr",
+        "m": "Prince or light (God of beauty)"
+      },
+      {
+        "n": "Birger",
+        "m": "Keeper or protector"
+      },
+      {
+        "n": "Bo",
+        "m": "Living, resident"
+      },
+      {
+        "n": "Bragi",
+        "m": "God of poetry"
+      },
+      {
+        "n": "Einar",
+        "m": "Lone warrior"
+      },
+      {
+        "n": "Espen",
+        "m": "Divine bear"
+      },
+      {
+        "n": "Finn",
+        "m": "Wanderer or adventurer"
+      },
+      {
+        "n": "Frode",
+        "m": "Wise and clever"
+      },
+      {
+        "n": "Garth",
+        "m": "Yard or garden"
+      },
+      {
+        "n": "Geir",
+        "m": "Spear"
+      },
+      {
+        "n": "Gorm",
+        "m": "He who worships God"
+      },
+      {
+        "n": "Haldor",
+        "m": "Thor's rock"
+      },
+      {
+        "n": "Harald",
+        "m": "Army commander"
+      },
+      {
+        "n": "Heimdall",
+        "m": "Guardian of the gods"
+      },
+      {
+        "n": "Hjalmar",
+        "m": "Helmet-wearing fighter"
+      },
+      {
+        "n": "Ingvar",
+        "m": "Ing's warrior"
+      },
+      {
+        "n": "Jarl",
+        "m": "Nobleman"
+      },
+      {
+        "n": "Ketil",
+        "m": "Cauldron or helmet"
+      },
+      {
+        "n": "Loki",
+        "m": "Trickster god"
+      },
+      {
+        "n": "Njal",
+        "m": "Giant"
+      },
+      {
+        "n": "Odin",
+        "m": "God of wisdom and war"
+      },
+      {
+        "n": "Orn",
+        "m": "Eagle"
+      },
+      {
+        "n": "Osmund",
+        "m": "Divine protection"
+      },
+      {
+        "n": "Roar",
+        "m": "Fame and spear"
+      },
+      {
+        "n": "Rolf",
+        "m": "Famous wolf"
+      },
+      {
+        "n": "Rune",
+        "m": "Secret lore"
+      },
+      {
+        "n": "Sten",
+        "m": "Stone"
+      },
+      {
+        "n": "Stig",
+        "m": "Path"
+      },
+      {
+        "n": "Sune",
+        "m": "Son"
+      }
+    ],
+    "female": [
+      {
+        "n": "Freya",
+        "m": "Noble woman, goddess of love"
+      },
+      {
+        "n": "Astrid",
+        "m": "Divinely beautiful"
+      },
+      {
+        "n": "Sigrid",
+        "m": "Victory and wisdom"
+      },
+      {
+        "n": "Ragnhild",
+        "m": "Battle counsel"
+      },
+      {
+        "n": "Gudrun",
+        "m": "Secret lore"
+      },
+      {
+        "n": "Ingrid",
+        "m": "Beautiful, beloved"
+      },
+      {
+        "n": "Solveig",
+        "m": "Strong house"
+      },
+      {
+        "n": "Thyra",
+        "m": "Thor's warrior"
+      },
+      {
+        "n": "Helga",
+        "m": "Holy, blessed"
+      },
+      {
+        "n": "Valdis",
+        "m": "Goddess of the slain"
+      },
+      {
+        "n": "Brynhildr",
+        "m": "Armour, battle"
+      },
+      {
+        "n": "Yrsa",
+        "m": "She-bear"
+      },
+      {
+        "n": "Aina",
+        "m": "Forever"
+      },
+      {
+        "n": "Åse",
+        "m": "Goddess"
+      },
+      {
+        "n": "Berit",
+        "m": "Exalted one"
+      },
+      {
+        "n": "Bodil",
+        "m": "Penance and fight"
+      },
+      {
+        "n": "Dagmar",
+        "m": "Glorious day"
+      },
+      {
+        "n": "Edda",
+        "m": "Ancestor or grandmother"
+      },
+      {
+        "n": "Eira",
+        "m": "Snow"
+      },
+      {
+        "n": "Embla",
+        "m": "First woman (elm tree)"
+      },
+      {
+        "n": "Estrid",
+        "m": "Divine beauty"
+      },
+      {
+        "n": "Frida",
+        "m": "Peace"
+      },
+      {
+        "n": "Frigg",
+        "m": "Beloved (Chief goddess)"
+      },
+      {
+        "n": "Gertrud",
+        "m": "Spear"
+      },
+      {
+        "n": "Gro",
+        "m": "To grow"
+      },
+      {
+        "n": "Gunhild",
+        "m": "Battle maiden"
+      },
+      {
+        "n": "Ingeborg",
+        "m": "Ing's stronghold"
+      },
+      {
+        "n": "Kara",
+        "m": "Pure or curly-haired"
+      },
+      {
+        "n": "Linnea",
+        "m": "Linden tree"
+      },
+      {
+        "n": "Liv",
+        "m": "Life or protection"
+      },
+      {
+        "n": "Magnhild",
+        "m": "Mighty in battle"
+      },
+      {
+        "n": "Nanna",
+        "m": "Brave or daring"
+      },
+      {
+        "n": "Norna",
+        "m": "Whisper"
+      },
+      {
+        "n": "Oda",
+        "m": "Wealth or fortune"
+      },
+      {
+        "n": "Olga",
+        "m": "Holy"
+      },
+      {
+        "n": "Ragna",
+        "m": "Advisor or powerful judgment"
+      },
+      {
+        "n": "Randi",
+        "m": "Shield or shrine"
+      },
+      {
+        "n": "Revna",
+        "m": "Raven"
+      },
+      {
+        "n": "Runa",
+        "m": "Secret lore"
+      },
+      {
+        "n": "Saga",
+        "m": "Soothsayer / story"
+      },
+      {
+        "n": "Sif",
+        "m": "Bride (Goddess of fertility)"
+      },
+      {
+        "n": "Signy",
+        "m": "New victory"
+      },
+      {
+        "n": "Sigrun",
+        "m": "Victory rune"
+      },
+      {
+        "n": "Thurid",
+        "m": "Beautiful Thor"
+      },
+      {
+        "n": "Tove",
+        "m": "Beautiful / dove"
+      }
+    ],
+    "neutral": [
+      {
+        "n": "Arn",
+        "m": "Eagle"
+      },
+      {
+        "n": "Dag",
+        "m": "Day"
+      },
+      {
+        "n": "Ran",
+        "m": "Sea goddess"
+      },
+      {
+        "n": "Skadi",
+        "m": "Damage or shadow"
+      },
+      {
+        "n": "Tyr",
+        "m": "God of war"
+      },
+      {
+        "n": "Sol",
+        "m": "Sun"
+      },
+      {
+        "n": "Ullr",
+        "m": "Glory / god of skiing"
+      },
+      {
+        "n": "Vidar",
+        "m": "Wide ruler"
+      },
+      {
+        "n": "Vale",
+        "m": "Strong / warrior"
+      },
+      {
+        "n": "Kari",
+        "m": "Curly-haired / wind"
+      }
+    ]
+  },
+  "latin": {
+    "male": [
+      {
+        "n": "Aurelius",
+        "m": "Golden"
+      },
+      {
+        "n": "Maximus",
+        "m": "Greatest"
+      },
+      {
+        "n": "Cassius",
+        "m": "Hollow"
+      },
+      {
+        "n": "Lucius",
+        "m": "Light"
+      },
+      {
+        "n": "Flavius",
+        "m": "Yellow-haired"
+      },
+      {
+        "n": "Octavian",
+        "m": "Eighth"
+      },
+      {
+        "n": "Titus",
+        "m": "Title of honour"
+      },
+      {
+        "n": "Hadrian",
+        "m": "From the Adriatic"
+      },
+      {
+        "n": "Antonius",
+        "m": "Priceless"
+      },
+      {
+        "n": "Caecilius",
+        "m": "Blind"
+      },
+      {
+        "n": "Germanicus",
+        "m": "Of Germany"
+      },
+      {
+        "n": "Valerius",
+        "m": "Strong, healthy"
+      },
+      {
+        "n": "Augustus",
+        "m": "Majestic, venerable"
+      },
+      {
+        "n": "Marcus",
+        "m": "Of Mars, warrior"
+      },
+      {
+        "n": "Julius",
+        "m": "Downy-bearded"
+      },
+      {
+        "n": "Claudius",
+        "m": "Lame, shuttered"
+      },
+      {
+        "n": "Tiberius",
+        "m": "Of the Tiber river"
+      },
+      {
+        "n": "Quintus",
+        "m": "Fifth"
+      },
+      {
+        "n": "Decimus",
+        "m": "Tenth"
+      },
+      {
+        "n": "Cornelius",
+        "m": "Horn-coloured"
+      },
+      {
+        "n": "Aetius",
+        "m": "Eagle-like"
+      },
+      {
+        "n": "Justinian",
+        "m": "Just / fair"
+      },
+      {
+        "n": "Constantine",
+        "m": "Steadfast / constant"
+      },
+      {
+        "n": "Victor",
+        "m": "Conqueror"
+      },
+      {
+        "n": "Benedict",
+        "m": "Blessed"
+      },
+      {
+        "n": "Dominic",
+        "m": "Of the Lord"
+      },
+      {
+        "n": "Paul",
+        "m": "Small / humble"
+      },
+      {
+        "n": "Leo",
+        "m": "Lion"
+      },
+      {
+        "n": "Gregory",
+        "m": "Watchful"
+      },
+      {
+        "n": "Julian",
+        "m": "Youthful"
+      },
+      {
+        "n": "Adrian",
+        "m": "From Hadria"
+      },
+      {
+        "n": "Marius",
+        "m": "Male / warlike"
+      },
+      {
+        "n": "Rufus",
+        "m": "Red-haired"
+      },
+      {
+        "n": "Caius",
+        "m": "Rejoiced"
+      },
+      {
+        "n": "Publius",
+        "m": "Public / popular"
+      },
+      {
+        "n": "Silvanus",
+        "m": "Forest dweller"
+      },
+      {
+        "n": "Terentius",
+        "m": "Rubbed / smooth"
+      },
+      {
+        "n": "Severus",
+        "m": "Stern / strict"
+      },
+      {
+        "n": "Sergius",
+        "m": "Servant / protector"
+      },
+      {
+        "n": "Quintilian",
+        "m": "Fifth-born"
+      },
+      {
+        "n": "Nero",
+        "m": "Strong / vigorous"
+      },
+      {
+        "n": "Cato",
+        "m": "Wise / shrewd"
+      },
+      {
+        "n": "Pliny",
+        "m": "Full / complete"
+      },
+      {
+        "n": "Horace",
+        "m": "Timekeeper / hourly"
+      },
+      {
+        "n": "Cicero",
+        "m": "Chickpea"
+      }
+    ],
+    "female": [
+      {
+        "n": "Aurelia",
+        "m": "Golden"
+      },
+      {
+        "n": "Claudia",
+        "m": "Lame"
+      },
+      {
+        "n": "Livia",
+        "m": "Blue, envious"
+      },
+      {
+        "n": "Valeria",
+        "m": "Strong, healthy"
+      },
+      {
+        "n": "Cornelia",
+        "m": "Horn"
+      },
+      {
+        "n": "Flavia",
+        "m": "Yellow-haired"
+      },
+      {
+        "n": "Lucretia",
+        "m": "Gain, profit"
+      },
+      {
+        "n": "Camilla",
+        "m": "Attendant at a ritual"
+      },
+      {
+        "n": "Portia",
+        "m": "Pig"
+      },
+      {
+        "n": "Lavinia",
+        "m": "Woman of Latium"
+      },
+      {
+        "n": "Tullia",
+        "m": "Bound"
+      },
+      {
+        "n": "Sabina",
+        "m": "Sabine woman"
+      },
+      {
+        "n": "Julia",
+        "m": "Youthful"
+      },
+      {
+        "n": "Augusta",
+        "m": "Venerable / majestic"
+      },
+      {
+        "n": "Octavia",
+        "m": "Eighth"
+      },
+      {
+        "n": "Marcella",
+        "m": "Dedicated to Mars"
+      },
+      {
+        "n": "Faustina",
+        "m": "Fortunate / lucky"
+      },
+      {
+        "n": "Domitilla",
+        "m": "Tamed"
+      },
+      {
+        "n": "Drusilla",
+        "m": "Dew-eyed / strong"
+      },
+      {
+        "n": "Lucilla",
+        "m": "Little light"
+      },
+      {
+        "n": "Antonia",
+        "m": "Priceless"
+      },
+      {
+        "n": "Cassia",
+        "m": "Cinnamon"
+      },
+      {
+        "n": "Tatiana",
+        "m": "Fairy queen / ruler"
+      },
+      {
+        "n": "Valentina",
+        "m": "Strong / healthy"
+      },
+      {
+        "n": "Priscilla",
+        "m": "Ancient / venerable"
+      },
+      {
+        "n": "Flora",
+        "m": "Flower"
+      },
+      {
+        "n": "Diana",
+        "m": "Divine / heavenly"
+      },
+      {
+        "n": "Victoria",
+        "m": "Victory"
+      },
+      {
+        "n": "Sylvia",
+        "m": "Of the forest"
+      },
+      {
+        "n": "Celia",
+        "m": "Heavenly"
+      },
+      {
+        "n": "Lucia",
+        "m": "Light"
+      },
+      {
+        "n": "Aurora",
+        "m": "Dawn"
+      },
+      {
+        "n": "Clara",
+        "m": "Bright / clear"
+      },
+      {
+        "n": "Emilia",
+        "m": "Industrious / rival"
+      },
+      {
+        "n": "Felicia",
+        "m": "Happy / fortunate"
+      },
+      {
+        "n": "Gloria",
+        "m": "Glory"
+      },
+      {
+        "n": "Helena",
+        "m": "Shining light"
+      },
+      {
+        "n": "Marina",
+        "m": "Of the sea"
+      },
+      {
+        "n": "Patricia",
+        "m": "Noblewoman"
+      },
+      {
+        "n": "Regina",
+        "m": "Queen"
+      },
+      {
+        "n": "Serena",
+        "m": "Tranquil / calm"
+      },
+      {
+        "n": "Stella",
+        "m": "Star"
+      },
+      {
+        "n": "Virginia",
+        "m": "Maidenly / pure"
+      },
+      {
+        "n": "Zoe",
+        "m": "Life"
+      },
+      {
+        "n": "Gemma",
+        "m": "Gem / jewel"
+      },
+      {
+        "n": "Beatrix",
+        "m": "She who makes happy"
+      }
+    ],
+    "neutral": [
+      {
+        "n": "Felix",
+        "m": "Happy, fortunate"
+      },
+      {
+        "n": "Amor",
+        "m": "Love"
+      },
+      {
+        "n": "Lux",
+        "m": "Light"
+      },
+      {
+        "n": "Pax",
+        "m": "Peace"
+      },
+      {
+        "n": "Vox",
+        "m": "Voice"
+      },
+      {
+        "n": "Caelum",
+        "m": "Heaven"
+      },
+      {
+        "n": "Alba",
+        "m": "White / dawn"
+      },
+      {
+        "n": "Albus",
+        "m": "White"
+      },
+      {
+        "n": "Clement",
+        "m": "Merciful / mild"
+      },
+      {
+        "n": "Fidelis",
+        "m": "Faithful / loyal"
+      }
+    ]
+  },
+  "celtic": {
+    "male": [
+      {
+        "n": "Cormac",
+        "m": "Charioteer"
+      },
+      {
+        "n": "Fionn",
+        "m": "Fair, white"
+      },
+      {
+        "n": "Bran",
+        "m": "Raven"
+      },
+      {
+        "n": "Caoimhin",
+        "m": "Gentle birth"
+      },
+      {
+        "n": "Conall",
+        "m": "Strong wolf"
+      },
+      {
+        "n": "Diarmuid",
+        "m": "Without envy"
+      },
+      {
+        "n": "Oisín",
+        "m": "Little deer"
+      },
+      {
+        "n": "Rónán",
+        "m": "Little seal"
+      },
+      {
+        "n": "Tadhg",
+        "m": "Poet, philosopher"
+      },
+      {
+        "n": "Ciarán",
+        "m": "Dark one"
+      },
+      {
+        "n": "Fergus",
+        "m": "Man of strength"
+      },
+      {
+        "n": "Lugh",
+        "m": "Light"
+      },
+      {
+        "n": "Cillian",
+        "m": "War-strife / church"
+      },
+      {
+        "n": "Declan",
+        "m": "Full of goodness"
+      },
+      {
+        "n": "Niall",
+        "m": "Champion / cloud"
+      },
+      {
+        "n": "Brian",
+        "m": "High / noble"
+      },
+      {
+        "n": "Connor",
+        "m": "Lover of hounds"
+      },
+      {
+        "n": "Dylan",
+        "m": "Son of the sea"
+      },
+      {
+        "n": "Eoin",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Kian",
+        "m": "Ancient / enduring"
+      },
+      {
+        "n": "Liam",
+        "m": "Strong-willed warrior"
+      },
+      {
+        "n": "Murrough",
+        "m": "Sea warrior"
+      },
+      {
+        "n": "Rory",
+        "m": "Red king"
+      },
+      {
+        "n": "Sean",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Colm",
+        "m": "Dove"
+      },
+      {
+        "n": "Aidan",
+        "m": "Little fire"
+      },
+      {
+        "n": "Alan",
+        "m": "Handsome / cheerful"
+      },
+      {
+        "n": "Arthur",
+        "m": "Bear / king"
+      },
+      {
+        "n": "Donald",
+        "m": "Ruler of the world"
+      },
+      {
+        "n": "Duncan",
+        "m": "Brown warrior"
+      },
+      {
+        "n": "Gcwain",
+        "m": "White hawk"
+      },
+      {
+        "n": "Kenneth",
+        "m": "Handsome / born of fire"
+      },
+      {
+        "n": "Owen",
+        "m": "Noble-born / youthful"
+      },
+      {
+        "n": "Ronald",
+        "m": "Ruler's counselor"
+      },
+      {
+        "n": "Tristan",
+        "m": "Sadness / riot"
+      },
+      {
+        "n": "Alistair",
+        "m": "Defender of men"
+      },
+      {
+        "n": "Angus",
+        "m": "One strength"
+      },
+      {
+        "n": "Brody",
+        "m": "Ditch / muddy place"
+      },
+      {
+        "n": "Callum",
+        "m": "Dove"
+      },
+      {
+        "n": "Craig",
+        "m": "Rock / crag"
+      },
+      {
+        "n": "Ian",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Keith",
+        "m": "Wood / forest"
+      },
+      {
+        "n": "Neil",
+        "m": "Champion"
+      },
+      {
+        "n": "Brogan",
+        "m": "Little shoe / sturdy"
+      },
+      {
+        "n": "Lachlan",
+        "m": "Land of lakes"
+      }
+    ],
+    "female": [
+      {
+        "n": "Brigid",
+        "m": "Exalted one"
+      },
+      {
+        "n": "Niamh",
+        "m": "Bright"
+      },
+      {
+        "n": "Aoife",
+        "m": "Beautiful radiance"
+      },
+      {
+        "n": "Gráinne",
+        "m": "She who inspires terror"
+      },
+      {
+        "n": "Saoirse",
+        "m": "Freedom"
+      },
+      {
+        "n": "Caoimhe",
+        "m": "Gentle, beautiful"
+      },
+      {
+        "n": "Deirdre",
+        "m": "Broken-hearted"
+      },
+      {
+        "n": "Étaín",
+        "m": "Jealousy"
+      },
+      {
+        "n": "Méabh",
+        "m": "She who intoxicates"
+      },
+      {
+        "n": "Sorcha",
+        "m": "Brightness"
+      },
+      {
+        "n": "Clíodhna",
+        "m": "Shapely one"
+      },
+      {
+        "n": "Íde",
+        "m": "Thirst for goodness"
+      },
+      {
+        "n": "Fiona",
+        "m": "Fair / white"
+      },
+      {
+        "n": "Maeve",
+        "m": "Intoxicating / queen"
+      },
+      {
+        "n": "Rhiannon",
+        "m": "Great queen"
+      },
+      {
+        "n": "Guinevere",
+        "m": "White wave / shadow"
+      },
+      {
+        "n": "Isolde",
+        "m": "Ice ruler / fair"
+      },
+      {
+        "n": "Bronwyn",
+        "m": "White breast"
+      },
+      {
+        "n": "Carys",
+        "m": "Love"
+      },
+      {
+        "n": "Eira",
+        "m": "Snow"
+      },
+      {
+        "n": "Gladys",
+        "m": "Country / princess"
+      },
+      {
+        "n": "Gwyneth",
+        "m": "Happiness / white"
+      },
+      {
+        "n": "Megan",
+        "m": "Pearl / great"
+      },
+      {
+        "n": "Sian",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Catriona",
+        "m": "Pure"
+      },
+      {
+        "n": "Eilidh",
+        "m": "Sun / shining light"
+      },
+      {
+        "n": "Isla",
+        "m": "Island"
+      },
+      {
+        "n": "Morag",
+        "m": "Great / sun"
+      },
+      {
+        "n": "Sheena",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Una",
+        "m": "Lamb"
+      },
+      {
+        "n": "Orla",
+        "m": "Golden princess"
+      },
+      {
+        "n": "Roisin",
+        "m": "Little rose"
+      },
+      {
+        "n": "Sinead",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Tara",
+        "m": "Rocky hill / tower"
+      },
+      {
+        "n": "Erin",
+        "m": "From Ireland"
+      },
+      {
+        "n": "Brenda",
+        "m": "Sword / torch"
+      },
+      {
+        "n": "Kathleen",
+        "m": "Pure"
+      },
+      {
+        "n": "Eileen",
+        "m": "Bright shining light"
+      },
+      {
+        "n": "Colleen",
+        "m": "Girl / maiden"
+      },
+      {
+        "n": "Kerry",
+        "m": "Dark-haired one"
+      },
+      {
+        "n": "Maureen",
+        "m": "Star of the sea"
+      },
+      {
+        "n": "Alanna",
+        "m": "Fair / attractive"
+      },
+      {
+        "n": "Gwendolyn",
+        "m": "White ring / brow"
+      },
+      {
+        "n": "Siobhan",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Mairead",
+        "m": "Pearl"
+      }
+    ],
+    "neutral": [
+      {
+        "n": "Mór",
+        "m": "Great one"
+      },
+      {
+        "n": "Lir",
+        "m": "Sea"
+      },
+      {
+        "n": "Ard",
+        "m": "Height"
+      },
+      {
+        "n": "Celt",
+        "m": "Hidden people"
+      },
+      {
+        "n": "Glenn",
+        "m": "Valley"
+      },
+      {
+        "n": "Morgan",
+        "m": "Sea circle / defender"
+      },
+      {
+        "n": "Rowan",
+        "m": "Little red one"
+      },
+      {
+        "n": "Kelly",
+        "m": "Warrior / church"
+      },
+      {
+        "n": "Shannon",
+        "m": "Wise river"
+      },
+      {
+        "n": "Quinn",
+        "m": "Chief / counsel"
+      }
+    ]
+  },
+  "french": {
+    "male": [
+      {
+        "n": "Théodore",
+        "m": "Gift of God"
+      },
+      {
+        "n": "Gaston",
+        "m": "From Gascony"
+      },
+      {
+        "n": "Armand",
+        "m": "Army man"
+      },
+      {
+        "n": "Bastien",
+        "m": "Venerable"
+      },
+      {
+        "n": "Clovis",
+        "m": "Famous warrior"
+      },
+      {
+        "n": "Émile",
+        "m": "Rival"
+      },
+      {
+        "n": "Florian",
+        "m": "Flowering"
+      },
+      {
+        "n": "Luc",
+        "m": "Light"
+      },
+      {
+        "n": "Mathieu",
+        "m": "Gift of God"
+      },
+      {
+        "n": "Gaspard",
+        "m": "Treasurer"
+      },
+      {
+        "n": "Thibault",
+        "m": "Bold people"
+      },
+      {
+        "n": "Raoul",
+        "m": "Wolf counsel"
+      },
+      {
+        "n": "Louis",
+        "m": "Famous warrior"
+      },
+      {
+        "n": "Charles",
+        "m": "Free man"
+      },
+      {
+        "n": "Henri",
+        "m": "Home ruler"
+      },
+      {
+        "n": "Pierre",
+        "m": "Stone / rock"
+      },
+      {
+        "n": "Jean",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Francois",
+        "m": "Free / French"
+      },
+      {
+        "n": "Antoine",
+        "m": "Priceless"
+      },
+      {
+        "n": "Guillaume",
+        "m": "Will-helmet"
+      },
+      {
+        "n": "Jacques",
+        "m": "Supplanter"
+      },
+      {
+        "n": "Philippe",
+        "m": "Lover of horses"
+      },
+      {
+        "n": "Nicolas",
+        "m": "Victory of the people"
+      },
+      {
+        "n": "Alexandre",
+        "m": "Defender of men"
+      },
+      {
+        "n": "Julien",
+        "m": "Youthful"
+      },
+      {
+        "n": "Sebastien",
+        "m": "Venerable"
+      },
+      {
+        "n": "Olivier",
+        "m": "Olive tree"
+      },
+      {
+        "n": "Vincent",
+        "m": "Conquering"
+      },
+      {
+        "n": "Thomas",
+        "m": "Twin"
+      },
+      {
+        "n": "David",
+        "m": "Beloved"
+      },
+      {
+        "n": "Laurent",
+        "m": "Laurel-crowned"
+      },
+      {
+        "n": "Marc",
+        "m": "Of Mars / warlike"
+      },
+      {
+        "n": "Paul",
+        "m": "Small / humble"
+      },
+      {
+        "n": "Robert",
+        "m": "Bright fame"
+      },
+      {
+        "n": "Remy",
+        "m": "Oarsman"
+      },
+      {
+        "n": "Noel",
+        "m": "Christmas / birth"
+      },
+      {
+        "n": "Adrien",
+        "m": "From Hadria"
+      },
+      {
+        "n": "Bernard",
+        "m": "Strong bear"
+      },
+      {
+        "n": "Daniel",
+        "m": "God is my judge"
+      },
+      {
+        "n": "Gabriel",
+        "m": "God is my strength"
+      },
+      {
+        "n": "Hugo",
+        "m": "Heart / mind"
+      },
+      {
+        "n": "Pascal",
+        "m": "Easter / Passover"
+      },
+      {
+        "n": "Yves",
+        "m": "Yew wood / archer"
+      },
+      {
+        "n": "Zacharie",
+        "m": "God remembers"
+      },
+      {
+        "n": "Benoit",
+        "m": "Blessed"
+      },
+      {
+        "n": "Didier",
+        "m": "Desired"
+      }
+    ],
+    "female": [
+      {
+        "n": "Amélie",
+        "m": "Hardworking"
+      },
+      {
+        "n": "Céleste",
+        "m": "Heavenly"
+      },
+      {
+        "n": "Delphine",
+        "m": "Dolphin"
+      },
+      {
+        "n": "Élodie",
+        "m": "Foreign riches"
+      },
+      {
+        "n": "Fleur",
+        "m": "Flower"
+      },
+      {
+        "n": "Geneviève",
+        "m": "Tribe woman"
+      },
+      {
+        "n": "Inès",
+        "m": "Pure"
+      },
+      {
+        "n": "Léonie",
+        "m": "Lioness"
+      },
+      {
+        "n": "Margaux",
+        "m": "Pearl"
+      },
+      {
+        "n": "Colette",
+        "m": "Victory of the people"
+      },
+      {
+        "n": "Mathilde",
+        "m": "Battle mighty"
+      },
+      {
+        "n": "Séraphine",
+        "m": "Fiery ones"
+      },
+      {
+        "n": "Marie",
+        "m": "Beloved / star of the sea"
+      },
+      {
+        "n": "Jeanne",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Anne",
+        "m": "Grace / favour"
+      },
+      {
+        "n": "Catherine",
+        "m": "Pure"
+      },
+      {
+        "n": "Louise",
+        "m": "Famous warrior"
+      },
+      {
+        "n": "Charlotte",
+        "m": "Free woman / petite"
+      },
+      {
+        "n": "Josephine",
+        "m": "He will add"
+      },
+      {
+        "n": "Marguerite",
+        "m": "Pearl"
+      },
+      {
+        "n": "Alice",
+        "m": "Noble kind"
+      },
+      {
+        "n": "Claire",
+        "m": "Clear / bright"
+      },
+      {
+        "n": "Juliette",
+        "m": "Youthful"
+      },
+      {
+        "n": "Sophie",
+        "m": "Wisdom"
+      },
+      {
+        "n": "Beatrice",
+        "m": "She who brings joy"
+      },
+      {
+        "n": "Gabrielle",
+        "m": "God is my strength"
+      },
+      {
+        "n": "Adele",
+        "m": "Noble"
+      },
+      {
+        "n": "Chloe",
+        "m": "Blooming / green shoot"
+      },
+      {
+        "n": "Emma",
+        "m": "Universal"
+      },
+      {
+        "n": "Lea",
+        "m": "Weary / wild cow"
+      },
+      {
+        "n": "Manon",
+        "m": "Bitter / star of the sea"
+      },
+      {
+        "n": "Sarah",
+        "m": "Princess"
+      },
+      {
+        "n": "Zoe",
+        "m": "Life"
+      },
+      {
+        "n": "Valentine",
+        "m": "Strong / healthy"
+      },
+      {
+        "n": "Julie",
+        "m": "Youthful"
+      },
+      {
+        "n": "Eliane",
+        "m": "Sun"
+      },
+      {
+        "n": "Isabelle",
+        "m": "My God is an oath"
+      },
+      {
+        "n": "Natalie",
+        "m": "Birthday of the Lord"
+      },
+      {
+        "n": "Odette",
+        "m": "Wealthy"
+      },
+      {
+        "n": "Paulette",
+        "m": "Little / small"
+      },
+      {
+        "n": "Suzanne",
+        "m": "Lily"
+      },
+      {
+        "n": "Yvette",
+        "m": "Yew wood"
+      },
+      {
+        "n": "Yvonne",
+        "m": "Yew wood / archer"
+      },
+      {
+        "n": "Gisele",
+        "m": "Pledge"
+      },
+      {
+        "n": "Audrey",
+        "m": "Noble strength"
+      },
+      {
+        "n": "Corinne",
+        "m": "Maiden"
+      }
+    ],
+    "neutral": [
+      {
+        "n": "Camille",
+        "m": "Attendant"
+      },
+      {
+        "n": "René",
+        "m": "Reborn"
+      },
+      {
+        "n": "Maxime",
+        "m": "Greatest"
+      },
+      {
+        "n": "Alexis",
+        "m": "Defender"
+      },
+      {
+        "n": "Claude",
+        "m": "Lame"
+      },
+      {
+        "n": "Dominique",
+        "m": "Of the Lord"
+      },
+      {
+        "n": "Sasha",
+        "m": "Defender of men"
+      },
+      {
+        "n": "Morgan",
+        "m": "Sea defender"
+      },
+      {
+        "n": "Lou",
+        "m": "Famous warrior"
+      },
+      {
+        "n": "Jules",
+        "m": "Youthful / downy"
+      }
+    ]
+  },
+  "german": {
+    "male": [
+      {
+        "n": "Heinrich",
+        "m": "Home ruler"
+      },
+      {
+        "n": "Wilhelm",
+        "m": "Will helmet"
+      },
+      {
+        "n": "Friedrich",
+        "m": "Peaceful ruler"
+      },
+      {
+        "n": "Konrad",
+        "m": "Bold counsel"
+      },
+      {
+        "n": "Dietrich",
+        "m": "People's ruler"
+      },
+      {
+        "n": "Wolfram",
+        "m": "Wolf raven"
+      },
+      {
+        "n": "Burkhard",
+        "m": "Castle protector"
+      },
+      {
+        "n": "Albrecht",
+        "m": "Noble bright"
+      },
+      {
+        "n": "Hartmann",
+        "m": "Hardy man"
+      },
+      {
+        "n": "Siegfried",
+        "m": "Victory peace"
+      },
+      {
+        "n": "Gottfried",
+        "m": "God's peace"
+      },
+      {
+        "n": "Ruprecht",
+        "m": "Bright fame"
+      },
+      {
+        "n": "Otto",
+        "m": "Wealthy"
+      },
+      {
+        "n": "Karl",
+        "m": "Free man"
+      },
+      {
+        "n": "Ludwig",
+        "m": "Famous warrior"
+      },
+      {
+        "n": "Franz",
+        "m": "Frenchman / free"
+      },
+      {
+        "n": "Hans",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Walter",
+        "m": "Army commander"
+      },
+      {
+        "n": "Werner",
+        "m": "Defender army"
+      },
+      {
+        "n": "Gerhard",
+        "m": "Strong spear"
+      },
+      {
+        "n": "Dieter",
+        "m": "People's warrior"
+      },
+      {
+        "n": "Gunther",
+        "m": "Battle army"
+      },
+      {
+        "n": "Rudolf",
+        "m": "Famous wolf"
+      },
+      {
+        "n": "Albert",
+        "m": "Noble bright"
+      },
+      {
+        "n": "Bernhard",
+        "m": "Strong bear"
+      },
+      {
+        "n": "Bruno",
+        "m": "Brown"
+      },
+      {
+        "n": "Emil",
+        "m": "Industrious / rival"
+      },
+      {
+        "n": "Erich",
+        "m": "Eternal ruler"
+      },
+      {
+        "n": "Ernst",
+        "m": "Serious / earnest"
+      },
+      {
+        "n": "Gustav",
+        "m": "Staff of Goths"
+      },
+      {
+        "n": "Hugo",
+        "m": "Mind / spirit"
+      },
+      {
+        "n": "Richard",
+        "m": "Brave ruler"
+      },
+      {
+        "n": "Ulrich",
+        "m": "Noble heritage"
+      },
+      {
+        "n": "Paul",
+        "m": "Small"
+      },
+      {
+        "n": "Leo",
+        "m": "Lion"
+      },
+      {
+        "n": "Max",
+        "m": "Greatest"
+      },
+      {
+        "n": "Anton",
+        "m": "Priceless"
+      },
+      {
+        "n": "Christian",
+        "m": "Christ-follower"
+      },
+      {
+        "n": "Felix",
+        "m": "Fortunate"
+      },
+      {
+        "n": "Jakob",
+        "m": "Supplanter"
+      },
+      {
+        "n": "Jonas",
+        "m": "Dove"
+      },
+      {
+        "n": "Lukas",
+        "m": "Light-bringer"
+      },
+      {
+        "n": "Moritz",
+        "m": "Dark-skinned"
+      },
+      {
+        "n": "Sebastian",
+        "m": "Venerable"
+      },
+      {
+        "n": "Tobias",
+        "m": "God is good"
+      },
+      {
+        "n": "Arthur",
+        "m": "Bear king"
+      }
+    ],
+    "female": [
+      {
+        "n": "Hildegard",
+        "m": "Battle enclosure"
+      },
+      {
+        "n": "Mathilde",
+        "m": "Mighty battle"
+      },
+      {
+        "n": "Brunhilde",
+        "m": "Armoured battle maid"
+      },
+      {
+        "n": "Adelheid",
+        "m": "Noble kind"
+      },
+      {
+        "n": "Gertrud",
+        "m": "Spear strength"
+      },
+      {
+        "n": "Walburga",
+        "m": "Ruler of fortresses"
+      },
+      {
+        "n": "Mechthild",
+        "m": "Strength in battle"
+      },
+      {
+        "n": "Kunigunde",
+        "m": "Bold in war"
+      },
+      {
+        "n": "Edeltraud",
+        "m": "Noble strength"
+      },
+      {
+        "n": "Irmgard",
+        "m": "Universal enclosure"
+      },
+      {
+        "n": "Lieselotte",
+        "m": "God is my oath"
+      },
+      {
+        "n": "Kriemhild",
+        "m": "Helmet of battle"
+      },
+      {
+        "n": "Martha",
+        "m": "Lady"
+      },
+      {
+        "n": "Anna",
+        "m": "Favour / grace"
+      },
+      {
+        "n": "Maria",
+        "m": "Star of the sea"
+      },
+      {
+        "n": "Elisabeth",
+        "m": "God is my oath"
+      },
+      {
+        "n": "Bertha",
+        "m": "Bright / glorious"
+      },
+      {
+        "n": "Clara",
+        "m": "Bright"
+      },
+      {
+        "n": "Emma",
+        "m": "Universal"
+      },
+      {
+        "n": "Frida",
+        "m": "Peace"
+      },
+      {
+        "n": "Gisela",
+        "m": "Pledge"
+      },
+      {
+        "n": "Hedwig",
+        "m": "Battle / war"
+      },
+      {
+        "n": "Ida",
+        "m": "Work / industrious"
+      },
+      {
+        "n": "Johanna",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Luise",
+        "m": "Famous warrior"
+      },
+      {
+        "n": "Minna",
+        "m": "Love / memory"
+      },
+      {
+        "n": "Olga",
+        "m": "Holy / blessed"
+      },
+      {
+        "n": "Sofie",
+        "m": "Wisdom"
+      },
+      {
+        "n": "Theresa",
+        "m": "Harvester"
+      },
+      {
+        "n": "Ursula",
+        "m": "Little bear"
+      },
+      {
+        "n": "Hannelore",
+        "m": "Grace and light"
+      },
+      {
+        "n": "Elsa",
+        "m": "God is my oath"
+      },
+      {
+        "n": "Grete",
+        "m": "Pearl"
+      },
+      {
+        "n": "Erika",
+        "m": "Heather / ruler"
+      },
+      {
+        "n": "Gerda",
+        "m": "Protected enclosure"
+      },
+      {
+        "n": "Helga",
+        "m": "Holy"
+      },
+      {
+        "n": "Ilse",
+        "m": "God is my oath"
+      },
+      {
+        "n": "Karin",
+        "m": "Pure"
+      },
+      {
+        "n": "Lore",
+        "m": "Laurel"
+      },
+      {
+        "n": "Lotte",
+        "m": "Free woman"
+      },
+      {
+        "n": "Ruth",
+        "m": "Companion / friend"
+      },
+      {
+        "n": "Sabine",
+        "m": "Sabine woman"
+      },
+      {
+        "n": "Waltraud",
+        "m": "Ruler on the battlefield"
+      },
+      {
+        "n": "Renate",
+        "m": "Reborn"
+      },
+      {
+        "n": "Heidi",
+        "m": "Noble birth"
+      }
+    ],
+    "neutral": [
+      {
+        "n": "Klaus",
+        "m": "Victory of the people"
+      },
+      {
+        "n": "Kai",
+        "m": "Harbour"
+      },
+      {
+        "n": "Robin",
+        "m": "Bright fame"
+      },
+      {
+        "n": "Juri",
+        "m": "Farmer"
+      },
+      {
+        "n": "Eike",
+        "m": "Edge of sword"
+      },
+      {
+        "n": "Gerd",
+        "m": "Strong spear"
+      },
+      {
+        "n": "Chris",
+        "m": "Christ-bearer"
+      },
+      {
+        "n": "Jan",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Kim",
+        "m": "Ruler / chief"
+      },
+      {
+        "n": "Mika",
+        "m": "Who is like God?"
+      }
+    ]
+  },
+  "japanese": {
+    "male": [
+      {
+        "n": "Haruto",
+        "m": "Sun, soar"
+      },
+      {
+        "n": "Ren",
+        "m": "Lotus, love"
+      },
+      {
+        "n": "Sōta",
+        "m": "Big, thick"
+      },
+      {
+        "n": "Yūki",
+        "m": "Gentle hope"
+      },
+      {
+        "n": "Kazuki",
+        "m": "Harmony, hope"
+      },
+      {
+        "n": "Takumi",
+        "m": "Artisan"
+      },
+      {
+        "n": "Ryū",
+        "m": "Dragon"
+      },
+      {
+        "n": "Kenji",
+        "m": "Intelligent second son"
+      },
+      {
+        "n": "Daiki",
+        "m": "Great glory"
+      },
+      {
+        "n": "Shōta",
+        "m": "Big, thick, flying"
+      },
+      {
+        "n": "Hiroshi",
+        "m": "Generous"
+      },
+      {
+        "n": "Kenta",
+        "m": "Healthy, strong"
+      },
+      {
+        "n": "Akira",
+        "m": "Bright / clear"
+      },
+      {
+        "n": "Hiro",
+        "m": "Abundant / broad"
+      },
+      {
+        "n": "Takashi",
+        "m": "Noble / prosperous"
+      },
+      {
+        "n": "Satoshi",
+        "m": "Wise / fast learner"
+      },
+      {
+        "n": "Yoshio",
+        "m": "Righteous man"
+      },
+      {
+        "n": "Takeshi",
+        "m": "Fierce warrior"
+      },
+      {
+        "n": "Masao",
+        "m": "Righteous hero"
+      },
+      {
+        "n": "Takuya",
+        "m": "Eminent pioneer"
+      },
+      {
+        "n": "Kouta",
+        "m": "Great peace"
+      },
+      {
+        "n": "Yuto",
+        "m": "Gentle soar"
+      },
+      {
+        "n": "Yamato",
+        "m": "Great harmony"
+      },
+      {
+        "n": "Taiga",
+        "m": "Great river"
+      },
+      {
+        "n": "Riku",
+        "m": "Land / continent"
+      },
+      {
+        "n": "Hayato",
+        "m": "Falcon person"
+      },
+      {
+        "n": "Haru",
+        "m": "Spring / sunlight"
+      },
+      {
+        "n": "Kaito",
+        "m": "Ocean soar"
+      },
+      {
+        "n": "Hinata",
+        "m": "Sunny place"
+      },
+      {
+        "n": "Arata",
+        "m": "Fresh / new"
+      },
+      {
+        "n": "Daichi",
+        "m": "Great land"
+      },
+      {
+        "n": "Hideki",
+        "m": "Splendid tree"
+      },
+      {
+        "n": "Itsuki",
+        "m": "Timber tree / independence"
+      },
+      {
+        "n": "Jun",
+        "m": "Obedient / pure"
+      },
+      {
+        "n": "Kazuo",
+        "m": "First son of peace"
+      },
+      {
+        "n": "Minoru",
+        "m": "To bear fruit / truth"
+      },
+      {
+        "n": "Naoki",
+        "m": "Honest tree"
+      },
+      {
+        "n": "Ryo",
+        "m": "Excellent / refreshing"
+      },
+      {
+        "n": "Shin",
+        "m": "Truth / trust"
+      },
+      {
+        "n": "Shiro",
+        "m": "Fourth son"
+      },
+      {
+        "n": "Tsubasa",
+        "m": "Wings"
+      },
+      {
+        "n": "Yoshi",
+        "m": "Good / righteous"
+      },
+      {
+        "n": "Yuuto",
+        "m": "Gentle person"
+      },
+      {
+        "n": "Koji",
+        "m": "Second son of peace"
+      },
+      {
+        "n": "Sho",
+        "m": "To soar / fly"
+      }
+    ],
+    "female": [
+      {
+        "n": "Yui",
+        "m": "Bind clothing"
+      },
+      {
+        "n": "Aoi",
+        "m": "Hollyhock, blue"
+      },
+      {
+        "n": "Hana",
+        "m": "Flower"
+      },
+      {
+        "n": "Sakura",
+        "m": "Cherry blossom"
+      },
+      {
+        "n": "Rin",
+        "m": "Dignified"
+      },
+      {
+        "n": "Mei",
+        "m": "Bright, beautiful"
+      },
+      {
+        "n": "Nana",
+        "m": "Seven"
+      },
+      {
+        "n": "Saki",
+        "m": "Blossom, hope"
+      },
+      {
+        "n": "Yuna",
+        "m": "Gentle"
+      },
+      {
+        "n": "Koharu",
+        "m": "Small spring"
+      },
+      {
+        "n": "Akari",
+        "m": "Light, brightness"
+      },
+      {
+        "n": "Misaki",
+        "m": "Beautiful blossom"
+      },
+      {
+        "n": "Yoko",
+        "m": "Child of the sun"
+      },
+      {
+        "n": "Keiko",
+        "m": "Blessed child"
+      },
+      {
+        "n": "Naoko",
+        "m": "Honest child"
+      },
+      {
+        "n": "Miyuki",
+        "m": "Beautiful happiness"
+      },
+      {
+        "n": "Ayano",
+        "m": "My color"
+      },
+      {
+        "n": "Haruka",
+        "m": "Far off / spring fragrance"
+      },
+      {
+        "n": "Himari",
+        "m": "Sunflower"
+      },
+      {
+        "n": "Hina",
+        "m": "Sunny vegetables"
+      },
+      {
+        "n": "Yuina",
+        "m": "Bind vegetables"
+      },
+      {
+        "n": "Mio",
+        "m": "Beautiful cherry blossom"
+      },
+      {
+        "n": "Kokoa",
+        "m": "Heart love"
+      },
+      {
+        "n": "Rio",
+        "m": "Jasmine thread"
+      },
+      {
+        "n": "Ichika",
+        "m": "One flower"
+      },
+      {
+        "n": "Akane",
+        "m": "Deep red"
+      },
+      {
+        "n": "Mai",
+        "m": "Dance"
+      },
+      {
+        "n": "Nanami",
+        "m": "Seven seas"
+      },
+      {
+        "n": "Riko",
+        "m": "Jasmine child"
+      },
+      {
+        "n": "Yoshiko",
+        "m": "Good child"
+      },
+      {
+        "n": "Asuka",
+        "m": "Fragrance of tomorrow"
+      },
+      {
+        "n": "Chiyo",
+        "m": "Thousand generations"
+      },
+      {
+        "n": "Emi",
+        "m": "Beautiful picture"
+      },
+      {
+        "n": "Hitomi",
+        "m": "Pupil of the eye"
+      },
+      {
+        "n": "Izumi",
+        "m": "Spring / fountain"
+      },
+      {
+        "n": "Kasumi",
+        "m": "Mist"
+      },
+      {
+        "n": "Kumi",
+        "m": "Beautiful braid"
+      },
+      {
+        "n": "Mana",
+        "m": "Love"
+      },
+      {
+        "n": "Midori",
+        "m": "Green"
+      },
+      {
+        "n": "Natsumi",
+        "m": "Beautiful summer"
+      },
+      {
+        "n": "Risa",
+        "m": "Sand blossom"
+      },
+      {
+        "n": "Shizuka",
+        "m": "Quiet / calm"
+      },
+      {
+        "n": "Tomoko",
+        "m": "Wise child"
+      },
+      {
+        "n": "Yuka",
+        "m": "Gentle flower"
+      },
+      {
+        "n": "Yuri",
+        "m": "Lily"
+      },
+      {
+        "n": "Ayame",
+        "m": "Iris"
+      }
+    ],
+    "neutral": [
+      {
+        "n": "Sora",
+        "m": "Sky"
+      },
+      {
+        "n": "Noa",
+        "m": "Wavering"
+      },
+      {
+        "n": "Kai",
+        "m": "Sea"
+      },
+      {
+        "n": "Rei",
+        "m": "Gratitude"
+      },
+      {
+        "n": "Hikaru",
+        "m": "Light / radiance"
+      },
+      {
+        "n": "Kaoru",
+        "m": "Fragrance"
+      },
+      {
+        "n": "Chihiro",
+        "m": "Thousand fathoms"
+      },
+      {
+        "n": "Hinata",
+        "m": "Sunny place"
+      },
+      {
+        "n": "Yuki",
+        "m": "Snow / happiness"
+      },
+      {
+        "n": "Aoi",
+        "m": "Blue / hollyhock"
+      }
+    ]
+  },
+  "spanish": {
+    "male": [
+      {
+        "n": "Rodrigo",
+        "m": "Famous ruler"
+      },
+      {
+        "n": "Gonzalo",
+        "m": "Battle genius"
+      },
+      {
+        "n": "Ignacio",
+        "m": "Fiery"
+      },
+      {
+        "n": "Alejandro",
+        "m": "Defender of men"
+      },
+      {
+        "n": "Sebastián",
+        "m": "Venerable"
+      },
+      {
+        "n": "Mateo",
+        "m": "Gift of God"
+      },
+      {
+        "n": "Nicolás",
+        "m": "Victory of the people"
+      },
+      {
+        "n": "Emilio",
+        "m": "Rival"
+      },
+      {
+        "n": "Rafael",
+        "m": "God has healed"
+      },
+      {
+        "n": "Diego",
+        "m": "Supplanter"
+      },
+      {
+        "n": "Álvaro",
+        "m": "Elf warrior"
+      },
+      {
+        "n": "Fernando",
+        "m": "Bold traveller"
+      },
+      {
+        "n": "Carlos",
+        "m": "Free man"
+      },
+      {
+        "n": "Juan",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Jose",
+        "m": "He will add"
+      },
+      {
+        "n": "Luis",
+        "m": "Famous warrior"
+      },
+      {
+        "n": "Francisco",
+        "m": "Frenchman / free"
+      },
+      {
+        "n": "Manuel",
+        "m": "God is with us"
+      },
+      {
+        "n": "Antonio",
+        "m": "Priceless"
+      },
+      {
+        "n": "Pedro",
+        "m": "Stone / rock"
+      },
+      {
+        "n": "Miguel",
+        "m": "Who is like God"
+      },
+      {
+        "n": "Javier",
+        "m": "New house"
+      },
+      {
+        "n": "Jorge",
+        "m": "Earth worker / farmer"
+      },
+      {
+        "n": "David",
+        "m": "Beloved"
+      },
+      {
+        "n": "Daniel",
+        "m": "God is my judge"
+      },
+      {
+        "n": "Andres",
+        "m": "Manly / brave"
+      },
+      {
+        "n": "Gabriel",
+        "m": "God is my strength"
+      },
+      {
+        "n": "Tomas",
+        "m": "Twin"
+      },
+      {
+        "n": "Martin",
+        "m": "Of Mars / warrior"
+      },
+      {
+        "n": "Marcos",
+        "m": "Dedicated to Mars"
+      },
+      {
+        "n": "Hugo",
+        "m": "Mind / spirit"
+      },
+      {
+        "n": "Lucas",
+        "m": "Bringer of light"
+      },
+      {
+        "n": "Pablo",
+        "m": "Small / humble"
+      },
+      {
+        "n": "Santiago",
+        "m": "Saint James"
+      },
+      {
+        "n": "Joaquin",
+        "m": "Established by God"
+      },
+      {
+        "n": "Eduardo",
+        "m": "Wealthy guardian"
+      },
+      {
+        "n": "Adrian",
+        "m": "From Hadria"
+      },
+      {
+        "n": "Angel",
+        "m": "Messenger"
+      },
+      {
+        "n": "Cristian",
+        "m": "Christ-follower"
+      },
+      {
+        "n": "Felipe",
+        "m": "Lover of horses"
+      },
+      {
+        "n": "Guillermo",
+        "m": "Will-helmet"
+      },
+      {
+        "n": "Mario",
+        "m": "Male / warlike"
+      },
+      {
+        "n": "Raul",
+        "m": "Wolf counsel"
+      },
+      {
+        "n": "Ruben",
+        "m": "Behold, a son"
+      },
+      {
+        "n": "Victor",
+        "m": "Conqueror"
+      },
+      {
+        "n": "Samuel",
+        "m": "God has heard"
+      }
+    ],
+    "female": [
+      {
+        "n": "Valentina",
+        "m": "Strong, healthy"
+      },
+      {
+        "n": "Isabella",
+        "m": "God is my oath"
+      },
+      {
+        "n": "Camila",
+        "m": "Attendant"
+      },
+      {
+        "n": "Valeria",
+        "m": "Strong"
+      },
+      {
+        "n": "Lucía",
+        "m": "Light"
+      },
+      {
+        "n": "Sofía",
+        "m": "Wisdom"
+      },
+      {
+        "n": "Martina",
+        "m": "Of Mars"
+      },
+      {
+        "n": "Paula",
+        "m": "Small"
+      },
+      {
+        "n": "Elena",
+        "m": "Shining light"
+      },
+      {
+        "n": "Adriana",
+        "m": "From the Adriatic"
+      },
+      {
+        "n": "Pilar",
+        "m": "Pillar"
+      },
+      {
+        "n": "Consuelo",
+        "m": "Consolation"
+      },
+      {
+        "n": "Maria",
+        "m": "Bitter / star of the sea"
+      },
+      {
+        "n": "Ana",
+        "m": "Grace / favour"
+      },
+      {
+        "n": "Juana",
+        "m": "God is gracious"
+      },
+      {
+        "n": "Carmen",
+        "m": "Song / garden"
+      },
+      {
+        "n": "Francisca",
+        "m": "Free woman"
+      },
+      {
+        "n": "Isabel",
+        "m": "God is my oath"
+      },
+      {
+        "n": "Teresa",
+        "m": "Harvester"
+      },
+      {
+        "n": "Dolores",
+        "m": "Sorrow"
+      },
+      {
+        "n": "Mercedes",
+        "m": "Mercies"
+      },
+      {
+        "n": "Soledad",
+        "m": "Solitude"
+      },
+      {
+        "n": "Esperanza",
+        "m": "Hope"
+      },
+      {
+        "n": "Victoria",
+        "m": "Victory"
+      },
+      {
+        "n": "Gloria",
+        "m": "Glory"
+      },
+      {
+        "n": "Rosa",
+        "m": "Rose flower"
+      },
+      {
+        "n": "Beatriz",
+        "m": "She who brings joy"
+      },
+      {
+        "n": "Clara",
+        "m": "Bright / clear"
+      },
+      {
+        "n": "Alicia",
+        "m": "Noble kind"
+      },
+      {
+        "n": "Laura",
+        "m": "Laurel tree"
+      },
+      {
+        "n": "Cristina",
+        "m": "Christ-follower"
+      },
+      {
+        "n": "Patricia",
+        "m": "Noblewoman"
+      },
+      {
+        "n": "Monica",
+        "m": "Advisor / unique"
+      },
+      {
+        "n": "Silvia",
+        "m": "From the forest"
+      },
+      {
+        "n": "Sandra",
+        "m": "Defender of men"
+      },
+      {
+        "n": "Natalia",
+        "m": "Birthday of the Lord"
+      },
+      {
+        "n": "Andrea",
+        "m": "Manly / brave"
+      },
+      {
+        "n": "Aurora",
+        "m": "Dawn"
+      },
+      {
+        "n": "Blanca",
+        "m": "White / fair"
+      },
+      {
+        "n": "Diana",
+        "m": "Divine / heavenly"
+      },
+      {
+        "n": "Estela",
+        "m": "Star"
+      },
+      {
+        "n": "Ines",
+        "m": "Pure / chaste"
+      },
+      {
+        "n": "Leticia",
+        "m": "Gladness / joy"
+      },
+      {
+        "n": "Margarita",
+        "m": "Pearl"
+      },
+      {
+        "n": "Gabriela",
+        "m": "God is my strength"
+      },
+      {
+        "n": "Julia",
+        "m": "Youthful"
+      }
+    ],
+    "neutral": [
+      {
+        "n": "Cruz",
+        "m": "Cross"
+      },
+      {
+        "n": "Sol",
+        "m": "Sun"
+      },
+      {
+        "n": "Paz",
+        "m": "Peace"
+      },
+      {
+        "n": "Mar",
+        "m": "Sea"
+      },
+      {
+        "n": "Guadalupe",
+        "m": "River of the wolf"
+      },
+      {
+        "n": "Carmen",
+        "m": "Song / garden"
+      },
+      {
+        "n": "Reyes",
+        "m": "Kings"
+      },
+      {
+        "n": "Santana",
+        "m": "Saint Anne"
+      },
+      {
+        "n": "Angel",
+        "m": "Messenger / angel"
+      },
+      {
+        "n": "Rosario",
+        "m": "Rosary"
+      }
+    ]
+  }
+};
+
+  var LANG_TTS = {
+    english:'en-GB', oldenglish:'en-GB', norse:'no', latin:'it-IT',
+    celtic:'ga', french:'fr-FR', german:'de-DE',
+    japanese:'ja-JP', spanish:'es-ES'
+  };
+
+  /* Keep global references to protect SpeechSynthesisUtterance from browser Garbage Collection */
+  window._phgUtterances = [];
+
+  function speakText(text, langCode, buttonEl) {
+    speakTextHelper(text, langCode, buttonEl, false);
+  }
+
+  function speakTextHelper(text, langCode, buttonEl, isFallback) {
+    if (!window.speechSynthesis) return;
+    try {
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+      window.speechSynthesis.cancel();
+      resetSpeakingStates();
+      if (buttonEl) {
+        buttonEl.classList.add('speaking');
+      }
+      /* Add a small 100ms timeout so speechSynthesis.cancel() can process */
+      setTimeout(function () {
+        try {
+          var u = new SpeechSynthesisUtterance(text);
+          u.volume = 1.0;
+          u.pitch = 1.0;
+          u.rate = 0.85;
+          var selectedVoice = null;
+          if (!isFallback) {
+            var voices = window.speechSynthesis.getVoices();
+            if (voices) {
+              if (voices.length) {
+                var targetLang = (langCode || 'en-GB').toLowerCase().replace('_', '-');
+                var langPrefix = targetLang.split('-')[0];
+                /* Prioritize local voices to avoid Google's flaky network voices */
+                /* 1. Try local exact match */
+                for (var i = 0; i !== voices.length; i++) {
+                  var voiceLang = voices[i].lang.toLowerCase().replace('_', '-');
+                  if (voiceLang === targetLang) {
+                    if (voices[i].localService) {
+                      selectedVoice = voices[i];
+                      break;
+                    }
+                  }
+                }
+                /* 2. Try exact match (including network voices) */
+                if (!selectedVoice) {
+                  for (var i = 0; i !== voices.length; i++) {
+                    var voiceLang = voices[i].lang.toLowerCase().replace('_', '-');
+                    if (voiceLang === targetLang) {
+                      selectedVoice = voices[i];
+                      break;
+                    }
+                  }
+                }
+                /* 3. Try local prefix match (e.g. local en-US for en-GB) */
+                if (!selectedVoice) {
+                  for (var i = 0; i !== voices.length; i++) {
+                    var voiceLang = voices[i].lang.toLowerCase().replace('_', '-');
+                    if (voiceLang.indexOf(langPrefix) === 0) {
+                      if (voices[i].localService) {
+                        selectedVoice = voices[i];
+                        break;
+                      }
+                    }
+                  }
+                }
+                /* 4. Try prefix match (including network voices) */
+                if (!selectedVoice) {
+                  for (var i = 0; i !== voices.length; i++) {
+                    var voiceLang = voices[i].lang.toLowerCase().replace('_', '-');
+                    if (voiceLang.indexOf(langPrefix) === 0) {
+                      selectedVoice = voices[i];
+                      break;
+                    }
+                  }
+                }
+                /* 5. Try local English fallback */
+                if (!selectedVoice) {
+                  for (var i = 0; i !== voices.length; i++) {
+                    var voiceLang = voices[i].lang.toLowerCase().replace('_', '-');
+                    if (voiceLang.indexOf('en') === 0) {
+                      if (voices[i].localService) {
+                        selectedVoice = voices[i];
+                        break;
+                      }
+                    }
+                  }
+                }
+                /* 6. Try any English fallback */
+                if (!selectedVoice) {
+                  for (var i = 0; i !== voices.length; i++) {
+                    var voiceLang = voices[i].lang.toLowerCase().replace('_', '-');
+                    if (voiceLang.indexOf('en') === 0) {
+                      selectedVoice = voices[i];
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          if (selectedVoice) {
+            u.voice = selectedVoice;
+            u.lang = selectedVoice.lang;
+            console.log("Selected voice for speech: " + selectedVoice.name + " (" + selectedVoice.lang + ")");
+          } else {
+            if (!isFallback) {
+              u.lang = langCode || 'en-GB';
+            }
+          }
+          u.onend = function () {
+            if (buttonEl) buttonEl.classList.remove('speaking');
+            removeUtteranceReference(u);
+          };
+          u.onerror = function (e) {
+            console.error("Speech Synthesis Error (" + (isFallback ? "fallback" : "primary") + "):", e.error || e);
+            if (buttonEl) buttonEl.classList.remove('speaking');
+            removeUtteranceReference(u);
+            /* If the primary attempt failed, retry immediately with default system settings */
+            if (!isFallback) {
+              console.log("Primary speech failed. Retrying with default browser speech parameters...");
+              speakTextHelper(text, null, buttonEl, true);
+            }
+          };
+          /* Store reference to prevent V8 Garbage Collection */
+          window._phgUtterances.push(u);
+          window.speechSynthesis.speak(u);
+        } catch (innerErr) {
+          console.error("Speech Synthesis inner error:", innerErr);
+          if (buttonEl) buttonEl.classList.remove('speaking');
+          if (!isFallback) {
+            speakTextHelper(text, null, buttonEl, true);
+          }
+        }
+      }, 100);
+    } catch (e) {
+      console.error("Speech Synthesis outer error: ", e);
+      if (buttonEl) buttonEl.classList.remove('speaking');
+    }
+  }
+
+  function removeUtteranceReference(u) {
+    if (window._phgUtterances) {
+      var idx = window._phgUtterances.indexOf(u);
+      if (idx !== -1) {
+        window._phgUtterances.splice(idx, 1);
+      }
+    }
+  }
+
+  function resetSpeakingStates() {
+    var els = document.querySelectorAll('.phg-ng-container .tts-btn, .phg-ng-container .history-pill');
+    els.forEach(function(el) {
+      el.classList.remove('speaking');
+    });
+  }
+
+  function phgGenerate(btnEl) {
+    var container = btnEl.closest('.phg-ng-container');
+    if (!container) return;
+
+    var langSelect   = container.querySelector('.phg-lang-select');
+    var genderSelect = container.querySelector('.phg-gender-select');
+    var lang   = langSelect.value;
+    var gender = genderSelect.value;
+
+    var list = [];
+    if (NAMES[lang]) {
+      if (NAMES[lang][gender]) {
+        list = NAMES[lang][gender];
+      }
+    }
+    if (!list.length) return;
+
+    var entry  = list[Math.floor(Math.random() * list.length)];
+    container.currentName = entry.n;
+    container.currentOE   = entry.oe || null;
+    container.currentLang = lang;
+
+    var langLabel   = langSelect.options[langSelect.selectedIndex].text;
+    var genderLabel = genderSelect.options[genderSelect.selectedIndex].text;
+
+    var result = container.querySelector('.phg-result');
+    result.classList.remove('updated');
+    void result.offsetWidth; /* Reflow resets entry animation */
+    result.classList.add('updated');
+
+    var placeholder = container.querySelector('.phg-placeholder');
+    if (placeholder) {
+      placeholder.style.setProperty('display', 'none', 'important');
+    }
+
+    var nameOut = container.querySelector('.phg-name');
+    var metaOut = container.querySelector('.phg-meta');
+    nameOut.textContent   = entry.n;
+    metaOut.textContent   = entry.m + ' · ' + langLabel + ' · ' + genderLabel;
+
+    var ttsRow = container.querySelector('.phg-tts-row');
+    if (ttsRow) {
+      ttsRow.style.display = 'flex';
+    }
+    
+    /* Reset Copy Button design states */
+    var copyBtn = container.querySelector('.phg-copy-btn');
+    var copyText = container.querySelector('.phg-copy-text');
+    var iconCopy = copyBtn.querySelector('.icon-copy');
+    var iconCheck = copyBtn.querySelector('.icon-check');
+    if (copyText) copyText.textContent = 'Copy';
+    if (iconCopy) iconCopy.style.display = 'inline-block';
+    if (iconCheck) iconCheck.style.display = 'none';
+    copyBtn.classList.remove('copied');
+
+    var oeBlock = container.querySelector('.phg-oe-block');
+    if (entry.oe) {
+      container.querySelector('.phg-oe-name').textContent    = entry.oe.name;
+      container.querySelector('.phg-oe-meaning').textContent = entry.oe.meaning;
+      container.querySelector('.phg-oe-modern').textContent  = 'Modern equivalent: ' + entry.oe.modern;
+      oeBlock.classList.add('visible');
+    } else {
+      oeBlock.classList.remove('visible');
+    }
+
+    phgAddHistory(container, entry.n, lang);
+  }
+
+  function phgSpeak(btnEl) {
+    var container = btnEl.closest('.phg-ng-container');
+    if (!container) return;
+    if (!container.currentName) return;
+    var langCode = LANG_TTS[container.currentLang] || 'en-GB';
+    speakText(container.currentName, langCode, btnEl);
+  }
+
+  function phgSpeakOE(btnEl) {
+    var container = btnEl.closest('.phg-ng-container');
+    if (!container) return;
+    if (!container.currentOE) return;
+    speakText(container.currentOE.name, 'en-GB', btnEl);
+  }
+
+  function phgSpeakHistory(name, lang, pillEl) {
+    var langCode = LANG_TTS[lang] || 'en-GB';
+    speakText(name, langCode, pillEl);
+  }
+
+  function phgCopy(btnEl) {
+    var container = btnEl.closest('.phg-ng-container');
+    if (!container) return;
+    if (!container.currentName) return;
+
+    var btn = container.querySelector('.phg-copy-btn');
+    var copyText = container.querySelector('.phg-copy-text');
+    var iconCopy = btn.querySelector('.icon-copy');
+    var iconCheck = btn.querySelector('.icon-check');
+    var textToCopy = container.currentName;
+
+    function handleSuccess() {
+      if (iconCopy) iconCopy.style.display = 'none';
+      if (iconCheck) iconCheck.style.display = 'inline-block';
+      if (copyText) copyText.textContent = 'Copied!';
+      btn.classList.add('copied');
+      
+      setTimeout(function () {
+        if (iconCopy) iconCopy.style.display = 'inline-block';
+        if (iconCheck) iconCheck.style.display = 'none';
+        if (copyText) copyText.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 1800);
+    }
+
+    var canCopy = false;
+    if (navigator.clipboard) {
+      if (navigator.clipboard.writeText) {
+        canCopy = true;
+      }
+    }
+    if (canCopy) {
+      navigator.clipboard.writeText(textToCopy).then(handleSuccess);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = textToCopy;
+      ta.style.position = 'absolute';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        handleSuccess();
+      } catch (err) {
+        console.error('Fallback copy failed', err);
+      }
+      document.body.removeChild(ta);
+    }
+  }
+
+  function phgAddHistory(container, name, lang) {
+    if (!container.historyList) {
+      container.historyList = [];
+    }
+    var list = container.historyList;
+
+    /* Prevent duplicate entries, maintain max 10 elements */
+    var filtered = [];
+    for (var i = 0; i !== list.length; i++) {
+      if (list[i].name !== name) {
+        filtered.push(list[i]);
+      }
+    }
+    list = [{ name: name, lang: lang }].concat(filtered).slice(0, 10);
+    container.historyList = list;
+
+    var pills = container.querySelector('.phg-history-pills');
+    var historyWrap = container.querySelector('.phg-history-wrap');
+    if (historyWrap) {
+      historyWrap.style.display = 'block';
+    }
+    
+    pills.innerHTML = list.map(function (item) {
+      var attrName = item.name.replace(/"/g, '&quot;');
+      var attrLang = item.lang.replace(/"/g, '&quot;');
+      return '<span class="history-pill" data-name="' + attrName + '" data-lang="' + attrLang + '" title="Click to hear pronunciation">' + item.name + '</span>';
+    }).join('');
+  }
+
+  /* Dynamic Binding logic for relative scopes */
+  function initWidget(container) {
+    if (container.phgInitialized) return;
+    container.phgInitialized = true;
+
+    /* 1. Generate button */
+    var genBtn = container.querySelector('.phg-generate-btn');
+    if (genBtn) {
+      genBtn.addEventListener('click', function () {
+        phgGenerate(genBtn);
+      });
+    }
+
+    /* 2. Speak name button */
+    var speakBtn = container.querySelector('.phg-speak-btn');
+    if (speakBtn) {
+      speakBtn.addEventListener('click', function () {
+        phgSpeak(speakBtn);
+      });
+    }
+
+    /* 3. Speak Old English name button */
+    var speakOEBtn = container.querySelector('.phg-speak-oe-btn');
+    if (speakOEBtn) {
+      speakOEBtn.addEventListener('click', function () {
+        phgSpeakOE(speakOEBtn);
+      });
+    }
+
+    /* 4. Copy button */
+    var copyBtn = container.querySelector('.phg-copy-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        phgCopy(copyBtn);
+      });
+    }
+
+    /* 5. History pill event delegation */
+    var pillsContainer = container.querySelector('.phg-history-pills');
+    if (pillsContainer) {
+      pillsContainer.addEventListener('click', function (e) {
+        var pill = e.target.closest('.history-pill');
+        if (pill) {
+          var name = pill.getAttribute('data-name');
+          var lang = pill.getAttribute('data-lang');
+          phgSpeakHistory(name, lang, pill);
+        }
+      });
+    }
+  }
+
+  function initAll() {
+    var containers = document.querySelectorAll('.phg-ng-container');
+    for (var i = 0; i !== containers.length; i++) {
+      initWidget(containers[i]);
+    }
+  }
+
+  /* Auto initialize on DOM ready state changes */
+  initAll();
+  document.addEventListener('DOMContentLoaded', initAll);
+  window.addEventListener('load', initAll);
+
+  /* Keyboard shortcut: press 'G' key to generate */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'g') {
+      if (!e.ctrlKey) {
+        if (!e.metaKey) {
+          var tag = document.activeElement.tagName;
+          if (tag !== 'INPUT') {
+            if (tag !== 'TEXTAREA') {
+              if (tag !== 'SELECT') {
+                var container = document.querySelector('.phg-ng-container');
+                if (container) {
+                  var btn = container.querySelector('.phg-generate-btn');
+                  if (btn) {
+                    phgGenerate(btn);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  });
+
+})();
+</script>
+
+
+
+<p>Looking for an authentic, free Name Maker with real meanings, real history, and real Anglo-Saxon roots? You have found it. At <a href="https://partnerhoursguide.com">PartnerHoursGuide.com</a>, our Name Maker tool is built from the most authoritative academic databases of ancient English names — the <a href="https://pase.ac.uk" target="_blank" rel="noopener noreferrer">Prosopography of Anglo-Saxon England (PASE)</a> and <a href="https://www.behindthename.com/names/origin/old-english" target="_blank" rel="noopener noreferrer">Behind the Name</a>. Whether you need name ideas for a baby, a fantasy character, a novel, or simply want to explore the name history behind a word your family has carried for generations — our Name Maker is here to help.</p>
+
+<img src="https://partnerhoursguide.com/wp-content/uploads/2026/05/Copilot_20260601_032343.webp" alt="Name Maker tool" width="100%" loading="eager" />
+
+<p>Every name in this guide is attested — meaning real people actually bore these names, documented in charters, royal genealogies, and the Domesday Book. These are not invented words. They are living fragments of English history.</p>
+
+<h2 id="name-finder-ancient-anglo-saxon-names" style="font-family: var(--font-title); font-size: 2rem; color: var(--accent-gold); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-top: 1.5rem;">Name Maker — Ancient Anglo-Saxon Names With Meanings</h2>
+
+<h2 id="what-is-a-name-maker">What Is the Name Maker Tool?</h2>
+<p>The Name Maker is a specialized name finder tool that returns historically documented Anglo-Saxon names — complete with meanings, gender, etymology, and era. Unlike a generic name randomizer that assembles plausible-sounding syllables, our Name Maker draws from real recorded names of real people.</p>
+
+<p>The Name Maker at PartnerHoursGuide.com lets you filter by:</p>
+<ul>
+  <li><strong>Gender</strong> — male names, female names, or unisex</li>
+  <li><strong>Name element</strong> — the Old English root word at the heart of the name</li>
+  <li><strong>Era</strong> — Anglo-Saxon, Medieval English, or Modern English revival</li>
+</ul>
+
+<p>Every result includes the full name meaning, its compound elements, its usage period, and a pronunciation button — so you can both read and hear the name before choosing it.</p>
+
+<h2 id="origins-and-history">The Origins and Name History of Old English Names</h2>
+
+<h3 id="where-from">Where Do Old English Names Come From?</h3>
+<p>Old English names are drawn from the West Germanic language spoken by the Anglo-Saxons — the Angles, Saxons, and Jutes who migrated to Britain from continental Europe in the 5th century. This language, which we call Old English, was the direct ancestor of modern English and was spoken across England from approximately 450 AD to 1150 AD.</p>
+
+<p>The name history of this period is remarkable. Anglo-Saxon names were not single words — they were compound poems. Two meaningful elements were fused together to create a name that expressed a quality, a hope, or a destiny:</p>
+<ul>
+<li><strong>ælf</strong> (elf) + <strong>ræd</strong> (counsel) = Ælfræd — the root of Alfred</li>
+<li><strong>æðele</strong> (noble) + <strong>flæd</strong> (beauty) = Æthelflæd — the Lady of the Mercians</li>
+<li><strong>ead</strong> (wealth, fortune) + <strong>wine</strong> (friend) = Eadwine — the root of Edwin</li>
+</ul>
+
+<p>This is what makes Old English names so distinctive among ancient english names: every name carries a compressed name story inside it.</p>
+
+<h3 id="anglo-saxon-naming-tradition">The Anglo-Saxon Naming Tradition (5th–10th Century)</h3>
+<p>The earliest Old English names on record appear in 7th-century church documents and royal charters. Names like Acca (Bishop of Hexham, 709–731) and Æbbe (Abbess of Coldingham, d. 683) appear in the writings of the Venerable Bede — our oldest narrative source for Anglo-Saxon England.</p>
+
+<p>Noble and royal families practised alliterative naming — recycling a shared first element across generations to signal dynasty and descent. The House of Wessex, for example, built a dynasty of names around <strong>æðele</strong> (noble) and <strong>ælf</strong> (elf): Æthelred, Æthelstan, Ælfræd, Ælfwine — a living genealogy written in language.</p>
+
+<p>The most celebrated bearers of these ancient english names include:</p>
+<ul>
+<li><strong>Alfred the Great (Ælfræd)</strong> — scholar-king of Wessex, defender against the Vikings</li>
+<li><strong>Æthelflæd</strong> — Lady of the Mercians, military commander and daughter of Alfred</li>
+<li><strong>Æthelstan</strong> — first King of all England, r. 927–939</li>
+<li><strong>Beowulf</strong> — the legendary hero of the greatest Old English epic poem</li>
+</ul>
+
+<h3 id="norman-conquest">How the Norman Conquest Changed English Names (1066)</h3>
+<p>When William the Conqueror invaded in 1066, he brought an entirely different naming culture. Norman French names — William, Robert, Richard, Henry — rapidly replaced the Anglo-Saxon naming stock. Within two generations, old family names of Anglo-Saxon origin had nearly vanished from the nobility.</p>
+
+<p>Some survived through transformation. Ælfræd became Alfred. Æðelþryð softened into Audrey. Ælfwine compressed into Alvin. These modern English names are the living descendants of their Old English ancestors — the same name story told in a new tongue.</p>
+
+<h3 id="victorian-revival">The Victorian Revival</h3>
+<p>The 19th century brought a romantic rediscovery of Anglo-Saxon heritage. Parents, writers, and scholars revived names like Aldous, Algar, Edith, and Athelstan — drawn by the same longing for authentic English identity that later drove Tolkien's deep study of Old English. Many of the most popular english female names and male names of the Victorian era were, in fact, Old English revivals.</p>
+
+<h2 id="good-character-names">So You Want to Create Good Old English Character Names?</h2>
+<p>If you are a writer looking for fantasy book character names rooted in something real — not invented — Old English is one of the richest sources available. Understanding how the name finder system works gives you the tools to build your own names from scratch, or to use our tool intelligently.</p>
+
+<h3 id="element-architecture">The Element Architecture</h3>
+<p>Old English names are built from roughly 80 attested elements. Combine any two and you have a historically plausible name. Here are the most productive:</p>
+
+<strong>First elements (the "front" of the name):</strong>
+<table>
+  <tr><th>Element</th><th>Meaning</th><th>Example</th></tr>
+  <tr><td>Ælf-</td><td>elf, supernatural</td><td>Ælfræd (Alfred)</td></tr>
+  <tr><td>Æðele-</td><td>noble, excellent</td><td>Æthelflæd</td></tr>
+  <tr><td>Beorht-</td><td>bright, shining</td><td>Beorhtric</td></tr>
+  <tr><td>Ead-</td><td>wealth, fortune</td><td>Eadwine (Edwin)</td></tr>
+  <tr><td>Eofor-</td><td>boar (warrior)</td><td>Eoforic</td></tr>
+  <tr><td>Os-</td><td>god, divine</td><td>Oswald</td></tr>
+  <tr><td>Wulf-</td><td>wolf, fierce</td><td>Wulfric</td></tr>
+  <tr><td>Beorn-</td><td>warrior, nobleman</td><td>Beornræd</td></tr>
+</table>
+
+<strong>Second elements (the "back" of the name):</strong>
+<table>
+  <tr><th>Element</th><th>Meaning</th><th>Example</th></tr>
+  <tr><td>-flæd</td><td>beauty</td><td>Æthelflæd</td></tr>
+  <tr><td>-friþ</td><td>peace</td><td>Æðelfrið</td></tr>
+  <tr><td>-gar</td><td>spear</td><td>Ælfgar (Algar)</td></tr>
+  <tr><td>-giefu</td><td>gift</td><td>Ælfgifu</td></tr>
+  <tr><td>-heard</td><td>hard, brave</td><td>Burgheard</td></tr>
+  <tr><td>-hild</td><td>battle</td><td>Ælfhild</td></tr>
+  <tr><td>-mund</td><td>protector</td><td>Ceolmund</td></tr>
+  <tr><td>-ræd</td><td>counsel, wisdom</td><td>Ælfræd</td></tr>
+  <tr><td>-ric</td><td>ruler, king</td><td>Ælfric</td></tr>
+  <tr><td>-stan</td><td>stone</td><td>Æthelstan</td></tr>
+  <tr><td>-weard</td><td>guardian</td><td>Ælfweard</td></tr>
+  <tr><td>-wine</td><td>friend</td><td>Ælfwine</td></tr>
+  <tr><td>-wulf</td><td>wolf</td><td>Æðelwulf</td></tr>
+  <tr><td>-wynn</td><td>joy</td><td>Ælfwynn</td></tr>
+</table>
+
+<h3 id="rules-for-writers">Rules for Writers Building Character Names</h3>
+<p><strong>Rule 1 — Status matters.</strong> Noble and royal characters had long compound names. Common people, servants, and craftsmen often had short single-element names like Acca, Bada, or Adda. Use name length to signal social class.</p>
+
+<p><strong>Rule 2 — Use alliterative families.</strong> If characters are related, give them names sharing a first element. Æthelflæd and Æthelstan feel like siblings — because historically, they were (both children of Alfred the Great).</p>
+
+<p><strong>Rule 3 — Match the element to the character.</strong> A cunning advisor might carry -ræd (counsel). A fierce warrior might carry wulf- (wolf) or -hild (battle). A good character names female might draw from -wynn (joy) or ælf- (elf). A book character names male might use beorn- (warrior) or os- (god).</p>
+
+<p><strong>Rule 4 — Use the tool.</strong> Rather than building from scratch, the name finder at PartnerHoursGuide.com functions as both a name finder and a fantasy characters generator — filtering by element theme so you can match names to personalities.</p>
+
+<img src="https://partnerhoursguide.com/wp-content/uploads/2026/05/Copilot_20260601_032458.webp" alt="name finder" width="100%" loading="lazy" />
+
+<h2 id="10-names-for-inspiration">10 Old English Names From Our Name Finder for Inspiration</h2>
+<p>These ten names come from genuine historical records. Each carries centuries of name story behind it.</p>
+
+<p><strong>1. Æthelflæd (f) — Noble Beauty</strong><br>
+Elements: æðele + flæd | Era: Anglo-Saxon<br>
+Daughter of Alfred the Great. Lady of the Mercians. Military commander against the Vikings. One of the most powerful women in early medieval Europe. For a good character names female who leads.</p>
+
+<p><strong>2. Beowulf (m) — Bear</strong><br>
+Elements: beo + wulf | Era: Anglo-Saxon<br>
+Hero of the 8th-century Old English epic. The ultimate book character names male — a warrior who slays monsters and accepts his own mortality with grace.</p>
+
+<p><strong>3. Ælfwynn (f) — Elf Joy</strong><br>
+Elements: ælf + wynn | Era: Anglo-Saxon<br>
+Daughter of Æthelflæd, briefly ruled Mercia. For ethereal female names with supernatural undertones — one of the most beautiful popular english female names from the Anglo-Saxon era.</p>
+
+<p><strong>4. Aldous (m) — The Ancient One</strong><br>
+Elements: eald | Era: English (Medieval, revived Victorian)<br>
+One of the great old short names — simple, literary, distinctive. Aldous Huxley brought it into the 20th century. Still genuinely unusual among male names today.</p>
+
+<p><strong>5. Æbbe (f) — Strength of a Boar</strong><br>
+Elements: eofor + beorn | Era: Anglo-Saxon<br>
+Abbess of Coldingham, d. 683. One of the earliest named women in English ecclesiastical history. A perfect old woman's names with genuine historical weight.</p>
+
+<p><strong>6. Æðelmær (m) — Noble and Famous</strong><br>
+Elements: æðele + mære | Era: Anglo-Saxon<br>
+An 11th-century monk who attempted to fly with a gliding apparatus — the first recorded aviator. For a character with aristocratic boldness. Outstanding among male english names and meaning.</p>
+
+<p><strong>7. Ealdgyð (f) — Old Battle</strong><br>
+Elements: eald + guð | Era: Anglo-Saxon<br>
+A warrior woman's name. The name story here is ancient power — inherited strength from a long line. Survived into the Medieval period as Aldith. Rich with the female names and meaning in english tradition.</p>
+
+<p><strong>8. Æthelstan (m) — Noble Stone</strong><br>
+Elements: æðele + stan | Era: Anglo-Saxon<br>
+First King of all England. The name of a unifier. An outstanding choice among ancient english names for a character who brings order out of chaos.</p>
+
+<p><strong>9. Ælfgifu (f) — Elf Gift</strong><br>
+Elements: ælf + giefu | Era: Anglo-Saxon<br>
+First wife of King Æthelred II. Romantic, otherworldly, grounded in royal history. One of the finest name ideas for parents seeking a genuinely rare English name.</p>
+
+<p><strong>10. Acca (m) — Oak</strong><br>
+Elements: æc | Era: Anglo-Saxon<br>
+Bishop of Hexham, 709–731. A stone cross from Hexham still bears his name. One of the most usable old short names — just four letters, completely pronounceable, loaded with historical resonance.</p>
+
+<h2 id="name-finder-results-by-category">Name Finder Results by Category</h2>
+
+<h3 id="old-english-female-names">Old English Female Names</h3>
+<p>The best female names from the Old English tradition draw from the ælf (elf), æðele (noble), and wynn (joy) elements. These are genuinely popular english female names in the Anglo-Saxon scholarly world:</p>
+<ul>
+<li>Æthelflæd — noble beauty (Lady of the Mercians)</li>
+<li>Ælfwynn — elf joy (ruled Mercia briefly)</li>
+<li>Æbbe — strength of a boar (Abbess of Coldingham)</li>
+<li>Ælfgifu — elf gift (Queen of England)</li>
+<li>Ealdgyð — old battle (powerful noblewoman)</li>
+<li>Ælfþryð — elf strength (Elfreda)</li>
+<li>Ælfswiþ — elf strong</li>
+<li>Ælfhild — elf battle</li>
+</ul>
+<p>Use our english name generator to filter these by era and element at PartnerHoursGuide.com.</p>
+
+<h3 id="old-english-male-names">Old English Male Names</h3>
+<p>Strong, compound male names from the Anglo-Saxon tradition — a rich source of name ideas for characters and babies alike:</p>
+<ul>
+<li>Beowulf — bear (the great epic hero)</li>
+<li>Æthelstan — noble stone (first King of England)</li>
+<li>Ælfræd (Alfred) — elf counsel (Alfred the Great)</li>
+<li>Æðelwulf — noble wolf (King of Wessex)</li>
+<li>Aldous — the ancient one (Victorian revival)</li>
+<li>Acca — oak (Bishop of Hexham)</li>
+<li>Ælfric — elf ruler (Archbishop of Canterbury)</li>
+<li>Beornræd — warrior counsel</li>
+</ul>
+
+<h3 id="unusual-old-english-boy-names">Unusual Old English Boy Names (Including 1800s Revival Names)</h3>
+<p>For parents seeking name ideas well outside the mainstream — these unusual male names have genuine Old English roots and Victorian revival credentials:</p>
+<ul>
+<li>Aldous — literary, distinctive, used in East Anglia since the Middle Ages</li>
+<li>Algar — elf spear, briefly revived in the 19th century</li>
+<li>Athelstan — noble stone, modernised Victorian spelling</li>
+<li>Barclay — birch clearing, from an Old English place name</li>
+<li>Burton — fortified town</li>
+</ul>
+
+<h3 id="unusual-old-english-girl-names">Unusual Old English Girl Names</h3>
+<p>For good character names female or distinctive baby names:</p>
+<ul>
+<li>Æbbe — rarely used, historically grounded</li>
+<li>Bealdhild — bold battle-maiden</li>
+<li>Ælfwynn — elf joy</li>
+<li>Ælfswiþ — elf strong</li>
+<li>Æðelflæd — noble beauty (for the genuinely bold)</li>
+</ul>
+
+<h3 id="old-family-names">Old Family Names With Old English Roots</h3>
+<p>Many modern old family names that feel classically English trace back to Anglo-Saxon personal names used as surnames after the Conquest. Aldous, Edgar, Edwin, Alvin, Audrey, and Ethel all carry Old English DNA. Our name translator section at PartnerHoursGuide.com helps you trace the Old English root behind a modern English name.</p>
+
+<h2 id="looking-for-more">Looking for More Good Old English Names? Use the Full Name Finder</h2>
+<p>This post gives you a foundation. For the full experience — hundreds of attested names, filterable by gender, element, and era, with pronunciation audio — use the tools below.</p>
+
+<p><strong>1. Free Name Finder</strong><br>
+The free name generator at PartnerHoursGuide.com/old-english-names is the best name finder for historically accurate Anglo-Saxon names. Filter, generate, randomize, and listen to every name spoken aloud. It works as both a name ideas generator for parents and a fantasy characters generator for writers. Let our <a href="https://partnerhoursguide.com/old-english-names/">name finder at PartnerHoursGuide.com</a> be your guide.</p>
+
+<p><strong>2. Old English Translator</strong><br>
+Understanding the language behind the names adds a dimension no name list can give. Use our <a href="https://partnerhoursguide.com/translator-old-english-tool/">Old English Translator Tool</a> as a <a href="https://partnerhoursguide.com/translator-old-english-tool/">name translator</a> — enter a modern English word and discover its Anglo-Saxon equivalent, which may itself become a name.</p>
+
+<p><strong>3. Old English Words We Still Use Today</strong><br>
+Discover how much of everyday modern English descends from the Anglo-Saxon tongue. Our post on <a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Old English Words We Still Use Today</a> shows the living legacy of the same language that gave us all of these names.</p>
+
+<p><strong>4. Shakespeare English Translator</strong><br>
+Old English naming traditions flowed directly into Early Modern English. Our <a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare English Translator</a> bridges the 500-year gap between the two eras.</p>
+
+<p><strong>5. Academic Sources</strong><br>
+The <a href="https://pase.ac.uk" target="_blank" rel="noopener noreferrer">Prosopography of Anglo-Saxon England (PASE)</a> at pase.ac.uk documents over 19,000 recorded individuals. <a href="https://www.behindthename.com/names/origin/old-english" target="_blank" rel="noopener noreferrer">Behind the Name</a> provides etymology for hundreds of attested Old English names. Both were used as primary sources for this article and our generator tool.</p>
+
+<img src="https://partnerhoursguide.com/wp-content/uploads/2026/05/Copilot_20260601_032343.webp" alt="name finder" width="100%" loading="lazy" />
+
+<h2 id="blog-section">Name Maker History &amp; Insights</h2>
+<p>To fully appreciate Anglo-Saxon naming traditions, we must look beyond individual names to see how they influenced modern names, language, and culture.</p>
+
+<h3 id="old-english-last-names">Old English Last Names</h3>
+<p>Unlike modern naming systems, traditional Anglo-Saxons did not use hereditary <strong>old english last names</strong>. Instead, individuals were identified by a single given name, often accompanied by a descriptive byname, a patronymic (father's name), or an occupational tag to distinguish them from others in their village. Over centuries, many of these identifiers evolved into the family names we use today.</p>
+<p><em>Example:</em> The name <strong>Wulfricson</strong> (literally "son of Wulfric") or <strong>Bradford</strong> (referring to someone who lived near a "broad ford") are classic examples of how old english last names developed from description and lineage.</p>
+
+<h3 id="old-english-surnames">Old English Surnames</h3>
+<p>Hereditary <strong>old english surnames</strong> only became the norm after the Norman Conquest of 1066. The Normans introduced a formal registry of land and taxation (such as the Domesday Book), which required fixed family lineages. Many families took their old Anglo-Saxon personal names and stabilized them into permanent surnames, or used local geographic features to identify their household.</p>
+<p><em>Example:</em> The surname <strong>Alwy</strong> (derived from the Old English personal name <em>Ælfgifu</em>, meaning "elf-gift") and the surname <strong>Green</strong> (originally describing a family residing near the village green) illustrate the transition of old english surnames from descriptions to hereditary titles.</p>
+
+<h3 id="old-english-insults">Old English Insults</h3>
+<p>The Anglo-Saxons were masters of wordplay, and their language was rich with colorful, poetic <strong>old english insults</strong>. In a culture where verbal duels (called "flyting") were a popular form of entertainment, having a sharp tongue was as highly valued as swordcraft. Insults often targeted a person's character, cleanliness, or lack of wisdom, fusing compound words together to create devastating descriptors.</p>
+<p><em>Example:</em> Insults like <strong>Snotgand</strong> (meaning a snivelling, mucus-faced person) or <strong>Æwærdla</strong> (meaning an outlaw, lawbreaker, or morally corrupt individual) show the raw, expressive power of old english insults.</p>
+
+<h3 id="old-english-sheepdog-size">Old English Sheepdog Size</h3>
+<p>While the terms above relate directly to linguistics, the "Old English" name has also been immortalized in the canine world through the Old English Sheepdog. If you are researching this breed, understanding the typical <strong>old english sheepdog size</strong> is essential. Developed in England as a pastoral herding dog, they are large, athletic dogs beneath their famously shaggy coats.</p>
+<p><em>Example:</em> An average male <strong>old english sheepdog size</strong> ranges from 22 to 24 inches (56 to 61 cm) tall at the shoulder, with a weight of 80 to 100 pounds (36 to 45 kg). Females are slightly smaller, standing around 21 to 22 inches tall and weighing between 60 to 85 pounds.</p>
+
+<h2 id="faq">FAQ: Name Maker</h2>
+
+<div class="faq-container">
+  <div class="faq-item">
+    <h3 class="faq-question">What does the old english e represent in early naming conventions?</h3>
+    <div class="faq-answer">
+      <p>The <strong>old english e</strong> was a fundamental vowel sound in Anglo-Saxon orthography. It commonly appeared in diphthongs like <em>ea</em> (meaning "river" or "wealth") and <em>eo</em> (meaning "yew" or "horse"), which were central elements combined by the Name Maker tool to construct historically accurate names like Eadwine and Leofric.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <h3 class="faq-question">How was the old english g pronounced in historical records?</h3>
+    <div class="faq-answer">
+      <p>Pronunciation of the <strong>old english g</strong> (represented by the yogh character in Middle English transition) varied based on surrounding letters. Before front vowels like <em>e</em> or <em>i</em>, it sounded like the modern "y" (e.g., <em>giefu</em> is pronounced "yief-oo"). In other contexts, it was a hard "g" or a voiced velar fricative sound.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <h3 class="faq-question">How does the old english a function in compound names?</h3>
+    <div class="faq-answer">
+      <p>The short <strong>old english a</strong> was distinct from the digraph <em>æ</em> (ash). In compounding, elements starting with <strong>old english a</strong> like <em>ald</em> (old) or <em>æsc</em> (ash tree) were fused with second elements to form names symbolizing wisdom or natural strength.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <h3 class="faq-question">What runic symbol represents the old english t in Futhorc?</h3>
+    <div class="faq-answer">
+      <p>The <strong>old english t</strong> corresponds to the Tyr rune (ᛏ) in the Anglo-Saxon runic alphabet. It symbolized the god Tiw and victory. In names, this consonant began powerful martial elements like <em>torht</em> (bright or glorious).</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <h3 class="faq-question">What protective qualities did the old english b carry in names?</h3>
+    <div class="faq-answer">
+      <p>The <strong>old english b</strong> is found in name prefixes like <em>beald</em> (bold) and <em>beorn</em> (warrior/nobleman). These elements were selected to invoke bravery, protection, and leadership qualities in the children who bore them.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <h3 class="faq-question">How was the old english l used in compound naming poetry?</h3>
+    <div class="faq-answer">
+      <p>The <strong>old english l</strong> often served as the link consonant for elements like <em>leof</em> (beloved, dear). Combining <strong>old english l</strong> elements allowed families to construct beautiful alliterative names that signaled family alignment and affection.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <h3 class="faq-question">How did the old english d interact with the letter eth (ð) in manuscripts?</h3>
+    <div class="faq-answer">
+      <p>In medieval manuscripts, the standard <strong>old english d</strong> was phonetically distinct from <em>eth</em> (ð) and <em>thorn</em> (þ), which represented th sounds. Names like <em>Cuthbert</em> or <em>Æthelred</em> use these unique dental sounds alongside standard dental <strong>old english d</strong> elements.</p>
+    </div>
+  </div>
+</div>
+
+</div></article>
+
+        <!-- Author Card -->
+        
+        
+        
+        <div class="author-card">
+          <div class="author-avatar">👨‍🏫</div>
+          <div class="author-details">
+            <h4>Written by Furqan &amp; the Editorial Team</h4>
+            <p>Researched and overseen by Furqan, a veteran student career advisor with 19 years of dedicated service in the education sector of Pakistan, including career guidance roles at Sir Syed University of Engineering and Technology (SSUET), and founder of the <a href="https://www.facebook.com/profile.php?id=100069961940632" target="_blank" rel="noopener noreferrer">Youth Development Society</a>. Under his direction, this platform provides a suite of tools built to motivate and guide the youth in utilizing AI to uplift their earning potential and build successful careers.</p>
+          </div>
+        </div>
+
+
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="blog-sidebar">
+        <div class="sidebar-widget cta-widget">
+          <h3>Try the Translator</h3>
+          <p>Experience the true sound of Anglo-Saxon. Translate modern phrases into Old English instantly.</p>
+          <a href="https://partnerhoursguide.com/translator-old-english-tool/" class="cta-btn">Start Translating</a>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3>Recent Articles</h3>
+          <ul class="recent-posts-list">
+            <li>
+              <a href="english-to-old-norse.html">English to Old Norse: Complete Viking Guide</a>
+              <span>Translator • 18 min read</span>
+            </li>
+            <li>
+              <a href="spanish-words-in-english.html">Spanish Words in English: Translator &amp; Guide</a>
+              <span>Translator • 15 min read</span>
+            </li>
+            <li>
+              <a href="blog-25-words.html">25 Old English Words We Still Use Today</a>
+              <span>History • 6 min read</span>
+            </li>
+            <li>
+              <a href="why-shakespeare-is-not-old-english.html">Is Shakespeare Old English?</a>
+              <span>Language Guide • 10 min read</span>
+            </li>
+            <li>
+              <a href="old-english-insults-slang-phrases.html">Old English Insults, Slang, &amp; Phrases</a>
+              <span>Language Guide • 8 min read</span>
+            </li>
+            <li>
+              <a href="is-french-mother-language-of-english.html">Is French the Mother Language of English?</a>
+              <span>History • 8 min read</span>
+            </li>
+            <li>
+              <a href="how-tolkien-used-old-english-rohirric.html">How Tolkien Used Old English in Rohirric</a>
+              <span>Tolkien Studies • 8 min read</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+          <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+          <span class="brand-name">Translator Old English</span>
+        </a>
+        <p>Bringing ancient history to life with instant, historically-grounded translations into the language of the Anglo-Saxons.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+            <li><a href="https://partnerhoursguide.com/">Home</a></li>
+            <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator Tool</a></li>
+            <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About Page</a></li>
+          </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Insights & Legal</h4>
+        <ul>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Articles & Blogs</a></li>
+          <li><a href="https://partnerhoursguide.com/contact-us/">Contact Us</a></li>
+          <li><a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Translator Old English. All rights reserved.</p>
+      <div class="footer-legal-links">
+        <a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a>
+        <a href="https://partnerhoursguide.com/contact-us/">Contact Support</a>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+      <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

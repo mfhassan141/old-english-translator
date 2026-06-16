@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Tolkien Used Old English to Build Rohirric &mdash; Names, Runes &amp; Lore</title>
+  <meta name="description" content="J.R.R. Tolkien was a trained Anglo-Saxon scholar. Discover exactly how he used Old English grammar, vocabulary, and runes to create the Rohirrim language in Lord of the Rings.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link data-no-optimize="1" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style data-no-optimize="1">
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-color: #120924; /* Deep Medieval Purple */
+      --card-bg: #1c1032; /* Slightly Lighter Purple */
+      --card-bg-hover: #261742;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.25);
+      --text-cream: #f8f5f0;
+      --text-muted: #8c829d;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.35);
+      
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* Isolated Wrapper to Prevent WordPress Theme Style Leaking */
+    .translator-app-wrapper {
+      background-color: #120924 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      line-height: 1.6 !important;
+      text-align: left !important;
+    }
+
+    .translator-app-wrapper h1, 
+    .translator-app-wrapper h2, 
+    .translator-app-wrapper h3, 
+    .translator-app-wrapper p, 
+    .translator-app-wrapper span, 
+    .translator-app-wrapper a, 
+    .translator-app-wrapper label {
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .header-nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-crest {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      background: rgba(28, 16, 50, 0.6);
+    }
+
+    .brand-name {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav.site-navigation ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav.site-navigation a {
+      white-space: nowrap;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    nav.site-navigation a:hover, 
+    nav.site-navigation a.active {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    nav.site-navigation a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--accent-gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav.site-navigation a:hover::after, 
+    nav.site-navigation a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    nav.site-navigation a.nav-cta {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.5rem 1.1rem !important;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    nav.site-navigation a.nav-cta:hover {
+      color: var(--bg-color) !important;
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       BLOG LAYOUT
+       ========================================================================== */
+    .blog-header-section {
+      padding: 5rem 0 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(28, 16, 50, 0.15);
+    }
+
+    .blog-category {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      background: rgba(201, 153, 58, 0.1);
+      border: 1.5px solid var(--accent-gold);
+      color: var(--accent-gold) !important;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .blog-main-title {
+      font-family: var(--font-title) !important;
+      font-size: 3rem;
+      line-height: 1.2;
+      color: var(--text-cream) !important;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .blog-meta-info {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .blog-meta-info span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .blog-content-wrapper {
+      padding: 4rem 0;
+    }
+
+    .blog-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    @media (min-width: 992px) {
+      .blog-grid-layout {
+        grid-template-columns: 8fr 4fr;
+      }
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    /* ARTICLE STYLES */
+    article.blog-article {
+      background: rgba(28, 16, 50, 0.15);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .article-body {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    .article-body p {
+      margin-bottom: 1.8rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--font-title) !important;
+      font-size: 2rem;
+      color: var(--accent-gold) !important;
+      margin: 2.5rem 0 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.4rem;
+      color: var(--text-cream) !important;
+      margin: 1.8rem 0 1rem;
+    }
+
+    .article-body ul, .article-body ol {
+      margin: 0 0 1.8rem 1.5rem;
+    }
+
+    .article-body li {
+      margin-bottom: 0.6rem;
+    }
+
+    .article-body blockquote {
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(201, 153, 58, 0.05);
+      border-left: 4px solid var(--accent-gold);
+      font-style: italic;
+      color: var(--text-cream);
+      border-radius: 4px;
+    }
+
+    /* AUTHOR CARD */
+    .author-card {
+      margin-top: 4rem;
+      padding: 2rem;
+      background: rgba(28, 16, 50, 0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    @media (min-width: 576px) {
+      .author-card {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    .author-avatar {
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--accent-gold);
+      border-radius: 50%;
+      background: var(--card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      flex-shrink: 0;
+    }
+
+    .author-details h4 {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 0.5rem;
+    }
+
+    .author-details p {
+      font-size: 0.95rem;
+      color: var(--text-muted) !important;
+      margin: 0;
+    }
+
+    /* SIDEBAR STYLES */
+    aside.blog-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-widget {
+      background: rgba(28, 16, 50, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+    }
+
+    .sidebar-widget h3 {
+      font-family: var(--font-title) !important;
+      font-size: 1.3rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.4rem;
+    }
+
+    .cta-widget {
+      background: linear-gradient(145deg, rgba(28, 16, 50, 0.8) 0%, rgba(18, 9, 36, 0.9) 100%);
+      border: 1px solid var(--accent-gold);
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .cta-widget p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-btn:hover {
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    .recent-posts-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .recent-posts-list li a {
+      color: var(--text-cream) !important;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+      display: block;
+    }
+
+    .recent-posts-list li a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    .recent-posts-list li span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.9);
+      padding: 4rem 0 2rem;
+      margin-top: 5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 320px;
+    }
+
+    .footer-links h4 {
+      font-family: var(--font-title) !important;
+      font-size: 1.1rem;
+      color: var(--accent-gold) !important;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted) !important;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold-hover) !important;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(201, 153, 58, 0.08);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+      }
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal-links a {
+      color: var(--text-muted) !important;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-legal-links a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 768px) {
+      .header-nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      /* Adjust blog layout paddings for maximum reading space on small screens */
+      article.blog-article {
+        padding: 1.2rem !important;
+      }
+      .blog-header-section {
+        padding: 3rem 0 2rem;
+      }
+      .blog-main-title {
+        font-size: 2rem !important;
+      }
+    }
+  
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  
+    /* Dropdown CSS Rules */
+    nav.site-navigation li {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1c1032;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+      padding: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.2rem !important;
+      font-size: 0.9rem !important;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      width: 100%;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent-gold-hover) !important;
+      background: rgba(201, 153, 58, 0.08);
+      padding-left: 1.5rem !important;
+    }
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+    nav.site-navigation li.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-arrow {
+      font-size: 0.7rem;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    nav.site-navigation li.has-dropdown:hover .nav-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-gold-hover);
+    }
+    @media (max-width: 1150px) {
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .dropdown-menu a {
+        padding: 0.3rem 1rem !important;
+        text-align: center !important;
+      }
+      .nav-arrow {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://partnerhoursguide.com/how-tolkien-used-old-english-rohirric/#post",
+      "headline": "How Tolkien Used Old English in Rohirric",
+      "description": "Explore how J.R.R. Tolkien used Mercian Old English to represent the Rohirrim language (Rohirric) in The Lord of the Rings. Read name etymologies and historical links.",
+      "author": {
+        "@type": "Person",
+        "name": "Furqan",
+        "jobTitle": "Senior Career Advisor",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Sir Syed University of Engineering and Technology"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "PartnerHoursGuide",
+        "url": "https://partnerhoursguide.com"
+      },
+      "datePublished": "2026-05-30",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://partnerhoursguide.com/how-tolkien-used-old-english-rohirric/"
+      }
+    }
+  ]
+}
+  </script>
+
+</head>
+<body>
+  <div class="translator-app-wrapper">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-nav-container">
+      <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+        <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+        <span class="brand-name">Translator Old English</span>
+      </a>
+        <nav class="site-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="https://partnerhoursguide.com/">Home</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/">Names</a></li>
+          <li><a href="https://partnerhoursguide.com/random-name-maker/">Name Maker</a></li>
+          
+          <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/" class="active">Blog</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/" class="nav-cta">Try translator</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Blog Header -->
+  <section class="blog-header-section">
+    <div class="container">
+      <span class="blog-category">Tolkien Studies</span>
+      <h1 class="blog-main-title">How Tolkien Used Old English in Rohirric</h1>
+      <div class="blog-meta-info">
+        <span>ðŸ•’ 8 min read</span>
+        <span>•</span>
+        <span>✍️ Editorial Team</span>
+        <span>•</span>
+        <span>ðŸ“… May 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Content -->
+  <div class="blog-content-wrapper">
+    <div class="container blog-grid-layout">
+      
+      <!-- Main Article -->
+      <main>
+        <article class="blog-article">
+          <div class="article-body">
+            
+            <p>For most readers of fantasy literature, J.R.R. Tolkien is celebrated as the grandfather of modern world-building, the mastermind behind Middle-earth. We marvel at the depth of his geography, the nobility of his characters, and the epic scale of his narratives. However, Tolkien himself viewed his stories from a very different perspective. For Tolkien, the languages came first; the stories were created to provide a world, a history, and a culture to house his invented tongues. If you are a writer or creator looking to convert <a href="https://partnerhoursguide.com/translate-english-to-english/">english to old english</a> to construct your own fictional cultures or etymologies, understanding Tolkien's approach is highly instructive. Instead of just wishing someone would generate a passage of old english for me, studying how Tolkien mapped his names to real Anglo-Saxon roots shows how to build depth into your lore.</p>
+
+            <p>As a professional philologist—eventually holding the prestigious chair of Rawlinson and Bosworth Professor of Anglo-Saxon at Oxford University—Tolkien had a deep, lifelong passion for the historical Germanic languages of Northern Europe. While he spent decades inventing languages like Quenya and Sindarin (the Elvish tongues), he also faced a unique challenge when constructing the human cultures of Middle-earth. How could he represent the relationship between different human languages in a way that felt historically and aesthetically authentic to a Modern English reader?</p>
+
+            <p>His most brilliant solution to this problem is found in the Kingdom of Rohan. The horse-lords, the Rohirrim, speak a language known as <strong>Rohirric</strong>. Yet, when we read <em>The Lord of the Rings</em>, they do not speak an invented language. Instead, they speak, name their children, and sing in <strong>Old English</strong>. In this article, we will explore the deep linguistic philosophy behind this choice and break down the etymologies of Rohan's most famous names.</p>
+
+            <blockquote>
+              "The language of Rohan was indeed related to the Common Speech, but was far more archaic. To represent this relationship, I chose to translate the language of the horse-lords into the ancient tongue of my own ancestors: Old English."<br>
+              — J.R.R. Tolkien, paraphrased from his letters
+            </blockquote>
+
+            <h2>1. Tolkien's Translation Scheme</h2>
+            
+            <p>To understand why the Rohirrim use Old English, we must understand Tolkien's hypothetical "translation scheme" for <em>The Lord of the Rings</em>. Within the context of the story, the characters do not speak English. The actual "common tongue" of Middle-earth is a language called <strong>Westron</strong> (or AdÃ»ni). Frodo, Sam, Aragorn, and even the Orcs communicate in Westron.</p>
+
+            <p>Tolkien imagined himself not as the author of the book, but as its translator, working from the ancient <em>Red Book of Westmarch</em>. To make the story readable, Tolkien "translated" Westron into Modern English. This created a secondary linguistic problem: what should he do with other human languages that are related to Westron but are older, more rustic, and more traditional?</p>
+
+            <p>The ancestors of the Hobbits and the ancestors of the horse-lords of Rohan lived in the same geographic regions of the North centuries prior, and their languages shared a common root. Since the Hobbits' speech (Westron) was translated into Modern English, Tolkien decided that the Rohirrim's speech (Rohirric) should be represented by the historical ancestor of English: <strong>Old English</strong> (specifically the Mercian dialect spoken in the midlands of Anglo-Saxon England). This preserved the exact structural relationship between the tongues: Rohirric is to Westron what Old English is to Modern English.</p>
+
+            <h2>2. The Mercian Dialect: Rohan's Linguistic Core</h2>
+            
+            <p>Tolkien did not choose just any Old English. He chose the Mercian dialect. Most students of Old English study the West Saxon dialect, as it was the language of King Alfred the Great and the source of most surviving manuscripts. However, Tolkien had a deep personal affinity for Mercia (the region of England where he grew up). He believed that the Mercian dialect was softer, more poetic, and closer to the heart of the landscape.</p>
+            
+            <p>By using Mercian spellings, Tolkien gave Rohan a distinct phonetic texture. For example, he used spellings like <strong>hasofax</strong> instead of the West Saxon <strong>hasufeax</strong>. This choice gave Rohan a clean, stark, and ancient poetic feeling that fits the sweeping plains of their grasslands.</p>
+
+            <h2>3. Breaking Down Rohirric Names & Words</h2>
+            
+            <p>Every name, place, and term associated with Rohan in <em>The Lord of the Rings</em> is a real Old English word or compound. Tolkien did not select these words at random; they are highly precise etymological descriptions of the characters and their culture.</p>
+
+            <h3>1. Théoden</h3>
+            <p>The name of the King of Rohan, <strong>Théoden</strong>, is the literal Old English word <strong>þēoden</strong> (pronounced <em>THEH-oh-den</em>), which means "lord," "king," "prince," or "chief of a people." It is a highly poetic word, frequently used in Anglo-Saxon heroic poetry like <em>Beowulf</em> to describe noble leaders. By naming the character Théoden, Tolkien was literally naming him "The King."</p>
+
+            <h3>2. Ã‰omer and Ã‰owyn</h3>
+            <p>These two noble siblings share a common prefix: <strong>Ã‰o-</strong>. In Old English, the word for horse is <strong>eoh</strong>. Since Rohan is a horse-centered culture, almost all noble names begin with this root:</p>
+            <ul>
+              <li><strong>Ã‰omer</strong>: A compound of <strong>eoh</strong> (horse) and <strong>mǣre</strong> (famous or grand). Thus, his name translates to "Famous Horse-lord" or "One famous for horses."</li>
+              <li><strong>Ã‰owyn</strong>: A compound of <strong>eoh</strong> (horse) and <strong>wynn</strong> (joy or delight). Her name translates to "Delight in horses" or "Horse-joy."</li>
+            </ul>
+
+            <h3>3. Meduseld</h3>
+            <p>The Golden Hall of Edoras, where King Théoden sits on his throne, is named <strong>Meduseld</strong>. In Old English, this is a literal compound: <strong>medu</strong> (mead) + <strong>seld</strong> (hall or seat). It is the "Mead-Hall," the central social and political hub of Anglo-Saxon society where warriors gathered to drink, share stories, and receive gifts from their lord. The name appears directly in line 3065 of <em>Beowulf</em>.</p>
+
+            <h3>4. Shadowfax</h3>
+            <p>Gandalf's legendary steed, the chief of the Mearas, is named <strong>Shadowfax</strong>. This is an anglicized version of the Old English compound <strong>Sceadufax</strong>, constructed from <strong>sceadu</strong> (shadow) and <strong>feax</strong> (hair or mane). Thus, the horse's name literally means "Shadow-mane," describing his sleek, silvery-grey coat that runs like the wind.</p>
+
+            <h3>5. Orthanc</h3>
+            <p>The black tower of Isengard, inhabited by Saruman, is named <strong>Orthanc</strong>. While in Elvish it means "Mount Fang," in the language of the Rohirrim (Old English), it is a real word meaning "cunning mind," "skillful design," or "artistic device." This double meaning perfectly fits the tower: to the Elves it was a geological landmark, but to the horse-lords, it was an ancient, complex structure of "cunning craft" built by the Gondorians of old.</p>
+
+            <h2>4. Cultural Parallels: Horse-Lords and Shield-Walls</h2>
+            
+            <p>Tolkien's use of Old English went far beyond vocabulary. He imported the entire cultural ethos, poetry, and tragedy of the Anglo-Saxons into Rohan. The Rohirrim are, in essence, Anglo-Saxons on horseback.</p>
+            
+            <p>Historically, the Anglo-Saxons were not known as cavalry. They rode horses to travel, but they dismounted to fight in dense, infantry-based shield-walls. Tolkien, however, loved horses and lamented the historical defeat of the Anglo-Saxons at the Battle of Hastings in 1066, where Harold Godwinson's shield-wall was broken by William the Conqueror's mounted Norman knights. By designing the Rohirrim as master horsemen who speak Old English, Tolkien effectively created a mythic, idealized version of Anglo-Saxon culture that possessed the cavalry strength they lacked in reality.</p>
+
+            <p>Furthermore, the poetry of Rohan is deeply inspired by Anglo-Saxon elegiac verse. When Aragorn sings the lament for Rohan in <em>The Two Towers</em>:</p>
+            <blockquote>
+              "Where now the horse and the rider? Where is the horn that was blowing?<br>
+              Where is the helm and the hauberk, and the bright hair flowing?..."
+            </blockquote>
+            <p>This is a direct, poetic translation of a famous passage from the Anglo-Saxon poem <strong>The Wanderer</strong> (lines 92-93):</p>
+            <blockquote>
+              <strong>Hwær cwom mearg? Hwær cwom mago? Hwær cwom maþþumgyfa?<br>
+              Hwær cwom benceode? Hwær sindon fletsittend?...</strong><br>
+              <em>Translation: "Where has the horse gone? Where has the rider gone? Where is the giver of treasure?<br>
+              Where are the benches for feasting? Where are the hall-sitters?..."</em>
+            </blockquote>
+
+            <h2>Conclusion: The Depth of Philological Myth</h2>
+            
+            <p>J.R.R. Tolkien's use of Old English in Rohan is a testament to his linguistic genius. He did not simply borrow old-sounding words to decorate his fantasy world. Instead, he constructed a precise, logical, and historically-grounded translation framework that allowed the ancient history of our own language to breathe life into the riders of the Mark.</p>
+            
+            <p>When we read of Théoden riding to battle, Ã‰omer rallying the riders, or the golden light shining on Meduseld, we are experiencing the heroic age of Anglo-Saxon literature reborn in fantasy. Through the plains of Rohan, Tolkien preserved the spirit, poetry, and vocabulary of our ancestral tongue, ensuring that the legacy of Old English would ride on forever in the hearts of millions of readers.</p>
+
+          
+            <div class="academic-references" style="margin-top: 3rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; text-align: left;">
+              <h3 style="font-family: var(--font-title), serif; font-size: 1.25rem; color: var(--accent-gold); margin-bottom: 0.8rem; margin-top: 0;">Academic References &amp; Further Reading</h3>
+              <ul style="font-size: 0.95rem; color: var(--text-muted); list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>📖</span>
+                  <span>Explore historical Anglo-Saxon vocabulary in the <a href="https://bosworthtoller.com/" target="_blank" rel="noopener noreferrer">Bosworth-Toller Old English Dictionary</a>.</span>
+                </li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>🎓</span>
+                  <span>Review linguistic research and texts at the <a href="https://www.doe.utoronto.ca/" target="_blank" rel="noopener noreferrer">Dictionary of Old English (DOE) Project at the University of Toronto</a>.</span>
+                </li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>🏛️</span>
+                  <span>Verify historical medieval names and etymologies using the <a href="https://www.pase.ac.uk/" target="_blank" rel="noopener noreferrer">Prosopography of Anglo-Saxon England (PASE)</a>.</span>
+                </li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 8px; align-items: flex-start;">
+                  <span>🎭</span>
+                  <span>For Shakespearean and Elizabethan studies, consult resources at the <a href="https://www.folger.edu/" target="_blank" rel="noopener noreferrer">Folger Shakespeare Library</a> and <a href="https://www.shakespeareswords.com/" target="_blank" rel="noopener noreferrer">Shakespeare's Words dictionary</a>.</span>
+                </li>
+              </ul>
+            </div>
+
+        </div>
+        </article>
+
+        <!-- Author Bio Card -->
+        
+        
+        
+        <div class="author-card">
+          <div class="author-avatar">👨‍🏫</div>
+          <div class="author-details">
+            <h4>Written by Furqan &amp; the Editorial Team</h4>
+            <p>Researched and overseen by Furqan, a veteran student career advisor with 19 years of dedicated service in the education sector of Pakistan, including career guidance roles at Sir Syed University of Engineering and Technology (SSUET), and founder of the <a href="https://www.facebook.com/profile.php?id=100069961940632" target="_blank" rel="noopener noreferrer">Youth Development Society</a>. Under his direction, this platform provides a suite of tools built to motivate and guide the youth in utilizing AI to uplift their earning potential and build successful careers.</p>
+          </div>
+        </div>
+
+
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="blog-sidebar">
+        
+        <!-- CTA Widget -->
+        <div class="sidebar-widget cta-widget">
+          <h3>Try the Translator</h3>
+          <p>Experience the true sound of Anglo-Saxon. Translate modern phrases into Old English instantly.</p>
+          <a href="https://partnerhoursguide.com/translator-old-english-tool/" class="cta-btn">Start Translating</a>
+        </div>
+
+        <!-- Recent Posts Widget -->
+        <div class="sidebar-widget">
+          <h3>Recent Articles</h3>
+          <ul class="recent-posts-list">
+            <li>
+              <a href="english-to-old-norse.html">English to Old Norse: Complete Viking Guide</a>
+              <span>Translator • 18 min read</span>
+            </li>
+            <li>
+              <a href="spanish-words-in-english.html">Spanish Words in English: Translator &amp; Guide</a>
+              <span>Translator • 15 min read</span>
+            </li>
+            <li>
+              <a href="blog-25-words.html">25 Old English Words We Still Use Today</a>
+              <span>History • 6 min read</span>
+            </li>
+            <li>
+              <a href="why-shakespeare-is-not-old-english.html">Is Shakespeare Old English?</a>
+              <span>Language Guide • 10 min read</span>
+            </li>
+            <li>
+              <a href="old-english-insults-slang-phrases.html">Old English Insults, Slang, &amp; Phrases</a>
+              <span>Language Guide • 8 min read</span>
+            </li>
+            <li>
+              <a href="is-french-mother-language-of-english.html">Is French the Mother Language of English?</a>
+              <span>History • 8 min read</span>
+            </li>
+            <li>
+              <a href="how-tolkien-used-old-english-rohirric.html">How Tolkien Used Old English in Rohirric</a>
+              <span>Tolkien Studies • 8 min read</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+          <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+          <span class="brand-name">Translator Old English</span>
+        </a>
+        <p>Bringing ancient history to life with instant, historically-grounded translations into the language of the Anglo-Saxons.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+            <li><a href="https://partnerhoursguide.com/">Home</a></li>
+            <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator Tool</a></li>
+            <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About Page</a></li>
+          </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Insights & Legal</h4>
+        <ul>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Articles & Blogs</a></li>
+          <li><a href="https://partnerhoursguide.com/contact-us/">Contact Us</a></li>
+          <li><a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Translator Old English. All rights reserved.</p>
+      <div class="footer-legal-links">
+        <a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a>
+        <a href="https://partnerhoursguide.com/contact-us/">Contact Support</a>
+      </div>
+    </div>
+  </footer>
+
+  
+
+  
+
+  </div>
+
+      <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

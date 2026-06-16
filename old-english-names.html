@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Old English Name Finder &mdash; Anglo-Saxon Names With Meanings &amp; Pronunciation</title>
+  <meta name="description" content="Explore hundreds of authentic Anglo-Saxon names with etymology, gender filters, and text-to-speech pronunciation. Free Old English name finder tool &mdash; no signup needed.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-color: #120924;
+      --card-bg: #1c1032;
+      --card-bg-hover: #261742;
+      --sidebar-bg: #160b2a;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.25);
+      --accent-gold-subtle: rgba(201, 153, 58, 0.08);
+      --text-cream: #f8f5f0;
+      --text-muted: #8c829d;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.4);
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(201,153,58,0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201,153,58,0.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    /* ==========================================================================
+       HEADER
+       ========================================================================== */
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.88);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 0.85rem 0;
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-crest {
+      width: 38px; height: 38px;
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 12px var(--accent-gold-glow);
+      background: rgba(28,16,50,0.6);
+      font-size: 1.1rem;
+    }
+
+    .brand-name {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav.site-navigation ul {
+      display: flex; list-style: none; gap: 1rem; align-items: center; flex-wrap: nowrap;
+    }
+
+    nav.site-navigation li {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    nav.site-navigation a {
+      white-space: nowrap;
+      text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      color: var(--text-muted); transition: var(--transition-smooth);
+      position: relative; padding: 3px 0;
+    }
+
+    nav.site-navigation a:hover, nav.site-navigation a.active { color: var(--accent-gold-hover); }
+
+    nav.site-navigation a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 1.5px; background: var(--accent-gold);
+      transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease;
+    }
+
+    nav.site-navigation a:hover::after,
+    nav.site-navigation a.active::after { transform: scaleX(1); transform-origin: left; }
+
+    nav.site-navigation a.nav-cta {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: #120924 !important;
+      padding: 0.45rem 1rem !important;
+      border-radius: 6px; font-weight: 700; font-size: 0.88rem;
+      -webkit-text-fill-color: #120924 !important;
+    }
+
+    nav.site-navigation a.nav-cta:hover {
+      color: var(--bg-color) !important;
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 14px var(--accent-gold-glow);
+    }
+
+    /* Voice selector in header */
+    .voice-selector-wrap {
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .voice-selector-wrap label {
+      font-size: 0.8rem; color: var(--text-muted); white-space: nowrap;
+    }
+
+    #voiceSelect {
+      background: rgba(28,16,50,0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      padding: 0.35rem 0.6rem;
+      max-width: 170px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    #voiceSelect:hover { border-color: var(--accent-gold); }
+    #voiceSelect:focus { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 0 2px var(--accent-gold-glow); }
+
+    /* ==========================================================================
+       PAGE HERO
+       ========================================================================== */
+    .page-hero {
+      padding: 3.5rem 0 2.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: 'ᚦ ᚹ ᚪ ᛏ ᚾ ᚫ ᛗ';
+      font-family: 'Segoe UI Historic','Segoe UI Symbol','Noto Sans Runic', sans-serif;
+      font-size: 6rem;
+      color: rgba(201,153,58,0.04);
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      letter-spacing: 1.5rem; white-space: nowrap; pointer-events: none;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.6rem;
+      position: relative;
+    }
+
+    .page-hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* ==========================================================================
+       TOOLBAR (Generate Button)
+       ========================================================================== */
+    .toolbar {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left {
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+
+    .results-count {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .results-count strong {
+      color: var(--accent-gold);
+    }
+
+    #generateBtn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: #120924;
+      border: none;
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #generateBtn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+
+    #generateBtn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px var(--accent-gold-glow); }
+    #generateBtn:hover::before { opacity: 1; }
+    #generateBtn:active { transform: translateY(0); }
+
+    .btn-icon { font-size: 1.1rem; }
+
+    /* Spin animation on generate */
+    @keyframes spinOnce { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spinning { animation: spinOnce 0.45s ease; }
+
+    /* ==========================================================================
+       APP LAYOUT: Sidebar + Main
+       ========================================================================== */
+    .app-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 1.8rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .app-layout { grid-template-columns: 1fr; }
+    }
+
+    /* ==========================================================================
+       SIDEBAR
+       ========================================================================== */
+    .sidebar {
+      background: var(--sidebar-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      position: sticky;
+      top: 80px;
+      display: flex; flex-direction: column; gap: 1.8rem;
+    }
+
+    .sidebar-section-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Gender filter */
+    .gender-filter-group {
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+
+    .gender-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      border-radius: 7px;
+      color: var(--text-muted);
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      padding: 0.55rem 0.85rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      text-align: left;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    .gender-btn:hover {
+      border-color: var(--border-color-hover);
+      color: var(--text-cream);
+      background: rgba(201,153,58,0.05);
+    }
+
+    .gender-btn.active {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      background: var(--accent-gold-subtle);
+      font-weight: 600;
+    }
+
+    .gender-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-any    { background: linear-gradient(135deg, #c9993a, #8a5cf6); }
+    .dot-m      { background: #5c9df6; }
+    .dot-f      { background: #f66fb8; }
+    .dot-unisex { background: #6df6b8; }
+
+    /* Element dropdown */
+    #elementFilter {
+      width: 100%;
+      background: rgba(18,9,36,0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      padding: 0.6rem 0.85rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c9993a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      padding-right: 2.2rem;
+    }
+
+    #elementFilter:hover { border-color: var(--accent-gold); }
+    #elementFilter:focus { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 0 2px var(--accent-gold-glow); }
+    #elementFilter option { background: #1c1032; color: var(--text-cream); }
+
+    /* Active filters badges */
+    .active-filters {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+
+    .filter-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(201,153,58,0.12);
+      border: 1px solid rgba(201,153,58,0.3);
+      border-radius: 20px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.78rem;
+      color: var(--accent-gold);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .filter-badge:hover { background: rgba(201,153,58,0.22); }
+    .filter-badge .badge-x { font-size: 0.7rem; opacity: 0.7; }
+
+    /* Sidebar divider */
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    /* Quick stats */
+    .quick-stat {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .quick-stat-label { color: var(--text-muted); }
+    .quick-stat-value { color: var(--accent-gold); font-weight: 600; }
+
+    /* ==========================================================================
+       MAIN GRID
+       ========================================================================== */
+    .names-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.1rem;
+    }
+
+    /* ==========================================================================
+       NAME CARD
+       ========================================================================== */
+    .name-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.2rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      user-select: none;
+    }
+
+    .name-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+
+    .name-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-color-hover);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+      background: var(--card-bg-hover);
+    }
+
+    .name-card:hover::before { opacity: 1; }
+
+    .name-card.expanded {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 1px var(--accent-gold), 0 12px 40px rgba(0,0,0,0.5);
+      background: var(--card-bg-hover);
+    }
+
+    .name-card.expanded::before { opacity: 1; }
+
+    .card-name {
+      font-family: var(--font-title);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-cream);
+      line-height: 1.2;
+    }
+
+    .card-gender-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.72rem;
+      text-transform: uppercase; letter-spacing: 0.07rem;
+      font-weight: 600;
+      padding: 0.18rem 0.55rem;
+      border-radius: 20px;
+      width: fit-content;
+    }
+
+    .gender-m  { background: rgba(92,157,246,0.15); color: #5c9df6; border: 1px solid rgba(92,157,246,0.3); }
+    .gender-f  { background: rgba(246,111,184,0.15); color: #f66fb8; border: 1px solid rgba(246,111,184,0.3); }
+    .gender-u  { background: rgba(109,246,184,0.15); color: #6df6b8; border: 1px solid rgba(109,246,184,0.3); }
+
+    /* Card top row: name + inline speak button */
+    .card-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .card-speak-btn {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(201,153,58,0.1);
+      border: 1px solid rgba(201,153,58,0.3);
+      color: var(--accent-gold);
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition-smooth);
+      line-height: 1;
+    }
+
+    .card-speak-btn:hover {
+      background: rgba(201,153,58,0.22);
+      border-color: var(--accent-gold);
+      transform: scale(1.12);
+    }
+
+    @keyframes pulse-card {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,153,58,0.5); }
+      50%       { box-shadow: 0 0 0 7px rgba(201,153,58,0); }
+    }
+
+    .card-speak-btn.speaking {
+      background: rgba(201,153,58,0.25);
+      border-color: var(--accent-gold);
+      animation: pulse-card 1.1s infinite;
+    }
+
+    /* Phonetic line */
+    .card-phonetic {
+      font-size: 0.78rem;
+      color: var(--accent-gold);
+      font-family: var(--font-ui);
+      letter-spacing: 0.03rem;
+      margin-top: -0.1rem;
+      opacity: 0.8;
+    }
+
+    .card-meaning {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .card-expand-hint {
+      font-size: 0.72rem;
+      color: rgba(201,153,58,0.5);
+      margin-top: auto;
+    }
+
+    /* ==========================================================================
+       DETAIL PANEL (inside expanded card)
+       ========================================================================== */
+    .detail-panel {
+      display: none;
+      margin-top: 0.8rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-direction: column;
+      gap: 0.9rem;
+      animation: fadeSlideIn 0.28s ease;
+    }
+
+    .name-card.expanded .detail-panel { display: flex; }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .detail-label {
+      font-size: 0.68rem;
+      text-transform: uppercase; letter-spacing: 0.08rem;
+      color: var(--accent-gold); font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-value {
+      font-size: 0.88rem;
+      color: var(--text-cream);
+      line-height: 1.5;
+    }
+
+    .detail-etymology {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    .element-pills {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+
+    .element-pill {
+      background: rgba(201,153,58,0.1);
+      border: 1px solid rgba(201,153,58,0.25);
+      border-radius: 20px;
+      padding: 0.18rem 0.65rem;
+      font-size: 0.78rem;
+      color: var(--accent-gold);
+      transition: var(--transition-smooth);
+      cursor: default;
+    }
+
+    .element-pill:hover {
+      background: rgba(201,153,58,0.2);
+      border-color: var(--accent-gold);
+    }
+
+    /* TTS Button */
+    .tts-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: transparent;
+      border: 1px solid rgba(201,153,58,0.4);
+      border-radius: 7px;
+      color: var(--accent-gold);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.45rem 0.9rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      width: fit-content;
+    }
+
+    .tts-btn:hover {
+      background: rgba(201,153,58,0.12);
+      border-color: var(--accent-gold);
+      transform: translateY(-1px);
+    }
+
+    .tts-btn.speaking {
+      background: rgba(201,153,58,0.15);
+      border-color: var(--accent-gold);
+    }
+
+    /* SVG speaker icon sizing — replaces emoji */
+    .speak-svg {
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      pointer-events: none;
+    }
+
+    .card-speak-btn .speak-svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .tts-btn .speak-svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .tts-icon { font-size: 1rem; }
+
+    @keyframes pulse-tts {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,153,58,0.4); }
+      50%       { box-shadow: 0 0 0 6px rgba(201,153,58,0); }
+    }
+
+    .tts-btn.speaking { animation: pulse-tts 1.2s infinite; }
+
+    /* ==========================================================================
+       EMPTY STATE
+       ========================================================================== */
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 5rem 2rem;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+
+    .empty-state-icon { font-size: 3.5rem; opacity: 0.3; }
+    .empty-state h3 { font-family: var(--font-title); font-size: 1.4rem; color: var(--text-muted); }
+    .empty-state p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      background: #0d061c;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      justify-content: space-between;
+    }
+
+    .footer-brand { max-width: 320px; display: flex; flex-direction: column; gap: 0.9rem; }
+    .footer-brand p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+
+    .footer-nav { display: flex; flex-direction: column; gap: 0.9rem; }
+    .footer-nav h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1rem; color: var(--accent-gold); font-weight: 700; }
+    .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-nav a { text-decoration: none; font-size: 0.88rem; color: var(--text-muted); transition: var(--transition-smooth); }
+    .footer-nav a:hover { color: var(--accent-gold-hover); padding-left: 4px; }
+
+    .footer-bottom {
+      max-width: 1400px; margin: 2rem auto 0;
+      padding: 1.5rem 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.82rem; color: var(--text-muted);
+    }
+
+    .footer-bottom a { color: var(--text-muted); text-decoration: none; transition: var(--transition-smooth); }
+    .footer-bottom a:hover { color: var(--accent-gold-hover); }
+
+    /* ==========================================================================
+       RESPONSIVE TWEAKS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .header-inner { gap: 0.5rem; }
+      nav.site-navigation ul { gap: 0.7rem; }
+      .voice-selector-wrap { display: none; }
+      .names-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    }
+
+    @media (max-width: 500px) {
+      .names-grid { grid-template-columns: 1fr 1fr; }
+    }
+  
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  
+    /* Dropdown CSS Rules */
+    nav.site-navigation li {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1c1032;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+      padding: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.2rem !important;
+      font-size: 0.9rem !important;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      width: 100%;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent-gold-hover) !important;
+      background: rgba(201, 153, 58, 0.08);
+      padding-left: 1.5rem !important;
+    }
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+    nav.site-navigation li.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-arrow {
+      font-size: 0.7rem;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    nav.site-navigation li.has-dropdown:hover .nav-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-gold-hover);
+    }
+    @media (max-width: 1150px) {
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .dropdown-menu a {
+        padding: 0.3rem 1rem !important;
+        text-align: center !important;
+      }
+      .nav-arrow {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <!-- ============================================================
+       WORDPRESS THEME ISOLATION — overrides any WP theme bleeding
+       ============================================================ -->
+  <style>
+    /* Force the dark theme on every container WordPress might control */
+    html, body {
+      background-color: #120924 !important;
+      background: #120924 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    }
+
+    /* Kill WordPress entry-content, site-main, page whitebox styles */
+    .site-main,
+    .entry-content,
+    .page-content,
+    article.page,
+    .wp-site-blocks,
+    .site-content,
+    main.site-main,
+    #primary,
+    #main,
+    #content,
+    .hentry {
+      background: transparent !important;
+      background-color: transparent !important;
+      color: #f8f5f0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: none !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    /* Scoped app wrapper */
+    .oe-app {
+      background-color: #120924 !important;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(201,153,58,0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201,153,58,0.04) 0%, transparent 45%) !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      min-height: 100vh;
+      line-height: 1.6 !important;
+      overflow-x: hidden;
+    }
+
+    /* Ensure all text elements inside the app keep theme colors */
+    .oe-app h1, .oe-app h2, .oe-app h3, .oe-app h4,
+    .oe-app p, .oe-app span, .oe-app div,
+    .oe-app li, .oe-app label {
+      color: inherit !important;
+    }
+
+    /* Stop WordPress from adding padding to the page hero */
+    .oe-app .page-hero {
+      background-color: #120924 !important;
+    }
+
+    /* Stop WordPress from making the toolbar area white */
+    .oe-app .toolbar {
+      background-color: #120924 !important;
+    }
+
+    /* Stop WordPress from making the app layout white */
+    .oe-app .app-layout {
+      background-color: #120924 !important;
+    }
+
+    /* Footer */
+    .oe-app footer.site-footer {
+      background: #0d061c !important;
+    }
+
+    /* Remove any WP-injected padding on the outer content wrapper */
+    .oe-app .header-inner,
+    .oe-app .footer-inner {
+      max-width: 1400px;
+    }
+  
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+</style>
+
+  
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://partnerhoursguide.com/old-english-names/#post",
+      "headline": "Old English Names",
+      "description": "Explore 50 authentic Old English (Anglo-Saxon) names with full etymology, element breakdowns, gender filters, and text-to-speech pronunciation. Discover the ancient roots of names like Æthelred, Wulfric, and Eadwine.",
+      "author": {
+        "@type": "Person",
+        "name": "Furqan",
+        "jobTitle": "Senior Career Advisor",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Sir Syed University of Engineering and Technology"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "PartnerHoursGuide",
+        "url": "https://partnerhoursguide.com"
+      },
+      "datePublished": "2026-05-30",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://partnerhoursguide.com/old-english-names/"
+      }
+    }
+  ]
+}
+  </script>
+
+</head>
+
+<body>
+
+  <div class="oe-app">
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+        <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+        <span class="brand-name">Translator Old English</span>
+      </a>
+
+                  <nav class="site-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="https://partnerhoursguide.com/">Home</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/" class="active">Names</a></li>
+          <li><a href="https://partnerhoursguide.com/random-name-maker/">Name Maker</a></li>
+          
+          <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About</a></li>
+          <li><a href="https://partnerhoursguide.com/spanish-words-in-english/">Spanish Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Blog</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/" class="nav-cta">Try translator</a></li>
+        </ul>
+      </nav>
+
+      <div class="voice-selector-wrap">
+        <label for="voiceSelect">&#9834; Voice:</label>
+        <select id="voiceSelect" aria-label="Select TTS voice"></select>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <div class="page-hero">
+    <h1>Old English Names</h1>
+    <p>Discover 50 authentic Anglo-Saxon names documented in primary records such as the <a href="https://www.pase.ac.uk/" target="_blank" rel="noopener noreferrer">Prosopography of Anglo-Saxon England (PASE)</a> — their meanings, roots, and ancient heritage.</p>
+    <a href="https://partnerhoursguide.com/random-name-maker/" class="hero-link-btn" style="display: inline-flex; align-items: center; justify-content: center; margin-top: 1rem; padding: 0.6rem 1.2rem; border-radius: 6px; background: rgba(201, 153, 58, 0.1); border: 1px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: var(--transition-smooth); gap: 6px;">
+      <span>If you want more names, use our Name Maker tool</span>
+      <span style="font-size: 1rem;">➔</span>
+    </a>
+  </div>
+
+  <!-- ===== TOOLBAR ===== -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <button id="generateBtn" aria-label="Shuffle names">
+        <span class="btn-icon" id="btnIcon">⚔️</span>
+        Generate Names
+      </button>
+      <span class="results-count">Showing <strong id="shownCount">0</strong> of <strong id="totalCount">0</strong></span>
+    </div>
+  </div>
+
+  <!-- ===== APP LAYOUT ===== -->
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" role="complementary" aria-label="Filters">
+
+      <!-- Gender Filter -->
+      <div>
+        <div class="sidebar-section-title">Gender</div>
+        <div class="gender-filter-group" role="group" aria-label="Gender filter">
+          <button class="gender-btn active" data-gender="any" id="genderAny">
+            <span class="gender-dot dot-any"></span> Any
+          </button>
+          <button class="gender-btn" data-gender="masculine" id="genderMasc">
+            <span class="gender-dot dot-m"></span> Masculine
+          </button>
+          <button class="gender-btn" data-gender="feminine" id="genderFem">
+            <span class="gender-dot dot-f"></span> Feminine
+          </button>
+          <button class="gender-btn" data-gender="unisex" id="genderUnisex">
+            <span class="gender-dot dot-unisex"></span> Unisex
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Element Filter -->
+      <div>
+        <div class="sidebar-section-title">Root Element</div>
+        <select id="elementFilter" aria-label="Filter by root element">
+          <option value="any">All Elements</option>
+        </select>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Active Filters -->
+      <div id="activeFiltersWrap" style="display:none;">
+        <div class="sidebar-section-title">Active Filters</div>
+        <div class="active-filters" id="activeFiltersList"></div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Quick Stats -->
+      <div>
+        <div class="sidebar-section-title">Dataset</div>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <div class="quick-stat">
+            <span class="quick-stat-label">Total Names</span>
+            <span class="quick-stat-value" id="statTotal">—</span>
+          </div>
+          <div class="quick-stat">
+            <span class="quick-stat-label">Masculine</span>
+            <span class="quick-stat-value" id="statMasc">—</span>
+          </div>
+          <div class="quick-stat">
+            <span class="quick-stat-label">Feminine</span>
+            <span class="quick-stat-value" id="statFem">—</span>
+          </div>
+          <div class="quick-stat">
+            <span class="quick-stat-label">Unisex</span>
+            <span class="quick-stat-value" id="statUnisex">—</span>
+          </div>
+          <div class="quick-stat">
+            <span class="quick-stat-label">Elements</span>
+            <span class="quick-stat-value" id="statElements">—</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN GRID -->
+    <main>
+      <div class="names-grid" id="namesGrid" role="list" aria-label="Old English names"></div>
+    
+        
+        
+        <div class="author-card">
+          <div class="author-avatar">👨‍🏫</div>
+          <div class="author-details">
+            <h4>Written by Furqan &amp; the Editorial Team</h4>
+            <p>Researched and overseen by Furqan, a veteran student career advisor with 19 years of dedicated service in the education sector of Pakistan, including career guidance roles at Sir Syed University of Engineering and Technology (SSUET), and founder of the <a href="https://www.facebook.com/profile.php?id=100069961940632" target="_blank" rel="noopener noreferrer">Youth Development Society</a>. Under his direction, this platform provides a suite of tools built to motivate and guide the youth in utilizing AI to uplift their earning potential and build successful careers.</p>
+          </div>
+        </div>
+
+
+
+      </main>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+          <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+          <span class="brand-name">Translator Old English</span>
+        </a>
+        <p>Your guide to the Anglo-Saxon language — translate, explore names, and discover the roots of English at <a href="https://partnerhoursguide.com" style="color:var(--accent-gold);">partnerhoursguide.com</a>.</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Old English Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare Converter</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/">Old English Names</a></li>
+          </ul>
+      </div>
+      <div class="footer-nav">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="https://partnerhoursguide.com/what-is-old-english/">What is Old English?</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-vs-modern-english/">Old vs Modern English</a></li>
+          <li><a href="https://partnerhoursguide.com/how-tolkien-used-old-english-rohirric/">Tolkien & Old English</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">25 Old English Words</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav">
+        <h4>Site</h4>
+        <ul>
+          <li><a href="https://partnerhoursguide.com/about/">About</a></li>
+          <li><a href="https://partnerhoursguide.com/contact/">Contact</a></li>
+          <li><a href="https://partnerhoursguide.com/privacy-policy/">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Translator Old English. All rights reserved.</p>
+      <p>Data sourced from Anglo-Saxon historical records &amp; scholarly etymology.</p>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // =========================================================================
+    // DATA: 50 Old English Names
+    // =========================================================================
+    const NAMES_DATA = [
+      {
+        name: "Æthelred",
+        phonetic: "ATH-el-red",
+        gender: "masculine",
+        era: "Anglo-Saxon England, 6th–11th c. (most famously Æthelred II, 978–1016)",
+        meaning: "Noble counsel — a name borne by many Anglo-Saxon kings",
+        etymology: "From Old English 'æðele' (noble, aristocratic) + 'rǣd' (counsel, advice). The second element 'rǣd' carries the sense of wisdom given through speech; the nickname 'Unræd' (ill-counselled) was ironically applied to Æthelred II by later chroniclers, punning on his name.",
+        elements: ["æðele (noble)", "rǣd (counsel)"]
+      },
+      {
+        name: "Eadwine",
+        phonetic: "EAD-wee-neh",
+        gender: "masculine",
+        era: "Common throughout the Anglo-Saxon period; King Edwin of Northumbria d. 633",
+        meaning: "Prosperous friend; a name of good fortune and fellowship",
+        etymology: "Compound of 'ēad' (wealth, prosperity, happiness) + 'wine' (friend, ally). 'Wine' in Old English names denotes a close companion or kinsman, not merely an acquaintance.",
+        elements: ["ēad (prosperity)", "wine (friend)"]
+      },
+      {
+        name: "Wulfric",
+        phonetic: "WULF-rik",
+        gender: "masculine",
+        era: "Pre-Conquest England, 9th–11th c.",
+        meaning: "Wolf power — evoking the fearsome strength of the wolf",
+        etymology: "From 'wulf' (wolf, a symbol of fierce warrior strength) + 'rīc' (power, rule, kingdom). The wolf was a prestigious totem in Germanic warrior culture.",
+        elements: ["wulf (wolf)", "rīc (power)"]
+      },
+      {
+        name: "Beorhtric",
+        phonetic: "BEH-ohr-trik",
+        gender: "masculine",
+        era: "Late Anglo-Saxon period; King of Wessex 786–802",
+        meaning: "Bright power — radiant rulership",
+        etymology: "Joins 'beorht' (bright, shining, glorious) with 'rīc' (power, rule). 'Beorht' implies both physical luminosity and moral excellence in Old English usage.",
+        elements: ["beorht (bright)", "rīc (power)"]
+      },
+      {
+        name: "Godwine",
+        phonetic: "GOD-wee-neh",
+        gender: "masculine",
+        era: "11th c.; most famously the powerful Earl Godwine of Wessex",
+        meaning: "God's friend; blessed companion",
+        etymology: "'God' (God, or sometimes 'good') + 'wine' (friend). A deeply pious name reflecting the Christianisation of Anglo-Saxon England.",
+        elements: ["god (God/good)", "wine (friend)"]
+      },
+      {
+        name: "Cynewulf",
+        phonetic: "KUE-neh-wulf",
+        gender: "masculine",
+        era: "8th–9th c.; also an Old English poet of that name",
+        meaning: "Royal wolf — the wolf of the king's house",
+        etymology: "From 'cyne-' (royal, kingly, from 'cyning' = king) + 'wulf' (wolf). Cynewulf is one of the few Old English poets whose name is known through runic signatures in manuscripts.",
+        elements: ["cyne (royal)", "wulf (wolf)"]
+      },
+      {
+        name: "Ælfric",
+        phonetic: "ALF-rik",
+        gender: "masculine",
+        era: "10th–11th c.; Ælfric of Eynsham was a celebrated homilist",
+        meaning: "Elf ruler — one with the power of the elves",
+        etymology: "From 'ælf' (elf — in Anglo-Saxon belief, supernatural beings associated with beauty and power, not necessarily small) + 'rīc' (rule, power).",
+        elements: ["ælf (elf)", "rīc (power)"]
+      },
+      {
+        name: "Leofwine",
+        phonetic: "LEH-of-wee-neh",
+        gender: "masculine",
+        era: "Pre-Conquest; a brother of King Harold II fell at Hastings 1066",
+        meaning: "Dear friend; beloved companion",
+        etymology: "'Lēof' (dear, beloved, pleasant) + 'wine' (friend). A warm, affectionate name. 'Lēof' is the ancestor of modern 'lief' and 'leave' (as in 'I would liefer').",
+        elements: ["lēof (dear)", "wine (friend)"]
+      },
+      {
+        name: "Oswald",
+        phonetic: "OZ-wahld",
+        gender: "masculine",
+        era: "King Oswald of Northumbria, martyred 642; Saint Oswald of Worcester, d. 992",
+        meaning: "God's power — divine rule",
+        etymology: "From 'os' (a divine being, god — especially in Scandinavian-influenced Old English) + 'weald' (power, dominion, rule). The 'os-' prefix appears in many royal names.",
+        elements: ["os (god/divine)", "weald (power)"]
+      },
+      {
+        name: "Dunstan",
+        phonetic: "DUN-stan",
+        gender: "masculine",
+        era: "Saint Dunstan, Archbishop of Canterbury, 909–988",
+        meaning: "Dark stone; stone of the hill",
+        etymology: "From 'dunn' (dun-coloured, dark grey, tawny) + 'stān' (stone). Dunstan was the great reformer of English monasticism and is patron saint of goldsmiths.",
+        elements: ["dunn (dark/dun)", "stān (stone)"]
+      },
+      {
+        name: "Eadric",
+        phonetic: "EAD-rik",
+        gender: "masculine",
+        era: "Anglo-Saxon England; Eadric Streona, d. 1017, was a powerful and treacherous ealdorman",
+        meaning: "Prosperous ruler; wealthy in power",
+        etymology: "'Ēad' (prosperity, wealth, happiness) + 'rīc' (rule, power). A compound promising both material fortune and political dominance.",
+        elements: ["ēad (prosperity)", "rīc (power)"]
+      },
+      {
+        name: "Sigeberht",
+        phonetic: "SEE-yeh-behr-t",
+        gender: "masculine",
+        era: "Several kings bore this name, including King Sigeberht of East Anglia, 7th c.",
+        meaning: "Victory bright — radiant in conquest",
+        etymology: "'Sige' (victory, triumph — cognate with German 'Sieg') + 'beorht' (bright, glorious). A martial name promising brilliant victories.",
+        elements: ["sige (victory)", "beorht (bright)"]
+      },
+      {
+        name: "Thurston",
+        phonetic: "THUR-ston",
+        gender: "masculine",
+        era: "Late Anglo-Saxon and early Norman period, 10th–12th c.",
+        meaning: "Thor's stone — under the protection of the thunder-god",
+        etymology: "Anglicisation of Old Norse 'Þórsteinn': 'Þór' (the god Thor) + 'steinn' (stone). Reflects Scandinavian settlement in the Danelaw.",
+        elements: ["þor (Thor)", "stān (stone)"]
+      },
+      {
+        name: "Hereward",
+        phonetic: "HEH-reh-ward",
+        gender: "masculine",
+        era: "Hereward the Wake, legendary resistance leader against the Normans, fl. 1070s",
+        meaning: "Army guard; protector of the host",
+        etymology: "'Here' (army, military host) + 'weard' (guard, protector, keeper). Hereward became a folk hero celebrated in later English literature.",
+        elements: ["here (army)", "weard (guard)"]
+      },
+      {
+        name: "Æthelwulf",
+        phonetic: "ATH-el-wulf",
+        gender: "masculine",
+        era: "King Æthelwulf of Wessex, r. 839–858, father of Alfred the Great",
+        meaning: "Noble wolf — the aristocratic wolf",
+        etymology: "'Æðele' (noble, excellent, of high birth) + 'wulf' (wolf). The wolf symbolised fierce, untameable nobility in Old English aristocratic culture.",
+        elements: ["æðele (noble)", "wulf (wolf)"]
+      },
+      {
+        name: "Aldhelm",
+        phonetic: "ALD-helm",
+        gender: "masculine",
+        era: "Saint Aldhelm, Bishop of Sherborne, c. 639–709",
+        meaning: "Old helmet — the ancient protector",
+        etymology: "'Ald' / 'eald' (old, ancient, venerable) + 'helm' (helmet, protection, also used figuratively for a protector). Aldhelm was the first English scholar to write in Latin.",
+        elements: ["eald (old)", "helm (helmet/protector)"]
+      },
+      {
+        name: "Cuthbert",
+        phonetic: "KUTH-behrt",
+        gender: "masculine",
+        era: "Saint Cuthbert of Lindisfarne, c. 634–687",
+        meaning: "Famous bright; known for brilliance",
+        etymology: "'Cūð' (known, famous, familiar — cognate with 'could', from 'cunnan') + 'beorht' (bright). His relics at Durham were among the most venerated in medieval England.",
+        elements: ["cūð (known/famous)", "beorht (bright)"]
+      },
+      {
+        name: "Sweyn",
+        phonetic: "SWAYN",
+        gender: "masculine",
+        era: "King Sweyn Forkbeard of Denmark, conquered England 1013",
+        meaning: "Young man; boy-warrior (Old Norse)",
+        etymology: "From Old Norse 'Sveinn' (boy, servant, young warrior), adopted into Old English. Reflects the extensive Scandinavian cultural exchange during the Viking Age.",
+        elements: ["sweyn (young man)"]
+      },
+      {
+        name: "Ulfberht",
+        phonetic: "ULF-behr-t",
+        gender: "masculine",
+        era: "Carolingian and Viking Age, 9th–11th c.",
+        meaning: "Wolf bright — the gleaming wolf",
+        etymology: "'Ulf' (wolf, from Old Norse/Old English 'wulf') + 'beorht' (bright). Famous as the inscription on a series of high-quality Viking-Age swords.",
+        elements: ["wulf (wolf)", "beorht (bright)"]
+      },
+      {
+        name: "Wiglaf",
+        phonetic: "WIG-lahf",
+        gender: "masculine",
+        era: "Legendary; the loyal thane in the epic poem Beowulf",
+        meaning: "Battle survivor; war remnant",
+        etymology: "'Wig' (war, battle, conflict) + 'lāf' (remnant, survivor, what is left — cognate with 'leave'). Wiglaf is the one warrior who stands by Beowulf in his final dragon fight.",
+        elements: ["wig (battle)", "lāf (survivor/remnant)"]
+      },
+      {
+        name: "Æthelflæd",
+        phonetic: "ATH-el-flad",
+        gender: "feminine",
+        era: "Lady of the Mercians, c. 870–918, daughter of Alfred the Great",
+        meaning: "Noble beauty; aristocratic and fair",
+        etymology: "'Æðele' (noble) + 'flǣd' (beauty, comeliness — a rare feminine element). Æthelflæd was one of the most powerful women in Anglo-Saxon history, governing Mercia as a military ruler.",
+        elements: ["æðele (noble)", "flǣd (beauty)"]
+      },
+      {
+        name: "Ælswith",
+        phonetic: "AL-swith",
+        gender: "feminine",
+        era: "Wife of King Alfred the Great, c. 852–902",
+        meaning: "Elf strength — powered by elfin grace",
+        etymology: "'Ælf' (elf) + 'swiþ' (strong, mighty). The elf element in women's names often connoted otherworldly grace and inner power.",
+        elements: ["ælf (elf)", "swiþ (strong)"]
+      },
+      {
+        name: "Cynethryth",
+        phonetic: "KUE-neh-thrith",
+        gender: "feminine",
+        era: "8th c.; wife of King Offa of Mercia, the only Anglo-Saxon queen to appear on coins",
+        meaning: "Royal strength; queenly might",
+        etymology: "'Cyne-' (royal, kingly) + 'þryð' (strength, might, power — also sometimes translated as 'woman of power'). An exceptionally rare honour for her coins to survive.",
+        elements: ["cyne (royal)", "þryð (strength)"]
+      },
+      {
+        name: "Eadgyth",
+        phonetic: "EAD-yith",
+        gender: "feminine",
+        era: "Several royal women; notably the queen of Emperor Otto I and a saint",
+        meaning: "Prosperous war; blessed battle",
+        etymology: "'Ēad' (prosperity, wealth) + 'gyð' / 'gūð' (battle, war). A compound that may seem paradoxical but reflects the aristocratic ideal of a royal woman connected to martial glory.",
+        elements: ["ēad (prosperity)", "gyð (battle)"]
+      },
+      {
+        name: "Mildreth",
+        phonetic: "MIL-dreth",
+        gender: "feminine",
+        era: "Saint Mildred of Minster-in-Thanet, died c. 700",
+        meaning: "Gentle strength; mild power",
+        etymology: "'Mild' / 'milde' (gentle, merciful, mild) + 'þryð' (strength, power). A name pairing gentleness with might — the ideal of a noble woman in Christian Old English culture.",
+        elements: ["mild (gentle)", "þryð (strength)"]
+      },
+      {
+        name: "Æthelburh",
+        phonetic: "ATH-el-burh",
+        gender: "feminine",
+        era: "Several saints; notably the wife of King Edwin of Northumbria, 7th c.",
+        meaning: "Noble fortress; aristocratic stronghold",
+        etymology: "'Æðele' (noble) + 'burh' / 'burg' (fortified place, stronghold, town — the ancestor of modern '-bury' and '-borough' place names).",
+        elements: ["æðele (noble)", "burh (fortress)"]
+      },
+      {
+        name: "Sexburh",
+        phonetic: "SEAKS-burh",
+        gender: "feminine",
+        era: "Queen of Kent and Abbess of Ely, d. c. 699",
+        meaning: "Victory fortress; triumphant stronghold",
+        etymology: "'Sex' / 'seax' (knife, short sword — the weapon of the Saxons, giving them their name) + 'burh' (fortress). Her relics were venerated at Ely alongside her sisters.",
+        elements: ["seax (knife/Saxon)", "burh (fortress)"]
+      },
+      {
+        name: "Cwenburh",
+        phonetic: "KWEN-burh",
+        gender: "feminine",
+        era: "Attested in Anglo-Saxon charters and saints' lists",
+        meaning: "Queen's fortress; women's stronghold",
+        etymology: "'Cwen' (queen, woman — the source of modern 'queen') + 'burh' (fortified settlement). 'Cwen' specifically denoted a woman of the highest rank.",
+        elements: ["cwen (queen)", "burh (fortress)"]
+      },
+      {
+        name: "Leofgyth",
+        phonetic: "LEH-of-yith",
+        gender: "feminine",
+        era: "Attested in the 8th c.; possibly a name of Saint Lioba",
+        meaning: "Dear war; beloved in battle",
+        etymology: "'Lēof' (dear, beloved) + 'gyð' (battle, war). A warm personal name joined to a martial element — characteristic of Old English compound name-making.",
+        elements: ["lēof (dear)", "gyð (battle)"]
+      },
+      {
+        name: "Ælfflaed",
+        phonetic: "ALF-flad",
+        gender: "feminine",
+        era: "Multiple notable women; Abbess Ælfflaed of Whitby, d. 713",
+        meaning: "Elf beauty; elfin comeliness",
+        etymology: "'Ælf' (elf, supernatural being of grace and beauty) + 'flǣd' (beauty, fairness). A name that draws on pre-Christian beliefs about elves as beautiful, otherworldly beings.",
+        elements: ["ælf (elf)", "flǣd (beauty)"]
+      },
+      {
+        name: "Wulfrun",
+        phonetic: "WULF-run",
+        gender: "feminine",
+        era: "10th c.; noble benefactress who founded Wolverhampton",
+        meaning: "Wolf secret; wolf mystery",
+        etymology: "'Wulf' (wolf) + 'rūn' (mystery, secret, whispered council — the source of 'rune'). Combines a totem animal with the sacred secrecy of runic wisdom.",
+        elements: ["wulf (wolf)", "rūn (secret/rune)"]
+      },
+      {
+        name: "Ealdgyth",
+        phonetic: "EAL-d-yith",
+        gender: "feminine",
+        era: "Wife of King Harold II, the last Anglo-Saxon king before Hastings",
+        meaning: "Old war; the ancient battle",
+        etymology: "'Eald' (old, ancient) + 'gyð' (battle, war). A name evoking ancestral martial heritage.",
+        elements: ["eald (old)", "gyð (battle)"]
+      },
+      {
+        name: "Eanswith",
+        phonetic: "EAN-swith",
+        gender: "feminine",
+        era: "Saint Eanswith, granddaughter of Æthelberht of Kent, d. c. 640",
+        meaning: "Grace strength; gracious power",
+        etymology: "'Ean-' (a name element related to grace or favour, sometimes linked to OE 'ēan', to give birth) + 'swiþ' (strong). She founded the first convent in England.",
+        elements: ["ean (grace)", "swiþ (strong)"]
+      },
+      {
+        name: "Sigeflæd",
+        phonetic: "SEE-yeh-flad",
+        gender: "feminine",
+        era: "Attested in Anglo-Saxon name records, 9th–10th c.",
+        meaning: "Victory beauty; triumphantly fair",
+        etymology: "'Sige' (victory) + 'flǣd' (beauty, comeliness). A striking feminine compound joining military triumph to feminine grace.",
+        elements: ["sige (victory)", "flǣd (beauty)"]
+      },
+      {
+        name: "Æthelswith",
+        phonetic: "ATH-el-swith",
+        gender: "feminine",
+        era: "Queen of Mercia, sister of King Alfred the Great, d. 888",
+        meaning: "Noble strong; powerful in nobility",
+        etymology: "'Æðele' (noble) + 'swiþ' (strong, mighty). Alfred's sister who married King Burgred of Mercia and later died on pilgrimage to Rome.",
+        elements: ["æðele (noble)", "swiþ (strong)"]
+      },
+      {
+        name: "Godgifu",
+        phonetic: "GOD-yi-fu",
+        gender: "feminine",
+        era: "11th c.; anglicised as 'Lady Godiva', wife of the Earl of Mercia",
+        meaning: "God's gift; divine gift",
+        etymology: "'God' (God) + 'gifu' (gift — the ancestor of modern 'give'). The Latinised form 'Godiva' is famous for the legendary naked ride through Coventry.",
+        elements: ["god (God)", "gifu (gift)"]
+      },
+      {
+        name: "Freawine",
+        phonetic: "FREH-ah-wee-neh",
+        gender: "unisex",
+        era: "Attested in royal genealogies; an ancestor name in early Mercian king-lists",
+        meaning: "Lord's friend; friend of the master",
+        etymology: "'Frēa' (lord, master — related to the god Frey in Norse mythology) + 'wine' (friend). One of the few unambiguously gender-neutral Old English compounds.",
+        elements: ["frēa (lord)", "wine (friend)"]
+      },
+      {
+        name: "Goldwine",
+        phonetic: "GOLD-wee-neh",
+        gender: "unisex",
+        era: "Attested in Domesday Book and pre-Conquest sources",
+        meaning: "Golden friend; friend of gold",
+        etymology: "'Gold' (gold, treasure) + 'wine' (friend). 'Gold' in Old English names often carries connotations of value, preciousness, and generosity.",
+        elements: ["gold (gold)", "wine (friend)"]
+      },
+      {
+        name: "Deorwine",
+        phonetic: "DEH-or-wee-neh",
+        gender: "unisex",
+        era: "Attested in early English records and hagiographies",
+        meaning: "Beloved friend; dear and friendly",
+        etymology: "'Dēor' (dear, beloved — also 'animal/beast'; the two meanings coexist in Old English) + 'wine' (friend). An endearing compound used for both men and women.",
+        elements: ["dēor (dear/beloved)", "wine (friend)"]
+      },
+      {
+        name: "Winefrith",
+        phonetic: "WEE-neh-frith",
+        gender: "unisex",
+        era: "The birth name of Saint Boniface, apostle to Germany, 675–754",
+        meaning: "Friend of peace; peaceful companion",
+        etymology: "'Wine' (friend) + 'friþ' (peace, protection — the source of modern 'frith', an archaic word for sanctuary). Boniface adopted his Latin name upon entering religious life.",
+        elements: ["wine (friend)", "friþ (peace)"]
+      },
+      {
+        name: "Ēadhild",
+        phonetic: "EAD-hild",
+        gender: "feminine",
+        era: "A daughter of King Edward the Elder, 10th c.",
+        meaning: "Prosperous battle-woman; blessed warrior",
+        etymology: "'Ēad' (prosperity, blessedness) + 'hild' (battle, war — used especially of a female warrior figure in compounds). 'Hild' was also a Valkyrie name.",
+        elements: ["ēad (prosperity)", "hild (battle)"]
+      },
+      {
+        name: "Byrhthelm",
+        phonetic: "BURH-t-helm",
+        gender: "masculine",
+        era: "Archbishop of Canterbury (959), attested in multiple charters",
+        meaning: "Bright helmet; shining protector",
+        etymology: "'Byrhт' / 'beorht' (bright, brilliant) + 'helm' (helmet, figurative protector). A clerical name implying radiant spiritual guardianship.",
+        elements: ["beorht (bright)", "helm (helmet/protector)"]
+      },
+      {
+        name: "Leofstan",
+        phonetic: "LEH-of-stan",
+        gender: "masculine",
+        era: "Abbot of Bury St Edmunds, 11th c.",
+        meaning: "Dear stone; beloved and firm",
+        etymology: "'Lēof' (dear, beloved) + 'stān' (stone). The stone element implies steadfastness and enduring loyalty.",
+        elements: ["lēof (dear)", "stān (stone)"]
+      },
+      {
+        name: "Æthelheard",
+        phonetic: "ATH-el-heard",
+        gender: "masculine",
+        era: "Archbishop of Canterbury, d. 805",
+        meaning: "Noble hard; noble and resolute",
+        etymology: "'Æðele' (noble) + 'heard' (hard, brave, resolute — cognate with modern 'hard'). A name denoting steely aristocratic resolve.",
+        elements: ["æðele (noble)", "heard (hard/brave)"]
+      },
+      {
+        name: "Sigemund",
+        phonetic: "SEE-yeh-mund",
+        gender: "masculine",
+        era: "Legendary; Sigemund is praised as a dragon-slayer in Beowulf",
+        meaning: "Victory protection; guarded by triumph",
+        etymology: "'Sige' (victory) + 'mund' (hand, protection — 'mund' originally meant 'hand' and by extension 'guardian'). Sigemund is the great Germanic dragon-slayer hero.",
+        elements: ["sige (victory)", "mund (hand/protection)"]
+      },
+      {
+        name: "Ealdwulf",
+        phonetic: "EAL-d-wulf",
+        gender: "masculine",
+        era: "King of East Anglia, r. c. 664–713",
+        meaning: "Ancient wolf; the elder wolf",
+        etymology: "'Eald' (old, ancient, venerable) + 'wulf' (wolf). Suggests the wisdom of age combined with the fierce strength of the wolf totem.",
+        elements: ["eald (old)", "wulf (wolf)"]
+      },
+      {
+        name: "Friðuswið",
+        phonetic: "FRITH-u-swith",
+        gender: "feminine",
+        era: "Saint Frideswide (Latinised), patron of Oxford, d. c. 727",
+        meaning: "Peace strong; strong in peace",
+        etymology: "'Friþ' / 'friðu' (peace, protection, sanctuary) + 'swiþ' (strong). Her priory became the foundation for Christ Church, Oxford.",
+        elements: ["friþ (peace)", "swiþ (strong)"]
+      },
+      {
+        name: "Hereswith",
+        phonetic: "HEH-reh-swith",
+        gender: "feminine",
+        era: "Sister of Saint Hilda of Whitby, 7th c.",
+        meaning: "Army strong; strong as a host",
+        etymology: "'Here' (army, military host) + 'swiþ' (strong, mighty). She became a nun in Frankish Gaul before her more famous sister led Whitby.",
+        elements: ["here (army)", "swiþ (strong)"]
+      },
+      {
+        name: "Forthred",
+        phonetic: "FORTH-red",
+        gender: "masculine",
+        era: "Attested in Anglo-Saxon charters, 8th–9th c.",
+        meaning: "Forth counsel; advancing wisdom",
+        etymology: "'Forþ' (forth, forward, onward) + 'rǣd' (counsel, advice, wisdom). A name suggesting progressive, forward-looking wisdom.",
+        elements: ["forþ (forth/forward)", "rǣd (counsel)"]
+      },
+      {
+        name: "Beornwulf",
+        phonetic: "BEH-orn-wulf",
+        gender: "masculine",
+        era: "King of Mercia, r. 823–826",
+        meaning: "Warrior wolf; the wolf-warrior",
+        etymology: "'Beorn' (warrior, man, noble — also means 'bear') + 'wulf' (wolf). 'Beorn' has a dual meaning of noble warrior and bear, making this name doubly fierce.",
+        elements: ["beorn (warrior/bear)", "wulf (wolf)"]
+      },
+      {
+        name: "Abarhilda",
+        phonetic: "AH-bar-hil-da",
+        gender: "feminine",
+        era: "Early Anglo-Saxon period, attested in PASE records",
+        meaning: "Struggle and battle-maid — a warrior woman",
+        etymology: "Germanic compound: 'abar' (struggle, effort) + 'hild' (battle, war). A powerful martial name for a noble woman.",
+        elements: ["abar (struggle)", "hild (battle)"]
+      },
+      {
+        name: "Abba",
+        phonetic: "AB-ba",
+        gender: "masculine",
+        era: "Anglo-Saxon ecclesiastical records, 7th–10th c.",
+        meaning: "Father — a title of religious authority",
+        etymology: "From ecclesiastical Latin 'abba', itself from Aramaic 'abbā' (father). Used both as a personal name and a title for abbots in the early English church.",
+        elements: ["abba (father)"]
+      },
+      {
+        name: "Abbe",
+        phonetic: "AB-beh",
+        gender: "feminine",
+        era: "Attested in PASE; short form of Æbbe, 7th–8th c.",
+        meaning: "Strength of a boar — fierce and powerful",
+        etymology: "Short form of Æbbe: Old English 'eofor' (boar) + 'beorn' (warrior/man). The boar was a symbol of ferocious strength and bravery in Anglo-Saxon culture.",
+        elements: ["eofor (boar)", "beorn (warrior)"]
+      },
+      {
+        name: "Abbo",
+        phonetic: "AB-boh",
+        gender: "masculine",
+        era: "Continental and Anglo-Saxon records, 8th–10th c.",
+        meaning: "Noble and bright — radiant nobility",
+        etymology: "Germanic compound from 'adal' (noble) + 'beorht' (bright). Abbo of Fleury (945–1004), the learned French monk who visited Ramsey Abbey in England, bore this name.",
+        elements: ["adal (noble)", "beorht (bright)"]
+      },
+      {
+        name: "Abbud",
+        phonetic: "AB-bud",
+        gender: "masculine",
+        era: "Early Anglo-Saxon ecclesiastical records",
+        meaning: "Abbot, father — head of a monastery",
+        etymology: "From Latin 'abbud' / 'abbat', itself from Aramaic 'abbā'. Used as both a personal name and an official title in early English monasticism.",
+        elements: ["abbud (abbot/father)"]
+      },
+      {
+        name: "Abel",
+        phonetic: "AY-bel",
+        gender: "masculine",
+        era: "Biblical name adopted in Anglo-Saxon England after Christianisation",
+        meaning: "Breath, vapor — fleeting life",
+        etymology: "Hebrew 'Hebel' (breath, vapour), the second son of Adam and Eve in Genesis. Biblical names became common in England following the 7th-century conversion.",
+        elements: ["hebel (breath/vapor)"]
+      },
+      {
+        name: "Abenel",
+        phonetic: "AB-eh-nel",
+        gender: "masculine",
+        era: "Attested in PASE Domesday records, 11th c.",
+        meaning: "Son of strength — powerful lineage",
+        etymology: "Possibly from Hebrew/Semitic roots: 'ab' (father/strength) + 'el' (God). The name may have entered England through Norman-French ecclesiastical contacts.",
+        elements: ["ab (father/strength)", "el (God)"]
+      },
+      {
+        name: "Abonis",
+        phonetic: "ah-BOH-nis",
+        gender: "masculine",
+        era: "Attested in PASE; rare, possibly Frankish or Latin",
+        meaning: "Of uncertain origin, possibly from Latin",
+        etymology: "Uncertain etymology. Possibly a Latinised form of a Continental Germanic name, recorded in Anglo-Saxon administrative documents.",
+        elements: ["abonis (uncertain)"]
+      },
+      {
+        name: "Abunel",
+        phonetic: "AB-oo-nel",
+        gender: "masculine",
+        era: "PASE records, 11th c., possibly Domesday Book",
+        meaning: "Variant of Abenel — son of strength",
+        etymology: "Likely a scribal or dialectal variant of Abenel. The interchange of 'e' and 'u' vowels is common in late Anglo-Saxon orthography.",
+        elements: ["ab (father/strength)", "el (God)"]
+      },
+      {
+        name: "Acca",
+        phonetic: "AK-ka",
+        gender: "masculine",
+        era: "Bishop Acca of Hexham, d. 740; attested in PASE",
+        meaning: "Oak — strength and endurance of the oak tree",
+        etymology: "From Old English 'æc' (oak tree). The oak was a sacred tree to the Germanic peoples and a symbol of enduring strength. Bishop Acca was a learned friend of Bede.",
+        elements: ["æc (oak)"]
+      },
+      {
+        name: "Acchiersum",
+        phonetic: "ak-KEE-er-sum",
+        gender: "masculine",
+        era: "PASE records; rare and unusual form",
+        meaning: "Unclear — possibly derived from a place name",
+        etymology: "Of obscure origin. The name may be a corrupt or dialectal rendering of a place-derived byname in Anglo-Saxon administrative records.",
+        elements: ["acchiersum (unclear)"]
+      },
+      {
+        name: "Acha",
+        phonetic: "AH-cha",
+        gender: "feminine",
+        era: "Attested in PASE; mother of King Oswine of Deira, 7th c.",
+        meaning: "Oak, or edge of a sword — strength or sharpness",
+        etymology: "Possibly from Old English 'æc' (oak), or related to 'ecg' (edge, blade of a sword). Both roots suggest strength and durability in an Anglo-Saxon woman.",
+        elements: ["æc (oak)", "ecg (edge/blade)"]
+      },
+      {
+        name: "Aculf",
+        phonetic: "AK-ulf",
+        gender: "masculine",
+        era: "Attested in PASE Anglo-Saxon name records",
+        meaning: "Oak wolf — fierce as a wolf, enduring as an oak",
+        etymology: "Old English compound: 'æc' (oak) + 'wulf' (wolf). Combines two powerful natural symbols — the strength of the oak tree and the ferocity of the wolf.",
+        elements: ["æc (oak)", "wulf (wolf)"]
+      },
+      {
+        name: "Acwulf",
+        phonetic: "AK-wulf",
+        gender: "masculine",
+        era: "Variant spelling in PASE Anglo-Saxon records",
+        meaning: "Oak wolf — variant spelling of Aculf",
+        etymology: "Spelling variant of Aculf: 'æc' (oak) + 'wulf' (wolf). Orthographic variation between 'c' and 'cw' is common in Old English manuscripts.",
+        elements: ["æc (oak)", "wulf (wolf)"]
+      },
+      {
+        name: "Ada",
+        phonetic: "AH-da",
+        gender: "feminine",
+        era: "Attested in PASE and post-Conquest Anglo-Norman records",
+        meaning: "Noble, nobility — of aristocratic character",
+        etymology: "Short form of Germanic names beginning with 'adal' (noble, of noble lineage). Popular among both Anglo-Saxon and Norman nobility.",
+        elements: ["adal (noble)"]
+      },
+      {
+        name: "Adalbert",
+        phonetic: "AH-dal-behrt",
+        gender: "masculine",
+        era: "Continental and English use, 8th–11th c.; Saint Adalbert of Prague, d. 997",
+        meaning: "Noble and bright — shining in nobility",
+        etymology: "Germanic: 'adal' (noble, of high birth) + 'beorht' (bright, glorious). An Old English cognate of Æthelberht. Borne by several Continental bishops and saints.",
+        elements: ["adal (noble)", "beorht (bright)"]
+      },
+      {
+        name: "Adalger",
+        phonetic: "AH-dal-ger",
+        gender: "masculine",
+        era: "Attested in PASE and Frankish records, 9th–11th c.",
+        meaning: "Noble spear — armed with nobility",
+        etymology: "Germanic: 'adal' (noble) + 'gar' (spear). Cognate with Old English Æthelgar. The spear was the primary weapon of the Anglo-Saxon warrior.",
+        elements: ["adal (noble)", "gar (spear)"]
+      },
+      {
+        name: "Adalhard",
+        phonetic: "AH-dal-hard",
+        gender: "masculine",
+        era: "Attested in PASE; Frankish abbot Adalhard of Corbie, c. 753–827",
+        meaning: "Noble and hardy — brave in nobility",
+        etymology: "Germanic: 'adal' (noble) + 'heard' (hard, brave, resolute). Cognate with Old English Æthelheard. A name implying aristocratic courage.",
+        elements: ["adal (noble)", "heard (hardy/brave)"]
+      },
+      {
+        name: "Adalhelmus",
+        phonetic: "ah-dal-HEL-mus",
+        gender: "masculine",
+        era: "Latinised form in ecclesiastical records, 8th–11th c.",
+        meaning: "Noble helmet — noble protector",
+        etymology: "Latin form of Germanic 'adal' (noble) + 'helm' (helmet, protector). Latinised names were standard in Church documents. The vernacular form would be Æthelhelm.",
+        elements: ["adal (noble)", "helm (helmet/protector)"]
+      },
+      {
+        name: "Adam",
+        phonetic: "AH-dam",
+        gender: "masculine",
+        era: "Biblical name adopted widely after Anglo-Saxon Christianisation",
+        meaning: "Earth, red earth — made from the dust of the ground",
+        etymology: "Hebrew 'Adām', from 'adamah' (earth, ground). The first man in Genesis. The name became common in England following the Norman Conquest and ecclesiastical influence.",
+        elements: ["adam (earth/ground)"]
+      },
+      {
+        name: "Adda",
+        phonetic: "AD-da",
+        gender: "masculine",
+        era: "Attested in PASE; bishop Adda, 7th c.; also a short name form",
+        meaning: "Noble gift, or short form of Æthelred",
+        etymology: "Either a short form of names beginning 'adal' (noble) combined with 'gift', or a pet form of longer names like Æthelred. Common in PASE ecclesiastical records.",
+        elements: ["adal (noble)", "giefu (gift)"]
+      },
+      {
+        name: "Addan",
+        phonetic: "AD-dan",
+        gender: "masculine",
+        era: "Attested in PASE Anglo-Saxon records",
+        meaning: "Noble one — the noble man",
+        etymology: "Variant or oblique case form of Adda. The '-an' suffix is a common Old English weak noun ending that became part of some personal names in manuscript tradition.",
+        elements: ["adal (noble)"]
+      },
+      {
+        name: "Addi",
+        phonetic: "AD-dee",
+        gender: "masculine",
+        era: "Attested in PASE and early genealogical records",
+        meaning: "Noble ornament — beautifully noble",
+        etymology: "From Germanic 'adal' (noble) + '-i' (an ornament or appended element, related to Old High German 'odi'). A compact name suggesting aristocratic decoration.",
+        elements: ["adal (noble)", "odi (ornament)"]
+      },
+      {
+        name: "Adela",
+        phonetic: "ah-DAY-la",
+        gender: "feminine",
+        era: "Anglo-Norman period; Adela of Normandy, daughter of William the Conqueror, d. 1137",
+        meaning: "Noble — of high and noble birth",
+        etymology: "From Germanic 'adal' (noble). Popularised in England following the Norman Conquest. Adela of Normandy was a significant patron of the church and mother of King Stephen.",
+        elements: ["adal (noble)"]
+      },
+      {
+        name: "Adelaver",
+        phonetic: "AH-del-ah-ver",
+        gender: "masculine",
+        era: "Attested in PASE Continental Germanic contacts",
+        meaning: "Noble army — of the army of the noble",
+        etymology: "Germanic: 'adal' (noble) + 'hari' / 'heri' (army, host of warriors). Cognate with Æthelhere in Old English tradition.",
+        elements: ["adal (noble)", "hari (army)"]
+      },
+      {
+        name: "Adelelm",
+        phonetic: "AH-del-elm",
+        gender: "masculine",
+        era: "Attested in PASE and Norman records, 10th–12th c.",
+        meaning: "Noble helmet — noble protector",
+        etymology: "Germanic: 'adal' (noble) + 'helm' (helmet, figurative protector). Vernacular equivalent of Adalhelmus; both forms appear in Anglo-Norman administrative documents.",
+        elements: ["adal (noble)", "helm (helmet/protector)"]
+      },
+      {
+        name: "Adelida",
+        phonetic: "ah-del-EE-da",
+        gender: "feminine",
+        era: "Attested in PASE; Anglo-Norman feminine name, 11th c.",
+        meaning: "Noble kind — of noble sort or lineage",
+        etymology: "Germanic: 'adal' (noble) + 'id' (sort, kind, type — related to Old High German 'itis', woman). A compound emphasising noble feminine character.",
+        elements: ["adal (noble)", "id (kind/type)"]
+      },
+      {
+        name: "Adelo",
+        phonetic: "AH-del-oh",
+        gender: "masculine",
+        era: "PASE records; short Continental form, 9th–11th c.",
+        meaning: "Noble — a compact form of adal names",
+        etymology: "Short form of Germanic names built on 'adal' (noble). The '-o' ending is a common hypocoristic (pet-name) suffix in Continental Germanic and Frankish naming.",
+        elements: ["adal (noble)"]
+      },
+      {
+        name: "Adelolf",
+        phonetic: "AH-del-olf",
+        gender: "masculine",
+        era: "Attested in PASE and Frankish records",
+        meaning: "Noble wolf — aristocratic and fierce",
+        etymology: "Germanic: 'adal' (noble) + 'wulf' (wolf). Cognate with Old English Æthelwulf. The wolf totem was prized among Germanic noble families.",
+        elements: ["adal (noble)", "wulf (wolf)"]
+      },
+      {
+        name: "Aden",
+        phonetic: "AH-den",
+        gender: "masculine",
+        era: "Attested in PASE; possibly place-derived or Celtic-influenced",
+        meaning: "Possibly 'fire' or place-derived",
+        etymology: "Of uncertain origin. May be a short form of the Irish Áedán (little fire), or derived from a place name. The name appears in marginal PASE records.",
+        elements: ["aden (uncertain)"]
+      },
+      {
+        name: "Adestan",
+        phonetic: "AH-de-stan",
+        gender: "masculine",
+        era: "Attested in PASE Anglo-Saxon records",
+        meaning: "Noble stone — steadfast nobility",
+        etymology: "Germanic: 'adal' (noble) + 'stān' (stone). Stone in Old English names implies enduring steadfastness and unyielding strength.",
+        elements: ["adal (noble)", "stān (stone)"]
+      },
+      {
+        name: "Adola",
+        phonetic: "ah-DOH-la",
+        gender: "feminine",
+        era: "Attested in PASE; rare feminine form, 8th–10th c.",
+        meaning: "Noble — feminine form of the adal root",
+        etymology: "Feminine form of Germanic names built on 'adal' (noble). The '-a' ending marks the feminine in Old English and related Germanic languages.",
+        elements: ["adal (noble)"]
+      },
+      {
+        name: "Adomnán",
+        phonetic: "ah-DOM-nawn",
+        gender: "masculine",
+        era: "Adomnán of Iona, abbot and biographer of Columba, d. 704",
+        meaning: "Little lord, little monk — a humble title of devotion",
+        etymology: "Old Irish diminutive of 'adom' (lord, master, related to Latin 'dominus'). Adomnán wrote the Life of Columba and promulgated the Law of the Innocents (697).",
+        elements: ["adom (lord)", "-nán (diminutive)"]
+      },
+      {
+        name: "Adrad",
+        phonetic: "AD-rad",
+        gender: "masculine",
+        era: "Attested in PASE Anglo-Saxon records",
+        meaning: "Noble counsel — wise and noble advice",
+        etymology: "Old English: 'æðel' (noble) + 'rǣd' (counsel, advice). A vernacular compound equivalent to Æthelred, showing typical Old English name-element variation.",
+        elements: ["æðel (noble)", "rǣd (counsel)"]
+      },
+      {
+        name: "Adriod",
+        phonetic: "AH-dree-od",
+        gender: "masculine",
+        era: "Attested in PASE; possibly Welsh-influenced border region",
+        meaning: "Possibly swift rider — a Celtic-derived name",
+        etymology: "Of uncertain origin, possibly Welsh-derived. The '-od' ending may reflect Brythonic influence in areas of western England where Welsh and Old English cultures met.",
+        elements: ["adriod (uncertain)"]
+      },
+      {
+        name: "Æadan",
+        phonetic: "AY-ah-dan",
+        gender: "masculine",
+        era: "Old Irish name form attested in Anglo-Saxon contexts, 6th–8th c.",
+        meaning: "Little fire — born of fire and passion",
+        etymology: "Old Irish 'Áedán', diminutive of 'Áed' (fire). The name was common among the Irish missionaries who came to Britain, including Saint Áedán (Aidan) of Lindisfarne, d. 651.",
+        elements: ["áed (fire)", "-án (diminutive)"]
+      },
+      {
+        name: "Æalde",
+        phonetic: "AY-al-deh",
+        gender: "feminine",
+        era: "Attested in PASE; rare Old English feminine name",
+        meaning: "Old, ancient — venerable and of long lineage",
+        etymology: "From Old English 'eald' (old, ancient, venerable). A simple descriptive name suggesting an old and established family line, or possibly a nickname that became a personal name.",
+        elements: ["eald (old/ancient)"]
+      },
+      {
+        name: "Æbane",
+        phonetic: "AY-bah-neh",
+        gender: "masculine",
+        era: "Attested in PASE; obscure form",
+        meaning: "Possibly river dweller — one who lives by the water",
+        etymology: "Of uncertain origin. Possibly related to Old English 'ēa' (river, stream) + 'bana' (dweller, one who inhabits). Recorded in marginal PASE documents.",
+        elements: ["ēa (river)", "bana (dweller)"]
+      },
+      {
+        name: "Æbbe",
+        phonetic: "AY-bbeh",
+        gender: "feminine",
+        era: "Saint Æbbe of Coldingham, abbess, d. c. 683; Saint Æbbe the Younger, d. 870",
+        meaning: "Strength of a boar — fierce and indomitable",
+        etymology: "Old English: 'eofor' (boar, a symbol of ferocious courage) + 'beorn' (warrior, man of strength). The boar's head was a heraldic and totem symbol of martial power among the Anglo-Saxons.",
+        elements: ["eofor (boar)", "beorn (warrior)"]
+      },
+      {
+        name: "Aedán",
+        phonetic: "ay-DAWN",
+        gender: "masculine",
+        era: "Saint Aidan of Lindisfarne, d. 651; King Áedán mac Gabráin of Dál Riata, d. c. 608",
+        meaning: "Little fire, born of fire — fiery spirit",
+        etymology: "Old Irish 'Áedán', diminutive of 'Áed' (fire, flame). Saint Aidan was sent from Iona to Northumbria by King Oswald and founded the monastery at Lindisfarne.",
+        elements: ["áed (fire)", "-án (diminutive)"]
+      },
+      {
+        name: "Ædda",
+        phonetic: "AYD-da",
+        gender: "masculine",
+        era: "Attested in PASE; Old English masculine name",
+        meaning: "Rich gift — a gift of prosperity",
+        etymology: "Old English: 'ēad' (wealth, prosperity, happiness) + 'giefu' (gift). A name combining two positive elements, expressing the hope that the bearer would be both wealthy and generous.",
+        elements: ["ēad (wealth)", "giefu (gift)"]
+      },
+      {
+        name: "Ædde",
+        phonetic: "AYD-deh",
+        gender: "masculine",
+        era: "Attested in PASE; Wilfrid's choirmaster was named Ædde, 7th c.",
+        meaning: "Rich, blessed — wealthy and fortunate",
+        etymology: "From Old English 'ēad' (wealth, prosperity, blessedness). A short form expressing the quality of being richly blessed. Ædde Stephanus wrote the Life of Wilfrid.",
+        elements: ["ēad (wealth/blessed)"]
+      },
+      {
+        name: "Ædi",
+        phonetic: "AY-dee",
+        gender: "unisex",
+        era: "Attested in PASE Domesday records for both sexes, 11th c.",
+        meaning: "Rich, blessed — short form expressing prosperity",
+        etymology: "Short form of Old English 'ēad' (wealth, prosperity, blessedness). One of the few names in PASE recorded for both male and female bearers in Domesday Book.",
+        elements: ["ēad (wealth/blessed)"]
+      }
+    ];
+
+    // =========================================================================
+    // STATE
+    // =========================================================================
+    let activeGender = 'any';
+    let activeElement = 'any';
+    let expandedCard = null;
+    let currentSpeakingBtn = null;
+    let voices = [];
+    let shuffledPool = [];
+
+    // =========================================================================
+    // TTS HELPERS
+    // =========================================================================
+    function ttsClean(str) {
+      return str
+        .replace(/[Æ]/g, 'A')
+        .replace(/[æ]/g, 'a')
+        .replace(/[ðÐ]/g, 'th')
+        .replace(/[þÞ]/g, 'th')
+        .replace(/[ý]/g, 'y')
+        .replace(/[ū]/g, 'u')
+        .replace(/[ē]/g, 'e')
+        .replace(/[ā]/g, 'a')
+        .replace(/[ī]/g, 'i')
+        .replace(/[ō]/g, 'o')
+        .replace(/[ǣ]/g, 'ae')
+        .replace(/[Ǣ]/g, 'Ae');
+    }
+
+    function loadVoices() {
+      voices = window.speechSynthesis.getVoices();
+      const sel = document.getElementById('voiceSelect');
+      sel.innerHTML = '';
+      if (voices.length === 0) {
+        const opt = document.createElement('option');
+        opt.textContent = 'Default Voice';
+        opt.value = '';
+        sel.appendChild(opt);
+        return;
+      }
+      voices.forEach((v, i) => {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `${v.name} (${v.lang})`;
+        if (v.lang.startsWith('en')) opt.selected = true;
+        sel.appendChild(opt);
+      });
+    }
+
+    // SVG speaker icon — used everywhere instead of emoji (emoji breaks in WordPress)
+    const SVG_SPEAK = `<svg class="speak-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
+    const SVG_SPEAK_MUTED = `<svg class="speak-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
+
+    // Shared TTS engine
+    function _doSpeak(text, btn, resetFn) {
+      if (currentSpeakingBtn === btn && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        btn.classList.remove('speaking');
+        resetFn(btn);
+        currentSpeakingBtn = null;
+        return;
+      }
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        if (currentSpeakingBtn) {
+          currentSpeakingBtn.classList.remove('speaking');
+          // Reset whichever kind of button it is
+          if (currentSpeakingBtn.classList.contains('tts-btn')) {
+            currentSpeakingBtn.innerHTML = SVG_SPEAK + ' Hear it';
+          } else {
+            currentSpeakingBtn.innerHTML = SVG_SPEAK;
+          }
+        }
+      }
+      const clean = ttsClean(text);
+      const utt = new SpeechSynthesisUtterance(clean);
+      utt.rate = 0.75;
+      utt.pitch = 1.0;
+      const sel = document.getElementById('voiceSelect');
+      const idx = parseInt(sel.value, 10);
+      if (!isNaN(idx) && voices[idx]) utt.voice = voices[idx];
+      btn.classList.add('speaking');
+      currentSpeakingBtn = btn;
+      utt.onend = utt.onerror = () => {
+        btn.classList.remove('speaking');
+        resetFn(btn);
+        if (currentSpeakingBtn === btn) currentSpeakingBtn = null;
+      };
+      window.speechSynthesis.speak(utt);
+    }
+
+    // Detail-panel TTS button (shows text label)
+    function speak(text, btn) {
+      btn.innerHTML = SVG_SPEAK_MUTED + ' Speaking…';
+      _doSpeak(text, btn, b => { b.innerHTML = SVG_SPEAK + ' Hear it'; });
+    }
+
+    // Inline card speaker button (icon-only)
+    function speakCard(text, btn) {
+      btn.innerHTML = SVG_SPEAK_MUTED;
+      _doSpeak(text, btn, b => { b.innerHTML = SVG_SPEAK; });
+    }
+
+    // =========================================================================
+    // ELEMENT FILTER POPULATION
+    // =========================================================================
+    function populateElementFilter() {
+      const sel = document.getElementById('elementFilter');
+      // Collect all unique elements
+      const elemMap = {};
+      NAMES_DATA.forEach(n => {
+        n.elements.forEach(e => {
+          const key = e.split(' ')[0]; // e.g. "æðele"
+          elemMap[key] = e; // full string e.g. "æðele (noble)"
+        });
+      });
+
+      const sorted = Object.keys(elemMap).sort((a, b) => a.localeCompare(b));
+      sorted.forEach(key => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = elemMap[key];
+        sel.appendChild(opt);
+      });
+
+      document.getElementById('statElements').textContent = sorted.length;
+    }
+
+    // =========================================================================
+    // STATS
+    // =========================================================================
+    function updateStats() {
+      document.getElementById('statTotal').textContent   = NAMES_DATA.length;
+      document.getElementById('statMasc').textContent    = NAMES_DATA.filter(n => n.gender === 'masculine').length;
+      document.getElementById('statFem').textContent     = NAMES_DATA.filter(n => n.gender === 'feminine').length;
+      document.getElementById('statUnisex').textContent  = NAMES_DATA.filter(n => n.gender === 'unisex').length;
+    }
+
+    // =========================================================================
+    // FILTERING
+    // =========================================================================
+    function getFiltered() {
+      return NAMES_DATA.filter(n => {
+        const gMatch = activeGender === 'any' || n.gender === activeGender;
+        const eMatch = activeElement === 'any' || n.elements.some(e => e.startsWith(activeElement));
+        return gMatch && eMatch;
+      });
+    }
+
+    // =========================================================================
+    // SHUFFLE
+    // =========================================================================
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // =========================================================================
+    // RENDER
+    // =========================================================================
+    function render(pool) {
+      const grid = document.getElementById('namesGrid');
+      grid.innerHTML = '';
+
+      if (pool.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">🔍</div>
+            <h3>No names found</h3>
+            <p>Try adjusting the filters or click Generate for a new selection.</p>
+          </div>`;
+        document.getElementById('shownCount').textContent = 0;
+        return;
+      }
+
+      document.getElementById('shownCount').textContent = pool.length;
+      document.getElementById('totalCount').textContent = NAMES_DATA.length;
+
+      pool.forEach(nameObj => {
+        const genderLabel = nameObj.gender === 'masculine' ? 'Masculine' :
+                            nameObj.gender === 'feminine' ? 'Feminine' : 'Unisex';
+        const genderClass = nameObj.gender === 'masculine' ? 'gender-m' :
+                            nameObj.gender === 'feminine' ? 'gender-f' : 'gender-u';
+
+        const pillsHtml = nameObj.elements.map(e =>
+          `<span class="element-pill">${e}</span>`
+        ).join('');
+
+        const card = document.createElement('div');
+        card.className = 'name-card';
+        card.setAttribute('role', 'listitem');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-expanded', 'false');
+        card.innerHTML = `
+          <div class="card-top-row">
+            <div class="card-name">${nameObj.name}</div>
+            <button class="card-speak-btn" title="Pronounce ${nameObj.name}" aria-label="Hear pronunciation of ${nameObj.name}">${SVG_SPEAK}</button>
+          </div>
+          <div class="card-phonetic">${nameObj.phonetic}</div>
+          <span class="card-gender-badge ${genderClass}">${genderLabel}</span>
+          <div class="card-meaning">${nameObj.meaning}</div>
+          <div class="card-expand-hint">Click to explore ↓</div>
+          <div class="detail-panel">
+            <div>
+              <div class="detail-label">Pronunciation</div>
+              <div class="detail-value" style="display:flex;align-items:center;gap:0.6rem;">
+                <span style="font-family:monospace;font-size:0.95rem;color:var(--accent-gold);letter-spacing:0.05rem;">${nameObj.phonetic}</span>
+              </div>
+            </div>
+            <div>
+              <div class="detail-label">Era / Usage</div>
+              <div class="detail-value">${nameObj.era}</div>
+            </div>
+            <div>
+              <div class="detail-label">Etymology</div>
+              <div class="detail-etymology">${nameObj.etymology}</div>
+            </div>
+            <div>
+              <div class="detail-label">Name Elements</div>
+              <div class="element-pills">${pillsHtml}</div>
+            </div>
+            <button class="tts-btn" aria-label="Hear pronunciation of ${nameObj.name}">
+              ${SVG_SPEAK} Hear it
+            </button>
+          </div>
+        `;
+
+        // Click to expand (ignore clicks on either speak button)
+        card.addEventListener('click', e => {
+          if (e.target.closest('.card-speak-btn') || e.target.closest('.tts-btn')) return;
+          toggleCard(card);
+        });
+
+        // Keyboard support
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCard(card);
+          }
+        });
+
+        // Inline card-level speak button
+        const cardSpeakBtn = card.querySelector('.card-speak-btn');
+        cardSpeakBtn.addEventListener('click', e => {
+          e.stopPropagation();
+          speakCard(nameObj.name, cardSpeakBtn);
+        });
+
+        // Detail panel TTS button
+        const ttsBtn = card.querySelector('.tts-btn');
+        ttsBtn.addEventListener('click', e => {
+          e.stopPropagation();
+          speak(nameObj.name, ttsBtn);
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    function toggleCard(card) {
+      const wasExpanded = card.classList.contains('expanded');
+
+      // Collapse any open card
+      if (expandedCard && expandedCard !== card) {
+        expandedCard.classList.remove('expanded');
+        expandedCard.setAttribute('aria-expanded', 'false');
+        expandedCard.querySelector('.card-expand-hint').textContent = 'Click to explore ↓';
+      }
+
+      if (wasExpanded) {
+        card.classList.remove('expanded');
+        card.setAttribute('aria-expanded', 'false');
+        card.querySelector('.card-expand-hint').textContent = 'Click to explore ↓';
+        expandedCard = null;
+      } else {
+        card.classList.add('expanded');
+        card.setAttribute('aria-expanded', 'true');
+        card.querySelector('.card-expand-hint').textContent = 'Click to collapse ↑';
+        expandedCard = card;
+        // Scroll into view smoothly
+        setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      }
+    }
+
+    // =========================================================================
+    // ACTIVE FILTERS BADGE DISPLAY
+    // =========================================================================
+    function updateActiveFiltersBadges() {
+      const wrap = document.getElementById('activeFiltersWrap');
+      const list = document.getElementById('activeFiltersList');
+      list.innerHTML = '';
+      const filters = [];
+
+      if (activeGender !== 'any') {
+        const label = activeGender.charAt(0).toUpperCase() + activeGender.slice(1);
+        filters.push({ label, clear: () => { activeGender = 'any'; applyFilters(); setGenderBtn('any'); } });
+      }
+
+      if (activeElement !== 'any') {
+        const sel = document.getElementById('elementFilter');
+        const label = sel.options[sel.selectedIndex]?.text || activeElement;
+        filters.push({ label, clear: () => { activeElement = 'any'; document.getElementById('elementFilter').value = 'any'; applyFilters(); } });
+      }
+
+      if (filters.length > 0) {
+        wrap.style.display = 'block';
+        filters.forEach(f => {
+          const badge = document.createElement('span');
+          badge.className = 'filter-badge';
+          badge.innerHTML = `${f.label} <span class="badge-x">✕</span>`;
+          badge.addEventListener('click', f.clear);
+          list.appendChild(badge);
+        });
+      } else {
+        wrap.style.display = 'none';
+      }
+    }
+
+    // =========================================================================
+    // APPLY FILTERS
+    // =========================================================================
+    function applyFilters() {
+      expandedCard = null;
+      if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+
+      const filtered = getFiltered();
+      shuffledPool = shuffle(filtered);
+      render(shuffledPool);
+      updateActiveFiltersBadges();
+    }
+
+    // =========================================================================
+    // GENDER BUTTONS
+    // =========================================================================
+    function setGenderBtn(g) {
+      document.querySelectorAll('.gender-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.gender === g);
+      });
+    }
+
+    document.querySelectorAll('.gender-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeGender = btn.dataset.gender;
+        setGenderBtn(activeGender);
+        applyFilters();
+      });
+    });
+
+    // =========================================================================
+    // ELEMENT DROPDOWN
+    // =========================================================================
+    document.getElementById('elementFilter').addEventListener('change', e => {
+      activeElement = e.target.value;
+      applyFilters();
+    });
+
+    // =========================================================================
+    // GENERATE BUTTON
+    // =========================================================================
+    document.getElementById('generateBtn').addEventListener('click', () => {
+      const icon = document.getElementById('btnIcon');
+      icon.classList.remove('spinning');
+      void icon.offsetWidth; // reflow
+      icon.classList.add('spinning');
+      icon.addEventListener('animationend', () => icon.classList.remove('spinning'), { once: true });
+
+      applyFilters();
+    });
+
+    // =========================================================================
+    // VOICES
+    // =========================================================================
+    if (typeof speechSynthesis !== 'undefined') {
+      speechSynthesis.onvoiceschanged = loadVoices;
+      loadVoices();
+    }
+
+    // =========================================================================
+    // INIT
+    // =========================================================================
+    populateElementFilter();
+    updateStats();
+    document.getElementById('totalCount').textContent = NAMES_DATA.length;
+    applyFilters(); // Initial render with shuffle
+  </script>
+  </div><!-- /.oe-app -->
+
+    <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

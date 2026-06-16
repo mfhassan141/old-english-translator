@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Translator Old English</title>
+  <meta name="description" content="Read the Privacy Policy for TranslatorOldEnglish.com. Understand how we collect, store, and process your data in compliance with GDPR.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link data-no-optimize="1" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style data-no-optimize="1">
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-color: #120924; /* Deep Medieval Purple */
+      --card-bg: #1c1032; /* Slightly Lighter Purple */
+      --card-bg-hover: #261742;
+      --accent-gold: #c9993a;
+      --accent-gold-hover: #dfb45b;
+      --accent-gold-glow: rgba(201, 153, 58, 0.25);
+      --text-cream: #f8f5f0;
+      --text-muted: #8c829d;
+      --border-color: rgba(201, 153, 58, 0.15);
+      --border-color-hover: rgba(201, 153, 58, 0.35);
+      
+      --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Playfair Display', Georgia, serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(201, 153, 58, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(201, 153, 58, 0.04) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* Isolated Wrapper to Prevent WordPress Theme Style Leaking */
+    .translator-app-wrapper {
+      background-color: #120924 !important;
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      line-height: 1.6 !important;
+      text-align: left !important;
+    }
+
+    .translator-app-wrapper h1, 
+    .translator-app-wrapper h2, 
+    .translator-app-wrapper h3, 
+    .translator-app-wrapper p, 
+    .translator-app-wrapper span, 
+    .translator-app-wrapper a, 
+    .translator-app-wrapper label {
+      color: #f8f5f0 !important;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(18, 9, 36, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .header-nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-crest {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+      background: rgba(28, 16, 50, 0.6);
+    }
+
+    .brand-name {
+      font-family: var(--font-title) !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav.site-navigation ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav.site-navigation a {
+      white-space: nowrap;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    nav.site-navigation a:hover, 
+    nav.site-navigation a.active {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    nav.site-navigation a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--accent-gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav.site-navigation a:hover::after, 
+    nav.site-navigation a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    nav.site-navigation a.nav-cta {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #b2832c 100%);
+      color: var(--bg-color) !important;
+      border: none;
+      padding: 0.5rem 1.1rem !important;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    nav.site-navigation a.nav-cta:hover {
+      color: var(--bg-color) !important;
+      background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px var(--accent-gold-glow);
+    }
+
+    /* ==========================================================================
+       HERO AREA (PAGE TITLE)
+       ========================================================================== */
+    section.page-hero {
+      padding: 5rem 0 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(28, 16, 50, 0.2);
+    }
+
+    h1.page-title {
+      font-family: var(--font-title) !important;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(135deg, var(--text-cream) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      margin-bottom: 1rem;
+    }
+
+    p.page-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted) !important;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       PRIVACY POLICY CONTENT
+       ========================================================================== */
+    section.privacy-content-section {
+      padding: 5rem 0;
+    }
+
+    .privacy-document {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      position: relative;
+    }
+
+    .privacy-document::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    }
+
+    .last-updated-date {
+      color: var(--accent-gold) !important;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      margin-bottom: 2rem;
+      display: block;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .policy-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .policy-section h2 {
+      font-family: var(--font-title) !important;
+      font-size: 1.6rem;
+      color: var(--accent-gold-hover) !important;
+      margin-bottom: 1rem;
+    }
+
+    .policy-section p {
+      font-size: 1.02rem;
+      color: var(--text-cream) !important;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .policy-section ul {
+      list-style-type: none;
+      margin-left: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .policy-section ul li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 1.02rem;
+      color: var(--text-cream) !important;
+    }
+
+    .policy-section ul li::before {
+      content: '✍¦';
+      position: absolute;
+      left: 0;
+      color: var(--accent-gold);
+      font-size: 0.8rem;
+    }
+
+    .policy-section p strong {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      background: #0d061c;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .footer-brand-info p {
+      font-size: 0.95rem;
+      color: var(--text-muted) !important;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-nav-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .footer-nav-col h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      color: var(--accent-gold) !important;
+      font-weight: 700;
+    }
+
+    .footer-nav-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      list-style: none;
+    }
+
+    .footer-nav-col a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-nav-col a:hover {
+      color: var(--accent-gold-hover) !important;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+      }
+    }
+
+    .footer-bottom p {
+      font-size: 0.85rem;
+      color: var(--text-muted) !important;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--accent-gold-hover) !important;
+    }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVENESS & UTILITIES
+       ========================================================================== */
+    @media (max-width: 768px) {
+      section.page-hero {
+        padding: 3rem 0 2rem;
+      }
+      h1.page-title {
+        font-size: 2.2rem !important;
+      }
+      p.page-subtitle {
+        font-size: 1rem !important;
+      }
+      .header-nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+    }
+  
+    /* SEO, AEO, GEO & EEAT Callout and Badge Styles */
+    .aeo-quick-answer {
+      background: rgba(201, 153, 58, 0.05) !important;
+      border: 1px solid var(--accent-gold) !important;
+      border-left: 4px solid var(--accent-gold) !important;
+      border-radius: 6px !important;
+      padding: 1.5rem !important;
+      margin: 2rem 0 !important;
+      text-align: left !important;
+    }
+    .aeo-quick-answer h3 {
+      font-family: var(--font-title), serif !important;
+      font-size: 1.15rem !important;
+      color: var(--accent-gold) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.6rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .aeo-quick-answer p {
+      font-size: 1.05rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-cream) !important;
+      margin: 0 !important;
+    }
+    .fact-check-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: rgba(201, 153, 58, 0.08) !important;
+      border: 1px solid rgba(201, 153, 58, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 1rem 0 !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      color: var(--accent-gold-hover) !important;
+    }
+    .educational-disclaimer {
+      background: rgba(28, 16, 50, 0.25) !important;
+      border: 1px dashed var(--border-color) !important;
+      border-radius: 8px !important;
+      padding: 1.2rem !important;
+      margin: 2rem 0 !important;
+      font-size: 0.9rem !important;
+      line-height: 1.6 !important;
+      color: var(--text-muted) !important;
+      text-align: left !important;
+    }
+    .educational-disclaimer strong {
+      color: var(--accent-gold) !important;
+    }
+
+    @media (max-width: 1150px) {
+      .header-nav-container {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      nav.site-navigation ul {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+      }
+    }
+  
+    /* Dropdown CSS Rules */
+    nav.site-navigation li {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1c1032;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.8rem 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+      padding: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.2rem !important;
+      font-size: 0.9rem !important;
+      color: var(--text-muted) !important;
+      transition: var(--transition-smooth);
+      width: 100%;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent-gold-hover) !important;
+      background: rgba(201, 153, 58, 0.08);
+      padding-left: 1.5rem !important;
+    }
+    .dropdown-menu a::after {
+      display: none !important;
+    }
+    nav.site-navigation li.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-arrow {
+      font-size: 0.7rem;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    nav.site-navigation li.has-dropdown:hover .nav-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-gold-hover);
+    }
+    @media (max-width: 1150px) {
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .dropdown-menu a {
+        padding: 0.3rem 1rem !important;
+        text-align: center !important;
+      }
+      .nav-arrow {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  
+
+
+  <!-- Schema Graph Added/Updated Programmatically -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://partnerhoursguide.com/partner-hours-dmca/#webpage",
+  "url": "https://partnerhoursguide.com/partner-hours-dmca/",
+  "name": "Privacy Policy — Translator Old English",
+  "description": "Read the Privacy Policy and terms for Translator Old English.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "PartnerHoursGuide",
+    "url": "https://partnerhoursguide.com"
+  }
+}
+  </script>
+
+</head>
+<body>
+
+  <div class="translator-app-wrapper">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-nav-container">
+        <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+          <div class="brand-crest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6 6-6"></path>
+              <path d="m4 14 6 6 8-8"></path>
+            </svg>
+          </div>
+          <span class="brand-name">Translator Old English</span>
+        </a>
+        <nav class="site-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="https://partnerhoursguide.com/">Home</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator</a></li>
+          <li><a href="https://partnerhoursguide.com/shakespeare-english-translator/">Shakespeare</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-names/">Names</a></li>
+          <li><a href="https://partnerhoursguide.com/random-name-maker/">Name Maker</a></li>
+          
+          <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About</a></li>
+          <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Blog</a></li>
+          <li><a href="https://partnerhoursguide.com/translator-old-english-tool/" class="nav-cta">Try translator</a></li>
+        </ul>
+      </nav>
+      </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <h1 class="page-title">Privacy Policy — Translator Old English</h1>
+        <p class="page-subtitle">Understand how we collect, store, and process your data in compliance with GDPR guidelines.</p>
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="privacy-content-section">
+      <div class="container">
+        <div class="privacy-document">
+          
+          <span class="last-updated-date">Last Updated: May 24, 2026</span>
+
+          <!-- Intro -->
+          <div class="policy-section">
+            <p>At <strong>TranslatorOldEnglish.com</strong>, we are committed to protecting and respecting your privacy. This Privacy Policy explains when, why, and how we collect personal information about people who visit our website, how we keep it secure, and under what conditions we may disclose it to third parties. We are dedicated to ensuring that your data is processed transparently and in compliance with the General Data Protection Regulation (GDPR) and other applicable privacy laws.</p>
+          </div>
+
+          <!-- Section 1: Data Collection -->
+          <div class="policy-section">
+            <h2>1. Data Collection</h2>
+            <p>We may collect and process the following types of information when you visit and interact with our website:</p>
+            <ul>
+              <li><strong>Contact Information:</strong> If you voluntarily fill out our contact form, we collect your name, email address, inquiry subject, and the contents of your message.</li>
+              <li><strong>Usage and Device Analytics:</strong> When you navigate our pages, we automatically gather standard system information through analytical tools. This includes your IP address, browser type, operating system, page visits, referral source, and duration of visits.</li>
+              <li><strong>Cookies and Tracking:</strong> We utilize cookies to enhance your browsing experience, remember preferences, and analyze website traffic. Please see Section 3 for more details.</li>
+            </ul>
+          </div>
+
+          <!-- Section 2: How Data Is Used -->
+          <div class="policy-section">
+            <h2>2. How Data Is Used</h2>
+            <p>We use the collected information for specific, legitimate business purposes, including:</p>
+            <ul>
+              <li>To respond to your inquiries, support requests, and feedback submitted via our contact form.</li>
+              <li>To monitor, analyze, and optimize website performance, ensuring that our translation tool remains responsive and functional across all device types.</li>
+              <li>To defend our platform against security threats, spam, and malicious activity.</li>
+              <li>To compile aggregate, anonymous statistical data regarding visitor behavior to improve our content strategy and historical guides.</li>
+            </ul>
+          </div>
+
+          <!-- Section 3: Cookies Policy -->
+          <div class="policy-section">
+            <h2>3. Cookies Policy</h2>
+            <p>Cookies are small text files placed on your device to collect standard internet log and visitor behavior information. We use both session cookies (which expire when you close your browser) and persistent cookies (which remain on your device for a set period) to:</p>
+            <ul>
+              <li>Analyze traffic patterns using statistical tools to help us refine the interface layout.</li>
+              <li>Temporarily cache translation selections and era tabs during active sessions to improve speed and responsiveness.</li>
+            </ul>
+            <p>You can set your browser not to accept cookies, and you can remove existing cookies from your browser. However, in a few cases, some of our website features (such as cached translation history or custom text size preferences) may not function fully as a result.</p>
+          </div>
+
+          <!-- Section 4: Third Party Services -->
+          <div class="policy-section">
+            <h2>4. Third Party Services</h2>
+            <p>To ensure a high-quality experience, we integrate trusted third-party services on our platform. These services may process data on our behalf:</p>
+            <ul>
+              <li><strong>Google Analytics:</strong> We use Google Analytics to track anonymous usage statistics. Google Analytics uses cookies to generate data about website usage, which is stored in compliance with Google's safety frameworks.</li>
+              <li><strong>WordPress Plugins & Hosting:</strong> Our site is powered by WordPress, utilizing secure plugins (e.g. WPCode, Kadence, and UpdraftPlus) and secure hosting infrastructure. These platforms operate under strict confidentiality agreements.</li>
+            </ul>
+            <p>We do not sell, rent, or distribute your personal contact information to any third-party advertisers or marketing agencies under any circumstances.</p>
+          </div>
+
+          <!-- Section 5: User Rights -->
+          <div class="policy-section">
+            <h2>5. User Rights (GDPR Compliance)</h2>
+            <p>Under the GDPR, you possess key rights regarding your personal data. You are entitled to:</p>
+            <ul>
+              <li><strong>The Right to Access:</strong> You can request copies of the personal data we hold about you.</li>
+              <li><strong>The Right to Rectification:</strong> You can request that we correct any information you believe is inaccurate or incomplete.</li>
+              <li><strong>The Right to Erasure (Right to be Forgotten):</strong> You can request that we erase your personal data under certain conditions.</li>
+              <li><strong>The Right to Restrict or Object to Processing:</strong> You have the right to request that we restrict or stop the processing of your personal data under specific circumstances.</li>
+              <li><strong>The Right to Data Portability:</strong> You can request that we transfer the collected data to another organization, or directly to you.</li>
+            </ul>
+            <p>To exercise any of these rights, please contact us using the information provided in Section 7. We will respond to your request within 30 days.</p>
+          </div>
+
+          <!-- Section 6: Data Retention -->
+          <div class="policy-section">
+            <h2>6. Data Retention</h2>
+            <p>We keep your contact information only for as long as is necessary to address your inquiries and provide support. Form submissions and email correspondence are deleted or archived after 12 months unless ongoing business collaborations require longer retention. Anonymous analytical logs generated by Google Analytics are retained for the standard duration specified by the service (typically 14 months) before automatic deletion.</p>
+          </div>
+
+          <!-- Section 7: Contact Information -->
+          <div class="policy-section">
+            <h2>7. Contact Information</h2>
+            <p>If you have any questions about this Privacy Policy, the data we hold on you, or if you would like to exercise one of your data protection rights, please do not hesitate to contact us:</p>
+            <p><strong>Email:</strong> <a href="mailto:support@translatoroldenglish.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">support@translatoroldenglish.com</a></p>
+            <p><strong>Inquiry Form:</strong> Please submit details via our <a href="https://partnerhoursguide.com/contact-us/" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">Contact Page</a>.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand-info">
+          <a href="https://partnerhoursguide.com/" class="brand-logo-area">
+            <div class="brand-crest">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 8 6 6 6-6"></path>
+                <path d="m4 14 6 6 8-8"></path>
+              </svg>
+            </div>
+            <span class="brand-name">Translator Old English</span>
+          </a>
+          <p>Uncovering the ancestral roots and sounds of the English language through technology. Built with academic detail.</p>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="https://partnerhoursguide.com/">Home</a></li>
+            <li><a href="https://partnerhoursguide.com/translator-old-english-tool/">Translator Tool</a></li>
+            <li><a href="https://partnerhoursguide.com/about-our-research-editorial-process/">About Page</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://partnerhoursguide.com/old-english-words-we-still-use-today/">Articles & Blogs</a></li>
+            <li><a href="https://partnerhoursguide.com/contact-us/">Contact Us</a></li>
+            <li><a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; 2026 Translator Old English. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="https://partnerhoursguide.com/partner-hours-dmca/">Privacy Policy</a>
+          <a href="https://partnerhoursguide.com/contact-us/">Contact Support</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+
+  
+
+  
+
+      <!-- Dynamic Link Resolution for WordPress Integration -->
+  <script data-no-optimize="1" data-no-defer="1">
+    document.addEventListener("DOMContentLoaded", function() {
+      // FAQ Accordion Toggle
+      var faqQuestions = document.querySelectorAll(".faq-question");
+      faqQuestions.forEach(function(question) {
+        question.addEventListener("click", function() {
+          var item = question.parentElement;
+          var isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".faq-item").forEach(function(el) {
+            el.classList.remove("open");
+          });
+          
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        });
+      });
+
+            var hostname = window.location.hostname;
+      var isLive = hostname === "partnerhoursguide.com" || hostname.includes("partnerhours");
+      
+      if (isLive) {
+        var linkMap = {
+          "blog-name-finder.html": "https://partnerhoursguide.com/name-finder/",
+          "old-english-names.html": "https://partnerhoursguide.com/old-english-names/",
+          "index.html": "https://partnerhoursguide.com/",
+          "home.html": "https://partnerhoursguide.com/",
+          "translator.html": "https://partnerhoursguide.com/translator-old-english-tool/",
+          "shakespeare-converter.html": "https://partnerhoursguide.com/shakespeare-english-translator/",
+          "about.html": "https://partnerhoursguide.com/about-our-research-editorial-process/",
+          "old-english-vs-modern-english.html": "https://partnerhoursguide.com/old-english-vs-modern-english/",
+          "blog-25-words.html": "https://partnerhoursguide.com/old-english-words-we-still-use-today/",
+          "why-shakespeare-is-not-old-english.html": "https://partnerhoursguide.com/why-shakespeare-is-not-old-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "english-to-old-norse.html": "https://partnerhoursguide.com/english-to-old-norse/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "old-english-insults-slang-phrases.html": "https://partnerhoursguide.com/old-english-insults-slang-phrases/",
+          "spanish-words-in-english.html": "https://partnerhoursguide.com/spanish-words-in-english/",
+          "is-french-mother-language-of-english.html": "https://partnerhoursguide.com/is-french-the-mother-language-of-english/",
+          "how-tolkien-used-old-english-rohirric.html": "https://partnerhoursguide.com/how-tolkien-used-old-english/",
+          "what-is-old-english.html": "https://partnerhoursguide.com/what-is-old-english/",
+          "translate-english-to-english.html": "https://partnerhoursguide.com/translate-english-to-english/",
+          "shakespearean-english-translator.html": "https://partnerhoursguide.com/shakespearean-english-translator/",
+          "privacy-policy.html": "https://partnerhoursguide.com/partner-hours-dmca/",
+          "contact.html": "https://partnerhoursguide.com/contact-us/",
+          "history-of-languages.html": "https://partnerhoursguide.com/history-of-languages/"
+        };
+        
+        var anchors = document.querySelectorAll("a");
+        for (var i = 0; i < anchors.length; i++) {
+          var a = anchors[i];
+          var href = a.getAttribute("href");
+          if (href) {
+            var baseHref = href.split("#")[0];
+            var hash = href.indexOf("#") !== -1 ? href.substring(href.indexOf("#")) : "";
+            
+            for (var key in linkMap) {
+              if (linkMap.hasOwnProperty(key)) {
+                if (baseHref === key || baseHref.endsWith("/" + key)) {
+                  a.setAttribute("href", linkMap[key] + hash);
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
